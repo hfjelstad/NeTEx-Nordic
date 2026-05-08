@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Example_FareModelling.xml
+
+  Demonstrates a complete fare model for a simple single ticket:
+  - TariffZone attached to StopPlaces
+  - Tariff, ValidableElement, PreassignedFareProduct in FareFrame
+  - SalesOfferPackage with adult and child variants
+  - FareContract representing an actual purchase in SalesTransactionFrame
+
+  Scenario:
+  Zone 1 (Oslo) and Zone 2 (Drammen).
+  Single ticket product sold as adult (42 NOK) and child (21 NOK).
+  One purchase transaction in the sales frame.
+-->
+<PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="2.0">
+  <PublicationTimestamp>2026-03-18T00:00:00Z</PublicationTimestamp>
+  <ParticipantRef>EuPro</ParticipantRef>
+  <dataObjects>
+    <CompositeFrame id="ERP:CompositeFrame:Fares:1" version="1">
+      <codespaces>
+        <Codespace id="erp">
+          <Xmlns>ERP</Xmlns>
+          <XmlnsUrl>http://www.europeanprofile.eu/ERP</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultCodespaceRef ref="erp"/>
+      </FrameDefaults>
+      <frames>
+
+        <!-- ============================================================
+             SITE FRAME — TariffZones and StopPlaces
+             ============================================================ -->
+        <SiteFrame id="ERP:SiteFrame:Fares:1" version="1">
+          <stopPlaces>
+            <StopPlace id="ERP:StopPlace:OsloS" version="1">
+              <Name>Oslo S</Name>
+              <TransportMode>rail</TransportMode>
+              <StopPlaceType>railStation</StopPlaceType>
+            </StopPlace>
+            <StopPlace id="ERP:StopPlace:Drammen" version="1">
+              <Name>Drammen stasjon</Name>
+              <TransportMode>rail</TransportMode>
+              <StopPlaceType>railStation</StopPlaceType>
+            </StopPlace>
+          </stopPlaces>
+          <tariffZones>
+            <TariffZone id="ERP:TariffZone:Zone1" version="1">
+              <Name>Zone 1 - Oslo</Name>
+            </TariffZone>
+            <TariffZone id="ERP:TariffZone:Zone2" version="1">
+              <Name>Zone 2 - Drammen</Name>
+            </TariffZone>
+          </tariffZones>
+        </SiteFrame>
+
+        <!-- ============================================================
+             FARE FRAME — Product catalogue
+             ============================================================ -->
+        <FareFrame id="ERP:FareFrame:1" version="1">
+          <!-- Pricing rules -->
+          <tariffs>
+            <Tariff id="ERP:Tariff:ZoneTariff" version="1">
+              <Name>Standard zone tariff</Name>
+            </Tariff>
+          </tariffs>
+
+          <!-- What the passenger can travel on -->
+          <validableElements>
+            <ValidableElement id="ERP:ValidableElement:SingleZone1" version="1">
+              <Name>Single journey within Zone 1</Name>
+            </ValidableElement>
+            <ValidableElement id="ERP:ValidableElement:SingleZone1_2" version="1">
+              <Name>Single journey Zone 1 to Zone 2</Name>
+            </ValidableElement>
+          </validableElements>
+
+          <!-- Named product: access right + tariff -->
+          <fareProducts>
+            <PreassignedFareProduct id="ERP:PreassignedFareProduct:SingleTicket" version="1">
+              <Name>Single ticket</Name>
+              <accessRightsInProduct>
+                <AccessRightInProduct id="ERP:AccessRightInProduct:1" version="1">
+                  <ValidableElementRef ref="ERP:ValidableElement:SingleZone1" version="1"/>
+                </AccessRightInProduct>
+              </accessRightsInProduct>
+              <tariffs>
+                <TariffRef ref="ERP:Tariff:ZoneTariff" version="1"/>
+              </tariffs>
+            </PreassignedFareProduct>
+          </fareProducts>
+
+          <!-- How the product is sold (adult and child variants) -->
+          <salesOfferPackages>
+            <SalesOfferPackage id="ERP:SalesOfferPackage:SingleAdult" version="1">
+              <Name>Single ticket - Adult</Name>
+              <salesOfferPackageElements>
+                <SalesOfferPackageElement id="ERP:SalesOfferPackageElement:Adult_1" version="1" order="1">
+                  <PreassignedFareProductRef ref="ERP:PreassignedFareProduct:SingleTicket" version="1"/>
+                </SalesOfferPackageElement>
+              </salesOfferPackageElements>
+            </SalesOfferPackage>
+            <SalesOfferPackage id="ERP:SalesOfferPackage:SingleChild" version="1">
+              <Name>Single ticket - Child</Name>
+              <salesOfferPackageElements>
+                <SalesOfferPackageElement id="ERP:SalesOfferPackageElement:Child_1" version="1" order="1">
+                  <PreassignedFareProductRef ref="ERP:PreassignedFareProduct:SingleTicket" version="1"/>
+                </SalesOfferPackageElement>
+              </salesOfferPackageElements>
+            </SalesOfferPackage>
+          </salesOfferPackages>
+        </FareFrame>
+
+        <!-- ============================================================
+             SALES TRANSACTION FRAME — Actual purchases
+             ============================================================ -->
+        <SalesTransactionFrame id="ERP:SalesTransactionFrame:1" version="1">
+          <fareContracts>
+            <FareContract id="ERP:FareContract:FC_001" version="1">
+              <Name>Single ticket purchase</Name>
+              <StartDate>2026-03-18T08:00:00Z</StartDate>
+              <EndDate>2026-03-18T09:30:00Z</EndDate>
+              <fareContractEntries>
+                <SalesTransaction id="ERP:SalesTransaction:ST_001" version="1">
+                  <Name>Purchase via mobile app</Name>
+                  <Amount>42.00</Amount>
+                  <Currency>NOK</Currency>
+                  <PaymentMethod>mobileApp</PaymentMethod>
+                </SalesTransaction>
+              </fareContractEntries>
+            </FareContract>
+          </fareContracts>
+        </SalesTransactionFrame>
+
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+</PublicationDelivery>

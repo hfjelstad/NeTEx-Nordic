@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PublicationDelivery xmlns="http://www.netex.org.uk/netex" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.netex.org.uk/netex NeTEx_publication.xsd" version="1.0">
+    <PublicationTimestamp>2026-04-17T12:00:00</PublicationTimestamp>
+    <ParticipantRef>ENT</ParticipantRef>
+    <dataObjects>
+        <CompositeFrame id="ENT:CompositeFrame:ResponsibilitySetExample" version="1">
+            <validityConditions>
+                <AvailabilityCondition id="ENT:AvailabilityCondition:1" version="1">
+                    <FromDate>2026-01-01T00:00:00</FromDate>
+                    <ToDate>2026-12-31T23:59:59</ToDate>
+                </AvailabilityCondition>
+            </validityConditions>
+            <codespaces>
+                <Codespace id="nog">
+                    <!-- Organisasjonsregister -->
+                    <Xmlns>NOG</Xmlns>
+                    <XmlnsUrl>https://registry.example.org/netex</XmlnsUrl>
+                </Codespace>
+                <Codespace id="nar">
+                    <!-- "Avtaleregister" -->
+                    <Xmlns>NAR</Xmlns>
+                    <XmlnsUrl>https://registry.example.org/netex</XmlnsUrl>
+                </Codespace>
+                <Codespace id="ent">
+                    <Xmlns>ENT</Xmlns>
+                    <XmlnsUrl>https://entransit.example.org/netex</XmlnsUrl>
+                </Codespace>
+            </codespaces>
+            <frames>
+                <!-- Organisasjonsregister START -->
+                <ResourceFrame id="NOG" version="1">
+                    <organisations>
+                        <GeneralOrganisation id="NOG:GeneralOrganisation:KommuneTransport" version="1">
+                            <Name>KommuneTransport AS</Name>
+                            <ContactDetails>
+                                <Url>https://www.kommunetransport.example.no</Url>
+                            </ContactDetails>
+                        </GeneralOrganisation>
+                        <GeneralOrganisation id="NOG:GeneralOrganisation:Fylkeskommune" version="1">
+                            <Name>Fylkeskommune Mobilitet</Name>
+                            <ContactDetails>
+                                <Url>https://www.fylkeskommune.example.no</Url>
+                            </ContactDetails>
+                        </GeneralOrganisation>
+                        <GeneralOrganisation id="NOG:GeneralOrganisation:PrivatBuss" version="1">
+                            <Name>PrivatBuss Norge AS</Name>
+                        </GeneralOrganisation>
+                        <GeneralOrganisation id="NOG:GeneralOrganisation:SubstituBuss" version="1">
+                            <Name>SubstituBuss AS</Name>
+                        </GeneralOrganisation>
+                    </organisations>
+                </ResourceFrame>
+                <!-- Organisasjonsregister END -->
+                <!-- Avtaleregister START -->
+                <ResourceFrame id="NAR:ResourceFrame:AvtaleRegister" version="1">
+                    <responsibilitySets>
+                        <ResponsibilitySet id="NAR:ResponsibilitySet:SelfOperated" version="1">
+                            <Name>Self-operated (planning + operation)</Name>
+                            <roles>
+                                <ResponsibilityRoleAssignment id="NAR:ResponsibilityRoleAssignment:SO-Auth" version="1">
+                                    <StakeholderRoleType>EntityLegalOwnership</StakeholderRoleType>
+                                    <ResponsibleOrganisationRef ref="NOG:GeneralOrganisation:KommuneTransport"/>
+                                </ResponsibilityRoleAssignment>
+                                <ResponsibilityRoleAssignment id="NAR:ResponsibilityRoleAssignment:SO-Oper" version="1">
+                                    <StakeholderRoleType>Operation</StakeholderRoleType>
+                                    <ResponsibleOrganisationRef ref="NOG:GeneralOrganisation:KommuneTransport"/>
+                                </ResponsibilityRoleAssignment>
+                            </roles>
+                        </ResponsibilitySet>
+                        <!-- Kontraktuell rollefordeling -->
+                        <ResponsibilitySet id="NAR:ResponsibilitySet:FylkePrivat" version="1">
+                            <Name>Fylke-commissioned, privately operated</Name>
+                            <roles>
+                                <ResponsibilityRoleAssignment id="NAR:ResponsibilityRoleAssignment:19213" version="1">
+                                    <AssociatedContract>
+                                        <ContractRef ref="NAR:Contract:123"/>
+                                    </AssociatedContract>
+                                </ResponsibilityRoleAssignment>
+                                <ResponsibilityRoleAssignment id="NAR:ResponsibilityRoleAssignment:19214" version="1">
+                                    <StakeholderRoleType>Other</StakeholderRoleType>
+                                    <ResponsibleOrganisationRef ref="NOG:GeneralOrganisation:Retailer"/>
+                                </ResponsibilityRoleAssignment>
+                            </roles>
+                        </ResponsibilitySet>
+                    </responsibilitySets>
+                    <contracts>
+                        <Contract id="NAR:Contract:123" version="1">
+                            <contractees>
+                                <GeneralOrganisationRef ref="NOG:GeneralOrganisation:Fylkeskommune"/>
+                            </contractees>
+                            <contractors>
+                                <GeneralOrganisationRef ref="NOG:GeneralOrganisation:PrivatBuss"/>
+                            </contractors>
+                        </Contract>
+                    </contracts>
+                </ResourceFrame>
+                <!-- Avtaleregister END -->
+                <!-- Dataleveranse fra operatør START -->
+                <ResourceFrame id="ENT:ResourceFrame:ContactDetails" version="1">
+                    <contacts>
+                        <Contact id="ENT:Contact:Entur" version="1">
+                            <ContactDetails>
+                                <Email>hjelp@entur.no</Email>
+                                <Phone>+47 61 27 90 88</Phone>
+                                <Url>https://entur.no/</Url>
+                            </ContactDetails>
+                            <ContactType>information</ContactType>
+                        </Contact>
+                    </contacts>
+                </ResourceFrame>
+                <ServiceFrame id="ENT:ServiceFrame:Lines" version="1">
+                    <lines>
+                        <!-- Line 1: Self-operated (KommuneTransport plans AND operates) -->
+                        <Line id="ENT:Line:1" version="1" responsibilitySetRef="NAR:ResponsibilitySet:SelfOperated">
+                            <Name>Stadsbuss 1</Name>
+                            <TransportMode>bus</TransportMode>
+                            <ContactDetails>
+                                <ContactRef ref="ENT:Contact:Entur"/>
+                            </ContactDetails>
+                        </Line>
+                        <!-- Line 2: Split roles (Fylkeskommune plans, PrivatBuss operates) -->
+                        <Line id="ENT:Line:2" version="1" responsibilitySetRef="NAR:ResponsibilitySet:FylkePrivat">
+                            <Name>Regionbuss 2</Name>
+                            <TransportMode>bus</TransportMode>
+                        </Line>
+                    </lines>
+                </ServiceFrame>
+                <!-- Dataleveranse fra operatør END -->
+            </frames>
+        </CompositeFrame>
+    </dataObjects>
+</PublicationDelivery>
+

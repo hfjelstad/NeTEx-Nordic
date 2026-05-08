@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Central Vehicle Registry — two-frame export
+
+  The registry is published as a CompositeFrame containing two ResourceFrames:
+
+    ResourceFrame: VehicleTypes  — capacity/dimension templates
+                                   Owner: technical/procurement team
+                                   Changes: rarely (new vehicle model procured)
+                                   Consumers: timetable producers, journey planners,
+                                              passenger info, accessibility apps
+
+    ResourceFrame: VehicleFleet  — physical unit inventory
+                                   Owner: operator fleet management
+                                   Changes: regularly (vehicles enter/leave service)
+                                   Consumers: operations, vehicle scheduling, SIRI-VM
+
+  Consumers can subscribe to one or both frames independently.
+
+  Key design principles:
+  - One Vehicle entry per physical unit (Oxford definition)
+  - RegistrationNumber is optional — rail carriages omit it without issue
+  - No Train/CompoundTrain in the registry — formations are assembled in ops data
+  - @version omitted on cross-file refs in deliveries (see CentralVehicleRegistry guide)
+-->
+<PublicationDelivery
+  xmlns="http://www.netex.org.uk/netex"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  version="2.0">
+
+  <PublicationTimestamp>2026-04-21T08:00:00Z</PublicationTimestamp>
+  <ParticipantRef>REG</ParticipantRef>
+
+  <dataObjects>
+    <CompositeFrame id="REG:CompositeFrame:VehicleRegistry" version="1">
+      <codespaces>
+        <Codespace id="reg">
+          <Xmlns>REG</Xmlns>
+          <XmlnsUrl>http://www.example.org/registry</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultCodespaceRef ref="reg"/>
+      </FrameDefaults>
+
+      <frames>
+
+        <!-- =================================================================
+             FRAME 1: VEHICLE TYPES
+             Type templates — capacity, dimensions, propulsion.
+             This frame is the source of truth for the customer promise.
+             Changes rarely. Safe to cache in timetable tools.
+             ================================================================= -->
+        <ResourceFrame id="REG:ResourceFrame:VehicleTypes" version="1">
+          <vehicleTypes>
+
+            <!-- Bus type: standard 12-metre low-floor electric -->
+            <VehicleType id="REG:VehicleType:StandardBus12m" version="1">
+              <Name>Standard 12m Bus</Name>
+              <Description>Low-floor electric single-deck bus, 12 metres</Description>
+              <PassengerCapacity>
+                <SeatedCapacity>45</SeatedCapacity>
+                <StandingCapacity>35</StandingCapacity>
+                <WheelchairCapacity>2</WheelchairCapacity>
+              </PassengerCapacity>
+              <Length>12.0</Length>
+              <PropulsionType>electric</PropulsionType>
+            </VehicleType>
+
+            <!-- Rail carriage type: NSB Type 73 intermediate carriage -->
+            <VehicleType id="REG:VehicleType:NSB73_Carriage" version="1">
+              <Name>NSB Type 73 Carriage</Name>
+              <Description>Electric multiple unit intermediate carriage</Description>
+              <PassengerCapacity>
+                <SeatedCapacity>72</SeatedCapacity>
+                <WheelchairCapacity>1</WheelchairCapacity>
+              </PassengerCapacity>
+              <PropulsionType>electric</PropulsionType>
+            </VehicleType>
+
+            <!-- Rail locomotive type: El-18 -->
+            <VehicleType id="REG:VehicleType:El18_Locomotive" version="1">
+              <Name>El-18 Locomotive</Name>
+              <Description>Electric locomotive, passenger hauling</Description>
+              <PassengerCapacity>
+                <SeatedCapacity>0</SeatedCapacity>
+              </PassengerCapacity>
+              <PropulsionType>electric</PropulsionType>
+            </VehicleType>
+
+          </vehicleTypes>
+        </ResourceFrame>
+
+        <!-- =================================================================
+             FRAME 2: VEHICLE FLEET
+             Physical unit inventory — one entry per physical vehicle.
+             This frame is the source of truth for operational assignment
+             and real-time matching (SIRI-VM).
+             Changes regularly as vehicles enter and leave service.
+             ================================================================= -->
+        <ResourceFrame id="REG:ResourceFrame:VehicleFleet" version="1">
+          <vehicles>
+
+            <!-- ─── BUSES ─────────────────────────────────────────────────
+                 Buses are 1:1: one physical unit = one Vehicle entry.
+                 Registration plate present — standard for road vehicles.
+            ──────────────────────────────────────────────────────────── -->
+
+            <Vehicle id="REG:Vehicle:Bus_1001" version="1">
+              <Name>Buss 1001</Name>
+              <RegistrationNumber>EL-12345</RegistrationNumber>
+              <OperatorRef ref="REG:GeneralOrganisation:PrivatBuss"/>
+              <VehicleTypeRef ref="REG:VehicleType:StandardBus12m"/>
+            </Vehicle>
+
+            <Vehicle id="REG:Vehicle:Bus_1002" version="1">
+              <Name>Buss 1002</Name>
+              <RegistrationNumber>EL-12346</RegistrationNumber>
+              <OperatorRef ref="REG:GeneralOrganisation:PrivatBuss"/>
+              <VehicleTypeRef ref="REG:VehicleType:StandardBus12m"/>
+            </Vehicle>
+
+            <Vehicle id="REG:Vehicle:Bus_1003" version="1">
+              <Name>Buss 1003</Name>
+              <RegistrationNumber>EL-12347</RegistrationNumber>
+              <OperatorRef ref="REG:GeneralOrganisation:PrivatBuss"/>
+              <VehicleTypeRef ref="REG:VehicleType:StandardBus12m"/>
+            </Vehicle>
+
+            <!-- ─── RAIL CARRIAGES ────────────────────────────────────────
+                 Rail carriages are building blocks tracked by fleet ID only.
+                 RegistrationNumber omitted — optional in NeTEx XSD (minOccurs="0").
+                 No special "virtual vehicle" type needed.
+                 Formation (how carriages are coupled) belongs in ops data.
+            ──────────────────────────────────────────────────────────── -->
+
+            <Vehicle id="REG:Vehicle:Car_NS001" version="1">
+              <Name>Type 73 Vogn 001</Name>
+              <OperatorRef ref="REG:GeneralOrganisation:Vy"/>
+              <VehicleTypeRef ref="REG:VehicleType:NSB73_Carriage"/>
+            </Vehicle>
+
+            <Vehicle id="REG:Vehicle:Car_NS002" version="1">
+              <Name>Type 73 Vogn 002</Name>
+              <OperatorRef ref="REG:GeneralOrganisation:Vy"/>
+              <VehicleTypeRef ref="REG:VehicleType:NSB73_Carriage"/>
+            </Vehicle>
+
+            <Vehicle id="REG:Vehicle:Car_NS003" version="1">
+              <Name>Type 73 Vogn 003</Name>
+              <OperatorRef ref="REG:GeneralOrganisation:Vy"/>
+              <VehicleTypeRef ref="REG:VehicleType:NSB73_Carriage"/>
+            </Vehicle>
+
+            <!-- ─── LOCOMOTIVE ─────────────────────────────────────────── -->
+
+            <Vehicle id="REG:Vehicle:Loco_NS401" version="1">
+              <Name>El-18 Lok 401</Name>
+              <ChassisNumber>EL18-401</ChassisNumber>
+              <OperatorRef ref="REG:GeneralOrganisation:Vy"/>
+              <VehicleTypeRef ref="REG:VehicleType:El18_Locomotive"/>
+            </Vehicle>
+
+          </vehicles>
+        </ResourceFrame>
+
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+
+</PublicationDelivery>

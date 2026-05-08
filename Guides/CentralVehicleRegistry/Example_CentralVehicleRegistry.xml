@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Central Vehicle Registry — operator delivery example (2↔2 model)
+
+  Two registry frames map onto two delivery objects. Each is independently owned
+  and independently updated. Neither requires the other to change.
+
+  Registry                          Delivery object
+  ─────────────────────────────     ──────────────────────────────────────────
+  VehicleTypes frame           ───► ServiceJourney.VehicleTypeRef
+                                     Set once at timetable authoring.
+                                     Override on DatedServiceJourney if the type
+                                     deviates on a specific operated date.
+
+  VehicleFleet frame           ───► DatedServiceJourney.BlockRef
+                                       └── Block.VehicleRef
+                                     Added by operations team when a vehicle is
+                                     allocated for a specific date.
+                                     Never triggers a timetable update.
+
+  @version omitted on all refs to registry objects — prevents XSD keyref
+  constraints from triggering across file boundaries.
+-->
+<PublicationDelivery
+  xmlns="http://www.netex.org.uk/netex"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  version="2.0">
+
+  <PublicationTimestamp>2026-04-21T09:00:00Z</PublicationTimestamp>
+  <ParticipantRef>OPR</ParticipantRef>
+
+  <dataObjects>
+    <CompositeFrame id="OPR:CompositeFrame:Line1" version="1">
+      <frames>
+
+        <!-- =================================================================
+             SERVICE FRAME — lines, routes, journey patterns
+             ================================================================= -->
+        <ServiceFrame id="OPR:ServiceFrame:Line1" version="1">
+
+          <lines>
+            <Line id="OPR:Line:1" version="1">
+              <Name>Stadsbuss 1</Name>
+              <TransportMode>bus</TransportMode>
+              <AuthorityRef ref="REG:GeneralOrganisation:Fylkeskommune"/>
+              <OperatorRef ref="REG:GeneralOrganisation:PrivatBuss"/>
+            </Line>
+            <Line id="OPR:Line:10" version="1">
+              <Name>Regiontog 10</Name>
+              <TransportMode>rail</TransportMode>
+              <AuthorityRef ref="REG:GeneralOrganisation:Jernbanedirektoratet"/>
+              <OperatorRef ref="REG:GeneralOrganisation:Vy"/>
+            </Line>
+          </lines>
+
+        </ServiceFrame>
+
+        <!-- =================================================================
+             TIMETABLE FRAME
+             Owner: timetable team
+             VehicleTypeRef on ServiceJourney references VehicleTypes frame.
+             Set once. Changes only when the contracted type for the line changes.
+             Never needs updating because of a vehicle allocation change.
+             ================================================================= -->
+        <TimetableFrame id="OPR:TimetableFrame:Line1" version="1">
+
+          <vehicleJourneys>
+
+            <!-- Bus journey — baseline type promise, set once -->
+            <ServiceJourney id="OPR:ServiceJourney:Bus_1001" version="1">
+              <Name>Linje 1 dep. 08:00</Name>
+              <DepartureTime>08:00:00</DepartureTime>
+              <!-- VehicleTypes frame: passenger promise, set once -->
+              <VehicleTypeRef ref="REG:VehicleType:StandardBus12m"/>
+              <JourneyPatternRef ref="OPR:JourneyPattern:Line1_A"/>
+            </ServiceJourney>
+
+            <ServiceJourney id="OPR:ServiceJourney:Bus_1002" version="1">
+              <Name>Linje 1 dep. 09:00</Name>
+              <DepartureTime>09:00:00</DepartureTime>
+              <VehicleTypeRef ref="REG:VehicleType:StandardBus12m"/>
+              <JourneyPatternRef ref="OPR:JourneyPattern:Line1_A"/>
+            </ServiceJourney>
+
+            <!-- Rail journey — baseline type promise, set once -->
+            <ServiceJourney id="OPR:ServiceJourney:Rail_1001" version="1">
+              <Name>Regiontog 10 dep. 07:30</Name>
+              <DepartureTime>07:30:00</DepartureTime>
+              <VehicleTypeRef ref="REG:VehicleType:NSB73_Carriage"/>
+              <JourneyPatternRef ref="OPR:JourneyPattern:Line10_A"/>
+            </ServiceJourney>
+
+          </vehicleJourneys>
+
+        </TimetableFrame>
+
+        <!-- =================================================================
+             TIMETABLE FRAME — operated dates
+             Owner: operations team
+             DatedServiceJourney.BlockRef references VehicleFleet frame via Block.
+             Added when a vehicle is allocated for a specific date.
+             Can also carry VehicleTypeRef to override the baseline for that date.
+             ================================================================= -->
+        <TimetableFrame id="OPR:TimetableFrame:OperatedDates" version="1">
+
+          <vehicleJourneys>
+
+            <!-- ─── PATTERN 1: Allocation only (type unchanged) ─── -->
+            <!--
+              Bus_1001 (EL-12345) is allocated for Linje 1 dep. 08:00 on 2026-04-25.
+              ServiceJourney.VehicleTypeRef stays untouched — same type, different unit.
+              Only the BlockRef is added here.
+            -->
+            <DatedServiceJourney id="OPR:DatedServiceJourney:Bus_1001-20260425" version="1">
+              <ServiceJourneyRef ref="OPR:ServiceJourney:Bus_1001"/>
+              <DepartureDate>2026-04-25</DepartureDate>
+              <!-- VehicleFleet frame: physical allocation for this date -->
+              <BlockRef ref="OPR:Block:601"/>
+            </DatedServiceJourney>
+
+            <!-- ─── PATTERN 2: No allocation yet (type promise is sufficient) ─── -->
+            <!--
+              No vehicle has been allocated for the 09:00 departure yet.
+              The ServiceJourney with its VehicleTypeRef is the complete data.
+              No DatedServiceJourney is required — omit it until allocation occurs.
+            -->
+
+            <!-- ─── PATTERN 3: Type override + allocation for a specific date ─── -->
+            <!--
+              An articulated bus is deployed on 2026-04-26 instead of the standard 12m.
+              DatedServiceJourney overrides the type AND provides the allocation.
+              The ServiceJourney baseline remains unchanged.
+            -->
+            <DatedServiceJourney id="OPR:DatedServiceJourney:Bus_1001-20260426" version="1">
+              <ServiceJourneyRef ref="OPR:ServiceJourney:Bus_1001"/>
+              <DepartureDate>2026-04-26</DepartureDate>
+              <!-- Override: different type deployed this day -->
+              <VehicleTypeRef ref="REG:VehicleType:ArticulatedBus18m"/>
+              <!-- Allocation for the override vehicle -->
+              <BlockRef ref="OPR:Block:602"/>
+            </DatedServiceJourney>
+
+            <!-- ─── PATTERN 4: Rail — no allocation (BlockRef added when known) ─── -->
+            <!--
+              Rail vehicle allocation is typically resolved closer to operation.
+              Until then, the ServiceJourney with VehicleTypeRef is sufficient.
+              DatedServiceJourney with BlockRef is added by the fleet team separately.
+            -->
+
+          </vehicleJourneys>
+
+        </TimetableFrame>
+
+        <!-- =================================================================
+             VEHICLE SCHEDULE FRAME
+             Owner: fleet/operations team
+             Block.VehicleRef references VehicleFleet frame.
+             Updated when vehicle allocation changes — never triggers timetable update.
+             ================================================================= -->
+        <VehicleScheduleFrame id="OPR:VehicleScheduleFrame:Line1" version="1">
+
+          <blocks>
+
+            <!-- Bus_1001 allocated to the 08:00 departure on 2026-04-25 -->
+            <Block id="OPR:Block:601" version="1">
+              <Name>Duty 601</Name>
+              <!-- VehicleFleet frame — @version omitted (cross-file ref) -->
+              <VehicleRef ref="REG:Vehicle:Bus_1001"/>
+            </Block>
+
+            <!-- Articulated bus allocated to 2026-04-26 override -->
+            <Block id="OPR:Block:602" version="1">
+              <Name>Duty 602</Name>
+              <VehicleRef ref="REG:Vehicle:Bus_ART_001"/>
+            </Block>
+
+          </blocks>
+
+        </VehicleScheduleFrame>
+
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+
+</PublicationDelivery>
+
+<PublicationDelivery
+  xmlns="http://www.netex.org.uk/netex"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  version="2.0">
+
+  <PublicationTimestamp>2026-04-21T09:00:00Z</PublicationTimestamp>
+  <ParticipantRef>OPR</ParticipantRef>
+
+  <dataObjects>
+    <CompositeFrame id="OPR:CompositeFrame:Line1" version="1">
+      <frames>
+
+        <!-- =================================================================
+             SERVICE FRAME — lines, routes, journey patterns
+             ================================================================= -->
+        <ServiceFrame id="OPR:ServiceFrame:Line1" version="1">
+
+          <lines>
+            <Line id="OPR:Line:1" version="1">
+              <Name>Stadsbuss 1</Name>
+              <TransportMode>bus</TransportMode>
+              <AuthorityRef ref="REG:GeneralOrganisation:Fylkeskommune"/>
+              <OperatorRef ref="REG:GeneralOrganisation:PrivatBuss"/>
+            </Line>
+            <Line id="OPR:Line:10" version="1">
+              <Name>Regiontog 10</Name>
+              <TransportMode>rail</TransportMode>
+              <AuthorityRef ref="REG:GeneralOrganisation:Jernbanedirektoratet"/>
+              <OperatorRef ref="REG:GeneralOrganisation:Vy"/>
+            </Line>
+          </lines>
+
+        </ServiceFrame>
+
+        <!-- =================================================================
+             TIMETABLE FRAME — LAYER 1: customer promise
+
+             VehicleTypeRef on ServiceJourney references VehicleTypes frame.
+             Always present. Updated when the vehicle model for the line changes.
+             Never needs to change when only the physical unit assignment changes.
+             ================================================================= -->
+        <TimetableFrame id="OPR:TimetableFrame:Line1" version="1">
+
+          <vehicleJourneys>
+
+            <!-- ─── PATTERN 1: Customer promise only (no physical assignment) ─── -->
+            <!--
+              The bus type is promised to passengers. The specific bus that will
+              run this journey is not shared. This is the standard case.
+            -->
+            <ServiceJourney id="OPR:ServiceJourney:Bus_1001" version="1">
+              <Name>Linje 1 dep. 08:00</Name>
+              <DepartureTime>08:00:00</DepartureTime>
+              <!-- Promise: passengers will experience a standard 12m electric bus -->
+              <VehicleTypeRef ref="REG:VehicleType:StandardBus12m"/>
+              <JourneyPatternRef ref="OPR:JourneyPattern:Line1_A"/>
+            </ServiceJourney>
+
+            <ServiceJourney id="OPR:ServiceJourney:Bus_1002" version="1">
+              <Name>Linje 1 dep. 09:00</Name>
+              <DepartureTime>09:00:00</DepartureTime>
+              <!-- Same type promise, different journey -->
+              <VehicleTypeRef ref="REG:VehicleType:StandardBus12m"/>
+              <JourneyPatternRef ref="OPR:JourneyPattern:Line1_A"/>
+            </ServiceJourney>
+
+            <!-- ─── PATTERN 2: Rail journey — type promise only ─── -->
+            <!--
+              For most timetable deliveries, VehicleTypeRef alone is correct.
+              Train formations (Train/CompoundTrain) are defined separately in
+              ops data when the formation is concretely planned.
+            -->
+            <ServiceJourney id="OPR:ServiceJourney:Rail_1001" version="1">
+              <Name>Regiontog 10 dep. 07:30</Name>
+              <DepartureTime>07:30:00</DepartureTime>
+              <!-- Promise: NSB Type 73 carriage characteristics -->
+              <VehicleTypeRef ref="REG:VehicleType:NSB73_Carriage"/>
+              <JourneyPatternRef ref="OPR:JourneyPattern:Line10_A"/>
+            </ServiceJourney>
+
+          </vehicleJourneys>
+
+        </TimetableFrame>
+
+        <!-- =================================================================
+             VEHICLE SCHEDULE FRAME — LAYER 2: physical assignment (optional)
+
+             VehicleRef on Block references VehicleFleet frame.
+             Add this layer only when the concrete physical unit is known.
+             Omit entirely when not known or not shared — the delivery is
+             complete and valid with Layer 1 alone.
+             ================================================================= -->
+        <VehicleScheduleFrame id="OPR:VehicleScheduleFrame:Line1" version="1">
+
+          <blocks>
+
+            <!-- ─── PATTERN 3: Promise + physical assignment (bus, unit known) ─── -->
+            <!--
+              Bus 1001 (EL-12345) is concretely assigned to run both morning journeys.
+              The ServiceJourney still carries the promise; the Block carries the actual.
+            -->
+            <Block id="OPR:Block:601" version="1">
+              <Name>Duty 601</Name>
+              <!-- Actual physical unit from registry — @version omitted intentionally -->
+              <VehicleRef ref="REG:Vehicle:Bus_1001"/>
+              <journeys>
+                <ServiceJourneyRef ref="OPR:ServiceJourney:Bus_1001"/>
+                <ServiceJourneyRef ref="OPR:ServiceJourney:Bus_1002"/>
+              </journeys>
+            </Block>
+
+            <!-- ─── PATTERN 4: Rail block — physical unit NOT assigned ─── -->
+            <!--
+              The rail journey has a type promise but no physical unit is assigned
+              in this delivery. The Block exists for operational grouping but
+              carries no VehicleRef. This is valid and complete.
+            -->
+            <Block id="OPR:Block:701" version="1">
+              <Name>Togtjeneste 701</Name>
+              <!-- No VehicleRef — physical assignment not known/shared -->
+              <journeys>
+                <ServiceJourneyRef ref="OPR:ServiceJourney:Rail_1001"/>
+              </journeys>
+            </Block>
+
+          </blocks>
+
+        </VehicleScheduleFrame>
+
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+
+</PublicationDelivery>

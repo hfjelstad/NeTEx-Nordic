@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Example_JourneyLifecycle.xml
+
+  Demonstrates the full journey lifecycle chain:
+  Line -> Route -> JourneyPattern -> ServiceJourney -> DatedServiceJourney
+
+  Scenario: Bus 100, Drammen -> Asker -> Oslo S
+  - Weekday service with 07:30 departure
+  - DatedServiceJourney for a specific operating day
+  - DayType and DayTypeAssignment for calendar mapping
+-->
+<PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="2.0">
+  <PublicationTimestamp>2026-03-18T00:00:00Z</PublicationTimestamp>
+  <ParticipantRef>EuPro</ParticipantRef>
+  <dataObjects>
+    <CompositeFrame id="ERP:CompositeFrame:Lifecycle:1" version="1">
+      <codespaces>
+        <Codespace id="erp">
+          <Xmlns>ERP</Xmlns>
+          <XmlnsUrl>http://www.europeanprofile.eu/ERP</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultCodespaceRef ref="erp"/>
+      </FrameDefaults>
+      <frames>
+
+        <!-- ============================================================
+             RESOURCE FRAME — Operator
+             ============================================================ -->
+        <ResourceFrame id="ERP:ResourceFrame:Lifecycle:1" version="1">
+          <organisations>
+            <Operator id="ERP:Operator:Unibuss" version="1">
+              <Name>Unibuss</Name>
+            </Operator>
+          </organisations>
+        </ResourceFrame>
+
+        <!-- ============================================================
+             SERVICE CALENDAR FRAME — DayType + Assignment
+             ============================================================ -->
+        <ServiceCalendarFrame id="ERP:ServiceCalendarFrame:1" version="1">
+          <dayTypes>
+            <DayType id="ERP:DayType:Weekdays" version="1">
+              <Name>Weekdays</Name>
+              <properties>
+                <PropertyOfDay>
+                  <DaysOfWeek>Monday Tuesday Wednesday Thursday Friday</DaysOfWeek>
+                </PropertyOfDay>
+              </properties>
+            </DayType>
+          </dayTypes>
+          <operatingDays>
+            <OperatingDay id="ERP:OperatingDay:2026-03-18" version="1">
+              <CalendarDate>2026-03-18</CalendarDate>
+            </OperatingDay>
+          </operatingDays>
+          <dayTypeAssignments>
+            <DayTypeAssignment id="ERP:DayTypeAssignment:Weekdays_Mar18" version="1" order="1">
+              <OperatingDayRef ref="ERP:OperatingDay:2026-03-18"/>
+              <DayTypeRef ref="ERP:DayType:Weekdays"/>
+            </DayTypeAssignment>
+          </dayTypeAssignments>
+        </ServiceCalendarFrame>
+
+        <!-- ============================================================
+             SERVICE FRAME — Line, Route, JourneyPattern, Stop Points
+             ============================================================ -->
+        <ServiceFrame id="ERP:ServiceFrame:Lifecycle:1" version="1">
+          <routes>
+            <!-- STEP 2: Define the Route -->
+            <Route id="ERP:Route:100_Out" version="1">
+              <Name>100 Drammen - Asker - Oslo</Name>
+              <LineRef ref="ERP:Line:100"/>
+              <DirectionType>outbound</DirectionType>
+              <pointsInSequence>
+                <PointOnRoute id="ERP:PointOnRoute:100_Out_1" version="1" order="1">
+                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Drammen"/>
+                </PointOnRoute>
+                <PointOnRoute id="ERP:PointOnRoute:100_Out_2" version="1" order="2">
+                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Asker"/>
+                </PointOnRoute>
+                <PointOnRoute id="ERP:PointOnRoute:100_Out_3" version="1" order="3">
+                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS"/>
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+          </routes>
+
+          <lines>
+            <!-- STEP 1: Define the Line -->
+            <Line id="ERP:Line:100" version="1">
+              <Name>Bus 100</Name>
+              <TransportMode>bus</TransportMode>
+              <PublicCode>100</PublicCode>
+              <OperatorRef ref="ERP:Operator:Unibuss"/>
+            </Line>
+          </lines>
+
+          <destinationDisplays>
+            <DestinationDisplay id="ERP:DestinationDisplay:OsloS" version="1">
+              <FrontText>Oslo S</FrontText>
+            </DestinationDisplay>
+          </destinationDisplays>
+
+          <scheduledStopPoints>
+            <ScheduledStopPoint id="ERP:ScheduledStopPoint:Drammen" version="1">
+              <Name>Drammen</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="ERP:ScheduledStopPoint:Asker" version="1">
+              <Name>Asker</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="ERP:ScheduledStopPoint:OsloS" version="1">
+              <Name>Oslo S</Name>
+            </ScheduledStopPoint>
+          </scheduledStopPoints>
+
+          <journeyPatterns>
+            <!-- STEP 3: Define the JourneyPattern -->
+            <JourneyPattern id="ERP:JourneyPattern:100_Out_Full" version="1">
+              <Name>100 Full Run Outbound</Name>
+              <RouteRef ref="ERP:Route:100_Out"/>
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:100_1" version="1" order="1">
+                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Drammen"/>
+                  <ForAlighting>false</ForAlighting>
+                  <ForBoarding>true</ForBoarding>
+                  <DestinationDisplayRef ref="ERP:DestinationDisplay:OsloS"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:100_2" version="1" order="2">
+                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Asker"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:100_3" version="1" order="3">
+                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS"/>
+                  <ForAlighting>true</ForAlighting>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+          </journeyPatterns>
+        </ServiceFrame>
+
+        <!-- ============================================================
+             TIMETABLE FRAME — ServiceJourney + DatedServiceJourney
+             ============================================================ -->
+        <TimetableFrame id="ERP:TimetableFrame:Lifecycle:1" version="1">
+          <vehicleJourneys>
+            <!-- STEP 4: Define the ServiceJourney (reusable template) -->
+            <ServiceJourney id="ERP:ServiceJourney:100_0730" version="1">
+              <Name>Bus 100 dep. 07:30</Name>
+              <dayTypes>
+                <DayTypeRef ref="ERP:DayType:Weekdays"/>
+              </dayTypes>
+              <JourneyPatternRef ref="ERP:JourneyPattern:100_Out_Full"/>
+              <OperatorRef ref="ERP:Operator:Unibuss"/>
+              <passingTimes>
+                <TimetabledPassingTime id="ERP:TimetabledPassingTime:100_0730_1" version="1">
+                  <StopPointInJourneyPatternRef ref="ERP:StopPointInJourneyPattern:100_1"/>
+                  <DepartureTime>07:30:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime id="ERP:TimetabledPassingTime:100_0730_2" version="1">
+                  <StopPointInJourneyPatternRef ref="ERP:StopPointInJourneyPattern:100_2"/>
+                  <ArrivalTime>07:55:00</ArrivalTime>
+                  <DepartureTime>07:56:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime id="ERP:TimetabledPassingTime:100_0730_3" version="1">
+                  <StopPointInJourneyPatternRef ref="ERP:StopPointInJourneyPattern:100_3"/>
+                  <ArrivalTime>08:25:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+
+            <!-- STEP 5: Create a DatedServiceJourney (concrete instance) -->
+            <DatedServiceJourney id="ERP:DatedServiceJourney:100_0730_20260318" version="1">
+              <ServiceAlteration>planned</ServiceAlteration>
+              <ServiceJourneyRef ref="ERP:ServiceJourney:100_0730"/>
+              <OperatingDayRef ref="ERP:OperatingDay:2026-03-18"/>
+            </DatedServiceJourney>
+          </vehicleJourneys>
+        </TimetableFrame>
+
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+</PublicationDelivery>

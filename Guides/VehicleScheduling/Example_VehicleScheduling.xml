@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Example_VehicleScheduling.xml
+
+  Demonstrates vehicle scheduling concepts:
+  - VehicleType (shared template with capacity)
+  - Vehicle (specific fleet unit)
+  - Block grouping two ServiceJourneys into one vehicle duty
+  - DeadRun for non-revenue return to depot
+
+  Scenario: Bus duty 601
+  - 06:00 Drammen -> Oslo (revenue)
+  - 08:30 Oslo -> Drammen (revenue)
+  - Dead run back to depot
+-->
+<PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="2.0">
+  <PublicationTimestamp>2026-03-18T00:00:00Z</PublicationTimestamp>
+  <ParticipantRef>EuPro</ParticipantRef>
+  <dataObjects>
+    <CompositeFrame id="ERP:CompositeFrame:VehicleSched:1" version="1">
+      <codespaces>
+        <Codespace id="erp">
+          <Xmlns>ERP</Xmlns>
+          <XmlnsUrl>http://www.europeanprofile.eu/ERP</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultCodespaceRef ref="erp"/>
+      </FrameDefaults>
+      <frames>
+
+        <!-- ============================================================
+             RESOURCE FRAME — Operator, VehicleType, Vehicle
+             ============================================================ -->
+        <ResourceFrame id="ERP:ResourceFrame:VehicleSched:1" version="1">
+          <organisations>
+            <Operator id="ERP:Operator:Unibuss" version="1">
+              <Name>Unibuss</Name>
+            </Operator>
+          </organisations>
+          <vehicleTypes>
+            <VehicleType id="ERP:VehicleType:Bus_12m_Electric" version="1">
+              <Name>Standard 12m Electric Bus</Name>
+              <Description>Low-floor electric city bus</Description>
+              <PropulsionType>electric</PropulsionType>
+              <PassengerCapacity id="ERP:PassengerCapacity:Bus_12m_Electric" version="1">
+                <SeatingCapacity>45</SeatingCapacity>
+                <StandingCapacity>35</StandingCapacity>
+                <WheelchairPlaceCapacity>2</WheelchairPlaceCapacity>
+              </PassengerCapacity>
+              <Length>12.0</Length>
+            </VehicleType>
+          </vehicleTypes>
+          <vehicles>
+            <Vehicle id="ERP:Vehicle:EL12345" version="1">
+              <RegistrationNumber>EL 12345</RegistrationNumber>
+              <OperatorRef ref="ERP:Operator:Unibuss"/>
+              <VehicleTypeRef ref="ERP:VehicleType:Bus_12m_Electric"/>
+            </Vehicle>
+          </vehicles>
+        </ResourceFrame>
+
+        <!-- ============================================================
+             TIMETABLE FRAME — ServiceJourneys with BlockRef
+             ============================================================ -->
+        <TimetableFrame id="ERP:TimetableFrame:VehicleSched:1" version="1">
+          <vehicleJourneys>
+            <!-- Morning run: Drammen -> Oslo -->
+            <ServiceJourney id="ERP:ServiceJourney:100_0600" version="1">
+              <Name>Bus 100 dep. 06:00</Name>
+              <BlockRef ref="ERP:Block:Duty_601"/>
+            </ServiceJourney>
+
+            <!-- Return run: Oslo -> Drammen -->
+            <ServiceJourney id="ERP:ServiceJourney:100_0830" version="1">
+              <Name>Bus 100 dep. 08:30</Name>
+              <BlockRef ref="ERP:Block:Duty_601"/>
+            </ServiceJourney>
+
+            <!-- Non-revenue return to depot -->
+            <DeadRun id="ERP:DeadRun:DR_601_return" version="1">
+              <Name>Return to depot after duty 601</Name>
+              <BlockRef ref="ERP:Block:Duty_601"/>
+            </DeadRun>
+          </vehicleJourneys>
+        </TimetableFrame>
+
+        <!-- ============================================================
+             VEHICLE SCHEDULE FRAME — Block assignment
+             ============================================================ -->
+        <VehicleScheduleFrame id="ERP:VehicleScheduleFrame:1" version="1">
+          <blocks>
+            <Block id="ERP:Block:Duty_601" version="1">
+              <Name>Duty 601 - Morning shift</Name>
+              <Description>Bus 100 morning round trip + depot return</Description>
+              <journeys>
+                <VehicleJourneyRef ref="ERP:ServiceJourney:100_0600"/>
+                <VehicleJourneyRef ref="ERP:ServiceJourney:100_0830"/>
+                <VehicleJourneyRef ref="ERP:DeadRun:DR_601_return"/>
+              </journeys>
+            </Block>
+          </blocks>
+        </VehicleScheduleFrame>
+
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+</PublicationDelivery>
