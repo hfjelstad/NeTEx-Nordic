@@ -1,0 +1,3 @@
+[submodule "XSD"]
+	path = XSD
+	url = https://github.com/NeTEx-CEN/NeTEx.git
