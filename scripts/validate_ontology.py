@@ -171,6 +171,66 @@ def check_frame_containment(g: Graph, result: ValidationResult):
     result.ok(f"[frames] {len(contained)} objects have valid frame assignments")
 
 
+def check_harmonization(profile_g: Graph, doc_g: Graph, result: ValidationResult):
+    """Ensure relationships and constraints match between both files."""
+
+    def get_refs(g):
+        refs = set()
+        for s, p, o in g.triples((None, NETEX.hasRef, None)):
+            prop = list(g.objects(o, NETEX.property))
+            target = list(g.objects(o, NETEX.target))
+            if prop and target:
+                refs.add((str(s).split("#")[-1], str(prop[0]), str(target[0]).split("#")[-1]))
+        return refs
+
+    def get_compositions(g):
+        comps = set()
+        for s, p, o in g.triples((None, NETEX.hasComposition, None)):
+            prop = list(g.objects(o, NETEX.property))
+            target = list(g.objects(o, NETEX.target))
+            if prop and target:
+                comps.add((str(s).split("#")[-1], str(prop[0]), str(target[0]).split("#")[-1]))
+        return comps
+
+    def get_constraints(g, pred):
+        items = set()
+        for s, p, o in g.triples((PROFILE.NP, pred, None)):
+            cls = list(g.objects(o, NETEX["class"]))
+            prop = list(g.objects(o, NETEX.property))
+            if cls and prop:
+                items.add((str(cls[0]).split("#")[-1], str(prop[0])))
+        return items
+
+    # Check hasRef
+    p_refs = get_refs(profile_g)
+    d_refs = get_refs(doc_g)
+    for r in sorted(p_refs - d_refs):
+        result.error(f"[harmonize] hasRef in profile only: {r[0]}.{r[1]} -> {r[2]}")
+    for r in sorted(d_refs - p_refs):
+        result.error(f"[harmonize] hasRef in doc only: {r[0]}.{r[1]} -> {r[2]}")
+
+    # Check hasComposition
+    p_comp = get_compositions(profile_g)
+    d_comp = get_compositions(doc_g)
+    for c in sorted(p_comp - d_comp):
+        result.error(f"[harmonize] hasComposition in profile only: {c[0]}.{c[1]} -> {c[2]}")
+    for c in sorted(d_comp - p_comp):
+        result.error(f"[harmonize] hasComposition in doc only: {c[0]}.{c[1]} -> {c[2]}")
+
+    # Check excludes/allows/requires
+    for pred_name, pred in [("excludes", NETEX.excludes), ("allows", NETEX.allows), ("requires", NETEX.requires)]:
+        p_set = get_constraints(profile_g, pred)
+        d_set = get_constraints(doc_g, pred)
+        for x in sorted(p_set - d_set):
+            result.error(f"[harmonize] {pred_name} in profile only: {x[0]}.{x[1]}")
+        for x in sorted(d_set - p_set):
+            result.error(f"[harmonize] {pred_name} in doc only: {x[0]}.{x[1]}")
+
+    total_checked = len(p_refs | d_refs) + len(p_comp | d_comp)
+    if not any(msg.startswith("[harmonize]") for msg in result.errors):
+        result.ok(f"[harmonize] {total_checked} relationships match between files")
+
+
 def check_profile_constraints(g: Graph, result: ValidationResult):
     """NP allows/requires targets should reference known classes."""
     classes = get_owl_classes(g)
@@ -231,6 +291,11 @@ def main():
     # 7. Profile constraints
     print("\n--- Profile Constraints ---")
     check_profile_constraints(profile_g, result)
+
+    # 8. Cross-file harmonization
+    if doc_g:
+        print("\n--- Harmonization ---")
+        check_harmonization(profile_g, doc_g, result)
 
     # Summary
     print("\n" + "=" * 60)

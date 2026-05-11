@@ -462,6 +462,15 @@ netex:StopPlace netex:hasRef [
     netex:property "TopographicPlaceRef" ;
     netex:target netex:TopographicPlace ;
     netex:xsdCardinality "0..1"
+] , [
+    netex:property "ParentSiteRef" ;
+    netex:target netex:StopPlace ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "Multimodal parent stop — ERP only"
+] , [
+    netex:property "TariffZoneRef" ;
+    netex:target netex:TariffZone ;
+    netex:xsdCardinality "0..n"
 ] .
 
 netex:StopPlace netex:hasComposition [
@@ -605,6 +614,10 @@ netex:ServiceJourney netex:hasRef [
     netex:target netex:DayType ;
     netex:xsdCardinality "0..n" ;
     netex:path "dayTypes/DayTypeRef"
+] , [
+    netex:property "BlockRef" ;
+    netex:target netex:TrainBlock ;
+    netex:xsdCardinality "0..1"
 ] .
 
 netex:ServiceJourney netex:hasComposition [
@@ -652,12 +665,6 @@ netex:Interchange netex:hasRef [
 ] .
 
 ## --- VehicleScheduleFrame relationships ---
-
-netex:TrainBlock netex:hasRef [
-    netex:property "OperatorRef" ;
-    netex:target netex:Operator ;
-    netex:xsdCardinality "0..1"
-] .
 
 netex:TrainBlock netex:hasRef [
     netex:property "OperatorRef" ;
