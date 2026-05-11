@@ -30,9 +30,7 @@ The agent must always consult this folder when reading, validating, or generatin
 | ProfileCode | Profile Description |
 | -- | -- |
 | MIN | Minimum profile | 
-| ERP | European Recomended Profile |
 | NP | Nordic Profile |
-| SLO | Slovenian Profile |
 
 ---
 
@@ -83,7 +81,7 @@ The semantic explanation file. See [Object Description Template](Templates/Objec
    - **5a. Consistency Rules** (optional) – Cross-reference and cardinality constraints
    - **5b. Validation Requirements** (optional) – Testable validation rules
    - **5c. Common Pitfalls** (optional) – Describe mistakes and corrections
-   - **5d. Profile-Specific Notes** (optional) – Variations across MIN, ERP, NP profiles
+   - **5d. Profile-Specific Notes** (optional) – Variations across MIN and NP profiles
 6. **Additional Information** (optional) – Examples, related guides, supplementary content
 
 **Critical constraints:**
@@ -191,13 +189,13 @@ Use tabs to show profile-specific XML examples side by side:
 ```markdown
 <!-- tabs:start -->
 
-#### **MIN (ERP)**
+#### **MIN**
 
 \`\`\`xml
-<Line id="ERP:Line:1" version="1">...</Line>
+<Line id="MIN:Line:1" version="1">...</Line>
 \`\`\`
 
-#### **NP (Nordic)**
+#### **NP**
 
 \`\`\`xml
 <Line id="NP:Line:100" version="1">...</Line>

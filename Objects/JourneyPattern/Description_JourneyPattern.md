@@ -24,7 +24,18 @@ JourneyPattern
  │     ├─ 📄 ForAlighting (0..1)
  │     ├─ 📄 ForBoarding (0..1)
  │     ├─ 🔗 DestinationDisplayRef/@ref (0..1)
- │     └─ 📄 RequestStop (0..1)
+ │     ├─ 📄 ChangeOfDestinationDisplay (0..1)
+ │     ├─ 📄 RequestStop (0..1)
+ │     ├─ 📄 RequestMethod (0..1)
+ │     ├─ 📄 StopUse (0..1)
+ │     ├─ 📁 noticeAssignments (0..1)
+ │     │  └─ 📄 NoticeAssignment (0..n)
+ │     │     ├─ 📄 @id, @version, @order
+ │     │     └─ 🔗 NoticeRef/@ref (1..1)
+ │     └─ 📁 BookingArrangements (0..1)
+ │        ├─ 📄 BookingAccess, BookWhen, LatestBookingTime
+ │        ├─ 📄 MinimumBookingPeriod, BookingUrl, BookingNote
+ │        └─ 📄 BookingMethod (0..n)
  └─ 📁 linksInSequence (0..1)
     └─ 📁 ServiceLinkInJourneyPattern (1..n)
        ├─ 📄 @id (1..1)
@@ -38,6 +49,12 @@ JourneyPattern
 - **RouteRef**: Mandatory reference to the Route this pattern belongs to; establishes the geographic context.
 - **pointsInSequence**: Ordered list of StopPointInJourneyPattern elements defining the stop sequence; must contain at least one entry.
 - **StopPointInJourneyPattern**: Individual stop in the sequence; each has a sequential @order attribute and a reference to a ScheduledStopPoint.
+- **ForAlighting / ForBoarding**: Boolean flags controlling whether passengers may alight/board. First stop should be ForAlighting=false, last stop ForBoarding=false.
+- **DestinationDisplayRef**: Reference to the headsign shown from this stop onwards. Set ChangeOfDestinationDisplay=true where it changes.
+- **RequestStop / RequestMethod**: Whether the vehicle only stops on demand, and how to request it (handSignal, phoneCall, sms, stopButton).
+- **StopUse**: How the stop is used — `access` (normal), `passthrough` (timing point only), `interchangeOnly`.
+- **noticeAssignments**: Stop-specific notices (e.g., "school days only") via NoticeAssignment → NoticeRef.
+- **BookingArrangements**: For flexible/demand-responsive transport — booking deadlines, methods, and contact details.
 - **DirectionType**: Optional directional classifier (inbound, outbound, clockwise, anticlockwise); aids in distinguishing pattern variants.
 - **Name**: Optional human-readable label for the pattern variant (e.g., "Line 10 Outbound via Hospital").
 
