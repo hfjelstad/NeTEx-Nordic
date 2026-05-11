@@ -35,10 +35,6 @@
 ## PROFILES
 ## =================================================================
 
-profile:ERP a netex:Profile ;
-    rdfs:label "European Recommended Profile" ;
-    skos:notation "ERP" .
-
 profile:NP a netex:Profile ;
     rdfs:label "Nordic Profile" ;
     skos:notation "NP" .
@@ -836,34 +832,13 @@ netex:TrainBlock netex:hasComposition [
 ] .
 
 ## =================================================================
-## PROFILE RESTRICTIONS
+## PROFILE RESTRICTIONS (NP)
 ## =================================================================
-## Elements that differ between ERP and NP.
-## "excluded" = element not used in this profile.
-## "required" = stricter than XSD (e.g. 0..1 → 1..1).
+## NP-specific exclusions, allowances, and cardinality tightening vs XSD.
 ## Only divergences from XSD are listed.
 ## -----------------------------------------------------------------
 
-## --- ERP-only relationships (excluded from NP) ---
-
-profile:ERP netex:allows [
-    netex:class netex:StopPlace ;
-    netex:property "ParentSiteRef" ;
-    netex:cardinality "0..1" ;
-    rdfs:comment "Multimodal parent composition"
-] , [
-    netex:class netex:StopPlace ;
-    netex:property "TariffZoneRef" ;
-    netex:cardinality "0..n"
-] , [
-    netex:class netex:ServiceJourney ;
-    netex:property "FlexibleLineRef" ;
-    netex:cardinality "0..1"
-] , [
-    netex:class netex:ServiceJourney ;
-    netex:property "BlockRef" ;
-    netex:cardinality "0..1"
-] .
+## --- Elements excluded from NP ---
 
 profile:NP netex:excludes [
     netex:class netex:StopPlace ;
@@ -879,7 +854,7 @@ profile:NP netex:excludes [
     netex:property "BlockRef"
 ] .
 
-## --- NP-only relationships (excluded from ERP) ---
+## --- Elements allowed in NP (with cardinality) ---
 
 profile:NP netex:allows [
     netex:class netex:StopPlace ;
@@ -932,45 +907,7 @@ profile:NP netex:allows [
     netex:cardinality "0..1"
 ] .
 
-profile:ERP netex:excludes [
-    netex:class netex:StopPlace ;
-    netex:property "TopographicPlaceRef"
-] , [
-    netex:class netex:StopPlace ;
-    netex:property "ValidBetween"
-] , [
-    netex:class netex:StopPlace ;
-    netex:property "AccessibilityAssessment"
-] , [
-    netex:class netex:Quay ;
-    netex:property "AccessibilityAssessment"
-] , [
-    netex:class netex:Quay ;
-    netex:property "boardingPositions"
-] , [
-    netex:class netex:Line ;
-    netex:property "RepresentedByGroupRef"
-] , [
-    netex:class netex:Line ;
-    netex:property "TransportSubmode"
-] , [
-    netex:class netex:Line ;
-    netex:property "PublicCode"
-] , [
-    netex:class netex:Line ;
-    netex:property "PrivateCode"
-] , [
-    netex:class netex:DatedServiceJourney ;
-    netex:property "DatedVehicleJourneyRef"
-] , [
-    netex:class netex:Interchange ;
-    netex:property "FromPointRef"
-] , [
-    netex:class netex:Interchange ;
-    netex:property "ToPointRef"
-] .
-
-## --- Cardinality tightening (XSD is looser than profile requires) ---
+## --- Cardinality tightening (XSD is looser than NP requires) ---
 
 profile:NP netex:requires [
     netex:class netex:JourneyPattern ;

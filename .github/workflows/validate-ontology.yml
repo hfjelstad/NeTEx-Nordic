@@ -9,6 +9,7 @@ on:
       - 'Guides/**'
       - 'Examples/**'
       - 'scripts/validate_ontology.py'
+      - 'scripts/validate_shacl.py'
       - 'scripts/validate_profile.py'
   pull_request:
     paths:
@@ -18,6 +19,7 @@ on:
       - 'Guides/**'
       - 'Examples/**'
       - 'scripts/validate_ontology.py'
+      - 'scripts/validate_shacl.py'
       - 'scripts/validate_profile.py'
 
 jobs:
@@ -31,10 +33,13 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install rdflib lxml
+        run: pip install rdflib lxml pyshacl
 
       - name: Validate ontology integrity
         run: python scripts/validate_ontology.py
+
+      - name: Validate SHACL shapes
+        run: python scripts/validate_shacl.py
 
       - name: Validate profile compliance
         run: python scripts/validate_profile.py

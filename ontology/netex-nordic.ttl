@@ -659,6 +659,12 @@ netex:TrainBlock netex:hasRef [
     netex:xsdCardinality "0..1"
 ] .
 
+netex:TrainBlock netex:hasRef [
+    netex:property "OperatorRef" ;
+    netex:target netex:Operator ;
+    netex:xsdCardinality "0..1"
+] .
+
 netex:TrainBlock netex:hasComposition [
     netex:property "journeys" ;
     netex:target netex:ServiceJourney ;

@@ -1,0 +1,221 @@
+## -----------------------------------------------------------------
+## NeTEx Nordic SHACL Shapes
+## -----------------------------------------------------------------
+## Structural validation shapes for the Nordic Profile ontology.
+## Ensures every class, relationship, and constraint follows the
+## expected patterns.
+##
+## Usage: validate with pyshacl or Apache Jena against
+##        netex-nordic-documentation.ttl + netex-nordic.ttl
+## -----------------------------------------------------------------
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix profile: <https://netex-cen.eu/profile#> .
+@prefix doc:     <https://netex-cen.eu/doc#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix shapes:  <https://netex-cen.eu/shapes#> .
+
+## =================================================================
+## SHAPE 1: Every owl:Class must have label, definition, description, table
+## =================================================================
+
+shapes:ClassShape a sh:NodeShape ;
+    sh:targetClass owl:Class ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every owl:Class must have exactly one rdfs:label"
+    ] , [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every owl:Class must have exactly one skos:definition"
+    ] , [
+        sh:path doc:description ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every owl:Class must have a doc:description path"
+    ] , [
+        sh:path doc:table ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every owl:Class must have a doc:table path"
+    ] .
+
+## =================================================================
+## SHAPE 2: hasRef blank nodes must have property, target, xsdCardinality
+## =================================================================
+
+shapes:HasRefShape a sh:NodeShape ;
+    sh:targetObjectsOf netex:hasRef ;
+    sh:property [
+        sh:path netex:property ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every hasRef must have exactly one netex:property"
+    ] , [
+        sh:path netex:target ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every hasRef must have exactly one netex:target"
+    ] , [
+        sh:path netex:xsdCardinality ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[01]\\.\\.([01n])$" ;
+        sh:message "Every hasRef must have netex:xsdCardinality matching pattern N..M (e.g. 0..1, 1..n)"
+    ] .
+
+## =================================================================
+## SHAPE 3: hasComposition blank nodes must have property, target, xsdCardinality
+## =================================================================
+
+shapes:HasCompositionShape a sh:NodeShape ;
+    sh:targetObjectsOf netex:hasComposition ;
+    sh:property [
+        sh:path netex:property ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every hasComposition must have exactly one netex:property"
+    ] , [
+        sh:path netex:target ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every hasComposition must have exactly one netex:target"
+    ] , [
+        sh:path netex:xsdCardinality ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every hasComposition must have netex:xsdCardinality"
+    ] .
+
+## =================================================================
+## SHAPE 4: Profile exclusion constraints must have class and property
+## =================================================================
+
+shapes:ExcludesShape a sh:NodeShape ;
+    sh:targetObjectsOf netex:excludes ;
+    sh:property [
+        sh:path netex:class ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every exclusion must specify netex:class"
+    ] , [
+        sh:path netex:property ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every exclusion must specify netex:property"
+    ] .
+
+## =================================================================
+## SHAPE 5: Profile requirement constraints must have class, property, cardinality
+## =================================================================
+
+shapes:RequiresShape a sh:NodeShape ;
+    sh:targetObjectsOf netex:requires ;
+    sh:property [
+        sh:path netex:class ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every requirement must specify netex:class"
+    ] , [
+        sh:path netex:property ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every requirement must specify netex:property"
+    ] , [
+        sh:path netex:cardinality ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every requirement must specify netex:cardinality"
+    ] .
+
+## =================================================================
+## SHAPE 6: Profile allows constraints must have class, property, cardinality
+## =================================================================
+
+shapes:AllowsShape a sh:NodeShape ;
+    sh:targetObjectsOf netex:allows ;
+    sh:property [
+        sh:path netex:class ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every allows must specify netex:class"
+    ] , [
+        sh:path netex:property ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every allows must specify netex:property"
+    ] , [
+        sh:path netex:cardinality ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every allows must specify netex:cardinality"
+    ] .
+
+## =================================================================
+## SHAPE 7: Guides must have label, path, definition
+## =================================================================
+
+shapes:GuideShape a sh:NodeShape ;
+    sh:targetClass doc:Guide ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every Guide must have rdfs:label"
+    ] , [
+        sh:path doc:path ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every Guide must have a doc:path"
+    ] , [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every Guide must have skos:definition"
+    ] .
+
+## =================================================================
+## SHAPE 8: Frame classes must declare containment
+## =================================================================
+
+shapes:FrameContainmentShape a sh:NodeShape ;
+    sh:targetSubjectsOf netex:containedIn ;
+    sh:property [
+        sh:path netex:contains ;
+        sh:minCount 1 ;
+        sh:message "Frames that are containedIn must also contain at least one object class"
+    ] .
+
+## =================================================================
+## SHAPE 9: xsdCardinality values must be valid
+## =================================================================
+
+shapes:CardinalityValueShape a sh:NodeShape ;
+    sh:targetObjectsOf netex:xsdCardinality ;
+    sh:in ( "0..1" "0..n" "1..1" "1..n" ) ;
+    sh:message "xsdCardinality must be one of: 0..1, 0..n, 1..1, 1..n" .
+
+## =================================================================
+## END OF SHAPES
+## =================================================================
