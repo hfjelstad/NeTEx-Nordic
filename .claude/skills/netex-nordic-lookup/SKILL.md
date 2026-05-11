@@ -21,7 +21,7 @@ Note: Official validation is against XSD (`XSD/xsd/NeTEx_publication.xsd`). The 
 
 In Claude Code: read files directly from the repo.
 In Claude.ai: fetch from
-`https://raw.githubusercontent.com/hfjelstad/NeTEx-Nordic/main/<relative-path>`
+`https://github.com/hfjelstad/NeTEx-Nordic/main/<relative-path>`
 
 ## Profile codes
 
