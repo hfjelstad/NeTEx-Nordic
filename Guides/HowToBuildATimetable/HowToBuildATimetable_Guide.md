@@ -41,10 +41,10 @@ Each question maps to a NeTEx object:
 
 | Question | NeTEx Object | Lives in |
 |----------|-------------|----------|
-| Where does it stop? | `ScheduledStopPoint` | ServiceFrame |
-| What line is it? | `Line` | ServiceFrame |
-| In what order? | `JourneyPattern` | ServiceFrame |
-| When does it depart? | `ServiceJourney` + `TimetabledPassingTime` | TimetableFrame |
+| Where does it stop? | [`ScheduledStopPoint`](../../Objects/ScheduledStopPoint/) | ServiceFrame |
+| What line is it? | [`Line`](../../Objects/Line/) | ServiceFrame |
+| In what order? | [`JourneyPattern`](../../Objects/JourneyPattern/) | ServiceFrame |
+| When does it depart? | [`ServiceJourney`](../../Objects/ServiceJourney/) + `TimetabledPassingTime` | TimetableFrame |
 
 Let's build them one at a time.
 
@@ -52,7 +52,7 @@ Let's build them one at a time.
 
 ## 3. 📍 Where does it stop? — ScheduledStopPoint
 
-A `ScheduledStopPoint` is a logical stopping point in the timetable. It's not the physical platform or shelter — it's the planning concept "the vehicle stops here."
+A [`ScheduledStopPoint`](../../Objects/ScheduledStopPoint/) is a logical stopping point in the timetable. It's not the physical platform or shelter — it's the planning concept "the vehicle stops here."
 
 ```xml
 <scheduledStopPoints>
@@ -97,13 +97,13 @@ flowchart LR
 
 ## 4. 🚌 What line is it? — Line
 
-A `Line` groups related journeys into a single public-facing service. It gives the service a name, a transport mode, and links to the operator.
+A [`Line`](../../Objects/Line/) groups related journeys into a single public-facing service. It gives the service a name, a transport mode, and links to the operator.
 
 ```xml
 <lines>
     <Line id="ENT:Line:1" version="1">
         <Name>X</Name>
-        <TransportMode>rail / bus / water / tram / metro / air</TransportMode>
+        <TransportMode> rail / bus / water / tram / metro / air </TransportMode>
     </Line>
 </lines>
 ```
@@ -119,7 +119,7 @@ Key points:
 
 ## 5. 🗺️ In what order? — JourneyPattern
 
-A `JourneyPattern` defines the ordered sequence of stops a vehicle visits. It references the ScheduledStopPoints you already defined, and puts them in sequence.
+A [`JourneyPattern`](../../Objects/JourneyPattern/) defines the ordered sequence of stops a vehicle visits. It references the ScheduledStopPoints you already defined, and puts them in sequence.
 
 ```xml
 <journeyPatterns>
@@ -159,7 +159,7 @@ Key points:
 
 ## 6. 🕐 When does it depart? — ServiceJourney
 
-Now we have stops, a line, and an order. The final piece is *time*. A `ServiceJourney` ties it all together: it references a JourneyPattern and adds concrete arrival/departure times for each stop.
+Now we have stops, a line, and an order. The final piece is *time*. A [`ServiceJourney`](../../Objects/ServiceJourney/) ties it all together: it references a JourneyPattern and adds concrete arrival/departure times for each stop.
 
 ```xml
 <vehicleJourneys>
@@ -269,7 +269,6 @@ flowchart TD
     LINE --> JP["JourneyPattern"]
     LINE --> SJ["ServiceJourney"]
 
-    SJ -.->|"references"| SSP
     JP -.->|"references"| SSP
 
     style SHARED fill:#0D47A1,stroke:#0D47A1,color:#fff

@@ -277,6 +277,10 @@ You now have the foundation — here's where to go depending on what you need.
 - [Calendar Guide](../Calendar/Calendar_Guide.md) — DayType, OperatingDay, exceptions
 - [Table of Contents](../../LLM/Tables/TableOfContent.md) — browse all frames and objects
 
+**Build something:**
+
+- [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) — step-by-step guide from stops to departures
+
 **Start working:**
 
 - [Tools Guide](../Tools/Tools_Guide.md) — editors, plugins, and validation setup
