@@ -204,7 +204,64 @@ Key points:
 
 ---
 
-## 7. 🔗 How It All Connects
+## 7. � Which days does it run? — DatedServiceJourney
+
+A ServiceJourney defines *what* happens and *at what time*, but not *on which date*. To assign a journey to a specific calendar day, you create a [`DatedServiceJourney`](../../Objects/DatedServiceJourney/). It references the ServiceJourney (the template) and an `OperatingDay` (the date).
+
+```xml
+<ServiceCalendarFrame id="ENT:ServiceCalendarFrame:1" version="1">
+    <operatingDays>
+        <OperatingDay id="ENT:OperatingDay:2026-06-01" version="1">
+            <CalendarDate>2026-06-01</CalendarDate>
+        </OperatingDay>
+        <OperatingDay id="ENT:OperatingDay:2026-06-02" version="1">
+            <CalendarDate>2026-06-02</CalendarDate>
+        </OperatingDay>
+    </operatingDays>
+</ServiceCalendarFrame>
+
+<TimetableFrame id="ENT:TimetableFrame:1" version="1">
+    <vehicleJourneys>
+        <ServiceJourney id="ENT:ServiceJourney:1" version="1">
+            <!-- ... as before ... -->
+        </ServiceJourney>
+        <DatedServiceJourney id="ENT:DatedServiceJourney:1_2026-06-01" version="1">
+            <ServiceJourneyRef ref="ENT:ServiceJourney:1"/>
+            <OperatingDayRef ref="ENT:OperatingDay:2026-06-01"/>
+        </DatedServiceJourney>
+        <DatedServiceJourney id="ENT:DatedServiceJourney:1_2026-06-02" version="1">
+            <ServiceJourneyRef ref="ENT:ServiceJourney:1"/>
+            <OperatingDayRef ref="ENT:OperatingDay:2026-06-02"/>
+        </DatedServiceJourney>
+    </vehicleJourneys>
+</TimetableFrame>
+```
+
+Key points:
+- **OperatingDay** — a single calendar date, defined in a `ServiceCalendarFrame`.
+- **DatedServiceJourney** — binds a ServiceJourney to one OperatingDay. Create one per day the journey operates.
+- **No times here** — the stop times come from the ServiceJourney's `TimetabledPassingTime`. The DatedServiceJourney only adds the *date*.
+
+```mermaid
+flowchart LR
+    SJ["<b>ServiceJourney</b><br/><i>Template with times</i>"]
+    DSJ["<b>DatedServiceJourney</b><br/><i>Instance for a date</i>"]
+    OD["<b>OperatingDay</b><br/><i>2026-06-01</i>"]
+
+    DSJ -->|"ServiceJourneyRef"| SJ
+    DSJ -->|"OperatingDayRef"| OD
+
+    style SJ fill:#1565C0,stroke:#1565C0,color:#fff
+    style DSJ fill:#0D47A1,stroke:#0D47A1,color:#fff
+    style OD fill:#42A5F5,stroke:#42A5F5,color:#fff
+```
+
+> [!NOTE]
+> This is the recommended approach in the Nordic Profile. An alternative pattern using `DayType` and `DayTypeAssignment` exists for grouping multiple dates — see the [Calendar Guide](../Calendar/Calendar_Guide.md) for details.
+
+---
+
+## 8. �🔗 How It All Connects
 
 Here's how the objects reference each other:
 
@@ -252,7 +309,7 @@ Data is defined once and referenced everywhere — no duplication.
 
 ---
 
-## 8. 📐 Putting It Together — The Frame Structure
+## 9. 📐 Putting It Together — The Frame Structure
 
 In the Nordic Profile, a timetable dataset is split into a **shared data file** and one or more **line files**. Shared objects — like `ScheduledStopPoint`, `PassengerStopAssignment`, and `DestinationDisplay` — are defined once in the shared file and reused across all line files. Line-specific objects — `Line`, `JourneyPattern`, `ServiceJourney` — live in each line file.
 
@@ -305,7 +362,7 @@ The **ServiceFrame** holds the structural objects (what exists), and the **Timet
 
 ---
 
-## 9. ✅ Checklist — Minimum Viable Timetable
+## 10. ✅ Checklist — Minimum Viable Timetable
 
 To produce a working timetable delivery, you need at minimum:
 
@@ -316,13 +373,14 @@ To produce a working timetable delivery, you need at minimum:
 | 3 | `Line` | At least one | ServiceFrame |
 | 4 | `ScheduledStopPoint` | One per stop | ServiceFrame |
 | 5 | `PassengerStopAssignment` | One per ScheduledStopPoint | ServiceFrame |
+| 6 | `OperatingDay` | One per date in the timetable period | ServiceCalendarFrame |
+| 7 | `DatedServiceJourney` | One per ServiceJourney per operating day | TimetableFrame |
 
 ---
 
-## 10. 🧭 Where to Go Next
+## 11. 🧭 Where to Go Next
 
-**Add calendar and passenger information:**
-- [Calendar](../Calendar/Calendar_Guide.md) — defines which days a journey operates. Preferred: [DatedServiceJourney](../../Objects/DatedServiceJourney/) (assigns a ServiceJourney to a specific `OperatingDay`). Alternative: `DayType` patterns via `ServiceCalendarFrame`.
+**Add passenger information:**
 - [Passenger Information](../PassengerInformation/PassengerInformation_Guide.md) — [DestinationDisplay](../../Objects/DestinationDisplay/) (headsign text), notices
 
 **Expand the dataset:**
