@@ -77,10 +77,12 @@
             <PassengerStopAssignment id="ERP:PassengerStopAssignment:1001" version="1" order="1">
               <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:1001"/>
               <StopPlaceRef ref="NSR:StopPlace:1001" versionRef="EXTERNAL"/>
+              <QuayRef ref="NSR:Quay:1001" versionRef="EXTERNAL"/>
             </PassengerStopAssignment>
             <PassengerStopAssignment id="ERP:PassengerStopAssignment:1002" version="1" order="2">
               <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:1002"/>
               <StopPlaceRef ref="NSR:StopPlace:1002" versionRef="EXTERNAL"/>
+              <QuayRef ref="NSR:Quay:1002" versionRef="EXTERNAL"/>
             </PassengerStopAssignment>
           </stopAssignments>
 

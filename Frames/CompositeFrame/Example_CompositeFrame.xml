@@ -52,6 +52,7 @@
               <dayTypes>
                 <DayTypeRef ref="ERP:DayType:WKD"/>
               </dayTypes>
+              <JourneyPatternRef ref="ERP:JourneyPattern:JP_001"/>
               <LineRef ref="ERP:Line:L1"/>
             </ServiceJourney>
           </vehicleJourneys>

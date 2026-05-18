@@ -13,7 +13,9 @@
         </Operator>
       </organisations>
       <vehicleTypes>
-        <VehicleType version="1" id="ERP:VehicleType:1"/>
+        <VehicleType version="1" id="ERP:VehicleType:1">
+          <Name>Standard Bus</Name>
+        </VehicleType>
       </vehicleTypes>
       <vehicles>
         <Vehicle version="1" id="ERP:Vehicle:1">

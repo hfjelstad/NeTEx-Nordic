@@ -18,6 +18,7 @@
           <journeyPatterns>
             <JourneyPattern id="ERP:JourneyPattern:JP_001:1" version="1">
               <Name>Example JourneyPattern</Name>
+              <RouteRef ref="ERP:Route:R_001:1"/>
             </JourneyPattern>
           </journeyPatterns>
         </ServiceFrame>

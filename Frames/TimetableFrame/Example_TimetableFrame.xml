@@ -5,8 +5,13 @@
   <dataObjects>
     <TimetableFrame version="1" id="ERP:TimetableFrame:Core">
       <vehicleJourneys>
-        <ServiceJourney version="1" id="ERP:ServiceJourney:1"/>
-        <DatedServiceJourney version="1" id="ERP:DatedServiceJourney:1"/>
+        <ServiceJourney version="1" id="ERP:ServiceJourney:1">
+          <JourneyPatternRef ref="ERP:JourneyPattern:JP_001"/>
+        </ServiceJourney>
+        <DatedServiceJourney version="1" id="ERP:DatedServiceJourney:1">
+          <ServiceJourneyRef ref="ERP:ServiceJourney:1"/>
+          <OperatingDayRef ref="ERP:OperatingDay:2026-06-01"/>
+        </DatedServiceJourney>
         <DatedVehicleJourney version="1" id="ERP:DatedVehicleJourney:1"/>
         <DeadRun version="1" id="ERP:DeadRun:1"/>
       </vehicleJourneys>
