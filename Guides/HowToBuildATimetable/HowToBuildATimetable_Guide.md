@@ -327,18 +327,18 @@ In the Nordic Profile, a timetable dataset is split into a **shared data file** 
 
 ```mermaid
 flowchart TD
-    SHARED["<b>Shared data file</b><br/><i>(_shared_data.xml)</i>"]
     LINE["<b>Line file</b><br/><i>(Line_X.xml)</i>"]
+    SHARED["<b>Shared data file</b><br/><i>(_shared_data.xml)</i>"]
+
+    LINE --> JP["JourneyPattern"]
+    LINE --> LN["Line"]
+    LINE --> SJ["ServiceJourney"]
+    LINE --> DSJ["DatedServiceJourney"]
 
     SHARED --> SSP["ScheduledStopPoint"]
     SHARED --> PSA["PassengerStopAssignment"]
     SHARED --> DD["DestinationDisplay"]
     SHARED --> OD["OperatingDay"]
-
-    LINE --> LN["Line"]
-    LINE --> JP["JourneyPattern"]
-    LINE --> SJ["ServiceJourney"]
-    LINE --> DSJ["DatedServiceJourney"]
 
     JP -.->|"references"| SSP
     DSJ -.->|"references"| OD
