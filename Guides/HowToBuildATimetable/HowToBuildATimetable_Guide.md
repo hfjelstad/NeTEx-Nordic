@@ -27,7 +27,7 @@ flowchart LR
     Q1["<b>WHERE?</b><br/>Which stops?"]
     Q2["<b>WHAT?</b><br/>Which line?"]
     Q3["<b>IN WHAT ORDER?</b><br/>Stop sequence"]
-    Q4["<b>WHEN?</b><br/>Departure times"]
+    Q4["<b>WHEN?</b><br/>Dates and times"]
 
     Q1 --> Q2 --> Q3 --> Q4
 
@@ -44,7 +44,8 @@ Each question maps to a NeTEx object:
 | Where does it stop? | [`ScheduledStopPoint`](../../Objects/ScheduledStopPoint/) | ServiceFrame |
 | What line is it? | [`Line`](../../Objects/Line/) | ServiceFrame |
 | In what order? | [`JourneyPattern`](../../Objects/JourneyPattern/) | ServiceFrame |
-| When does it depart? | [`ServiceJourney`](../../Objects/ServiceJourney/) + `TimetabledPassingTime` | TimetableFrame |
+| What time? | [`ServiceJourney`](../../Objects/ServiceJourney/) + `TimetabledPassingTime` | TimetableFrame |
+| Which days? | [`DatedServiceJourney`](../../Objects/DatedServiceJourney/) + `OperatingDay` | TimetableFrame / ServiceCalendarFrame |
 
 Let's build them one at a time.
 
@@ -273,6 +274,8 @@ flowchart TD
     SJ["<b>ServiceJourney</b><br/><i>The actual trip</i>"]
     TPT["TimetabledPassingTime<br/><i>08:05, 16:20, …</i>"]
     LN["<b>Line</b><br/><i>Line X</i>"]
+    DSJ["<b>DatedServiceJourney</b><br/><i>Instance for a date</i>"]
+    OD["<b>OperatingDay</b><br/><i>2026-06-01</i>"]
 
     JP --> SPJP
     SPJP -->|"ScheduledStopPointRef"| SSP
@@ -280,6 +283,8 @@ flowchart TD
     SJ -->|"LineRef"| LN
     SJ --> TPT
     TPT -->|"StopPointInJourneyPatternRef"| SPJP
+    DSJ -->|"ServiceJourneyRef"| SJ
+    DSJ -->|"OperatingDayRef"| OD
 
     subgraph ServiceFrame
         SSP
@@ -290,6 +295,10 @@ flowchart TD
     subgraph TimetableFrame
         SJ
         TPT
+        DSJ
+    end
+    subgraph ServiceCalendarFrame
+        OD
     end
 
     style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
@@ -298,12 +307,15 @@ flowchart TD
     style LN fill:#42A5F5,stroke:#42A5F5,color:#fff
     style SJ fill:#1565C0,stroke:#1565C0,color:#fff
     style TPT fill:#1976D2,stroke:#1976D2,color:#fff
+    style DSJ fill:#0D47A1,stroke:#0D47A1,color:#fff
+    style OD fill:#42A5F5,stroke:#42A5F5,color:#fff
 ```
 
 The reference chain:
-1. **ServiceJourney** points to a **JourneyPattern** (the stop order) and a **Line** (the service identity)
-2. **JourneyPattern** contains **StopPointInJourneyPattern** entries, each pointing to a **ScheduledStopPoint**
-3. **TimetabledPassingTime** entries in the journey point back to specific **StopPointInJourneyPattern** positions
+1. **DatedServiceJourney** points to a **ServiceJourney** (the template) and an **OperatingDay** (the date)
+2. **ServiceJourney** points to a **JourneyPattern** (the stop order) and a **Line** (the service identity)
+3. **JourneyPattern** contains **StopPointInJourneyPattern** entries, each pointing to a **ScheduledStopPoint**
+4. **TimetabledPassingTime** entries in the journey point back to specific **StopPointInJourneyPattern** positions
 
 Data is defined once and referenced everywhere — no duplication.
 
@@ -321,21 +333,26 @@ flowchart TD
     SHARED --> SSP["ScheduledStopPoint"]
     SHARED --> PSA["PassengerStopAssignment"]
     SHARED --> DD["DestinationDisplay"]
+    SHARED --> OD["OperatingDay"]
 
     LINE --> LN["Line"]
     LINE --> JP["JourneyPattern"]
     LINE --> SJ["ServiceJourney"]
+    LINE --> DSJ["DatedServiceJourney"]
 
     JP -.->|"references"| SSP
+    DSJ -.->|"references"| OD
 
     style SHARED fill:#0D47A1,stroke:#0D47A1,color:#fff
     style LINE fill:#1565C0,stroke:#1565C0,color:#fff
     style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
     style PSA fill:#42A5F5,stroke:#42A5F5,color:#fff
     style DD fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style OD fill:#42A5F5,stroke:#42A5F5,color:#fff
     style LN fill:#64B5F6,stroke:#64B5F6,color:#fff
     style JP fill:#64B5F6,stroke:#64B5F6,color:#fff
     style SJ fill:#64B5F6,stroke:#64B5F6,color:#fff
+    style DSJ fill:#64B5F6,stroke:#64B5F6,color:#fff
 ```
 
 Within each file, objects live inside frames in a `CompositeFrame`:
@@ -349,9 +366,16 @@ Within each file, objects live inside frames in a `CompositeFrame`:
             <journeyPatterns>…</journeyPatterns>
         </ServiceFrame>
 
+        <ServiceCalendarFrame id="ENT:ServiceCalendarFrame:1" version="1">
+            <operatingDays>
+                <OperatingDay>…</OperatingDay>
+            </operatingDays>
+        </ServiceCalendarFrame>
+
         <TimetableFrame id="ENT:TimetableFrame:1" version="1">
             <vehicleJourneys>
                 <ServiceJourney>…</ServiceJourney>
+                <DatedServiceJourney>…</DatedServiceJourney>
             </vehicleJourneys>
         </TimetableFrame>
     </frames>
