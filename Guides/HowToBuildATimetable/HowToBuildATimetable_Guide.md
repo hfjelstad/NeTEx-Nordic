@@ -326,28 +326,31 @@ Data is defined once and referenced everywhere — no duplication.
 In the Nordic Profile, a timetable dataset is split into a **shared data file** and one or more **line files**. Shared objects — like `ScheduledStopPoint`, `PassengerStopAssignment`, and `DestinationDisplay` — are defined once in the shared file and reused across all line files. Line-specific objects — `Line`, `JourneyPattern`, `ServiceJourney` — live in each line file.
 
 ```mermaid
-flowchart TD
-    LINE["<b>Line file</b><br/><i>(Line_X.xml)</i>"]
-    SHARED["<b>Shared data file</b><br/><i>(_shared_data.xml)</i>"]
+flowchart LR
+    subgraph LINE["<b>Line file</b> <i>(Line_X.xml)</i>"]
+        LN["Line"]
+        JP["JourneyPattern"]
+        SJ["ServiceJourney"]
+        DSJ["DatedServiceJourney"]
+    end
 
-    LINE --> JP["JourneyPattern"]
-    LINE --> LN["Line"]
-    LINE --> SJ["ServiceJourney"]
-    LINE --> DSJ["DatedServiceJourney"]
+    subgraph SHARED["<b>Shared data file</b> <i>(_shared_data.xml)</i>"]
+        SSP["ScheduledStopPoint"]
+        PSA["PassengerStopAssignment"]
+        OD["OperatingDay"]
+    end
 
-    SHARED --> SSP["ScheduledStopPoint"]
-    SHARED --> DD["DestinationDisplay"]
-    SHARED --> PSA["PassengerStopAssignment"]
-    SHARED --> OD["OperatingDay"]
-
+    SJ -->|"LineRef"| LN
+    SJ -->|"JourneyPatternRef"| JP
+    DSJ -->|"ServiceJourneyRef"| SJ
     JP -.->|"references"| SSP
+    PSA -.->|"references"| SSP
     DSJ -.->|"references"| OD
 
-    style SHARED fill:#0D47A1,stroke:#0D47A1,color:#fff
     style LINE fill:#1565C0,stroke:#1565C0,color:#fff
+    style SHARED fill:#0D47A1,stroke:#0D47A1,color:#fff
     style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
     style PSA fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style DD fill:#42A5F5,stroke:#42A5F5,color:#fff
     style OD fill:#42A5F5,stroke:#42A5F5,color:#fff
     style LN fill:#64B5F6,stroke:#64B5F6,color:#fff
     style JP fill:#64B5F6,stroke:#64B5F6,color:#fff
