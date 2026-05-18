@@ -336,8 +336,8 @@ flowchart TD
     LINE --> DSJ["DatedServiceJourney"]
 
     SHARED --> SSP["ScheduledStopPoint"]
-    SHARED --> PSA["PassengerStopAssignment"]
     SHARED --> DD["DestinationDisplay"]
+    SHARED --> PSA["PassengerStopAssignment"]
     SHARED --> OD["OperatingDay"]
 
     JP -.->|"references"| SSP

@@ -172,7 +172,7 @@ def validate_file(xml_path: Path, rules: ProfileRules) -> ValidationResult:
                 )
 
     # --- Rule 3: Mandatory references must be present ---
-    for cls_name, ref_prop, target, xpath in rules.mandatory_refs:
+    for cls_name, ref_prop, target, xpath, alt_xpath in rules.mandatory_refs:
         for elem in find_elements(root, cls_name):
             elem_id = elem.get("id", "?")
             found = False
