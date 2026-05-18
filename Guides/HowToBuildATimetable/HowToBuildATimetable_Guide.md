@@ -311,11 +311,11 @@ To produce a working timetable delivery, you need at minimum:
 
 | # | Object | Count | Where |
 |---|--------|-------|-------|
-| 1 | `ScheduledStopPoint` | One per stop | ServiceFrame |
-| 2 | `PassengerStopAssignment` | One per ScheduledStopPoint | ServiceFrame |
+| 1 | `ServiceJourney` with `TimetabledPassingTime` | At least one (with planned passing times per stop) | TimetableFrame |
+| 2 | `JourneyPattern` with `StopPointInJourneyPattern` | One per stop sequence variant | ServiceFrame |
 | 3 | `Line` | At least one | ServiceFrame |
-| 4 | `JourneyPattern` with `StopPointInJourneyPattern` | One per stop sequence variant | ServiceFrame |
-| 5 | `ServiceJourney` with `TimetabledPassingTime` | One per departure | TimetableFrame |
+| 4 | `ScheduledStopPoint` | One per stop | ServiceFrame |
+| 5 | `PassengerStopAssignment` | One per ScheduledStopPoint | ServiceFrame |
 
 ---
 
