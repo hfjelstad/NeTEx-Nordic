@@ -266,50 +266,7 @@ flowchart LR
 
 Here's how the objects reference each other:
 
-```mermaid
-flowchart TD
-    SSP["<b>ScheduledStopPoint</b><br/><i>Location A, B, …</i>"]
-    JP["<b>JourneyPattern</b><br/><i>Stop sequence</i>"]
-    SPJP["StopPointInJourneyPattern<br/><i>order 1, 2, 3…</i>"]
-    SJ["<b>ServiceJourney</b><br/><i>The actual trip</i>"]
-    TPT["TimetabledPassingTime<br/><i>08:05, 16:20, …</i>"]
-    LN["<b>Line</b><br/><i>Line X</i>"]
-    DSJ["<b>DatedServiceJourney</b><br/><i>Instance for a date</i>"]
-    OD["<b>OperatingDay</b><br/><i>2026-06-01</i>"]
-
-    JP --> SPJP
-    SPJP -->|"ScheduledStopPointRef"| SSP
-    SJ -->|"JourneyPatternRef"| JP
-    SJ -->|"LineRef"| LN
-    SJ --> TPT
-    TPT -->|"StopPointInJourneyPatternRef"| SPJP
-    DSJ -->|"ServiceJourneyRef"| SJ
-    DSJ -->|"OperatingDayRef"| OD
-
-    subgraph ServiceFrame
-        SSP
-        LN
-        JP
-        SPJP
-    end
-    subgraph TimetableFrame
-        SJ
-        TPT
-        DSJ
-    end
-    subgraph ServiceCalendarFrame
-        OD
-    end
-
-    style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style JP fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style SPJP fill:#64B5F6,stroke:#64B5F6,color:#fff
-    style LN fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style SJ fill:#1565C0,stroke:#1565C0,color:#fff
-    style TPT fill:#1976D2,stroke:#1976D2,color:#fff
-    style DSJ fill:#0D47A1,stroke:#0D47A1,color:#fff
-    style OD fill:#42A5F5,stroke:#42A5F5,color:#fff
-```
+![Timetable object reference chain](../../assets/images/netex_timetable_chain_frames.svg)
 
 The reference chain:
 1. **DatedServiceJourney** points to a **ServiceJourney** (the template) and an **OperatingDay** (the date)
