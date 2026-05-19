@@ -325,6 +325,8 @@ Data is defined once and referenced everywhere — no duplication.
 
 In the Nordic Profile, a timetable dataset is split into a **shared data file** and one or more **line files**. Shared objects — like `ScheduledStopPoint`, `PassengerStopAssignment`, and `DestinationDisplay` — are defined once in the shared file and reused across all line files. Line-specific objects — `Line`, `JourneyPattern`, `ServiceJourney` — live in each line file.
 
+![Line file vs shared data file](../../assets/images/netex_line_file_vs_shared_file_v3.svg)
+
 ```mermaid
 flowchart LR
     subgraph LINE["<b>Line file</b> <i>(Line_X.xml)</i>"]
