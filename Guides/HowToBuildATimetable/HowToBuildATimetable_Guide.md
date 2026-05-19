@@ -327,39 +327,6 @@ In the Nordic Profile, a timetable dataset is split into a **shared data file** 
 
 ![Line file vs shared data file](../../assets/images/netex_line_file_vs_shared_file_v3.svg)
 
-```mermaid
-flowchart LR
-    subgraph LINE["<b>Line file</b> <i>(Line_X.xml)</i>"]
-        LN["Line"]
-        JP["JourneyPattern"]
-        SJ["ServiceJourney"]
-        DSJ["DatedServiceJourney"]
-    end
-
-    subgraph SHARED["<b>Shared data file</b> <i>(_shared_data.xml)</i>"]
-        SSP["ScheduledStopPoint"]
-        PSA["PassengerStopAssignment"]
-        OD["OperatingDay"]
-    end
-
-    SJ -->|"LineRef"| LN
-    SJ -->|"JourneyPatternRef"| JP
-    DSJ -->|"ServiceJourneyRef"| SJ
-    JP -.->|"references"| SSP
-    PSA -.->|"references"| SSP
-    DSJ -.->|"references"| OD
-
-    style LINE fill:#1565C0,stroke:#1565C0,color:#fff
-    style SHARED fill:#0D47A1,stroke:#0D47A1,color:#fff
-    style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style PSA fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style OD fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style LN fill:#64B5F6,stroke:#64B5F6,color:#fff
-    style JP fill:#64B5F6,stroke:#64B5F6,color:#fff
-    style SJ fill:#64B5F6,stroke:#64B5F6,color:#fff
-    style DSJ fill:#64B5F6,stroke:#64B5F6,color:#fff
-```
-
 Within each file, objects live inside frames in a `CompositeFrame`:
 
 ```xml
