@@ -17,22 +17,33 @@ In this guide you will learn:
 
 ## 2. 🗺️ The Two Worlds of Stops
 
-```text
-  LOGICAL WORLD (ServiceFrame)              PHYSICAL WORLD (SiteFrame)
-+-------------------------------+        +-------------------------------+
-|                               |        |                               |
-|  ScheduledStopPoint           |        |  StopPlace                    |
-|  "Oslo S"                     |        |  "Oslo S"                     |
-|                               |        |   ├── Quay "Spor 1"          |
-|  Used by:                     |        |   ├── Quay "Spor 2"          |
-|   - JourneyPattern            |        |   └── Quay "Spor 3"          |
-|   - Route                     |        |                               |
-|   - TimetabledPassingTime     |        |  Has: coordinates, access-    |
-|                               |        |  ibility, transport mode      |
-+---------------+---------------+        +---------------+---------------+
-                |                                        |
-                |         PassengerStopAssignment         |
-                +------------>  (bridge)  <--------------+
+```mermaid
+flowchart LR
+    subgraph LOGICAL["ServiceFrame — Logical World"]
+        SSP["<b>ScheduledStopPoint</b><br/><i>Oslo S</i>"]
+    end
+
+    subgraph PHYSICAL["SiteFrame — Physical World"]
+        SP["<b>StopPlace</b><br/><i>Oslo S</i>"]
+        Q1["Quay <i>Spor 1</i>"]
+        Q2["Quay <i>Spor 2</i>"]
+        Q3["Quay <i>Spor 3</i>"]
+        SP --- Q1
+        SP --- Q2
+        SP --- Q3
+    end
+
+    PSA["<b>PassengerStopAssignment</b><br/><i>The bridge</i>"]
+
+    SSP --> PSA
+    PSA --> Q1
+
+    style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style PSA fill:#1E88E5,stroke:#1E88E5,color:#fff
+    style SP fill:#0D47A1,stroke:#0D47A1,color:#fff
+    style Q1 fill:#1976D2,stroke:#1976D2,color:#fff
+    style Q2 fill:#1976D2,stroke:#1976D2,color:#fff
+    style Q3 fill:#1976D2,stroke:#1976D2,color:#fff
 ```
 
 ### Why the split?
@@ -50,9 +61,19 @@ In this guide you will learn:
 
 PassengerStopAssignment connects exactly one ScheduledStopPoint to exactly one Quay:
 
-```text
-ScheduledStopPoint ──> PassengerStopAssignment ──> Quay ──> StopPlace
-     (logical)              (bridge)              (physical)
+```mermaid
+flowchart LR
+    SSP["<b>ScheduledStopPoint</b><br/><i>Logical</i>"]
+    PSA["<b>PassengerStopAssignment</b><br/><i>Bridge</i>"]
+    Q["<b>Quay</b><br/><i>Physical platform</i>"]
+    SP["<b>StopPlace</b><br/><i>Station / area</i>"]
+
+    SSP --> PSA --> Q --> SP
+
+    style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style PSA fill:#1E88E5,stroke:#1E88E5,color:#fff
+    style Q fill:#1976D2,stroke:#1976D2,color:#fff
+    style SP fill:#0D47A1,stroke:#0D47A1,color:#fff
 ```
 
 ```xml
@@ -68,7 +89,8 @@ Key rules:
 - **StopPlaceRef** is optional — it can be inferred from the Quay's parent StopPlace
 - The `@order` attribute is technically required but carries no business meaning
 
-> ⚠️ **Note:** A ScheduledStopPoint without a PassengerStopAssignment cannot be resolved to a physical platform. This is the single most common data integrity problem in NeTEx datasets.
+> [!WARNING]
+> A ScheduledStopPoint without a PassengerStopAssignment cannot be resolved to a physical platform. This is the single most common data integrity problem in NeTEx datasets.
 
 ---
 
@@ -78,36 +100,48 @@ Key rules:
 
 A simple stop serving one transport mode:
 
-```text
-StopPlace "Jernbanetorget" (bus)
- ├── TransportMode: bus
- ├── StopPlaceType: onstreetBus
- ├── Centroid: [59.9127, 10.7521]
- ├── TopographicPlaceRef -> Oslo
- └── quays
-      ├── Quay "A" [59.9128, 10.7520]
-      └── Quay "B" [59.9126, 10.7522]
+```mermaid
+flowchart TD
+    SP["<b>StopPlace</b><br/><i>Jernbanetorget</i><br/>TransportMode: bus<br/>StopPlaceType: onstreetBus"]
+    QA["<b>Quay A</b>"]
+    QB["<b>Quay B</b>"]
+
+    SP --> QA
+    SP --> QB
+
+    style SP fill:#0D47A1,stroke:#0D47A1,color:#fff
+    style QA fill:#1976D2,stroke:#1976D2,color:#fff
+    style QB fill:#1976D2,stroke:#1976D2,color:#fff
 ```
 
 ### Multimodal Hierarchy
 
 Large transport hubs (rail + bus + metro) use a two-level hierarchy:
 
-```text
-StopPlace "Oslo S" (multimodal parent)
- ├── Name: "Oslo S"
- ├── NO TransportMode
- ├── NO quays
- │
- ├── Child: StopPlace "Oslo S" (rail)
- │   ├── ParentSiteRef -> multimodal parent
- │   ├── TransportMode: rail
- │   └── quays: Spor 1, Spor 2, ...
- │
- └── Child: StopPlace "Oslo S" (bus)
-     ├── ParentSiteRef -> multimodal parent
-     ├── TransportMode: bus
-     └── quays: Platform A, Platform B, ...
+```mermaid
+flowchart TD
+    PARENT["<b>StopPlace</b><br/><i>Oslo S</i><br/>(multimodal parent)<br/>No TransportMode, no Quays"]
+    RAIL["<b>StopPlace</b><br/><i>Oslo S — rail</i><br/>TransportMode: rail"]
+    BUS["<b>StopPlace</b><br/><i>Oslo S — bus</i><br/>TransportMode: bus"]
+    Q1["Quay <i>Spor 1</i>"]
+    Q2["Quay <i>Spor 2</i>"]
+    QA["Quay <i>Platform A</i>"]
+    QB["Quay <i>Platform B</i>"]
+
+    PARENT --> RAIL
+    PARENT --> BUS
+    RAIL --> Q1
+    RAIL --> Q2
+    BUS --> QA
+    BUS --> QB
+
+    style PARENT fill:#0D47A1,stroke:#0D47A1,color:#fff
+    style RAIL fill:#1565C0,stroke:#1565C0,color:#fff
+    style BUS fill:#1565C0,stroke:#1565C0,color:#fff
+    style Q1 fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style Q2 fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style QA fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style QB fill:#42A5F5,stroke:#42A5F5,color:#fff
 ```
 
 | Rule | Monomodal | Multimodal parent |
@@ -124,10 +158,18 @@ StopPlace "Oslo S" (multimodal parent)
 
 Provides geographic hierarchy for stops:
 
-```text
-TopographicPlace "Norway" (country)
- └── TopographicPlace "Oslo" (city)
-      └── StopPlace "Oslo S" (via TopographicPlaceRef)
+```mermaid
+flowchart TD
+    NO["<b>TopographicPlace</b><br/><i>Norway</i> (country)"]
+    OSLO["<b>TopographicPlace</b><br/><i>Oslo</i> (city)"]
+    SP["<b>StopPlace</b><br/><i>Oslo S</i>"]
+
+    NO --> OSLO
+    OSLO -.->|"TopographicPlaceRef"| SP
+
+    style NO fill:#0D47A1,stroke:#0D47A1,color:#fff
+    style OSLO fill:#1565C0,stroke:#1565C0,color:#fff
+    style SP fill:#42A5F5,stroke:#42A5F5,color:#fff
 ```
 
 ### TariffZone
@@ -150,22 +192,29 @@ Attaches fare zones to stops for zone-based pricing:
 
 All objects together in a CompositeFrame:
 
-```text
-CompositeFrame
- ├── SiteFrame
- │    ├── topographicPlaces
- │    │    └── TopographicPlace "Oslo"
- │    └── stopPlaces
- │         └── StopPlace "Oslo S"
- │              └── Quay "Spor 1"
- │
- └── ServiceFrame
-      ├── scheduledStopPoints
-      │    └── ScheduledStopPoint "Oslo S"
-      └── stopAssignments
-           └── PassengerStopAssignment
-                ├── ScheduledStopPointRef -> "Oslo S"
-                └── QuayRef -> "Spor 1"
+```mermaid
+flowchart TD
+    subgraph CF["CompositeFrame"]
+        subgraph SITE["SiteFrame"]
+            TP["TopographicPlace<br/><i>Oslo</i>"]
+            SP["StopPlace<br/><i>Oslo S</i>"]
+            Q["Quay<br/><i>Spor 1</i>"]
+            TP -.-> SP
+            SP --> Q
+        end
+        subgraph SVC["ServiceFrame"]
+            SSP["ScheduledStopPoint<br/><i>Oslo S</i>"]
+            PSA["PassengerStopAssignment"]
+            SSP --> PSA
+        end
+    end
+    PSA -->|"QuayRef"| Q
+
+    style TP fill:#64B5F6,stroke:#64B5F6,color:#fff
+    style SP fill:#0D47A1,stroke:#0D47A1,color:#fff
+    style Q fill:#1976D2,stroke:#1976D2,color:#fff
+    style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style PSA fill:#1E88E5,stroke:#1E88E5,color:#fff
 ```
 
 ### Complete Example
@@ -232,7 +281,8 @@ CompositeFrame
 </CompositeFrame>
 ```
 
-> 📄 **Full example:** [Example_StopInfrastructure.xml](Example_StopInfrastructure.xml) — Complete PublicationDelivery with TopographicPlace, StopPlace, Quay, ScheduledStopPoint, and PassengerStopAssignment.
+> [!NOTE]
+> **Full example:** [Example_StopInfrastructure.xml](Example_StopInfrastructure.xml) — Complete PublicationDelivery with TopographicPlace, StopPlace, Quay, ScheduledStopPoint, and PassengerStopAssignment.
 
 ---
 
@@ -268,18 +318,19 @@ CompositeFrame
 ## 9. 🔗 Related Resources
 
 ### Guides
-- [Get Started](../GetStarted/GetStarted_Guide.md) -- Introduction to NeTEx basics
-- [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) -- ID format and naming rules
+- [Get Started](../GetStarted/GetStarted_Guide.md) — Introduction to NeTEx basics
+- [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) — Where ScheduledStopPoints come from
+- [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) — ID format and naming rules
 
 ### Frames & Objects
-- [SiteFrame](../../Frames/SiteFrame/Table_SiteFrame.md) -- Physical infrastructure
-- [ServiceFrame](../../Frames/ServiceFrame/Table_ServiceFrame.md) -- Logical timetable data
-- [StopPlace](../../Objects/StopPlace/Table_StopPlace.md) -- Physical stop location
-- [Quay](../../Objects/Quay/Table_Quay.md) -- Boarding/alighting position
-- [ScheduledStopPoint](../../Objects/ScheduledStopPoint/Table_ScheduledStopPoint.md) -- Logical stop
-- [PassengerStopAssignment](../../Objects/PassengerStopAssignment/Table_PassengerStopAssignment.md) -- The bridge
-- [TopographicPlace](../../Objects/TopographicPlace/Table_TopographicPlace.md) -- Geographic context
-- [TariffZone](../../Objects/TariffZone/Table_TariffZone.md) -- Fare zone
+- [SiteFrame](../../Frames/SiteFrame/Table_SiteFrame.md) — Physical infrastructure
+- [ServiceFrame](../../Frames/ServiceFrame/Table_ServiceFrame.md) — Logical timetable data
+- [StopPlace](../../Objects/StopPlace/Table_StopPlace.md) — Physical stop location
+- [Quay](../../Objects/Quay/Table_Quay.md) — Boarding/alighting position
+- [ScheduledStopPoint](../../Objects/ScheduledStopPoint/Table_ScheduledStopPoint.md) — Logical stop
+- [PassengerStopAssignment](../../Objects/PassengerStopAssignment/Table_PassengerStopAssignment.md) — The bridge
+- [TopographicPlace](../../Objects/TopographicPlace/Table_TopographicPlace.md) — Geographic context
+- [TariffZone](../../Objects/TariffZone/Table_TariffZone.md) — Fare zone
 
 ### External
-- [NeTEx CEN Standard](https://www.netex-cen.eu/) -- Official specification
+- [NeTEx CEN Standard](https://www.netex-cen.eu/) — Official specification

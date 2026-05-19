@@ -91,6 +91,9 @@ flowchart LR
     style SP fill:#0D47A1,stroke:#0D47A1,color:#fff
 ```
 
+> [!IMPORTANT]
+> The `PassengerStopAssignment` is the interface between the operator's timetable delivery and the national stop registry. The operator defines `ScheduledStopPoint` (logical stops used in planning), while `StopPlace` and `Quay` are maintained centrally in the stop registry. The PSA bridges these two domains — it's where the operator declares "my logical stop corresponds to this physical Quay." For details on the stop registry side, see [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md).
+
 > [!NOTE]
 > The ID follows the pattern `Codespace:ObjectType:LocalId`. Here `ENT` is the codespace (who owns the data), `ScheduledStopPoint` is the type, and `1` is a local identifier. See [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) for details.
 
