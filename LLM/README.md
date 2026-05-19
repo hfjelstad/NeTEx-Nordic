@@ -287,3 +287,32 @@ All code blocks and XML snippets automatically get a "Copy" button via `docsify-
 - Descriptions must reference actual elements from the table
 - Cross-reference links must be relative and point to existing files
 - ProfileCode examples are authoritative for element ordering
+
+---
+
+## 9. Proposals & Future Work
+
+When documenting the profile "as-is", ideas for improvements or extensions will inevitably surface. To capture them without polluting the current documentation:
+
+**Use inline HTML comments with the `PROPOSAL` prefix:**
+
+```markdown
+5. **Use precise coordinates on Quays.** At least 4 decimal places.
+<!-- PROPOSAL: Consider adding gml:Polygon support for Quay area geometry. XSD supports it via Zone inheritance. Use cases: geofencing, navigation. -->
+```
+
+**Rules:**
+- Place the comment immediately after the relevant content
+- Start with `<!-- PROPOSAL:` followed by a concise description
+- Include: what the proposal is, why the XSD/standard supports it, and key use cases
+- Keep to a single line or short block — this is a breadcrumb, not a design document
+- Never let proposals change the rendered output — they are invisible to readers
+
+**Finding proposals:**
+```bash
+grep -rn "PROPOSAL:" Guides/ Objects/ Frames/
+```
+
+**When to promote a proposal:**
+- When a decision is made, either implement it on `main` or create a feature branch
+- Remove the comment once the change is merged or explicitly rejected

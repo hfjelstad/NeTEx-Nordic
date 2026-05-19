@@ -145,18 +145,34 @@ flowchart TD
     style SP fill:#42A5F5,stroke:#42A5F5,color:#fff
 ```
 
-### TariffZone
+### TariffZone / FareZone
 
-Attaches fare zones to stops for zone-based pricing:
+Fare zones attach geographic pricing context to stops. The Nordic Profile supports both:
+
+| Object | Where | How it links to stops |
+|--------|-------|----------------------|
+| `TariffZone` (legacy) | SiteFrame | Referenced *from* StopPlace via `TariffZoneRef` |
+| `FareZone` (preferred) | FareFrame | Contains `members` listing `ScheduledStopPointRef`s |
+
+> [!NOTE]
+> New implementations should use `FareZone`. `TariffZone` is still supported for backward compatibility but will be phased out.
 
 ```xml
+<!-- Legacy: TariffZone referenced from StopPlace -->
 <StopPlace id="ERP:StopPlace:OsloS" version="1">
   <Name>Oslo S</Name>
   <tariffZones>
     <TariffZoneRef ref="ERP:TariffZone:Zone1"/>
   </tariffZones>
-  <!-- ... -->
 </StopPlace>
+
+<!-- Preferred: FareZone with member stops -->
+<FareZone id="ERP:FareZone:1" version="1">
+  <Name>Zone 1</Name>
+  <members>
+    <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS"/>
+  </members>
+</FareZone>
 ```
 
 ---
@@ -270,6 +286,7 @@ flowchart TD
 4. **Include TopographicPlaceRef on StopPlaces.** It enables geographic search and administrative reporting.
 
 5. **Use precise coordinates on Quays.** At least 4 decimal places (±11m accuracy). The StopPlace Centroid should be central to all its Quays.
+<!-- PROPOSAL: Consider adding gml:Polygon support for Quay (area geometry). XSD supports it via Zone inheritance. Use cases: geofencing, indoor navigation, accessibility routing. Currently only Centroid (point) is in the Nordic Profile. -->
 
 6. **StopPlaceRef in PassengerStopAssignment is optional but recommended.** It makes the relationship explicit even though it can be inferred from the Quay's parent.
 
@@ -303,7 +320,8 @@ flowchart TD
 - [ScheduledStopPoint](../../Objects/ScheduledStopPoint/Table_ScheduledStopPoint.md) — Logical stop
 - [PassengerStopAssignment](../../Objects/PassengerStopAssignment/Table_PassengerStopAssignment.md) — The bridge
 - [TopographicPlace](../../Objects/TopographicPlace/Table_TopographicPlace.md) — Geographic context
-- [TariffZone](../../Objects/TariffZone/Table_TariffZone.md) — Fare zone
+- [TariffZone](../../Objects/TariffZone/Table_TariffZone.md) — Fare zone (legacy)
+- [FareZone](../../Objects/FareZone/Table_FareZone.md) — Fare zone (preferred)
 
 ### External
 - [NeTEx CEN Standard](https://www.netex-cen.eu/) — Official specification
