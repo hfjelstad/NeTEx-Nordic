@@ -17,34 +17,7 @@ In this guide you will learn:
 
 ## 2. 🗺️ The Two Worlds of Stops
 
-```mermaid
-flowchart LR
-    subgraph LOGICAL["ServiceFrame — Logical World"]
-        SSP["<b>ScheduledStopPoint</b><br/><i>Oslo S</i>"]
-    end
-
-    subgraph PHYSICAL["SiteFrame — Physical World"]
-        SP["<b>StopPlace</b><br/><i>Oslo S</i>"]
-        Q1["Quay <i>Spor 1</i>"]
-        Q2["Quay <i>Spor 2</i>"]
-        Q3["Quay <i>Spor 3</i>"]
-        SP --- Q1
-        SP --- Q2
-        SP --- Q3
-    end
-
-    PSA["<b>PassengerStopAssignment</b><br/><i>The bridge</i>"]
-
-    SSP --> PSA
-    PSA --> Q1
-
-    style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style PSA fill:#1E88E5,stroke:#1E88E5,color:#fff
-    style SP fill:#0D47A1,stroke:#0D47A1,color:#fff
-    style Q1 fill:#1976D2,stroke:#1976D2,color:#fff
-    style Q2 fill:#1976D2,stroke:#1976D2,color:#fff
-    style Q3 fill:#1976D2,stroke:#1976D2,color:#fff
-```
+![The two worlds of stops — logical vs physical](../../assets/images/netex_stop_infrastructure_two_worlds.svg)
 
 ### Why the split?
 

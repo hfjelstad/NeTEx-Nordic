@@ -141,7 +141,11 @@ Format options:
 | Blockquotes | Tips, warnings, key insights | `> [!TIP]`, `> [!WARNING]`, `> [!NOTE]` |
 | Collapsible sections | Advanced/optional content | `<details><summary>` |
 | Mermaid diagrams | Relationships, flows, trees | ` ```mermaid ` with blue palette |
+| SVG diagrams | Complex diagrams where Mermaid becomes unclear | `![Alt text](../../assets/images/name.svg)` — follow conventions in LLM/README.md §7c-ii |
 | Docsify tabs | Multi-profile examples | `<!-- tabs:start -->` blocks |
+
+> [!TIP]
+> **Mermaid vs SVG:** Use Mermaid as the default for diagrams — it's version-controllable, editable inline, and renders automatically. Switch to hand-crafted SVG (stored in `assets/images/`) when Mermaid produces unclear results: too many nodes, overlapping labels, complex layouts, or when you need precise visual control over spacing and alignment.
 
 ### Cross-References
 - Use **relative markdown links** to existing files in the repository

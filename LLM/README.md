@@ -222,6 +222,54 @@ Use Mermaid for relationship graphs, tree structures, and flowcharts. Always app
 
 Apply colors using `style NodeId fill:#color,stroke:#color,color:#fff`.
 
+> **When to use SVG instead:** If a Mermaid diagram becomes unclear — too many nodes, overlapping labels, or complex multi-level layouts — create a hand-crafted SVG and store it in `assets/images/`. Reference it with `![Alt text](../../assets/images/name.svg)`.
+
+### 7c-ii. SVG Diagram Conventions
+
+When creating SVGs, follow these conventions for visual consistency across the documentation:
+
+**Layout & sizing:**
+- Use `width="100%"` with a `viewBox` (e.g. `viewBox="0 0 680 450"`) — responsive, no fixed pixel size
+- Keep viewBox width at **680px** as the standard canvas width
+- Add `role="img"` for accessibility
+- Include `<title>` (short name) and `<desc>` (what the diagram shows) inside the `<svg>` element
+
+**Color palette (dark-mode friendly):**
+
+| Role | Fill | Stroke | Text |
+|------|------|--------|------|
+| Domain A boxes (e.g. timetable) | `rgb(60, 52, 137)` | `rgb(175, 169, 236)` | `rgb(206, 203, 246)` |
+| Domain B boxes (e.g. stop registry) | `rgb(8, 80, 65)` | `rgb(93, 202, 165)` | `rgb(159, 225, 203)` |
+| Frame/container outlines | `none` (no fill) | `rgba(222, 220, 209, 0.15)` | `rgb(194, 192, 182)` |
+| Arrow labels | — | — | `rgb(194, 192, 182)` |
+| Intra-domain arrows | — | `rgb(83, 74, 183)` | — |
+| Cross-domain arrows | — | `rgb(15, 110, 86)` | — |
+
+**Typography:**
+- Font stack: `"Anthropic Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+- Box labels: 14px, font-weight 500, `text-anchor: middle`
+- Sublabels (italic): 12px, font-weight 400
+- Arrow/frame labels: 12px, font-weight 400
+- Section headers: 14px, font-weight 500
+
+**Boxes:**
+- Corner radius: `rx="8"` for object boxes, `rx="12"` or `rx="14"` for frame containers
+- Stroke width: `0.5` for boxes, `0.5` for frame outlines
+- Frame containers: dashed stroke (`stroke-dasharray="6 4"`)
+
+**Arrows:**
+- Open chevron marker: `<marker id="arrow">` with `<path d="M2 1L8 5L2 9"/>` (no fill, stroke only)
+- Stroke width: `1` with `opacity="0.7"`
+- Labels placed near midpoint of the arrow
+
+**Interactivity (optional):**
+- Wrap clickable boxes in `<g onclick="sendPrompt('...')">` for docsify chat integration
+- Use Norwegian prompts: `"Fortell meg mer om [ObjectName] i NeTEx Nordic"`
+
+**Naming convention:**
+- File: `netex_<topic>_<variant>.svg` (e.g. `netex_stop_infrastructure_two_worlds.svg`)
+- Store in `assets/images/`
+
 ### 7d. Glossary Tooltips
 
 A custom plugin (`assets/docsify-glossary-tooltip.js`) parses the 52-term Glossary and adds hover tooltips on first occurrence of each term. The Glossary contains three-layer definitions: Profile, NeTEx XSD, and Transmodel.
