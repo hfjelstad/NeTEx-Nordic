@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PublicationDelivery xmlns="http://www.netex.org.uk/netex" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.netex.org.uk/netex NeTEx_publication.xsd" version="1.0">
+    <PublicationTimestamp>2026-05-15T12:00:00</PublicationTimestamp>
+    <ParticipantRef>NWY</ParticipantRef>
+    <dataObjects>
+        <CompositeFrame id="NWY:CompositeFrame:NW180" version="1">
+            <validityConditions>
+                <AvailabilityCondition id="NWY:AvailabilityCondition:1" version="1">
+                    <FromDate>2026-01-01T00:00:00</FromDate>
+                    <ToDate>2026-12-31T23:59:59</ToDate>
+                </AvailabilityCondition>
+            </validityConditions>
+            <codespaces>
+                <Codespace id="nog">
+                    <!-- Organisasjonsregister -->
+                    <Xmlns>NOG</Xmlns>
+                    <XmlnsUrl>https://registry.example.org/netex</XmlnsUrl>
+                </Codespace>
+                <Codespace id="nar">
+                    <!-- Avtaleregister -->
+                    <Xmlns>NAR</Xmlns>
+                    <XmlnsUrl>https://registry.example.org/netex</XmlnsUrl>
+                </Codespace>
+                <Codespace id="nsr">
+                    <!-- Stoppestedsregister -->
+                    <Xmlns>NSR</Xmlns>
+                    <XmlnsUrl>https://registry.example.org/netex</XmlnsUrl>
+                </Codespace>
+                <Codespace id="nwy">
+                    <!-- Dataleveranse NOR-WAY -->
+                    <Xmlns>NWY</Xmlns>
+                    <XmlnsUrl>https://norway-bussekspress.example.org/netex</XmlnsUrl>
+                </Codespace>
+            </codespaces>
+            <frames>
+                <!-- ============================================ -->
+                <!-- Organisasjonsregister START                   -->
+                <!-- ============================================ -->
+                <ResourceFrame id="NOG:ResourceFrame:Organisations" version="1">
+                    <typesOfValue>
+                        <TypeOfOrganisation id="NOG:TypeOfOrganisation:Authority" version="1">
+                            <Name lang="no">Autoritet</Name>
+                        </TypeOfOrganisation>
+                        <TypeOfOrganisation id="NOG:TypeOfOrganisation:Operator" version="1">
+                            <Name lang="no">Operatør</Name>
+                        </TypeOfOrganisation>
+                        <TypeOfOrganisation id="NOG:TypeOfOrganisation:LostAndFound" version="1">
+                            <Name lang="no">Hittegods</Name>
+                        </TypeOfOrganisation>
+                        <TypeOfOrganisation id="NOG:TypeOfOrganisation:CostumerService" version="1">
+                            <Name lang="no">Kundesenter</Name>
+                        </TypeOfOrganisation>
+                        <TypeOfOrganisation id="NOG:TypeOfOrganisation:SalesChannel" version="1">
+                            <Name lang="no">Salgskanal</Name>
+                        </TypeOfOrganisation>
+                    </typesOfValue>
+                    <organisations>
+                        <GeneralOrganisation id="NOG:GeneralOrganisation:NOR-WAY" version="1">
+                            <privateCodes>
+                                <PrivateCode type="Organisasjonsnummer">933449343</PrivateCode>
+                            </privateCodes>
+                            <Name>NOR-WAY Bussekspress AS</Name>
+                            <ShortName>NOR-WAY</ShortName>
+                            <ContactDetails>
+                                <Phone>+47 22 31 31 50</Phone>
+                                <Url>https://www.nor-way.no</Url>
+                                <FurtherDetails>Åpningstider: Man–tor 08:00–17:00, fre 08:00–19:00, lør 09:00–15:00, søn 12:00–19:00</FurtherDetails>
+                            </ContactDetails>
+                            <typesOfOrganisation>
+                                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:Authority"/>
+                                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:CostumerService"/>
+                                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:SalesChannel"/>
+                            </typesOfOrganisation>
+                        </GeneralOrganisation>
+                        <GeneralOrganisation id="NOG:GeneralOrganisation:Tide" version="1">
+                            <privateCodes>
+                                <PrivateCode type="Organisasjonsnummer">910500805</PrivateCode>
+                                <PrivateCode type="TurvognLøyve">148981</PrivateCode>
+                            </privateCodes>
+                            <Name>Tide Buss AS</Name>
+                            <ShortName>Tide</ShortName>
+                            <ContactDetails>
+                                <Phone>+47 55 55 44 73</Phone>
+                                <Url>https://www.tidebuss.no</Url>
+                            </ContactDetails>
+                            <typesOfOrganisation>
+                                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:Operator"/>
+                                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:LostAndFound"/>
+                            </typesOfOrganisation>
+                        </GeneralOrganisation>
+                        <GeneralOrganisation id="NOG:GeneralOrganisation:TelemarkBilruter" version="1">
+                            <privateCodes>
+                                <PrivateCode type="Organisasjonsnummer">980024504</PrivateCode>
+                                <PrivateCode type="TurvognLøyve">119848</PrivateCode>
+                            </privateCodes>
+                            <Name>Telemark Bilruter AS</Name>
+                            <ShortName>Telemark Bilruter</ShortName>
+                            <ContactDetails>
+                                <Phone>+47 35 06 54 00</Phone>
+                                <Url>https://www.telemarkbilruter.no</Url>
+                            </ContactDetails>
+                            <typesOfOrganisation>
+                                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:Operator"/>
+                                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:LostAndFound"/>
+                            </typesOfOrganisation>
+                        </GeneralOrganisation>
+                    </organisations>
+                </ResourceFrame>
+                <!-- Organisasjonsregister END -->
+
+                <!-- ============================================ -->
+                <!-- Avtaleregister START                          -->
+                <!-- ============================================ -->
+                <ResourceFrame id="NAR:ResourceFrame:AvtaleRegister" version="1">
+                    <responsibilitySets>
+                        <!-- Overordna ansvar for linja: NOR-WAY som ruteeier -->
+                        <ResponsibilitySet id="NAR:ResponsibilitySet:NW180" version="1">
+                            <Name>NW180 Haukeliekspressen</Name>
+                            <roles>
+                                <ResponsibilityRoleAssignment id="NAR:ResponsibilityRoleAssignment:NW180-Planning" version="1">
+                                    <StakeholderRoleType>Planning CustomerService</StakeholderRoleType>
+                                    <ResponsibleOrganisationRef ref="NOG:GeneralOrganisation:NOR-WAY"/>
+                                </ResponsibilityRoleAssignment>
+                            </roles>
+                        </ResponsibilitySet>
+                        <!-- Tide som operatør -->
+                        <ResponsibilitySet id="NAR:ResponsibilitySet:TideOperator" version="1">
+                            <Name>Tide as operator on NW180</Name>
+                            <roles>
+                                <ResponsibilityRoleAssignment id="NAR:ResponsibilityRoleAssignment:Tide-Op" version="1">
+                                    <StakeholderRoleType>Operation</StakeholderRoleType>
+                                    <ResponsibleOrganisationRef ref="NOG:GeneralOrganisation:Tide"/>
+                                </ResponsibilityRoleAssignment>
+                            </roles>
+                        </ResponsibilitySet>
+                        <!-- Telemark Bilruter som operatør -->
+                        <ResponsibilitySet id="NAR:ResponsibilitySet:TelemarkBilruterOperator" version="1">
+                            <Name>Telemark Bilruter as operator on NW180</Name>
+                            <roles>
+                                <ResponsibilityRoleAssignment id="NAR:ResponsibilityRoleAssignment:TB-Op" version="1">
+                                    <StakeholderRoleType>Operation</StakeholderRoleType>
+                                    <ResponsibleOrganisationRef ref="NOG:GeneralOrganisation:TelemarkBilruter"/>
+                                </ResponsibilityRoleAssignment>
+                            </roles>
+                        </ResponsibilitySet>
+                        <!-- Kundeservice: NOR-WAY for hele linja -->
+                        <ResponsibilitySet id="NAR:ResponsibilitySet:NOR-WAY-CustomerService" version="1">
+                            <Name>NOR-WAY customer service (hele NW180)</Name>
+                            <roles>
+                                <ResponsibilityRoleAssignment id="NAR:ResponsibilityRoleAssignment:NWY-CS" version="1">
+                                    <StakeholderRoleType>CustomerService</StakeholderRoleType>
+                                    <ResponsibleOrganisationRef ref="NOG:GeneralOrganisation:NOR-WAY"/>
+                                </ResponsibilityRoleAssignment>
+                            </roles>
+                        </ResponsibilitySet>
+                    </responsibilitySets>
+                    <contracts>
+                        <Contract id="NAR:Contract:NW180" version="1">
+                            <Name>NW180 Haukeliekspressen driftsavtale</Name>
+                            <Description>Inntektsfordeling mellom operatører på NW180</Description>
+                            <contractees>
+                                <GeneralOrganisationRef ref="NOG:GeneralOrganisation:NOR-WAY"/>
+                            </contractees>
+                            <contractors>
+                                <GeneralOrganisationRef ref="NOG:GeneralOrganisation:Tide"/>
+                                <GeneralOrganisationRef ref="NOG:GeneralOrganisation:TelemarkBilruter"/>
+                            </contractors>
+                        </Contract>
+                    </contracts>
+                </ResourceFrame>
+                <!-- Avtaleregister END -->
+
+                <!-- ============================================ -->
+                <!-- Dataleveranse fra NOR-WAY START               -->
+                <!-- ============================================ -->
+                <ResourceFrame id="NWY:ResourceFrame:Branding" version="1">
+                    <typesOfValue>
+                        <!-- NOR-WAY Bussekspress branding – dette er det reisende ser -->
+                        <Branding id="NWY:Branding:NOR-WAY" version="1">
+                            <Name>NOR-WAY Bussekspress</Name>
+                            <ShortName>NOR-WAY</ShortName>
+                            <Description>NOR-WAY Bussekspress felles merkevare for ekspressbuss</Description>
+                            <Url>https://www.nor-way.no</Url>
+                            <Presentation>
+                                <Colour>003DA5</Colour>
+                                <ColourName>NOR-WAY Blue</ColourName>
+                                <BackgroundColour>FFFFFF</BackgroundColour>
+                                <BackgroundColourName>White</BackgroundColourName>
+                                <TextColour>003DA5</TextColour>
+                                <TextColourName>NOR-WAY Blue</TextColourName>
+                            </Presentation>
+                        </Branding>
+                    </typesOfValue>
+                    <contacts>
+                        <!-- NOR-WAY: kundeservice / reiseinfo for hele linja -->
+                        <Contact id="NWY:Contact:NOR-WAY-Info" version="1">
+                            <ContactDetails>
+                                <Phone>+47 22 31 31 50</Phone>
+                                <Url>https://www.nor-way.no</Url>
+                                <FurtherDetails>Åpningstider: Man–tor 08:00–17:00, fre 08:00–19:00, lør 09:00–15:00, søn 12:00–19:00</FurtherDetails>
+                            </ContactDetails>
+                            <ContactType>information</ContactType>
+                        </Contact>
+                        <!-- Tide: hittegods (Vinje–Haugesund) -->
+                        <Contact id="NWY:Contact:Tide-LostProperty" version="1">
+                            <ContactDetails>
+                                <Phone>+47 55 55 44 73</Phone>
+                            </ContactDetails>
+                            <ContactType>lostProperty</ContactType>
+                        </Contact>
+                        <!-- Telemark Bilruter: hittegods (Oslo–Vinje) -->
+                        <Contact id="NWY:Contact:TB-LostProperty" version="1">
+                            <ContactDetails>
+                                <Phone>+47 35 06 54 00</Phone>
+                            </ContactDetails>
+                            <ContactType>lostProperty</ContactType>
+                        </Contact>
+                    </contacts>
+                </ResourceFrame>
+
+                <!-- Stoppestedsregister (forenkla) -->
+                <SiteFrame id="NSR:SiteFrame:NW180Stops" version="1">
+                    <stopPlaces>
+                        <StopPlace id="NSR:StopPlace:Haugesund" version="1">
+                            <Name>Haugesund rutebilstasjon</Name>
+                            <TransportMode>bus</TransportMode>
+                            <StopPlaceType>busStation</StopPlaceType>
+                        </StopPlace>
+                        <StopPlace id="NSR:StopPlace:Roeldal" version="1">
+                            <Name>Røldal</Name>
+                            <TransportMode>bus</TransportMode>
+                            <StopPlaceType>onstreetBus</StopPlaceType>
+                        </StopPlace>
+                        <StopPlace id="NSR:StopPlace:Haukeli" version="1">
+                            <Name>Haukeli</Name>
+                            <TransportMode>bus</TransportMode>
+                            <StopPlaceType>onstreetBus</StopPlaceType>
+                        </StopPlace>
+                        <StopPlace id="NSR:StopPlace:Kongsberg" version="1">
+                            <Name>Kongsberg rutebilstasjon</Name>
+                            <TransportMode>bus</TransportMode>
+                            <StopPlaceType>busStation</StopPlaceType>
+                        </StopPlace>
+                        <StopPlace id="NSR:StopPlace:OsloBussterminal" version="1">
+                            <Name>Oslo bussterminal</Name>
+                            <TransportMode>bus</TransportMode>
+                            <StopPlaceType>busStation</StopPlaceType>
+                        </StopPlace>
+                    </stopPlaces>
+                </SiteFrame>
+
+                <ServiceFrame id="NWY:ServiceFrame:NW180" version="1">
+                    <lines>
+                        <!-- Linja eies av NOR-WAY (Planning + CustomerService via ResponsibilitySet) -->
+                        <Line id="NWY:Line:NW180" version="1" responsibilitySetRef="NAR:ResponsibilitySet:NW180">
+                            <BrandingRef ref="NWY:Branding:NOR-WAY"/>
+                            <Name>Haukeliekspressen</Name>
+                            <ShortName>NW180</ShortName>
+                            <TransportMode>bus</TransportMode>
+                            <TransportSubmode>
+                                <BusSubmode>expressBus</BusSubmode>
+                            </TransportSubmode>
+                            <PublicCode>NW180</PublicCode>
+                        </Line>
+                    </lines>
+                    <scheduledStopPoints>
+                        <ScheduledStopPoint id="NWY:ScheduledStopPoint:Haugesund" version="1">
+                            <Name>Haugesund rutebilstasjon</Name>
+                        </ScheduledStopPoint>
+                        <ScheduledStopPoint id="NWY:ScheduledStopPoint:Roeldal" version="1">
+                            <Name>Røldal</Name>
+                        </ScheduledStopPoint>
+                        <ScheduledStopPoint id="NWY:ScheduledStopPoint:Haukeli" version="1">
+                            <Name>Haukeli</Name>
+                        </ScheduledStopPoint>
+                        <ScheduledStopPoint id="NWY:ScheduledStopPoint:Kongsberg" version="1">
+                            <Name>Kongsberg rutebilstasjon</Name>
+                        </ScheduledStopPoint>
+                        <ScheduledStopPoint id="NWY:ScheduledStopPoint:OsloBussterminal" version="1">
+                            <Name>Oslo bussterminal</Name>
+                        </ScheduledStopPoint>
+                    </scheduledStopPoints>
+                    <stopAssignments>
+                        <PassengerStopAssignment id="NWY:PassengerStopAssignment:Haugesund" version="1" order="1">
+                            <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:Haugesund"/>
+                            <StopPlaceRef ref="NSR:StopPlace:Haugesund"/>
+                        </PassengerStopAssignment>
+                        <PassengerStopAssignment id="NWY:PassengerStopAssignment:Roeldal" version="1" order="1">
+                            <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:Roeldal"/>
+                            <StopPlaceRef ref="NSR:StopPlace:Roeldal"/>
+                        </PassengerStopAssignment>
+                        <PassengerStopAssignment id="NWY:PassengerStopAssignment:Haukeli" version="1" order="1">
+                            <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:Haukeli"/>
+                            <StopPlaceRef ref="NSR:StopPlace:Haukeli"/>
+                        </PassengerStopAssignment>
+                        <PassengerStopAssignment id="NWY:PassengerStopAssignment:Kongsberg" version="1" order="1">
+                            <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:Kongsberg"/>
+                            <StopPlaceRef ref="NSR:StopPlace:Kongsberg"/>
+                        </PassengerStopAssignment>
+                        <PassengerStopAssignment id="NWY:PassengerStopAssignment:OsloBussterminal" version="1" order="1">
+                            <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:OsloBussterminal"/>
+                            <StopPlaceRef ref="NSR:StopPlace:OsloBussterminal"/>
+                        </PassengerStopAssignment>
+                    </stopAssignments>
+                    <journeyPatterns>
+                        <!-- Haugesund → Oslo -->
+                        <JourneyPattern id="NWY:JourneyPattern:NW180-East" version="1">
+                            <pointsInSequence>
+                                <StopPointInJourneyPattern id="NWY:StopPointInJourneyPattern:NW180E_01" version="1" order="1">
+                                    <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:Haugesund"/>
+                                    <ForAlighting>false</ForAlighting>
+                                </StopPointInJourneyPattern>
+                                <StopPointInJourneyPattern id="NWY:StopPointInJourneyPattern:NW180E_02" version="1" order="2">
+                                    <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:Roeldal"/>
+                                </StopPointInJourneyPattern>
+                                <StopPointInJourneyPattern id="NWY:StopPointInJourneyPattern:NW180E_03" version="1" order="3">
+                                    <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:Haukeli"/>
+                                </StopPointInJourneyPattern>
+                                <StopPointInJourneyPattern id="NWY:StopPointInJourneyPattern:NW180E_04" version="1" order="4">
+                                    <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:Kongsberg"/>
+                                </StopPointInJourneyPattern>
+                                <StopPointInJourneyPattern id="NWY:StopPointInJourneyPattern:NW180E_05" version="1" order="5">
+                                    <ScheduledStopPointRef ref="NWY:ScheduledStopPoint:OsloBussterminal"/>
+                                    <ForBoarding>false</ForBoarding>
+                                </StopPointInJourneyPattern>
+                            </pointsInSequence>
+                        </JourneyPattern>
+                    </journeyPatterns>
+                </ServiceFrame>
+
+                <TimetableFrame id="NWY:TimetableFrame:NW180" version="1">
+                    <vehicleJourneys>
+                        <!-- Avgang kjørt av Tide -->
+                        <ServiceJourney id="NWY:ServiceJourney:NW180-0600" version="1" responsibilitySetRef="NAR:ResponsibilitySet:TideOperator">
+                            <Name>NW180 Haugesund–Oslo (morgen)</Name>
+                            <TransportMode>bus</TransportMode>
+                            <TransportSubmode>
+                                <BusSubmode>expressBus</BusSubmode>
+                            </TransportSubmode>
+                            <JourneyPatternRef ref="NWY:JourneyPattern:NW180-East" version="1"/>
+                            <LineRef ref="NWY:Line:NW180"/>
+                            <passingTimes>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-0600_01" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_01"/>
+                                    <DepartureTime>06:00:00</DepartureTime>
+                                </TimetabledPassingTime>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-0600_02" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_02"/>
+                                    <ArrivalTime>07:45:00</ArrivalTime>
+                                    <DepartureTime>07:50:00</DepartureTime>
+                                </TimetabledPassingTime>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-0600_03" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_03"/>
+                                    <ArrivalTime>08:30:00</ArrivalTime>
+                                    <DepartureTime>08:40:00</DepartureTime>
+                                </TimetabledPassingTime>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-0600_04" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_04"/>
+                                    <ArrivalTime>11:00:00</ArrivalTime>
+                                    <DepartureTime>11:10:00</DepartureTime>
+                                </TimetabledPassingTime>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-0600_05" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_05"/>
+                                    <ArrivalTime>12:30:00</ArrivalTime>
+                                </TimetabledPassingTime>
+                            </passingTimes>
+                        </ServiceJourney>
+
+                        <!-- Avgang kjørt av Telemark Bilruter -->
+                        <ServiceJourney id="NWY:ServiceJourney:NW180-1000" version="1" responsibilitySetRef="NAR:ResponsibilitySet:TelemarkBilruterOperator">
+                            <Name>NW180 Haugesund–Oslo (formiddag)</Name>
+                            <TransportMode>bus</TransportMode>
+                            <TransportSubmode>
+                                <BusSubmode>expressBus</BusSubmode>
+                            </TransportSubmode>
+                            <JourneyPatternRef ref="NWY:JourneyPattern:NW180-East" version="1"/>
+                            <LineRef ref="NWY:Line:NW180"/>
+                            <passingTimes>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-1000_01" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_01"/>
+                                    <DepartureTime>10:00:00</DepartureTime>
+                                </TimetabledPassingTime>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-1000_02" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_02"/>
+                                    <ArrivalTime>11:45:00</ArrivalTime>
+                                    <DepartureTime>11:50:00</DepartureTime>
+                                </TimetabledPassingTime>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-1000_03" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_03"/>
+                                    <ArrivalTime>12:30:00</ArrivalTime>
+                                    <DepartureTime>12:40:00</DepartureTime>
+                                </TimetabledPassingTime>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-1000_04" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_04"/>
+                                    <ArrivalTime>15:00:00</ArrivalTime>
+                                    <DepartureTime>15:10:00</DepartureTime>
+                                </TimetabledPassingTime>
+                                <TimetabledPassingTime id="NWY:TimetabledPassingTime:NW180-1000_05" version="1">
+                                    <StopPointInJourneyPatternRef ref="NWY:StopPointInJourneyPattern:NW180E_05"/>
+                                    <ArrivalTime>16:30:00</ArrivalTime>
+                                </TimetabledPassingTime>
+                            </passingTimes>
+                        </ServiceJourney>
+                    </vehicleJourneys>
+                </TimetableFrame>
+
+                <!-- Billettproduktet eies av NOR-WAY, uavhengig av operatør -->
+                <FareFrame id="NWY:FareFrame:NW180" version="1">
+                    <fareProducts>
+                        <PreassignedFareProduct id="NWY:PreassignedFareProduct:NW180-Enkeltbillett" version="1">
+                            <Name>Haukeliekspressen enkeltbillett</Name>
+                            <GeneralOrganisationRef ref="NOG:GeneralOrganisation:NOR-WAY"/>
+                        </PreassignedFareProduct>
+                    </fareProducts>
+                </FareFrame>
+            </frames>
+        </CompositeFrame>
+    </dataObjects>
+</PublicationDelivery>

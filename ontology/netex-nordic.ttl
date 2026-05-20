@@ -408,6 +408,230 @@ netex:Network a owl:Class ;
     netex:inFrame netex:ServiceFrame .
 
 ## =================================================================
+## ELEMENT ORDERING (XSD-derived)
+## =================================================================
+## Canonical element sequence per class, derived from XSD type
+## hierarchy. Tables, descriptions, and generators should follow
+## this order. Attributes (@id, @version, @order) are listed first
+## by convention — XML attributes have no sequence constraint.
+## Only elements documented in the profile Tables are listed.
+## -----------------------------------------------------------------
+
+netex:ServiceJourney netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "keyList"
+] , [
+    netex:position 4 ; netex:element "Name"
+] , [
+    netex:position 5 ; netex:element "PrivateCode"
+] , [
+    netex:position 6 ; netex:element "Description"
+] , [
+    netex:position 7 ; netex:element "TransportMode"
+] , [
+    netex:position 8 ; netex:element "TransportSubmode"
+] , [
+    netex:position 9 ; netex:element "dayTypes"
+] , [
+    netex:position 10 ; netex:element "JourneyPatternRef"
+] , [
+    netex:position 11 ; netex:element "VehicleTypeRef"
+] , [
+    netex:position 12 ; netex:element "BlockRef"
+] , [
+    netex:position 13 ; netex:element "OperatorRef"
+] , [
+    netex:position 14 ; netex:element "LineRef"
+] , [
+    netex:position 15 ; netex:element "FlexibleLineRef"
+] , [
+    netex:position 16 ; netex:element "passingTimes"
+] , [
+    netex:position 17 ; netex:element "parts"
+] .
+
+netex:Operator netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "CompanyNumber"
+] , [
+    netex:position 4 ; netex:element "Name"
+] , [
+    netex:position 5 ; netex:element "ShortName"
+] , [
+    netex:position 6 ; netex:element "LegalName"
+] , [
+    netex:position 7 ; netex:element "ContactDetails"
+] , [
+    netex:position 8 ; netex:element "OrganisationType"
+] , [
+    netex:position 9 ; netex:element "CountryRef"
+] , [
+    netex:position 10 ; netex:element "PrimaryMode"
+] , [
+    netex:position 11 ; netex:element "CustomerServiceContactDetails"
+] .
+
+netex:StopPlace netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "ValidBetween"
+] , [
+    netex:position 4 ; netex:element "keyList"
+] , [
+    netex:position 5 ; netex:element "Name"
+] , [
+    netex:position 6 ; netex:element "Centroid"
+] , [
+    netex:position 7 ; netex:element "AccessibilityAssessment"
+] , [
+    netex:position 8 ; netex:element "TopographicPlaceRef"
+] , [
+    netex:position 9 ; netex:element "ParentSiteRef"
+] , [
+    netex:position 10 ; netex:element "TransportMode"
+] , [
+    netex:position 11 ; netex:element "StopPlaceType"
+] , [
+    netex:position 12 ; netex:element "Weighting"
+] , [
+    netex:position 13 ; netex:element "quays"
+] .
+
+netex:Line netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "Name"
+] , [
+    netex:position 4 ; netex:element "TransportMode"
+] , [
+    netex:position 5 ; netex:element "TransportSubmode"
+] , [
+    netex:position 6 ; netex:element "PublicCode"
+] , [
+    netex:position 7 ; netex:element "PrivateCode"
+] , [
+    netex:position 8 ; netex:element "OperatorRef"
+] , [
+    netex:position 9 ; netex:element "Monitored"
+] , [
+    netex:position 10 ; netex:element "RepresentedByGroupRef"
+] , [
+    netex:position 11 ; netex:element "Presentation"
+] .
+
+netex:Route netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "Name"
+] , [
+    netex:position 4 ; netex:element "ShortName"
+] , [
+    netex:position 5 ; netex:element "Description"
+] , [
+    netex:position 6 ; netex:element "LineRef"
+] , [
+    netex:position 7 ; netex:element "DirectionType"
+] , [
+    netex:position 8 ; netex:element "pointsInSequence"
+] , [
+    netex:position 9 ; netex:element "InverseRouteRef"
+] .
+
+netex:JourneyPattern netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "Name"
+] , [
+    netex:position 4 ; netex:element "RouteRef"
+] , [
+    netex:position 5 ; netex:element "pointsInSequence"
+] , [
+    netex:position 6 ; netex:element "linksInSequence"
+] .
+
+netex:DatedServiceJourney netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "ServiceAlteration"
+] , [
+    netex:position 4 ; netex:element "BlockRef"
+] , [
+    netex:position 5 ; netex:element "ServiceJourneyRef"
+] , [
+    netex:position 6 ; netex:element "replacedJourneys"
+] , [
+    netex:position 7 ; netex:element "OperatingDayRef"
+] .
+
+netex:DayType netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "Name"
+] , [
+    netex:position 4 ; netex:element "properties"
+] .
+
+netex:ScheduledStopPoint netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "ValidBetween"
+] , [
+    netex:position 4 ; netex:element "Name"
+] , [
+    netex:position 5 ; netex:element "TimingPointStatus"
+] .
+
+netex:PassengerStopAssignment netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "@order"
+] , [
+    netex:position 4 ; netex:element "ValidBetween"
+] , [
+    netex:position 5 ; netex:element "ScheduledStopPointRef"
+] , [
+    netex:position 6 ; netex:element "StopPlaceRef"
+] , [
+    netex:position 7 ; netex:element "QuayRef"
+] .
+
+netex:DestinationDisplay netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "Name"
+] , [
+    netex:position 4 ; netex:element "SideText"
+] , [
+    netex:position 5 ; netex:element "FrontText"
+] , [
+    netex:position 6 ; netex:element "vias"
+] .
+
+## =================================================================
 ## RELATIONSHIPS (@ref properties) — SUPERSET
 ## =================================================================
 ## Each relationship is defined once with XSD cardinality.

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResourceFrame id="NOG:ResourceFrame:Organisations" version="1">
+    <typesOfValue>
+        <TypeOfOrganisation id="NOG:TypeOfOrganisation:Authority" version="1">
+            <Name lang="no">Autoritet</Name>
+        </TypeOfOrganisation>
+        <TypeOfOrganisation id="NOG:TypeOfOrganisation:Operator" version="1">
+            <Name lang="no">Operatør</Name>
+        </TypeOfOrganisation>
+        <TypeOfOrganisation id="NOG:TypeOfOrganisation:LostAndFound" version="1">
+            <Name lang="no">Hittegods</Name>
+        </TypeOfOrganisation>
+        <TypeOfOrganisation id="NOG:TypeOfOrganisation:CostumerService" version="1">
+            <Name lang="no">Kundesenter</Name>
+        </TypeOfOrganisation>
+        <TypeOfOrganisation id="NOG:TypeOfOrganisation:SalesChannel" version="1">
+            <Name lang="no">Salgskanal</Name>
+        </TypeOfOrganisation>
+    </typesOfValue>
+    <organisations>
+        <GeneralOrganisation id="NOG:GeneralOrganisation:NOR-WAY" version="1">
+            <privateCodes>
+                <PrivateCode type="Organisasjonsnummer">933449343</PrivateCode>
+            </privateCodes>
+            <Name>NOR-WAY Bussekspress AS</Name>
+            <ShortName>NOR-WAY</ShortName>
+            <ContactDetails>
+                <Phone>+47 22 31 31 50</Phone>
+                <Url>https://www.nor-way.no</Url>
+                <FurtherDetails>Åpningstider: Man–tor 08:00–17:00, fre 08:00–19:00, lør 09:00–15:00, søn 12:00–19:00</FurtherDetails>
+            </ContactDetails>
+            <typesOfOrganisation>
+                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:Authority"/>
+                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:CostumerService"/>
+                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:SalesChannel"/>
+            </typesOfOrganisation>
+        </GeneralOrganisation>
+        <GeneralOrganisation id="NOG:GeneralOrganisation:Tide" version="1">
+            <privateCodes>
+                <PrivateCode type="Organisasjonsnummer">910500805</PrivateCode>
+                <PrivateCode type="TurvognLøyve">148981</PrivateCode>
+            </privateCodes>
+            <Name>Tide Buss AS</Name>
+            <ShortName>Tide</ShortName>
+            <ContactDetails>
+                <Phone>+47 55 55 44 73</Phone>
+                <Url>https://www.tidebuss.no</Url>
+            </ContactDetails>
+            <typesOfOrganisation>
+                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:Operator"/>
+                <TypeOfOrganisationRef ref="NOG:TypeOfOrganisation:LostAndFound"/>
+            </typesOfOrganisation>
+        </GeneralOrganisation>
+    </organisations>
+</ResourceFrame>

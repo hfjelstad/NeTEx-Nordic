@@ -121,6 +121,18 @@ The text shown on the front or side of a public transport vehicle to indicate it
 
 ---
 
+## EPIAP
+
+European Passenger Information Accessibility Profile — a CEN Technical Specification extending EPIP with accessibility data requirements for NeTEx datasets.
+
+---
+
+## EPIP
+
+European Passenger Information Profile — the CEN Technical Specification (CEN/TS 16614-PI) defining the NeTEx subset required for pan-European passenger information exchange.
+
+---
+
 ## FareContract
 
 A customer-facing agreement for the right to travel and consume fare products, defined within a SalesTransactionFrame (NeTEx Part 3 - Sales).
@@ -217,6 +229,12 @@ The geographic representation of a ServiceLink, carrying GML geometry (typically
 
 ---
 
+## NAP
+
+National Access Point — the national portal through which public transport data is published and made available to third parties, as mandated by EU delegated regulations.
+
+---
+
 ## Notice
 
 Informational or regulatory text associated with public transport services, displayed to passengers.
@@ -226,6 +244,12 @@ Informational or regulatory text associated with public transport services, disp
 > **Transmodel:** A text for informational purposes on exceptions in a LINE, a JOURNEY PATTERN, etc. The information may be usable for passenger or driver information.
 
 → [Full documentation](../../Objects/Notice/Description_Notice.md)
+
+---
+
+## NSR
+
+Nasjonalt Stoppestedsregister (National Stop Place Registry) — the authoritative Norwegian registry for StopPlace and Quay data, maintained by Entur. The source of all `StopPlace` and `Quay` identifiers referenced via PassengerStopAssignment.
 
 ---
 

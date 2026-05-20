@@ -1,5 +1,7 @@
 # 🕐 How to Build a Timetable
 
+*Technical Guide*
+
 ## 1. 🎯 Introduction
 
 You know how to plan a route: which stops a vehicle serves, in what order, and when it departs. This guide shows you how to express that knowledge in NeTEx — the European XML standard for exchanging public transport data.
@@ -92,7 +94,7 @@ flowchart LR
 ```
 
 > [!IMPORTANT]
-> The `PassengerStopAssignment` is the interface between the operator's timetable delivery and the national stop registry. The operator defines `ScheduledStopPoint` (logical stops used in planning), while `StopPlace` and `Quay` are maintained centrally in the stop registry. The PSA bridges these two domains — it's where the operator declares "my logical stop corresponds to this physical Quay." For details on the stop registry side, see [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md).
+> The `PassengerStopAssignment` is the interface between the operator's timetable delivery and the national stop registry. The operator defines `ScheduledStopPoint` (logical stops used in planning), while `StopPlace` and `Quay` are maintained centrally in the stop registry. The `PassengerStopAssignment` bridges these two domains — it's where the operator declares "my logical stop corresponds to this physical Quay." For details on the stop registry side, see [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md).
 
 > [!NOTE]
 > The ID follows the pattern `Codespace:ObjectType:LocalId`. Here `ENT` is the codespace (who owns the data), `ScheduledStopPoint` is the type, and `1` is a local identifier. See [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) for details.

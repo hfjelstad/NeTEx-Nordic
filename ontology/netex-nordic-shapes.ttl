@@ -217,5 +217,25 @@ shapes:CardinalityValueShape a sh:NodeShape ;
     sh:message "xsdCardinality must be one of: 0..1, 0..n, 1..1, 1..n" .
 
 ## =================================================================
+## SHAPE 10: elementOrder entries must have position (integer) + element (string)
+## =================================================================
+
+shapes:ElementOrderShape a sh:NodeShape ;
+    sh:targetObjectsOf netex:elementOrder ;
+    sh:property [
+        sh:path netex:position ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:message "Every elementOrder entry must have exactly one netex:position (integer)"
+    ] , [
+        sh:path netex:element ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every elementOrder entry must have exactly one netex:element (string)"
+    ] .
+
+## =================================================================
 ## END OF SHAPES
 ## =================================================================
