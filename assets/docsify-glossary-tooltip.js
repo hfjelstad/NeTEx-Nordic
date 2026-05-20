@@ -5,7 +5,6 @@
 (function () {
   var GLOSSARY_PATH = 'Guides/Glossary/Glossary.md';
   var glossaryTerms = {};
-  var glossaryLoaded = false;
 
   function parseGlossary(markdown) {
     var terms = {};
@@ -68,24 +67,23 @@
     return html;
   }
 
+  // Start fetching immediately so it's ready as soon as possible
+  var glossaryReady = fetch(GLOSSARY_PATH)
+    .then(function (res) { return res.ok ? res.text() : ''; })
+    .then(function (md) {
+      glossaryTerms = parseGlossary(md);
+    })
+    .catch(function () {});
+
   window.$docsify = window.$docsify || {};
   window.$docsify.plugins = (window.$docsify.plugins || []).concat(function (hook, vm) {
-    hook.init(function () {
-      // Fetch glossary markdown relative to the page (index.html at site root)
-      fetch(GLOSSARY_PATH)
-        .then(function (res) { return res.ok ? res.text() : ''; })
-        .then(function (md) {
-          glossaryTerms = parseGlossary(md);
-          glossaryLoaded = true;
-        })
-        .catch(function () { glossaryLoaded = true; });
-    });
-
-    hook.afterEach(function (html) {
-      if (!glossaryLoaded || Object.keys(glossaryTerms).length === 0) return html;
-      // Don't annotate the glossary page itself
-      if (vm.route.path && vm.route.path.indexOf('Glossary') !== -1) return html;
-      return addTooltips(html, glossaryTerms);
+    // Use async afterEach (with next callback) to wait for glossary fetch
+    hook.afterEach(function (html, next) {
+      glossaryReady.then(function () {
+        if (Object.keys(glossaryTerms).length === 0) { next(html); return; }
+        if (vm.route.path && vm.route.path.indexOf('Glossary') !== -1) { next(html); return; }
+        next(addTooltips(html, glossaryTerms));
+      });
     });
   });
 

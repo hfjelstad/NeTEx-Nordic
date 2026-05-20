@@ -18,7 +18,7 @@ We'll build a timetable step by step, starting with concepts you already know an
 > [!TIP]
 > If you're new to NeTEx documents in general (frames, codespaces, the PublicationDelivery envelope), read the [Get Started guide](../GetStarted/GetStarted_Guide.md) first.
 
-![Public transport illustration](../../assets/images/getting_on_the_bike.png)
+![Waiting at the platform](../../assets/images/Holding_Your_Hand.png)
 
 ---
 
@@ -339,6 +339,8 @@ To produce a working timetable delivery, you need at minimum:
 | 7 | DatedServiceJourney | One per ServiceJourney per operating day | TimetableFrame |
 
 ---
+
+![Public transport illustration](../../assets/images/getting_on_the_bike.png)
 
 ## 11. 🧭 Where to Go Next
 
