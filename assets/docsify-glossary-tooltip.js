@@ -45,22 +45,27 @@
       return b.length - a.length; // longest first
     });
 
-    // Split HTML into tags and text segments, only process text
-    return html.replace(/([^<]+)|(<[^>]+>)/g, function (match, text, tag) {
-      if (tag) return tag; // pass HTML tags through unchanged
-      sortedTerms.forEach(function (term) {
-        if (used[term]) return;
-        var re = new RegExp('\\b(' + escapeRegExp(term) + ')\\b');
+    // Process one term at a time, re-splitting HTML each time so we never
+    // match inside attributes of previously inserted tooltip spans.
+    sortedTerms.forEach(function (term) {
+      if (used[term]) return;
+      var re = new RegExp('\\b(' + escapeRegExp(term) + ')\\b');
+      var tooltip = terms[term].replace(/"/g, '&quot;');
+      var found = false;
+      html = html.replace(/([^<]+)|(<[^>]+>)/g, function (match, text, tag) {
+        if (tag || found) return match;
         if (re.test(text)) {
-          var tooltip = terms[term].replace(/"/g, '&quot;');
-          text = text.replace(re,
+          found = true;
+          return text.replace(re,
             '<span class="glossary-tooltip" title="' + tooltip + '">$1</span>'
           );
-          used[term] = true;
         }
+        return match;
       });
-      return text;
+      if (found) used[term] = true;
     });
+
+    return html;
   }
 
   window.$docsify = window.$docsify || {};
