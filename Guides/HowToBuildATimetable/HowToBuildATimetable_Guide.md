@@ -18,6 +18,8 @@ We'll build a timetable step by step, starting with concepts you already know an
 > [!TIP]
 > If you're new to NeTEx documents in general (frames, codespaces, the PublicationDelivery envelope), read the [Get Started guide](../GetStarted/GetStarted_Guide.md) first.
 
+![Public transport illustration](../../assets/images/getting_on_the_bike.png)
+
 ---
 
 ## 2. 🧠 The Mental Model
@@ -76,6 +78,7 @@ A [ScheduledStopPoint](../../Objects/ScheduledStopPoint/Description_ScheduledSto
 
 That's it — a name and a unique ID. But every ScheduledStopPoint must be linked to a specific physical Quay (platform or boarding position) via a PassengerStopAssignment. The Quay lives inside a StopPlace in the stop registry. So while the timetable itself only references the logical point, the assignment to a Quay is mandatory — it's what tells passengers *where* to stand.
 
+
 ```mermaid
 flowchart LR
     SSP["<b>ScheduledStopPoint</b><br/><i>Logical stop</i>"]
@@ -92,6 +95,7 @@ flowchart LR
     style Q fill:#1976D2,stroke:#1976D2,color:#fff
     style SP fill:#0D47A1,stroke:#0D47A1,color:#fff
 ```
+
 
 > [!IMPORTANT]
 > The PassengerStopAssignment is the interface between the operator's timetable delivery and the national stop registry. The operator defines ScheduledStopPoint (logical stops used in planning), while StopPlace and Quay are maintained centrally in the stop registry. The PassengerStopAssignment bridges these two domains — it's where the operator declares "my logical stop corresponds to this physical Quay." For details on the stop registry side, see [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md).
