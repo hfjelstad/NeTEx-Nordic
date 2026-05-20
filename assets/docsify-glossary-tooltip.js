@@ -66,9 +66,8 @@
   window.$docsify = window.$docsify || {};
   window.$docsify.plugins = (window.$docsify.plugins || []).concat(function (hook, vm) {
     hook.init(function () {
-      // Fetch glossary markdown from repo root (not relative to current page)
-      var base = (vm.config.basePath || '').replace(/\/$/, '');
-      fetch(base + '/' + GLOSSARY_PATH)
+      // Fetch glossary markdown relative to the page (index.html at site root)
+      fetch(GLOSSARY_PATH)
         .then(function (res) { return res.ok ? res.text() : ''; })
         .then(function (md) {
           glossaryTerms = parseGlossary(md);
