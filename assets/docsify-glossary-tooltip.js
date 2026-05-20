@@ -56,7 +56,7 @@
         if (re.test(text)) {
           found = true;
           return text.replace(re,
-            '<span class="glossary-tooltip" title="' + tooltip + '">$1</span>'
+            '<span class="glossary-tooltip" data-tooltip="' + tooltip + '">$1</span>'
           );
         }
         return match;
@@ -96,7 +96,7 @@
     '  position: relative;',
     '}',
     '.glossary-tooltip:hover::after {',
-    '  content: attr(title);',
+    '  content: attr(data-tooltip);',
     '  position: absolute;',
     '  bottom: 100%;',
     '  left: 0;',
