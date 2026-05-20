@@ -41,32 +41,34 @@
 
   function addTooltips(html, terms) {
     var used = {};
-    Object.keys(terms).sort(function (a, b) {
+    var sortedTerms = Object.keys(terms).sort(function (a, b) {
       return b.length - a.length; // longest first
-    }).forEach(function (term) {
-      if (used[term]) return;
-      // Match whole word, not inside tags or code
-      var re = new RegExp(
-        '(?<![<\\w/])\\b(' + escapeRegExp(term) + ')\\b(?![^<]*>|[^<]*<\\/code>)',
-        ''
-      );
-      var match = html.match(re);
-      if (match) {
-        var tooltip = terms[term].replace(/"/g, '&quot;');
-        html = html.replace(re,
-          '<span class="glossary-tooltip" title="' + tooltip + '">$1</span>'
-        );
-        used[term] = true;
-      }
     });
-    return html;
+
+    // Split HTML into tags and text segments, only process text
+    return html.replace(/([^<]+)|(<[^>]+>)/g, function (match, text, tag) {
+      if (tag) return tag; // pass HTML tags through unchanged
+      sortedTerms.forEach(function (term) {
+        if (used[term]) return;
+        var re = new RegExp('\\b(' + escapeRegExp(term) + ')\\b');
+        if (re.test(text)) {
+          var tooltip = terms[term].replace(/"/g, '&quot;');
+          text = text.replace(re,
+            '<span class="glossary-tooltip" title="' + tooltip + '">$1</span>'
+          );
+          used[term] = true;
+        }
+      });
+      return text;
+    });
   }
 
   window.$docsify = window.$docsify || {};
   window.$docsify.plugins = (window.$docsify.plugins || []).concat(function (hook, vm) {
     hook.init(function () {
-      // Fetch glossary markdown
-      fetch(vm.router.getFile(GLOSSARY_PATH))
+      // Fetch glossary markdown from repo root (not relative to current page)
+      var base = (vm.config.basePath || '').replace(/\/$/, '');
+      fetch(base + '/' + GLOSSARY_PATH)
         .then(function (res) { return res.ok ? res.text() : ''; })
         .then(function (md) {
           glossaryTerms = parseGlossary(md);

@@ -43,11 +43,11 @@ Each question maps to a NeTEx object:
 
 | Question | NeTEx Object | Lives in |
 |----------|-------------|----------|
-| Where does it stop? | [`ScheduledStopPoint`](../../Objects/ScheduledStopPoint/) | ServiceFrame |
-| What line is it? | [`Line`](../../Objects/Line/) | ServiceFrame |
-| In what order? | [`JourneyPattern`](../../Objects/JourneyPattern/) | ServiceFrame |
-| What time? | [`ServiceJourney`](../../Objects/ServiceJourney/) + `TimetabledPassingTime` | TimetableFrame |
-| Which days? | [`DatedServiceJourney`](../../Objects/DatedServiceJourney/) + `OperatingDay` | TimetableFrame / ServiceCalendarFrame |
+| Where does it stop? | [ScheduledStopPoint](../../Objects/ScheduledStopPoint/) | ServiceFrame |
+| What line is it? | [Line](../../Objects/Line/) | ServiceFrame |
+| In what order? | [JourneyPattern](../../Objects/JourneyPattern/) | ServiceFrame |
+| What time? | [ServiceJourney](../../Objects/ServiceJourney/) + TimetabledPassingTime | TimetableFrame |
+| Which days? | [DatedServiceJourney](../../Objects/DatedServiceJourney/) + OperatingDay | TimetableFrame / ServiceCalendarFrame |
 
 Let's build them one at a time.
 
@@ -55,7 +55,7 @@ Let's build them one at a time.
 
 ## 3. 📍 Where does it stop? — ScheduledStopPoint
 
-A [`ScheduledStopPoint`](../../Objects/ScheduledStopPoint/) is a logical stopping point in the timetable. It's not the physical platform or shelter — it's the planning concept "the vehicle stops here."
+A [ScheduledStopPoint](../../Objects/ScheduledStopPoint/) is a logical stopping point in the timetable. It's not the physical platform or shelter — it's the planning concept "the vehicle stops here."
 
 ```xml
 <scheduledStopPoints>
@@ -103,7 +103,7 @@ flowchart LR
 
 ## 4. 🚌 What line is it? — Line
 
-A [`Line`](../../Objects/Line/) groups related journeys into a single public-facing service. It gives the service a name, a transport mode, and links to the operator.
+A [Line](../../Objects/Line/) groups related journeys into a single public-facing service. It gives the service a name, a transport mode, and links to the operator.
 
 ```xml
 <lines>
@@ -125,7 +125,7 @@ Key points:
 
 ## 5. 🗺️ In what order? — JourneyPattern
 
-A [`JourneyPattern`](../../Objects/JourneyPattern/) defines the ordered sequence of stops a vehicle visits. It references the ScheduledStopPoints you already defined, and puts them in sequence.
+A [JourneyPattern](../../Objects/JourneyPattern/) defines the ordered sequence of stops a vehicle visits. It references the ScheduledStopPoints you already defined, and puts them in sequence.
 
 ```xml
 <journeyPatterns>
@@ -165,7 +165,7 @@ Key points:
 
 ## 6. 🕐 When does it depart? — ServiceJourney
 
-Now we have stops, a line, and an order. The final piece is *time*. A [`ServiceJourney`](../../Objects/ServiceJourney/) ties it all together: it references a JourneyPattern and adds concrete arrival/departure times for each stop.
+Now we have stops, a line, and an order. The final piece is *time*. A [ServiceJourney](../../Objects/ServiceJourney/) ties it all together: it references a JourneyPattern and adds concrete arrival/departure times for each stop.
 
 ```xml
 <vehicleJourneys>
@@ -212,7 +212,7 @@ Key points:
 
 ## 7. 📅 Which days does it run? — DatedServiceJourney
 
-A ServiceJourney defines *what* happens and *at what time*, but not *on which date*. To assign a journey to a specific calendar day, you create a [`DatedServiceJourney`](../../Objects/DatedServiceJourney/). It references the ServiceJourney (the template) and an `OperatingDay` (the date).
+A ServiceJourney defines *what* happens and *at what time*, but not *on which date*. To assign a journey to a specific calendar day, you create a [DatedServiceJourney](../../Objects/DatedServiceJourney/). It references the ServiceJourney (the template) and an OperatingDay (the date).
 
 ```xml
 <ServiceCalendarFrame id="ENT:ServiceCalendarFrame:1" version="1">
