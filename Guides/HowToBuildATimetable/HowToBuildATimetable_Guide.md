@@ -12,7 +12,7 @@ We'll build a timetable step by step, starting with concepts you already know an
 - 📍 How stops are represented ([ScheduledStopPoint](../../Objects/ScheduledStopPoint/))
 - 🚌 How a line is defined ([Line](../../Objects/Line/))
 - 🗺️ How the stop sequence is described ([JourneyPattern](../../Objects/JourneyPattern/))
-- 🕐 How departure times are added ([ServiceJourney](../../Objects/ServiceJourney/) + `TimetabledPassingTime`)
+- 🕐 How departure times are added ([ServiceJourney](../../Objects/ServiceJourney/) + TimetabledPassingTime)
 - 🔗 How the pieces reference each other
 
 > [!TIP]
@@ -74,7 +74,7 @@ A [`ScheduledStopPoint`](../../Objects/ScheduledStopPoint/) is a logical stoppin
 </scheduledStopPoints>
 ```
 
-That's it — a name and a unique ID. But every `ScheduledStopPoint` must be linked to a specific physical `Quay` (platform or boarding position) via a `PassengerStopAssignment`. The Quay lives inside a `StopPlace` in the stop registry. So while the timetable itself only references the logical point, the assignment to a Quay is mandatory — it's what tells passengers *where* to stand.
+That's it — a name and a unique ID. But every ScheduledStopPoint must be linked to a specific physical Quay (platform or boarding position) via a PassengerStopAssignment. The Quay lives inside a StopPlace in the stop registry. So while the timetable itself only references the logical point, the assignment to a Quay is mandatory — it's what tells passengers *where* to stand.
 
 ```mermaid
 flowchart LR
@@ -94,10 +94,10 @@ flowchart LR
 ```
 
 > [!IMPORTANT]
-> The `PassengerStopAssignment` is the interface between the operator's timetable delivery and the national stop registry. The operator defines `ScheduledStopPoint` (logical stops used in planning), while `StopPlace` and `Quay` are maintained centrally in the stop registry. The `PassengerStopAssignment` bridges these two domains — it's where the operator declares "my logical stop corresponds to this physical Quay." For details on the stop registry side, see [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md).
+> The PassengerStopAssignment is the interface between the operator's timetable delivery and the national stop registry. The operator defines ScheduledStopPoint (logical stops used in planning), while StopPlace and Quay are maintained centrally in the stop registry. The PassengerStopAssignment bridges these two domains — it's where the operator declares "my logical stop corresponds to this physical Quay." For details on the stop registry side, see [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md).
 
 > [!NOTE]
-> The ID follows the pattern `Codespace:ObjectType:LocalId`. Here `ENT` is the codespace (who owns the data), `ScheduledStopPoint` is the type, and `1` is a local identifier. See [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) for details.
+> The ID follows the pattern `Codespace:ObjectType:LocalId`. Here `ENT` is the codespace (who owns the data), ScheduledStopPoint is the type, and `1` is a local identifier. See [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) for details.
 
 ---
 
@@ -210,7 +210,7 @@ Key points:
 
 ---
 
-## 7. � Which days does it run? — DatedServiceJourney
+## 7. 📅 Which days does it run? — DatedServiceJourney
 
 A ServiceJourney defines *what* happens and *at what time*, but not *on which date*. To assign a journey to a specific calendar day, you create a [`DatedServiceJourney`](../../Objects/DatedServiceJourney/). It references the ServiceJourney (the template) and an `OperatingDay` (the date).
 
@@ -244,9 +244,9 @@ A ServiceJourney defines *what* happens and *at what time*, but not *on which da
 ```
 
 Key points:
-- **OperatingDay** — a single calendar date, defined in a `ServiceCalendarFrame`.
+- **OperatingDay** — a single calendar date, defined in a ServiceCalendarFrame.
 - **DatedServiceJourney** — binds a ServiceJourney to one OperatingDay. Create one per day the journey operates.
-- **No times here** — the stop times come from the ServiceJourney's `TimetabledPassingTime`. The DatedServiceJourney only adds the *date*.
+- **No times here** — the stop times come from the ServiceJourney's TimetabledPassingTime. The DatedServiceJourney only adds the *date*.
 
 ```mermaid
 flowchart LR
@@ -263,11 +263,11 @@ flowchart LR
 ```
 
 > [!NOTE]
-> This is the recommended approach in the Nordic Profile. An alternative pattern using `DayType` and `DayTypeAssignment` exists for grouping multiple dates — see the [Calendar Guide](../Calendar/Calendar_Guide.md) for details.
+> This is the recommended approach in the Nordic Profile. An alternative pattern using DayType and DayTypeAssignment exists for grouping multiple dates — see the [Calendar Guide](../Calendar/Calendar_Guide.md) for details.
 
 ---
 
-## 8. �🔗 How It All Connects
+## 8. 🔗 How It All Connects
 
 Here's how the objects reference each other:
 
@@ -285,11 +285,11 @@ Data is defined once and referenced everywhere — no duplication.
 
 ## 9. 📐 Putting It Together — The Frame Structure
 
-In the Nordic Profile, a timetable dataset is split into a **shared data file** and one or more **line files**. Shared objects — like `ScheduledStopPoint`, `PassengerStopAssignment`, and `DestinationDisplay` — are defined once in the shared file and reused across all line files. Line-specific objects — `Line`, `JourneyPattern`, `ServiceJourney` — live in each line file.
+In the Nordic Profile, a timetable dataset is split into a **shared data file** and one or more **line files**. Shared objects — like ScheduledStopPoint, PassengerStopAssignment, and DestinationDisplay — are defined once in the shared file and reused across all line files. Line-specific objects — Line, JourneyPattern, ServiceJourney — live in each line file.
 
 ![Line file vs shared data file](../../assets/images/netex_line_file_vs_shared_file_v3.svg)
 
-Within each file, objects live inside frames in a `CompositeFrame`:
+Within each file, objects live inside frames in a CompositeFrame:
 
 ```xml
 <CompositeFrame id="ENT:CompositeFrame:1" version="1">
@@ -326,13 +326,13 @@ To produce a working timetable delivery, you need at minimum:
 
 | # | Object | Count | Where |
 |---|--------|-------|-------|
-| 1 | `ServiceJourney` with `TimetabledPassingTime` | At least one (with planned passing times per stop) | TimetableFrame |
-| 2 | `JourneyPattern` with `StopPointInJourneyPattern` | One per stop sequence variant | ServiceFrame |
-| 3 | `Line` | At least one | ServiceFrame |
-| 4 | `ScheduledStopPoint` | One per stop | ServiceFrame |
-| 5 | `PassengerStopAssignment` | One per ScheduledStopPoint | ServiceFrame |
-| 6 | `OperatingDay` | One per date in the timetable period | ServiceCalendarFrame |
-| 7 | `DatedServiceJourney` | One per ServiceJourney per operating day | TimetableFrame |
+| 1 | ServiceJourney with TimetabledPassingTime | At least one (with planned passing times per stop) | TimetableFrame |
+| 2 | JourneyPattern with StopPointInJourneyPattern | One per stop sequence variant | ServiceFrame |
+| 3 | Line | At least one | ServiceFrame |
+| 4 | ScheduledStopPoint | One per stop | ServiceFrame |
+| 5 | PassengerStopAssignment | One per ScheduledStopPoint | ServiceFrame |
+| 6 | OperatingDay | One per date in the timetable period | ServiceCalendarFrame |
+| 7 | DatedServiceJourney | One per ServiceJourney per operating day | TimetableFrame |
 
 ---
 
