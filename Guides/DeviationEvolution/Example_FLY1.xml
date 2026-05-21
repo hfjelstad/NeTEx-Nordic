@@ -5,13 +5,13 @@
   <dataObjects>
     <!-- Step 1: Long-term plan – ServiceJourney 3702 with DayType Mon-Fri -->
     <CompositeFrame id="FLT:CompositeFrame:2" version="1" modification="new">
-      <Description>Long-term plan for ServiceJourney 3702, Mon-Fri May 2026</Description>
       <validityConditions>
         <ValidBetween>
           <FromDate>2026-05-01T00:00:00+01:00</FromDate>
           <ToDate>2026-05-31T23:59:59+01:00</ToDate>
         </ValidBetween>
       </validityConditions>
+      <Description>Long-term plan for ServiceJourney 3702, Mon-Fri May 2026</Description>
       <codespaces>
         <Codespace id="NSR">
           <Xmlns>NSR</Xmlns>
@@ -192,19 +192,13 @@
 
     <!-- Step 3: Replacement trains Oslo Lufthavn–Skøyen and Asker–Drammen on 2026-05-25 -->
     <CompositeFrame id="FLT:CompositeFrame:2" version="3" modification="revise">
-      <Description>Replacement services for cancelled 3702 on 2026-05-25: Oslo Lufthavn-Skøyen and Asker-Drammen</Description>
       <validityConditions>
         <ValidBetween>
           <FromDate>2026-05-25T00:00:00+01:00</FromDate>
           <ToDate>2026-05-25T23:59:59+01:00</ToDate>
         </ValidBetween>
       </validityConditions>
-      <codespaces>
-        <Codespace id="FLT">
-          <Xmlns>FLT</Xmlns>
-          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
-        </Codespace>
-      </codespaces>
+      <Description>Replacement services for cancelled 3702 on 2026-05-25: Oslo Lufthavn-Skøyen and Asker-Drammen</Description>
       <FrameDefaults>
         <DefaultLocale>
           <TimeZone>CET</TimeZone>
@@ -354,19 +348,13 @@
 
     <!-- Step 4: Rail replacement bus Skøyen–Asker + revised train B departure -->
     <CompositeFrame id="FLT:CompositeFrame:2" version="4" modification="revise">
-      <Description>Rail replacement bus Skøyen-Asker and revised train B (dep 06:35) on 2026-05-25</Description>
       <validityConditions>
         <ValidBetween>
           <FromDate>2026-05-25T00:00:00+01:00</FromDate>
           <ToDate>2026-05-25T23:59:59+01:00</ToDate>
         </ValidBetween>
       </validityConditions>
-      <codespaces>
-        <Codespace id="FLT">
-          <Xmlns>FLT</Xmlns>
-          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
-        </Codespace>
-      </codespaces>
+      <Description>Rail replacement bus Skøyen-Asker and revised train B (dep 06:35) on 2026-05-25</Description>
       <FrameDefaults>
         <DefaultLocale>
           <TimeZone>CET</TimeZone>
@@ -461,11 +449,11 @@
               </dayTypes>
               <JourneyPatternRef ref="FLT:JourneyPattern:1-7-B" version="1" />
               <passingTimes>
-                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702B-1">
+                <TimetabledPassingTime version="2" id="FLT:TimetabledPassingTime:3702B-1">
                   <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-B-1" />
                   <DepartureTime>06:35:00</DepartureTime>
                 </TimetabledPassingTime>
-                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702B-2">
+                <TimetabledPassingTime version="2" id="FLT:TimetabledPassingTime:3702B-2">
                   <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-B-2" />
                   <ArrivalTime>06:48:00</ArrivalTime>
                 </TimetabledPassingTime>
