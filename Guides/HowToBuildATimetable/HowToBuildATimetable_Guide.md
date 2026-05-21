@@ -236,19 +236,7 @@ Key points:
 - **DatedServiceJourney** — binds a ServiceJourney to one OperatingDay. Create one per day the journey operates.
 - **No times here** — the stop times come from the ServiceJourney's TimetabledPassingTime. The DatedServiceJourney only adds the *date*.
 
-```mermaid
-flowchart LR
-    SJ["<b>ServiceJourney</b><br/><i>Template with times</i>"]
-    DSJ["<b>DatedServiceJourney</b><br/><i>Instance for a date</i>"]
-    OD["<b>OperatingDay</b><br/><i>2026-06-01</i>"]
-
-    DSJ -->|"ServiceJourneyRef"| SJ
-    DSJ -->|"OperatingDayRef"| OD
-
-    style SJ fill:#1565C0,stroke:#1565C0,color:#fff
-    style DSJ fill:#0D47A1,stroke:#0D47A1,color:#fff
-    style OD fill:#42A5F5,stroke:#42A5F5,color:#fff
-```
+![DatedServiceJourney references ServiceJourney and OperatingDay](../../assets/images/netex_dated_service_journey_refs.svg)
 
 > [!NOTE]
 > This is the recommended approach in the Nordic Profile. An alternative pattern using DayType and DayTypeAssignment exists for grouping multiple dates — see the [Calendar Guide](../Calendar/Calendar_Guide.md) for details.

@@ -1,65 +1,70 @@
-<svg width="100%" viewBox="0 0 780 210" role="img" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" viewBox="0 0 680 220" role="img" xmlns="http://www.w3.org/2000/svg">
 <title>NeTEx Nordic: Stop assignment chain</title>
 <desc>Shows how ScheduledStopPoint connects to physical infrastructure via PassengerStopAssignment, Quay, and StopPlace.</desc>
 <defs>
-  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-    <path d="M2 1L8 5L2 9" fill="none" stroke="#1565C0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <marker id="arrow-intra" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="rgb(83, 74, 183)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </marker>
-  <linearGradient id="grad-ssp" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%" stop-color="#42A5F5"/>
-    <stop offset="100%" stop-color="#1E88E5"/>
-  </linearGradient>
-  <linearGradient id="grad-psa" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%" stop-color="#64B5F6"/>
-    <stop offset="100%" stop-color="#42A5F5"/>
-  </linearGradient>
-  <linearGradient id="grad-quay" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%" stop-color="#1976D2"/>
-    <stop offset="100%" stop-color="#1565C0"/>
-  </linearGradient>
-  <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
-    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.15"/>
-  </filter>
+  <marker id="arrow-cross" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="rgb(15, 110, 86)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
 </defs>
 
-<!-- Background -->
-<rect width="780" height="210" rx="12" fill="#FAFAFA"/>
+<!-- ===== FRAME CONTAINERS ===== -->
 
-<!-- Domain labels -->
-<rect x="20" y="12" width="200" height="22" rx="4" fill="#E3F2FD"/>
-<text x="120" y="27" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#1565C0">TIMETABLE DOMAIN</text>
+<!-- ServiceFrame (timetable domain) -->
+<rect x="15" y="18" width="330" height="175" rx="14" fill="none" stroke="rgba(222, 220, 209, 0.15)" stroke-width="0.5" stroke-dasharray="6 4"/>
+<text x="180" y="36" text-anchor="middle" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="400" fill="rgb(194, 192, 182)">ServiceFrame</text>
 
-<rect x="560" y="12" width="200" height="22" rx="4" fill="#E8EAF6"/>
-<text x="660" y="27" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#283593">STOP REGISTRY</text>
+<!-- Stop Registry (external domain) -->
+<rect x="380" y="18" width="285" height="175" rx="14" fill="none" stroke="rgba(222, 220, 209, 0.15)" stroke-width="0.5" stroke-dasharray="6 4"/>
+<text x="523" y="36" text-anchor="middle" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="400" fill="rgb(194, 192, 182)">Stop Registry (NSR)</text>
 
-<!-- Dashed domain boundary -->
-<line x1="390" y1="42" x2="390" y2="198" stroke="#B0BEC5" stroke-width="1" stroke-dasharray="4 3"/>
+<!-- ===== BOXES ===== -->
 
-<!-- StopPlace container (drawn first, behind Quay) -->
-<rect x="500" y="50" width="260" height="130" rx="14" fill="#E8EAF6" stroke="#0D47A1" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
-<text x="630" y="170" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#0D47A1">StopPlace</text>
-<text x="630" y="186" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-style="italic" fill="#1565C0">Station / stop area</text>
+<!-- ScheduledStopPoint (Domain A – timetable) -->
+<g>
+  <rect x="30" y="60" width="185" height="56" rx="8" fill="rgb(60, 52, 137)" stroke="rgb(175, 169, 236)" stroke-width="0.5"/>
+  <text x="123" y="82" text-anchor="middle" dominant-baseline="central" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="500" fill="rgb(206, 203, 246)">ScheduledStopPoint</text>
+  <text x="123" y="102" text-anchor="middle" dominant-baseline="central" font-style="italic" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="400" fill="rgb(175, 169, 236)">Logical stop</text>
+</g>
 
-<!-- ScheduledStopPoint box -->
-<rect x="30" y="75" width="180" height="70" rx="10" fill="url(#grad-ssp)" filter="url(#shadow)"/>
-<text x="120" y="103" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#fff">ScheduledStopPoint</text>
-<text x="120" y="123" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-style="italic" fill="rgba(255,255,255,0.85)">Logical stop</text>
+<!-- PassengerStopAssignment (Domain A – bridges both) -->
+<g>
+  <rect x="30" y="138" width="220" height="46" rx="8" fill="rgb(60, 52, 137)" stroke="rgb(175, 169, 236)" stroke-width="0.5"/>
+  <text x="140" y="165" text-anchor="middle" dominant-baseline="central" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="500" fill="rgb(206, 203, 246)">PassengerStopAssignment</text>
+</g>
 
-<!-- PassengerStopAssignment box -->
-<rect x="260" y="75" width="210" height="70" rx="10" fill="url(#grad-psa)" filter="url(#shadow)"/>
-<text x="365" y="103" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#fff">PassengerStopAssignment</text>
-<text x="365" y="123" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-style="italic" fill="rgba(255,255,255,0.85)">Maps logical → physical</text>
+<!-- Quay (Domain B – stop registry) -->
+<g>
+  <rect x="395" y="60" width="120" height="56" rx="8" fill="rgb(8, 80, 65)" stroke="rgb(93, 202, 165)" stroke-width="0.5"/>
+  <text x="455" y="82" text-anchor="middle" dominant-baseline="central" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="500" fill="rgb(159, 225, 203)">Quay</text>
+  <text x="455" y="102" text-anchor="middle" dominant-baseline="central" font-style="italic" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="400" fill="rgb(93, 202, 165)">Platform</text>
+</g>
 
-<!-- Quay box -->
-<rect x="540" y="75" width="180" height="70" rx="10" fill="url(#grad-quay)" filter="url(#shadow)"/>
-<text x="630" y="103" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#fff">Quay</text>
-<text x="630" y="123" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-style="italic" fill="rgba(255,255,255,0.85)">Platform / boarding position</text>
+<!-- StopPlace (Domain B – stop registry) -->
+<g>
+  <rect x="540" y="60" width="110" height="56" rx="8" fill="rgb(8, 80, 65)" stroke="rgb(93, 202, 165)" stroke-width="0.5"/>
+  <text x="595" y="82" text-anchor="middle" dominant-baseline="central" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="500" fill="rgb(159, 225, 203)">StopPlace</text>
+  <text x="595" y="102" text-anchor="middle" dominant-baseline="central" font-style="italic" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="400" fill="rgb(93, 202, 165)">Station / area</text>
+</g>
 
-<!-- Arrow: SSP → PSA -->
-<line x1="210" y1="110" x2="258" y2="110" stroke="#1565C0" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="234" y="102" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="9" fill="#546E7A">ref</text>
+<!-- ===== ARROWS ===== -->
 
-<!-- Arrow: PSA → Quay -->
-<line x1="470" y1="110" x2="538" y2="110" stroke="#1565C0" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="504" y="102" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="9" fill="#546E7A">QuayRef</text>
+<!-- SSP → PSA (intra-domain, vertical) -->
+<line x1="123" y1="116" x2="123" y2="136" stroke="rgb(83, 74, 183)" stroke-width="1" opacity="0.7" marker-end="url(#arrow-intra)"/>
+<text x="155" y="128" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="400" fill="rgb(194, 192, 182)">ref</text>
+
+<!-- PSA → Quay (cross-domain) -->
+<line x1="250" y1="161" x2="393" y2="88" stroke="rgb(15, 110, 86)" stroke-width="1" opacity="0.7" marker-end="url(#arrow-cross)"/>
+<text x="310" y="116" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="400" fill="rgb(194, 192, 182)">QuayRef</text>
+
+<!-- Quay → StopPlace (intra stop-registry) -->
+<line x1="515" y1="88" x2="538" y2="88" stroke="rgb(15, 110, 86)" stroke-width="1" opacity="0.7" marker-end="url(#arrow-cross)"/>
+<text x="527" y="80" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="400" fill="rgb(194, 192, 182)">in</text>
+
+<!-- ===== LEGEND ===== -->
+<text x="48" y="210" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="400" fill="rgb(194, 192, 182)">TimetableFrame</text>
+<text x="185" y="210" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="400" fill="rgb(194, 192, 182)">ServiceCalendarFrame</text>
+<text x="365" y="210" font-family="'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="400" fill="rgb(194, 192, 182)">ServiceFrame</text>
 </svg>
