@@ -26,20 +26,7 @@ We'll build a timetable step by step, starting with concepts you already know an
 
 Think of building a timetable as answering four questions:
 
-```mermaid
-flowchart LR
-    Q1["<b>WHERE?</b><br/>Which stops?"]
-    Q2["<b>WHAT?</b><br/>Which line?"]
-    Q3["<b>IN WHAT ORDER?</b><br/>Stop sequence"]
-    Q4["<b>WHEN?</b><br/>Dates and times"]
-
-    Q1 --> Q2 --> Q3 --> Q4
-
-    style Q1 fill:#0D47A1,stroke:#0D47A1,color:#fff
-    style Q2 fill:#1565C0,stroke:#1565C0,color:#fff
-    style Q3 fill:#1976D2,stroke:#1976D2,color:#fff
-    style Q4 fill:#42A5F5,stroke:#42A5F5,color:#fff
-```
+![Four timetable questions: WHERE, WHAT, IN WHAT ORDER, WHEN](../../assets/images/netex_four_questions.svg)
 
 Each question maps to a NeTEx object:
 
