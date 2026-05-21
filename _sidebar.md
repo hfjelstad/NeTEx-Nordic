@@ -9,6 +9,7 @@
   - [Calendar](/Guides/Calendar/Calendar_Guide.md)
   - [Journey Lifecycle](/Guides/JourneyLifecycle/JourneyLifecycle_Guide.md)
   - [Deviation Evolution](/Guides/DeviationEvolution/DeviationEvolution_Guide.md)
+  - [Deviation Evolution (DayType)](/Guides/DeviationEvolution/DeviationEvolution_DayType_Guide.md)
   - [Passenger Information](/Guides/PassengerInformation/PassengerInformation_Guide.md)
   - [Interchange](/Guides/InterchangeOnly/Interchange_Guide.md)
   - [Organisational Governance](/Guides/OrganisationalGovernance/OrganisationalGovernance_Guide.md)

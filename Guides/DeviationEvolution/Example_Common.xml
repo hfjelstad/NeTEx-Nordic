@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PublicationDelivery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.07:NO-NeTEx-networktimetable:1.1" xmlns="http://www.netex.org.uk/netex">
+  <PublicationTimestamp>2026-05-20T11:27:00</PublicationTimestamp>
+  <ParticipantRef>NDOV</ParticipantRef>
+  <dataObjects>
+    <!-- Step 1: Long-term plan – Mon-Fri May 2026 calendar -->
+    <CompositeFrame id="FLT:CompositeFrame:1" version="1" modification="new">
+      <Description>Long-term plan: DayType Mon-Fri, OperatingPeriod May 1-31</Description>
+      <validityConditions>
+        <ValidBetween>
+          <FromDate>2026-05-01T00:00:00+01:00</FromDate>
+          <ToDate>2026-05-31T23:59:59+01:00</ToDate>
+        </ValidBetween>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="NSR">
+          <Xmlns>NSR</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/nsr</XmlnsUrl>
+          <Description>Nasjonalt stoppestedsregister</Description>
+        </Codespace>
+        <Codespace id="FLT">
+          <Xmlns>FLT</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultDataSourceRef ref="FLT:DataSource:1" version="1"/>
+        <DefaultLocale>
+          <TimeZone>CET</TimeZone>
+        </DefaultLocale>
+      </FrameDefaults>
+      <versions>
+        <Version id="FLT:Version:2026-05-20-112700" version="1">
+          <StartDate>2026-05-01T00:00:00+01:00</StartDate>
+          <EndDate>2026-05-31T23:59:59+01:00</EndDate>
+        </Version>
+      </versions>
+      <frames>
+        <ResourceFrame id="FLT:ResourceFrame:1" version="1">
+          <dataSources>
+            <DataSource id="FLT:DataSource:1" version="1">
+              <Name>TPS-I</Name>
+              <Description>TPS-I</Description>
+              <Email>support@hacon.de</Email>
+            </DataSource>
+          </dataSources>
+          <organisations>
+            <Operator id="FLT:Operator:507" version="1">
+              <Name>Flytoget</Name>
+            </Operator>
+            <Authority id="FLT:Authority:FLT" version="1">
+              <Name>Flytoget</Name>
+              <ContactDetails>
+                <Email>flytoget@flytoget.no </Email>
+                <Phone>+47 23 15 90 00</Phone>
+                <Url>https://flytoget.no</Url>
+              </ContactDetails>
+            </Authority>
+          </organisations>
+        </ResourceFrame>
+        <ServiceCalendarFrame id="FLT:ServiceCalendarFrame:1" version="1">
+          <ServiceCalendar id="FLT:ServiceCalendar:1" version="1">
+            <FromDate>2026-05-01+01:00</FromDate>
+            <ToDate>2026-05-31+01:00</ToDate>
+            <dayTypes>
+              <DayType version="1" id="FLT:DayType:0">
+                <properties>
+                  <PropertyOfDay>
+                    <DaysOfWeek>Monday Tuesday Wednesday Thursday Friday</DaysOfWeek>
+                  </PropertyOfDay>
+                </properties>
+              </DayType>
+            </dayTypes>
+          </ServiceCalendar>
+          <operatingPeriods>
+            <OperatingPeriod id="FLT:OperatingPeriod:1" version="1">
+              <FromDate>2026-05-01T00:00:00</FromDate>
+              <ToDate>2026-05-31T23:59:59</ToDate>
+            </OperatingPeriod>
+          </operatingPeriods>
+          <dayTypeAssignments>
+            <DayTypeAssignment version="1" order="1" id="FLT:DayTypeAssignment:0">
+              <OperatingPeriodRef ref="FLT:OperatingPeriod:1"/>
+              <DayTypeRef version="1" ref="FLT:DayType:0"/>
+            </DayTypeAssignment>
+          </dayTypeAssignments>
+        </ServiceCalendarFrame>
+        <SiteFrame id="FLT:SiteFrame:1" version="1">
+           <stopPlaces>
+              <StopPlace version="1" id="NSR:StopPlace:337">
+                 <Name>Oslo S</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.753276</Longitude>
+                       <Latitude>59.910925</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:100148">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.759818</Longitude>
+                             <Latitude>59.908652</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                    <Quay version="1" id="NSR:Quay:565">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.753276</Longitude>
+                             <Latitude>59.910925</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="NSR:StopPlace:288">
+                 <Name>Nationaltheatret</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.728133</Longitude>
+                       <Latitude>59.915390</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:475">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.728133</Longitude>
+                             <Latitude>59.915390</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="NSR:StopPlace:451">
+                 <Name>Lillestrøm</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>11.044676</Longitude>
+                       <Latitude>59.953221</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:103572">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>11.045841</Longitude>
+                             <Latitude>59.952585</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                    <Quay version="1" id="NSR:Quay:756">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>11.044676</Longitude>
+                             <Latitude>59.953221</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="NSR:StopPlace:152">
+                 <Name>Skøyen</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.678831</Longitude>
+                       <Latitude>59.922353</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:106024">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.679381</Longitude>
+                             <Latitude>59.922313</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                    <Quay version="1" id="NSR:Quay:239">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.678831</Longitude>
+                             <Latitude>59.922353</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="NSR:StopPlace:157">
+                 <Name>Lysaker</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.637247</Longitude>
+                       <Latitude>59.913446</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:7905">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.637300</Longitude>
+                             <Latitude>59.913177</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                    <Quay version="1" id="NSR:Quay:250">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.637247</Longitude>
+                             <Latitude>59.913446</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="NSR:StopPlace:610">
+                 <Name>Sandvika</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.525746</Longitude>
+                       <Latitude>59.892903</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:7263">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.525278</Longitude>
+                             <Latitude>59.893199</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                    <Quay version="1" id="NSR:Quay:991">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.525746</Longitude>
+                             <Latitude>59.892903</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="NSR:StopPlace:418">
+                 <Name>Asker</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.434492</Longitude>
+                       <Latitude>59.833343</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:99992">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.434775</Longitude>
+                             <Latitude>59.832851</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                    <Quay version="1" id="NSR:Quay:698">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.434492</Longitude>
+                             <Latitude>59.833343</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="NSR:StopPlace:11">
+                 <Name>Drammen</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.205235</Longitude>
+                       <Latitude>59.740104</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:107381">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.201903</Longitude>
+                             <Latitude>59.739191</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                    <Quay version="1" id="NSR:Quay:22">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>10.205235</Longitude>
+                             <Latitude>59.740104</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="NSR:StopPlace:269">
+                 <Name>Oslo Lufthavn</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>11.097035</Longitude>
+                       <Latitude>60.193264</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+                 <quays>
+                    <Quay version="1" id="NSR:Quay:110509">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>11.095293</Longitude>
+                             <Latitude>60.193939</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                    <Quay version="1" id="NSR:Quay:451">
+                       <Centroid>
+                          <Location srsName="EPSG:4326">
+                             <Longitude>11.097035</Longitude>
+                             <Latitude>60.193264</Latitude>
+                          </Location>
+                       </Centroid>
+                    </Quay>
+                 </quays>
+              </StopPlace>
+              <StopPlace version="1" id="FLT:StopPlace:037600100">
+                 <Name>Oslo S Trelastgata buss</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.755250</Longitude>
+                       <Latitude>59.909548</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+              </StopPlace>
+              <StopPlace version="1" id="FLT:StopPlace:037601404">
+                 <Name>Lysaker E18 nord/sør buss</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.638489</Longitude>
+                       <Latitude>59.912755</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+              </StopPlace>
+              <StopPlace version="1" id="FLT:StopPlace:037601413">
+                 <Name>Asker st. Lensmannslia buss</Name>
+                 <Centroid>
+                    <Location srsName="EPSG:4326">
+                       <Longitude>10.433305</Longitude>
+                       <Latitude>59.831537</Latitude>
+                    </Location>
+                 </Centroid>
+                 <StopPlaceType>other</StopPlaceType>
+              </StopPlace>
+           </stopPlaces>
+        </SiteFrame>
+        <ServiceFrame id="FLT:ServiceFrame:1" version="1">
+          <Network id="FLT:Network:1" version="1">
+            <Name>Flytoget</Name>
+            <AuthorityRef ref="FLT:Authority:FLT" version="1"/>
+          </Network>
+          <directions>
+            <Direction id="FLT:Direction:1" version="1">
+              <Name>1</Name>
+            </Direction>
+          </directions>
+          <routePoints>
+            <RoutePoint id="FLT:RoutePoint:769922003" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:769922003" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:769922003" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+            <RoutePoint id="FLT:RoutePoint:760020702" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:760020702" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:760020702" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+            <RoutePoint id="FLT:RoutePoint:760010002" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:760010002" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:760010002" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+            <RoutePoint id="FLT:RoutePoint:760018001" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:760018001" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:760018001" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+            <RoutePoint id="FLT:RoutePoint:760140201" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:760140201" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:760140201" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+            <RoutePoint id="FLT:RoutePoint:760140402" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:760140402" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:760140402" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+            <RoutePoint id="FLT:RoutePoint:760140801" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:760140801" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:760140801" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+            <RoutePoint id="FLT:RoutePoint:760141301" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:760141301" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:760141301" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+            <RoutePoint id="FLT:RoutePoint:760142103" version="1">
+              <projections>
+                <PointProjection id="FLT:PointProjection:760142103" version="1">
+                  <ProjectedPointRef ref="FLT:ScheduledStopPoint:760142103" version="1"/>
+                </PointProjection>
+              </projections>
+            </RoutePoint>
+          </routePoints>
+          <destinationDisplays>
+            <DestinationDisplay id="FLT:DestinationDisplay:3" version="1">
+              <FrontText>Drammen</FrontText>
+            </DestinationDisplay>
+          </destinationDisplays>
+          <scheduledStopPoints>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:769922003" version="1">
+              <Name>Oslo Lufthavn</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:760020702" version="1">
+              <Name>Lillestrøm</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:760010002" version="1">
+              <Name>Oslo S</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:760018001" version="1">
+              <Name>Nationaltheatret</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:760140201" version="1">
+              <Name>Skøyen</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:760140402" version="1">
+              <Name>Lysaker</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:760140801" version="1">
+              <Name>Sandvika</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:760141301" version="1">
+              <Name>Asker</Name>
+            </ScheduledStopPoint>
+            <ScheduledStopPoint id="FLT:ScheduledStopPoint:760142103" version="1">
+              <Name>Drammen</Name>
+            </ScheduledStopPoint>
+          </scheduledStopPoints>
+          <stopAssignments>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:769922003" version="1" order="1">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:769922003" version="1"/>
+              <QuayRef ref="NSR:Quay:453"/>
+            </PassengerStopAssignment>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:760020702" version="1" order="2">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760020702" version="1"/>
+              <QuayRef ref="NSR:Quay:755"/>
+            </PassengerStopAssignment>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:760010002" version="1" order="3">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760010002" version="1"/>
+              <QuayRef ref="NSR:Quay:570"/>
+            </PassengerStopAssignment>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:760018001" version="1" order="4">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760018001" version="1"/>
+              <QuayRef ref="NSR:Quay:475"/>
+            </PassengerStopAssignment>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:760140201" version="1" order="5">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140201" version="1"/>
+              <QuayRef ref="NSR:Quay:239"/>
+            </PassengerStopAssignment>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:760140402" version="1" order="6">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140402" version="1"/>
+              <QuayRef ref="NSR:Quay:248"/>
+            </PassengerStopAssignment>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:760140801" version="1" order="7">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140801" version="1"/>
+              <QuayRef ref="NSR:Quay:991"/>
+            </PassengerStopAssignment>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:760141301" version="1" order="8">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760141301" version="1"/>
+              <QuayRef ref="NSR:Quay:698"/>
+            </PassengerStopAssignment>
+            <PassengerStopAssignment id="FLT:PassengerStopAssignment:760142103" version="1" order="9">
+              <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760142103" version="1"/>
+              <QuayRef ref="NSR:Quay:20"/>
+            </PassengerStopAssignment>
+          </stopAssignments>
+          <notices>
+            <Notice version="1" id="FLT:Notice:1">
+              <Name>BE (Bus replacement)</Name>
+              <Text>Train will be replaced by bus</Text>
+            </Notice>
+          </notices>
+        </ServiceFrame>
+      </frames>
+    </CompositeFrame>
+
+    <!-- Step 2: Cancellation – remove May 25 by splitting OperatingPeriod -->
+    <CompositeFrame id="FLT:CompositeFrame:1" version="2" modification="revise">
+      <Description>Cancel 3702 on 2026-05-25: split OperatingPeriod into May 1-24 and May 26-31</Description>
+      <validityConditions>
+        <ValidBetween>
+          <FromDate>2026-05-01T00:00:00+01:00</FromDate>
+          <ToDate>2026-05-31T23:59:59+01:00</ToDate>
+        </ValidBetween>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="FLT">
+          <Xmlns>FLT</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultLocale>
+          <TimeZone>CET</TimeZone>
+        </DefaultLocale>
+      </FrameDefaults>
+      <frames>
+        <ServiceCalendarFrame id="FLT:ServiceCalendarFrame:1" version="2">
+          <ServiceCalendar id="FLT:ServiceCalendar:1" version="2">
+            <FromDate>2026-05-01+01:00</FromDate>
+            <ToDate>2026-05-31+01:00</ToDate>
+            <dayTypes>
+              <DayType version="2" id="FLT:DayType:0">
+                <properties>
+                  <PropertyOfDay>
+                    <DaysOfWeek>Monday Tuesday Wednesday Thursday Friday</DaysOfWeek>
+                  </PropertyOfDay>
+                </properties>
+              </DayType>
+            </dayTypes>
+          </ServiceCalendar>
+          <operatingPeriods>
+            <OperatingPeriod id="FLT:OperatingPeriod:1a" version="1">
+              <FromDate>2026-05-01T00:00:00</FromDate>
+              <ToDate>2026-05-24T23:59:59</ToDate>
+            </OperatingPeriod>
+            <OperatingPeriod id="FLT:OperatingPeriod:1b" version="1">
+              <FromDate>2026-05-26T00:00:00</FromDate>
+              <ToDate>2026-05-31T23:59:59</ToDate>
+            </OperatingPeriod>
+          </operatingPeriods>
+          <dayTypeAssignments>
+            <DayTypeAssignment version="2" order="1" id="FLT:DayTypeAssignment:0a">
+              <OperatingPeriodRef ref="FLT:OperatingPeriod:1a"/>
+              <DayTypeRef version="2" ref="FLT:DayType:0"/>
+            </DayTypeAssignment>
+            <DayTypeAssignment version="2" order="2" id="FLT:DayTypeAssignment:0b">
+              <OperatingPeriodRef ref="FLT:OperatingPeriod:1b"/>
+              <DayTypeRef version="2" ref="FLT:DayType:0"/>
+            </DayTypeAssignment>
+          </dayTypeAssignments>
+        </ServiceCalendarFrame>
+      </frames>
+    </CompositeFrame>
+
+    <!-- Step 3: Replacement trains – DayTypes for 3702A and 3702B on May 25 only -->
+    <CompositeFrame id="FLT:CompositeFrame:1" version="3" modification="revise">
+      <Description>Replacement services calendar: DayType:A and DayType:B for 2026-05-25</Description>
+      <validityConditions>
+        <ValidBetween>
+          <FromDate>2026-05-25T00:00:00+01:00</FromDate>
+          <ToDate>2026-05-25T23:59:59+01:00</ToDate>
+        </ValidBetween>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="FLT">
+          <Xmlns>FLT</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultLocale>
+          <TimeZone>CET</TimeZone>
+        </DefaultLocale>
+      </FrameDefaults>
+      <frames>
+        <ServiceCalendarFrame id="FLT:ServiceCalendarFrame:1" version="3">
+          <ServiceCalendar id="FLT:ServiceCalendar:1" version="3">
+            <FromDate>2026-05-25+01:00</FromDate>
+            <ToDate>2026-05-25+01:00</ToDate>
+            <dayTypes>
+              <DayType version="1" id="FLT:DayType:A">
+                <properties>
+                  <PropertyOfDay>
+                    <DaysOfWeek>Monday</DaysOfWeek>
+                  </PropertyOfDay>
+                </properties>
+              </DayType>
+              <DayType version="1" id="FLT:DayType:B">
+                <properties>
+                  <PropertyOfDay>
+                    <DaysOfWeek>Monday</DaysOfWeek>
+                  </PropertyOfDay>
+                </properties>
+              </DayType>
+            </dayTypes>
+          </ServiceCalendar>
+          <operatingPeriods>
+            <OperatingPeriod id="FLT:OperatingPeriod:2026-05-25" version="1">
+              <FromDate>2026-05-25T00:00:00</FromDate>
+              <ToDate>2026-05-25T23:59:59</ToDate>
+            </OperatingPeriod>
+          </operatingPeriods>
+          <dayTypeAssignments>
+            <DayTypeAssignment version="1" order="1" id="FLT:DayTypeAssignment:A">
+              <OperatingPeriodRef ref="FLT:OperatingPeriod:2026-05-25"/>
+              <DayTypeRef version="1" ref="FLT:DayType:A"/>
+            </DayTypeAssignment>
+            <DayTypeAssignment version="1" order="2" id="FLT:DayTypeAssignment:B">
+              <OperatingPeriodRef ref="FLT:OperatingPeriod:2026-05-25"/>
+              <DayTypeRef version="1" ref="FLT:DayType:B"/>
+            </DayTypeAssignment>
+          </dayTypeAssignments>
+        </ServiceCalendarFrame>
+      </frames>
+    </CompositeFrame>
+
+    <!-- Step 4: Rail replacement bus + revised train B – DayType:C for bus, DayType:B v2 for revised B -->
+    <CompositeFrame id="FLT:CompositeFrame:1" version="4" modification="revise">
+      <Description>Bus replacement calendar: DayType:C for 2026-05-25</Description>
+      <validityConditions>
+        <ValidBetween>
+          <FromDate>2026-05-25T00:00:00+01:00</FromDate>
+          <ToDate>2026-05-25T23:59:59+01:00</ToDate>
+        </ValidBetween>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="FLT">
+          <Xmlns>FLT</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultLocale>
+          <TimeZone>CET</TimeZone>
+        </DefaultLocale>
+      </FrameDefaults>
+      <frames>
+        <ServiceCalendarFrame id="FLT:ServiceCalendarFrame:1" version="4">
+          <ServiceCalendar id="FLT:ServiceCalendar:1" version="4">
+            <FromDate>2026-05-25+01:00</FromDate>
+            <ToDate>2026-05-25+01:00</ToDate>
+            <dayTypes>
+              <DayType version="1" id="FLT:DayType:C">
+                <properties>
+                  <PropertyOfDay>
+                    <DaysOfWeek>Monday</DaysOfWeek>
+                  </PropertyOfDay>
+                </properties>
+              </DayType>
+            </dayTypes>
+          </ServiceCalendar>
+          <operatingPeriods>
+            <OperatingPeriod id="FLT:OperatingPeriod:2026-05-25" version="1">
+              <FromDate>2026-05-25T00:00:00</FromDate>
+              <ToDate>2026-05-25T23:59:59</ToDate>
+            </OperatingPeriod>
+          </operatingPeriods>
+          <dayTypeAssignments>
+            <DayTypeAssignment version="1" order="1" id="FLT:DayTypeAssignment:C">
+              <OperatingPeriodRef ref="FLT:OperatingPeriod:2026-05-25"/>
+              <DayTypeRef version="1" ref="FLT:DayType:C"/>
+            </DayTypeAssignment>
+          </dayTypeAssignments>
+        </ServiceCalendarFrame>
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+</PublicationDelivery>

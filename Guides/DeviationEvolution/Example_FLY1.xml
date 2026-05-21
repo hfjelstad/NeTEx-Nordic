@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PublicationDelivery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.07:NO-NeTEx-networktimetable:1.1" xmlns="http://www.netex.org.uk/netex">
+  <PublicationTimestamp>2026-05-20T11:27:00</PublicationTimestamp>
+  <ParticipantRef>NDOV</ParticipantRef>
+  <dataObjects>
+    <!-- Step 1: Long-term plan – ServiceJourney 3702 with DayType Mon-Fri -->
+    <CompositeFrame id="FLT:CompositeFrame:2" version="1" modification="new">
+      <Description>Long-term plan for ServiceJourney 3702, Mon-Fri May 2026</Description>
+      <validityConditions>
+        <ValidBetween>
+          <FromDate>2026-05-01T00:00:00+01:00</FromDate>
+          <ToDate>2026-05-31T23:59:59+01:00</ToDate>
+        </ValidBetween>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="NSR">
+          <Xmlns>NSR</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/nsr</XmlnsUrl>
+          <Description>Nasjonalt stoppestedsregister</Description>
+        </Codespace>
+        <Codespace id="FLT">
+          <Xmlns>FLT</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultLocale>
+          <TimeZone>CET</TimeZone>
+        </DefaultLocale>
+      </FrameDefaults>
+      <frames>
+        <ServiceFrame id="FLT:ServiceFrame:2" version="1">
+          <routes>
+            <Route id="FLT:Route:1-7" version="1">
+              <Name>Oslo Lufthavn - Drammen</Name>
+              <LineRef version="1" ref="FLT:Line:FLY1" />
+              <DirectionRef ref="FLT:Direction:1" />
+              <pointsInSequence>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-1" version="1" order="1">
+                  <RoutePointRef ref="FLT:RoutePoint:769922003" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-2" version="1" order="2">
+                  <RoutePointRef ref="FLT:RoutePoint:760020702" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-3" version="1" order="3">
+                  <RoutePointRef ref="FLT:RoutePoint:760010002" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-4" version="1" order="4">
+                  <RoutePointRef ref="FLT:RoutePoint:760018001" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-5" version="1" order="5">
+                  <RoutePointRef ref="FLT:RoutePoint:760140201" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-6" version="1" order="6">
+                  <RoutePointRef ref="FLT:RoutePoint:760140402" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-7" version="1" order="7">
+                  <RoutePointRef ref="FLT:RoutePoint:760140801" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-8" version="1" order="8">
+                  <RoutePointRef ref="FLT:RoutePoint:760141301" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-9" version="1" order="9">
+                  <RoutePointRef ref="FLT:RoutePoint:760142103" />
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+          </routes>
+          <lines>
+            <Line id="FLT:Line:FLY1" version="1">
+              <Name>FLY1</Name>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <PublicCode>FLY1</PublicCode>
+              <OperatorRef ref="FLT:Operator:507" />
+              <Monitored>true</Monitored>
+              <RepresentedByGroupRef ref="FLT:Network:1" />
+            </Line>
+          </lines>
+          <journeyPatterns>
+            <JourneyPattern id="FLT:JourneyPattern:1-7" version="1">
+              <RouteRef ref="FLT:Route:1-7" version="1" />
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-1" version="1" order="1">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:769922003" />
+                  <ForAlighting>false</ForAlighting>
+                  <DestinationDisplayRef ref="FLT:DestinationDisplay:3" />
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-2" version="1" order="2">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760020702" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-3" version="1" order="3">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760010002" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-4" version="1" order="4">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760018001" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-5" version="1" order="5">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140201" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-6" version="1" order="6">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140402" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-7" version="1" order="7">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140801" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-8" version="1" order="8">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760141301" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-9" version="1" order="9">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760142103" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+          </journeyPatterns>
+        </ServiceFrame>
+        <TimetableFrame id="FLT:TimetableFrame:1" version="1">
+          <vehicleJourneys>
+            <ServiceJourney id="FLT:ServiceJourney:1-2614-3702-20260519" version="1">
+              <PrivateCode>3702</PrivateCode>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <dayTypes>
+                <DayTypeRef ref="FLT:DayType:0" />
+              </dayTypes>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7" version="1" />
+              <passingTimes>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-1" />
+                  <DepartureTime>05:30:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-2" />
+                  <ArrivalTime>05:42:00</ArrivalTime>
+                  <DepartureTime>05:42:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-3">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-3" />
+                  <ArrivalTime>05:52:00</ArrivalTime>
+                  <DepartureTime>05:52:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-4">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-4" />
+                  <ArrivalTime>05:56:00</ArrivalTime>
+                  <DepartureTime>05:56:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-5">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-5" />
+                  <ArrivalTime>06:00:00</ArrivalTime>
+                  <DepartureTime>06:00:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-6">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-6" />
+                  <ArrivalTime>06:04:00</ArrivalTime>
+                  <DepartureTime>06:04:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-7">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-7" />
+                  <ArrivalTime>06:09:00</ArrivalTime>
+                  <DepartureTime>06:09:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-8">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-8" />
+                  <ArrivalTime>06:15:00</ArrivalTime>
+                  <DepartureTime>06:15:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:1-2525-3702-202605201127-9">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-9" />
+                  <ArrivalTime>06:28:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+          </vehicleJourneys>
+        </TimetableFrame>
+      </frames>
+    </CompositeFrame>
+
+    <!-- Step 2: Cancellation – no timetable change needed, calendar handles it in _common.xml -->
+    <!-- (DayType:0 split into two OperatingPeriods excluding May 25) -->
+
+    <!-- Step 3: Replacement trains Oslo Lufthavn–Skøyen and Asker–Drammen on 2026-05-25 -->
+    <CompositeFrame id="FLT:CompositeFrame:2" version="3" modification="revise">
+      <Description>Replacement services for cancelled 3702 on 2026-05-25: Oslo Lufthavn-Skøyen and Asker-Drammen</Description>
+      <validityConditions>
+        <ValidBetween>
+          <FromDate>2026-05-25T00:00:00+01:00</FromDate>
+          <ToDate>2026-05-25T23:59:59+01:00</ToDate>
+        </ValidBetween>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="FLT">
+          <Xmlns>FLT</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultLocale>
+          <TimeZone>CET</TimeZone>
+        </DefaultLocale>
+      </FrameDefaults>
+      <frames>
+        <ServiceFrame id="FLT:ServiceFrame:2" version="3">
+          <routes>
+            <Route id="FLT:Route:1-7-A" version="1">
+              <Name>Oslo Lufthavn - Skøyen</Name>
+              <LineRef version="1" ref="FLT:Line:FLY1" />
+              <DirectionRef ref="FLT:Direction:1" />
+              <pointsInSequence>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-1" version="1" order="1">
+                  <RoutePointRef ref="FLT:RoutePoint:769922003" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-2" version="1" order="2">
+                  <RoutePointRef ref="FLT:RoutePoint:760020702" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-3" version="1" order="3">
+                  <RoutePointRef ref="FLT:RoutePoint:760010002" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-4" version="1" order="4">
+                  <RoutePointRef ref="FLT:RoutePoint:760018001" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-5" version="1" order="5">
+                  <RoutePointRef ref="FLT:RoutePoint:760140201" />
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+            <Route id="FLT:Route:1-7-B" version="1">
+              <Name>Asker - Drammen</Name>
+              <LineRef version="1" ref="FLT:Line:FLY1" />
+              <DirectionRef ref="FLT:Direction:1" />
+              <pointsInSequence>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-B-1" version="1" order="1">
+                  <RoutePointRef ref="FLT:RoutePoint:760141301" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-B-2" version="1" order="2">
+                  <RoutePointRef ref="FLT:RoutePoint:760142103" />
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+          </routes>
+          <journeyPatterns>
+            <JourneyPattern id="FLT:JourneyPattern:1-7-A" version="1">
+              <RouteRef ref="FLT:Route:1-7-A" version="1" />
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-1" version="1" order="1">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:769922003" />
+                  <ForAlighting>false</ForAlighting>
+                  <DestinationDisplayRef ref="FLT:DestinationDisplay:3" />
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-2" version="1" order="2">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760020702" />
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-3" version="1" order="3">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760010002" />
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-4" version="1" order="4">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760018001" />
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-5" version="1" order="5">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140201" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+            <JourneyPattern id="FLT:JourneyPattern:1-7-B" version="1">
+              <RouteRef ref="FLT:Route:1-7-B" version="1" />
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-B-1" version="1" order="1">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760141301" />
+                  <ForAlighting>false</ForAlighting>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-B-2" version="1" order="2">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760142103" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+          </journeyPatterns>
+        </ServiceFrame>
+        <TimetableFrame id="FLT:TimetableFrame:1" version="3">
+          <vehicleJourneys>
+            <ServiceJourney id="FLT:ServiceJourney:3702A" version="1">
+              <PrivateCode>3702A</PrivateCode>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <dayTypes>
+                <DayTypeRef ref="FLT:DayType:A" />
+              </dayTypes>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7-A" version="1" />
+              <passingTimes>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-1" />
+                  <DepartureTime>05:30:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-2" />
+                  <ArrivalTime>05:42:00</ArrivalTime>
+                  <DepartureTime>05:42:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-3">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-3" />
+                  <ArrivalTime>05:52:00</ArrivalTime>
+                  <DepartureTime>05:52:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-4">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-4" />
+                  <ArrivalTime>05:56:00</ArrivalTime>
+                  <DepartureTime>05:56:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-5">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-5" />
+                  <ArrivalTime>06:00:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+            <ServiceJourney id="FLT:ServiceJourney:3702B" version="1">
+              <PrivateCode>3702B</PrivateCode>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <dayTypes>
+                <DayTypeRef ref="FLT:DayType:B" />
+              </dayTypes>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7-B" version="1" />
+              <passingTimes>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702B-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-B-1" />
+                  <DepartureTime>06:15:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702B-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-B-2" />
+                  <ArrivalTime>06:28:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+          </vehicleJourneys>
+        </TimetableFrame>
+      </frames>
+    </CompositeFrame>
+
+    <!-- Step 4: Rail replacement bus Skøyen–Asker + revised train B departure -->
+    <CompositeFrame id="FLT:CompositeFrame:2" version="4" modification="revise">
+      <Description>Rail replacement bus Skøyen-Asker and revised train B (dep 06:35) on 2026-05-25</Description>
+      <validityConditions>
+        <ValidBetween>
+          <FromDate>2026-05-25T00:00:00+01:00</FromDate>
+          <ToDate>2026-05-25T23:59:59+01:00</ToDate>
+        </ValidBetween>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="FLT">
+          <Xmlns>FLT</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultLocale>
+          <TimeZone>CET</TimeZone>
+        </DefaultLocale>
+      </FrameDefaults>
+      <frames>
+        <ServiceFrame id="FLT:ServiceFrame:2" version="4">
+          <routes>
+            <Route id="FLT:Route:1-7-C" version="1">
+              <Name>Skøyen - Asker (buss for tog)</Name>
+              <LineRef version="1" ref="FLT:Line:FLY1" />
+              <DirectionRef ref="FLT:Direction:1" />
+              <pointsInSequence>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-C-1" version="1" order="1">
+                  <RoutePointRef ref="FLT:RoutePoint:760140201" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-C-2" version="1" order="2">
+                  <RoutePointRef ref="FLT:RoutePoint:760140402" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-C-3" version="1" order="3">
+                  <RoutePointRef ref="FLT:RoutePoint:760140801" />
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-C-4" version="1" order="4">
+                  <RoutePointRef ref="FLT:RoutePoint:760141301" />
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+          </routes>
+          <journeyPatterns>
+            <JourneyPattern id="FLT:JourneyPattern:1-7-C" version="1">
+              <RouteRef ref="FLT:Route:1-7-C" version="1" />
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-C-1" version="1" order="1">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140201" />
+                  <ForAlighting>false</ForAlighting>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-C-2" version="1" order="2">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140402" />
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-C-3" version="1" order="3">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140801" />
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-C-4" version="1" order="4">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760141301" />
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+          </journeyPatterns>
+        </ServiceFrame>
+        <TimetableFrame id="FLT:TimetableFrame:1" version="4">
+          <vehicleJourneys>
+            <ServiceJourney id="FLT:ServiceJourney:3702C" version="1">
+              <PrivateCode>3702C</PrivateCode>
+              <TransportMode>bus</TransportMode>
+              <TransportSubmode>
+                <BusSubmode>railReplacementBus</BusSubmode>
+              </TransportSubmode>
+              <dayTypes>
+                <DayTypeRef ref="FLT:DayType:C" />
+              </dayTypes>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7-C" version="1" />
+              <passingTimes>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702C-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-C-1" />
+                  <DepartureTime>06:05:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702C-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-C-2" />
+                  <ArrivalTime>06:12:00</ArrivalTime>
+                  <DepartureTime>06:12:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702C-3">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-C-3" />
+                  <ArrivalTime>06:20:00</ArrivalTime>
+                  <DepartureTime>06:20:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702C-4">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-C-4" />
+                  <ArrivalTime>06:30:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+            <ServiceJourney id="FLT:ServiceJourney:3702B" version="2">
+              <PrivateCode>3702B</PrivateCode>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <dayTypes>
+                <DayTypeRef ref="FLT:DayType:B" />
+              </dayTypes>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7-B" version="1" />
+              <passingTimes>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702B-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-B-1" />
+                  <DepartureTime>06:35:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702B-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-B-2" />
+                  <ArrivalTime>06:48:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+          </vehicleJourneys>
+        </TimetableFrame>
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+</PublicationDelivery>
