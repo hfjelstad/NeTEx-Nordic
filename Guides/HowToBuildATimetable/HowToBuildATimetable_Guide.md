@@ -78,23 +78,7 @@ A [ScheduledStopPoint](../../Objects/ScheduledStopPoint/Description_ScheduledSto
 
 That's it — a name and a unique ID. But every ScheduledStopPoint must be linked to a specific physical Quay (platform or boarding position) via a PassengerStopAssignment. The Quay lives inside a StopPlace in the stop registry. So while the timetable itself only references the logical point, the assignment to a Quay is mandatory — it's what tells passengers *where* to stand.
 
-
-```mermaid
-flowchart LR
-    SSP["<b>ScheduledStopPoint</b><br/><i>Logical stop</i>"]
-    PSA["<b>PassengerStopAssignment</b>"]
-    Q["<b>Quay</b><br/><i>Platform / boarding position</i>"]
-    SP["<b>StopPlace</b><br/><i>Station / stop area</i>"]
-
-    SSP ---|"referenced by"| PSA
-    PSA -->|"QuayRef"| Q
-    Q ---|"contained in"| SP
-
-    style SSP fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style PSA fill:#64B5F6,stroke:#64B5F6,color:#fff
-    style Q fill:#1976D2,stroke:#1976D2,color:#fff
-    style SP fill:#0D47A1,stroke:#0D47A1,color:#fff
-```
+![Stop assignment chain: ScheduledStopPoint → PassengerStopAssignment → Quay inside StopPlace](../../assets/images/netex_stop_assignment_chain.svg)
 
 
 > [!IMPORTANT]
