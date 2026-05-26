@@ -36,9 +36,15 @@ The agent must always consult this folder when reading, validating, or generatin
 
 ## 3. Quick Navigation
 
-**Essential Index Files:**
+**Primary navigation — the ontology:**
 
-- [TableOfContent.md](Tables/TableOfContent.md) – Complete index of all Objects, Frames, and Guides with descriptions
+- [netex-nordic-documentation.ttl](../ontology/netex-nordic-documentation.ttl) – Documentation index: maps every object/frame/guide to its files, relationships, and frame membership
+
+The ontology is the authoritative navigation tool. Use it to discover what exists, how objects relate, which frame owns what, and where documentation lives.
+
+**Secondary index files:**
+
+- [TableOfContent.md](Tables/TableOfContent.md) – Human-readable index of all Objects, Frames, and Guides
 - [TableOfExamples.md](Tables/TableOfExamples.md) – Searchable list of all XML examples with brief descriptions
 
 **Reference Materials:**
@@ -49,7 +55,7 @@ The agent must always consult this folder when reading, validating, or generatin
 - [Frames](../../Frames/CompositeFrame/Description_CompositeFrame.md) – All Frame documentation
 - [Guides](../../Guides/GetStarted/GetStarted_Guide.md) – Guidelines and best practices
 
-Use these files to quickly locate documentation, explore examples, and understand the overall structure of the NeTEx profile.
+Use the ontology first; fall back to the table-of-content files for a quick human-readable overview.
 
 ---
 

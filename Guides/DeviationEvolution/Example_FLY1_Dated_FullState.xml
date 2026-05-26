@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PublicationDelivery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.13:NO-NeTEx-networktimetable:1.3" xmlns="http://www.netex.org.uk/netex">
+  <PublicationTimestamp>2026-05-20T11:27:00</PublicationTimestamp>
+  <ParticipantRef>NDOV</ParticipantRef>
+  <Description>Line file FLY1 train 3702 – full state including deviation on 2026-05-25</Description>
+  <dataObjects>
+    <CompositeFrame id="FLT:CompositeFrame:2" version="4" modification="new">
+      <validityConditions>
+        <ValidBetween>
+          <FromDate>2026-05-01T00:00:00+01:00</FromDate>
+          <ToDate>2026-05-31T23:59:59+01:00</ToDate>
+        </ValidBetween>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="NSR">
+          <Xmlns>NSR</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/nsr</XmlnsUrl>
+          <Description>Nasjonalt stoppestedsregister</Description>
+        </Codespace>
+        <Codespace id="FLT">
+          <Xmlns>FLT</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/flt</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <FrameDefaults>
+        <DefaultLocale>
+          <TimeZone>CET</TimeZone>
+        </DefaultLocale>
+      </FrameDefaults>
+      <frames>
+        <ServiceFrame id="FLT:ServiceFrame:2" version="4">
+          <routes>
+            <!-- Full route: Oslo Lufthavn - Drammen -->
+            <Route id="FLT:Route:1-7" version="1">
+              <Name>Oslo Lufthavn - Drammen</Name>
+              <LineRef version="1" ref="FLT:Line:FLY1"/>
+              <DirectionRef ref="FLT:Direction:1"/>
+              <pointsInSequence>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-1" version="1" order="1">
+                  <RoutePointRef ref="FLT:RoutePoint:769922003"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-2" version="1" order="2">
+                  <RoutePointRef ref="FLT:RoutePoint:760020702"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-3" version="1" order="3">
+                  <RoutePointRef ref="FLT:RoutePoint:760010002"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-4" version="1" order="4">
+                  <RoutePointRef ref="FLT:RoutePoint:760018001"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-5" version="1" order="5">
+                  <RoutePointRef ref="FLT:RoutePoint:760140201"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-6" version="1" order="6">
+                  <RoutePointRef ref="FLT:RoutePoint:760140402"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-7" version="1" order="7">
+                  <RoutePointRef ref="FLT:RoutePoint:760140801"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-8" version="1" order="8">
+                  <RoutePointRef ref="FLT:RoutePoint:760141301"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-9" version="1" order="9">
+                  <RoutePointRef ref="FLT:RoutePoint:760142103"/>
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+            <!-- Partial route A: Oslo Lufthavn - Skøyen (replacement train) -->
+            <Route id="FLT:Route:1-7-A" version="1">
+              <Name>Oslo Lufthavn - Skøyen</Name>
+              <LineRef version="1" ref="FLT:Line:FLY1"/>
+              <DirectionRef ref="FLT:Direction:1"/>
+              <pointsInSequence>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-1" version="1" order="1">
+                  <RoutePointRef ref="FLT:RoutePoint:769922003"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-2" version="1" order="2">
+                  <RoutePointRef ref="FLT:RoutePoint:760020702"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-3" version="1" order="3">
+                  <RoutePointRef ref="FLT:RoutePoint:760010002"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-4" version="1" order="4">
+                  <RoutePointRef ref="FLT:RoutePoint:760018001"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-A-5" version="1" order="5">
+                  <RoutePointRef ref="FLT:RoutePoint:760140201"/>
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+            <!-- Partial route B: Asker - Drammen (replacement train) -->
+            <Route id="FLT:Route:1-7-B" version="1">
+              <Name>Asker - Drammen</Name>
+              <LineRef version="1" ref="FLT:Line:FLY1"/>
+              <DirectionRef ref="FLT:Direction:1"/>
+              <pointsInSequence>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-B-1" version="1" order="1">
+                  <RoutePointRef ref="FLT:RoutePoint:760141301"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-B-2" version="1" order="2">
+                  <RoutePointRef ref="FLT:RoutePoint:760142103"/>
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+            <!-- Partial route C: Skøyen - Asker (rail replacement bus) -->
+            <Route id="FLT:Route:1-7-C" version="1">
+              <Name>Skøyen - Asker (buss for tog)</Name>
+              <LineRef version="1" ref="FLT:Line:FLY1"/>
+              <DirectionRef ref="FLT:Direction:1"/>
+              <pointsInSequence>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-C-1" version="1" order="1">
+                  <RoutePointRef ref="FLT:RoutePoint:760140201"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-C-2" version="1" order="2">
+                  <RoutePointRef ref="FLT:RoutePoint:760140402"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-C-3" version="1" order="3">
+                  <RoutePointRef ref="FLT:RoutePoint:760140801"/>
+                </PointOnRoute>
+                <PointOnRoute id="FLT:PointOnRoute:1-7-C-4" version="1" order="4">
+                  <RoutePointRef ref="FLT:RoutePoint:760141301"/>
+                </PointOnRoute>
+              </pointsInSequence>
+            </Route>
+          </routes>
+          <lines>
+            <Line id="FLT:Line:FLY1" version="1">
+              <Name>FLY1</Name>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <PublicCode>FLY1</PublicCode>
+              <OperatorRef ref="FLT:Operator:507"/>
+              <Monitored>true</Monitored>
+              <RepresentedByGroupRef ref="FLT:Network:1"/>
+            </Line>
+          </lines>
+          <journeyPatterns>
+            <!-- Full pattern: Oslo Lufthavn - Drammen (9 stops) -->
+            <JourneyPattern id="FLT:JourneyPattern:1-7" version="1">
+              <RouteRef ref="FLT:Route:1-7" version="1"/>
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-1" version="1" order="1">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:769922003"/>
+                  <ForAlighting>false</ForAlighting>
+                  <DestinationDisplayRef ref="FLT:DestinationDisplay:3"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-2" version="1" order="2">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760020702"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-3" version="1" order="3">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760010002"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-4" version="1" order="4">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760018001"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-5" version="1" order="5">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140201"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-6" version="1" order="6">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140402"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-7" version="1" order="7">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140801"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-8" version="1" order="8">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760141301"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-9" version="1" order="9">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760142103"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+            <!-- Partial pattern A: Oslo Lufthavn - Skøyen (replacement train) -->
+            <JourneyPattern id="FLT:JourneyPattern:1-7-A" version="1">
+              <RouteRef ref="FLT:Route:1-7-A" version="1"/>
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-1" version="1" order="1">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:769922003"/>
+                  <ForAlighting>false</ForAlighting>
+                  <DestinationDisplayRef ref="FLT:DestinationDisplay:3"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-2" version="1" order="2">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760020702"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-3" version="1" order="3">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760010002"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-4" version="1" order="4">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760018001"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-A-5" version="1" order="5">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140201"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+            <!-- Partial pattern B: Asker - Drammen (replacement train) -->
+            <JourneyPattern id="FLT:JourneyPattern:1-7-B" version="1">
+              <RouteRef ref="FLT:Route:1-7-B" version="1"/>
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-B-1" version="1" order="1">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760141301"/>
+                  <ForAlighting>false</ForAlighting>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-B-2" version="1" order="2">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760142103"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+            <!-- Partial pattern C: Skøyen - Asker (rail replacement bus) -->
+            <JourneyPattern id="FLT:JourneyPattern:1-7-C" version="1">
+              <RouteRef ref="FLT:Route:1-7-C" version="1"/>
+              <pointsInSequence>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-C-1" version="1" order="1">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140201"/>
+                  <ForAlighting>false</ForAlighting>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-C-2" version="1" order="2">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140402"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-C-3" version="1" order="3">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760140801"/>
+                </StopPointInJourneyPattern>
+                <StopPointInJourneyPattern id="FLT:StopPointInJourneyPattern:1-7-C-4" version="1" order="4">
+                  <ScheduledStopPointRef ref="FLT:ScheduledStopPoint:760141301"/>
+                  <ForBoarding>false</ForBoarding>
+                </StopPointInJourneyPattern>
+              </pointsInSequence>
+            </JourneyPattern>
+          </journeyPatterns>
+        </ServiceFrame>
+        <TimetableFrame id="FLT:TimetableFrame:1" version="4">
+          <vehicleJourneys>
+
+            <!-- === ServiceJourney templates === -->
+
+            <!-- Original full journey: Oslo Lufthavn → Drammen -->
+            <ServiceJourney id="FLT:ServiceJourney:3702" version="1">
+              <PrivateCode>3702</PrivateCode>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7" version="1"/>
+              <passingTimes>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-1"/>
+                  <DepartureTime>05:30:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-2"/>
+                  <ArrivalTime>05:42:00</ArrivalTime>
+                  <DepartureTime>05:42:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-3">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-3"/>
+                  <ArrivalTime>05:52:00</ArrivalTime>
+                  <DepartureTime>05:52:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-4">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-4"/>
+                  <ArrivalTime>05:56:00</ArrivalTime>
+                  <DepartureTime>05:56:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-5">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-5"/>
+                  <ArrivalTime>06:00:00</ArrivalTime>
+                  <DepartureTime>06:00:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-6">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-6"/>
+                  <ArrivalTime>06:04:00</ArrivalTime>
+                  <DepartureTime>06:04:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-7">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-7"/>
+                  <ArrivalTime>06:09:00</ArrivalTime>
+                  <DepartureTime>06:09:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-8">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-8"/>
+                  <ArrivalTime>06:15:00</ArrivalTime>
+                  <DepartureTime>06:15:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702-9">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-9"/>
+                  <ArrivalTime>06:28:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+
+            <!-- Replacement train A: Oslo Lufthavn → Skøyen -->
+            <ServiceJourney id="FLT:ServiceJourney:3702A" version="1">
+              <PrivateCode>3702A</PrivateCode>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7-A" version="1"/>
+              <passingTimes>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-1"/>
+                  <DepartureTime>05:30:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-2"/>
+                  <ArrivalTime>05:42:00</ArrivalTime>
+                  <DepartureTime>05:42:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-3">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-3"/>
+                  <ArrivalTime>05:52:00</ArrivalTime>
+                  <DepartureTime>05:52:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-4">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-4"/>
+                  <ArrivalTime>05:56:00</ArrivalTime>
+                  <DepartureTime>05:56:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702A-5">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-A-5"/>
+                  <ArrivalTime>06:00:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+
+            <!-- Replacement bus C: Skøyen → Asker (railReplacementBus) -->
+            <ServiceJourney id="FLT:ServiceJourney:3702C" version="1">
+              <PrivateCode>3702C</PrivateCode>
+              <TransportMode>bus</TransportMode>
+              <TransportSubmode>
+                <BusSubmode>railReplacementBus</BusSubmode>
+              </TransportSubmode>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7-C" version="1"/>
+              <passingTimes>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702C-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-C-1"/>
+                  <DepartureTime>06:05:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702C-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-C-2"/>
+                  <ArrivalTime>06:12:00</ArrivalTime>
+                  <DepartureTime>06:12:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702C-3">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-C-3"/>
+                  <ArrivalTime>06:20:00</ArrivalTime>
+                  <DepartureTime>06:20:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="1" id="FLT:TimetabledPassingTime:3702C-4">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-C-4"/>
+                  <ArrivalTime>06:30:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+
+            <!-- Replacement train B: Asker → Drammen (adjusted departure after bus arrives) -->
+            <ServiceJourney id="FLT:ServiceJourney:3702B" version="2">
+              <PrivateCode>3702B</PrivateCode>
+              <TransportMode>rail</TransportMode>
+              <TransportSubmode>
+                <RailSubmode>airportLinkRail</RailSubmode>
+              </TransportSubmode>
+              <JourneyPatternRef ref="FLT:JourneyPattern:1-7-B" version="1"/>
+              <passingTimes>
+                <TimetabledPassingTime version="2" id="FLT:TimetabledPassingTime:3702B-1">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-B-1"/>
+                  <DepartureTime>06:35:00</DepartureTime>
+                </TimetabledPassingTime>
+                <TimetabledPassingTime version="2" id="FLT:TimetabledPassingTime:3702B-2">
+                  <StopPointInJourneyPatternRef version="1" ref="FLT:StopPointInJourneyPattern:1-7-B-2"/>
+                  <ArrivalTime>06:48:00</ArrivalTime>
+                </TimetabledPassingTime>
+              </passingTimes>
+            </ServiceJourney>
+
+            <!-- === DatedServiceJourneys: normal days (3702 runs as planned) === -->
+
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-01" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-01"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-04" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-04"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-05" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-05"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-06" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-06"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-07" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-07"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-08" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-08"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-11" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-11"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-12" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-12"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-13" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-13"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-14" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-14"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-15" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-15"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-18" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-18"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-19" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-19"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-20" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-20"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-21" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-21"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-22" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-22"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-26" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-26"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-27" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-27"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-28" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-28"/>
+            </DatedServiceJourney>
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-29" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-29"/>
+            </DatedServiceJourney>
+
+            <!-- === 2026-05-25: Deviation day — original replaced, three replacement journeys === -->
+
+            <!-- Original 3702 marked as replaced on this day -->
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702-2026-05-25" version="4">
+              <ServiceAlteration>replaced</ServiceAlteration>
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702" version="1"/>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-25"/>
+            </DatedServiceJourney>
+
+            <!-- Replacement train A: Oslo Lufthavn → Skøyen -->
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702A-2026-05-25" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702A" version="1"/>
+              <replacedJourneys>
+                <DatedVehicleJourneyRef ref="FLT:DatedServiceJourney:3702-2026-05-25"/>
+              </replacedJourneys>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-25"/>
+            </DatedServiceJourney>
+
+            <!-- Replacement bus C: Skøyen → Asker -->
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702C-2026-05-25" version="1">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702C" version="1"/>
+              <replacedJourneys>
+                <DatedVehicleJourneyRef ref="FLT:DatedServiceJourney:3702-2026-05-25"/>
+              </replacedJourneys>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-25"/>
+            </DatedServiceJourney>
+
+            <!-- Replacement train B: Asker → Drammen -->
+            <DatedServiceJourney id="FLT:DatedServiceJourney:3702B-2026-05-25" version="2">
+              <ServiceJourneyRef ref="FLT:ServiceJourney:3702B" version="2"/>
+              <replacedJourneys>
+                <DatedVehicleJourneyRef ref="FLT:DatedServiceJourney:3702-2026-05-25"/>
+              </replacedJourneys>
+              <OperatingDayRef ref="FLT:OperatingDay:2026-05-25"/>
+            </DatedServiceJourney>
+
+          </vehicleJourneys>
+        </TimetableFrame>
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+</PublicationDelivery>

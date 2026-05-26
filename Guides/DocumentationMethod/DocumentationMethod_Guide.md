@@ -95,17 +95,20 @@ flowchart TD
 > [!NOTE]
 > No object was ever "done" in one pass. The typical object went through 2–4 revision cycles as understanding matured, related objects were documented, and edge cases surfaced from real data.
 
-### 3.3 Guides: top-down from concepts, refined iteratively
+### 3.3 Guides: concept-driven, but still example-first
 
-Guides follow the opposite direction — they start with a concept ("how do I build a timetable?") and work down to the objects:
+Guides start with a concept ("how do I build a timetable?", "how do deviations evolve?"), but the production process still follows the bottom-up principle:
 
 1. Identify the learning goal
-2. Define a progression (simple → complex)
-3. Show objects one at a time with growing context
-4. End with a complete picture and links to deep-dive documentation
-5. Validate all XML snippets in the guide against XSD
+2. Use existing object documentation (Tables, Descriptions, ontology) to design a realistic scenario
+3. **Build the example XML first** — a complete, validated delivery that demonstrates the concept
+4. Use the validated example as the foundation for writing the guide narrative
+5. Define a progression (simple → complex) that walks the reader through what the example contains
+6. Link back to deep-dive object documentation for details
 
-But guides also evolved iteratively. Early guides were revised as conventions solidified — diagrams were redone when the SVG style guide was established, sections were restructured when better patterns emerged, and XML snippets were replaced when the object documentation revealed more idiomatic approaches.
+This approach has a powerful side effect: once the object documentation and ontology are in place, producing new tailored guides becomes fast. The building blocks already exist — validated patterns for ServiceJourney, DatedServiceJourney, OperatingDay, and dozens of other objects — so assembling a scenario-specific example is largely a composition task. The guide narrative then writes itself against a concrete, validated foundation.
+
+But "fast" doesn't mean "done." Every guide still goes through iterative improvement — reviewing section by section, tightening the narrative, improving diagrams, and ensuring the progression actually teaches what it claims to. Early guides were revised as conventions solidified — diagrams were redone when the SVG style guide was established, sections were restructured when better patterns emerged, and XML snippets were replaced when the object documentation revealed more idiomatic approaches.
 
 ---
 
@@ -133,11 +136,7 @@ Beyond that, the templates and existing documentation provide strong patterns. T
 
 This was never a one-shot generation pipeline. Every piece of documentation went through multiple rounds:
 
-```
-Human intent → Agent draft → XSD validation → Human review → Correction → Agent revision → ...
-                    ↑                                                              |
-                    └────────────────── Repeat until right ─────────────────────────┘
-```
+![Human–Agent feedback loop](../../assets/images/netex_feedback_loop.svg)
 
 Typical iteration patterns:
 

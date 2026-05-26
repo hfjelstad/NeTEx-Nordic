@@ -1,3 +1,5 @@
+<!-- LLM agents: Read LLM/README.md for documentation conventions, templates, and navigation instructions. -->
+
 # NeTEx Nordic Profile - PROOF OF CONCEPT!
 
 **The definitive documentation for building, validating, and understanding Nordic NeTEx data.**
