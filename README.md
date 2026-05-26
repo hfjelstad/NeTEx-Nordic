@@ -1,4 +1,4 @@
-# NeTEx Nordic Profile
+# NeTEx Nordic Profile - PROOF OF CONCEPT!
 
 **The definitive documentation for building, validating, and understanding Nordic NeTEx data.**
 
