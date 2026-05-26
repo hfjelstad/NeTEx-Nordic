@@ -31,6 +31,8 @@ Objects/<Name>/
 
 **Frames** group objects into delivery containers. **Objects** are the building blocks. **Guides** explain cross-cutting patterns that span multiple objects.
 
+The layers build bottom-up: validated XML examples are the source of truth, tables are derived from them, and descriptions are written last. This repository was built iteratively using an AI agent as co-author — constrained by XSD validation and templates, with continuous human review. For the full story, see [How This Documentation Was Built](Guides/DocumentationMethod/DocumentationMethod_Guide.md).
+
 ### Reading order for newcomers
 
 ```mermaid
@@ -62,6 +64,7 @@ flowchart LR
 | Deviations & replacements | [Extended Sales & Deviation](Guides/ExtendedSales_and_DeviationHandling/ExtendedSales_and_DeviationHandling_Guide.md) |
 | Separation of concerns | [Separation of Concerns](Guides/SeparationOfConcerns/SeparationOfConcerns.md) |
 | Central registries | [Organisation Registry](Guides/CentralOrganisationRegistry/CentralOrganisationRegistry_Guide.md) · [Vehicle Registry](Guides/CentralVehicleRegistry/CentralVehicleRegistry_Guide.md) |
+| How this repo was built | [Documentation Method](Guides/DocumentationMethod/DocumentationMethod_Guide.md) |
 
 ---
 
