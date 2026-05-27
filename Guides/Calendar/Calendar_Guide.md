@@ -254,7 +254,7 @@ A complete example showing OperatingDays for date-specific instances, Weekdays a
 ## 10. 🔗 Related Resources
 
 ### Guides
-- [Journey Lifecycle](../JourneyLifecycle/JourneyLifecycle_Guide.md) — The full chain from Line to DatedServiceJourney
+- [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) — The full chain from Line to DatedServiceJourney
 - [Extended Sales & Deviation Handling](../ExtendedSales_and_DeviationHandling/ExtendedSales_and_DeviationHandling_Guide.md) — How DatedServiceJourney handles cancellations, replacements, and reinforcements
 - [Get Started](../GetStarted/GetStarted_Guide.md) — NeTEx fundamentals and document anatomy
 

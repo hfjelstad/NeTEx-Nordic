@@ -156,7 +156,7 @@ DeadRuns complete the picture of what a vehicle does in a day — without them, 
 ## 9. 🔗 Related Resources
 
 ### Guides
-- [Journey Lifecycle](../JourneyLifecycle/JourneyLifecycle_Guide.md) -- How ServiceJourneys are built
+- [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) -- How ServiceJourneys are built
 - [Organisational Governance](../OrganisationalGovernance/OrganisationalGovernance_Guide.md) -- Operator referenced by Vehicle
 - [Separation of Concerns](../SeparationOfConcerns/SeparationOfConcerns.md) -- Domain coupling strategies
 

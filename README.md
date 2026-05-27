@@ -13,7 +13,7 @@ Public transport in the Nordics runs on NeTEx — timetables, stops, vehicles, f
 | You want to… | Go to |
 |---|---|
 | Understand NeTEx from scratch | [Get Started Guide](Guides/GetStarted/GetStarted_Guide.md) |
-| Learn the modelling chain (Line → Route → Journey → Departure) | [Journey Lifecycle Guide](Guides/JourneyLifecycle/JourneyLifecycle_Guide.md) |
+| Learn the modelling chain (Line → Route → Journey → Departure) | [How to Build a Timetable](Guides/HowToBuildATimetable/HowToBuildATimetable_Guide.md) |
 | Look up a specific element's cardinality and rules | [Objects/](Objects/) or [Frames/](Frames/) |
 | See a complete validated XML delivery | [Example_PublicationDelivery.xml](Frames/Example_PublicationDelivery.xml) |
 | Validate your own XML against the profile | [scripts/validate.py](scripts/validate.py) |
@@ -40,7 +40,7 @@ The layers build bottom-up: validated XML examples are the source of truth, tabl
 ```mermaid
 flowchart LR
     A[Get Started] --> B[NeTEx Conventions]
-    B --> C[Journey Lifecycle]
+    B --> C[How to Build a Timetable]
     C --> D[Stop Infrastructure]
     D --> E[Calendar]
     E --> F[Network Timetable]
@@ -48,7 +48,7 @@ flowchart LR
 
 1. **[Get Started](Guides/GetStarted/GetStarted_Guide.md)** — What NeTEx is, where it comes from, anatomy of a document
 2. **[NeTEx Conventions](Guides/NeTExConventions/NeTEx_Conventions.md)** — ID patterns, versioning, naming rules
-3. **[Journey Lifecycle](Guides/JourneyLifecycle/JourneyLifecycle_Guide.md)** — The core chain from Line to DatedServiceJourney
+3. **[How to Build a Timetable](Guides/HowToBuildATimetable/HowToBuildATimetable_Guide.md)** — The core chain from Line to DatedServiceJourney
 4. **[Stop Infrastructure](Guides/StopInfrastructure/StopInfrastructure_Guide.md)** — Logical stops, physical platforms, the assignment bridge
 5. **[Calendar](Guides/Calendar/Calendar_Guide.md)** — DayTypes, OperatingPeriods, binding services to dates
 6. **[Network Timetable](Guides/NetworkTimetable/NetworkTimetable_Guide.md)** — Producing and consuming complete datasets

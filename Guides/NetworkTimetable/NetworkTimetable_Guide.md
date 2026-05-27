@@ -281,7 +281,7 @@ In a shared + line file setup, references cross file boundaries:
 > [!TIP]
 > Build an in-memory index of all shared objects keyed by `id` when loading the shared file. Then resolve references from line files using simple lookups.
 
-For a deeper look at the journey chain, see the [Journey Lifecycle guide](../JourneyLifecycle/JourneyLifecycle_Guide.md).
+For a deeper look at the journey chain, see the [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) guide.
 
 ---
 
@@ -343,7 +343,7 @@ This convention ensures IDs remain unique when datasets from multiple providers 
 > - **Load shared data first.** Always parse the shared file before line files. Build an object index keyed by `id` for fast cross-file reference resolution.
 > - **Don't assume all optional elements exist.** `noticeAssignments` and `journeyInterchanges` are only present in some line files. Check for their existence before processing.
 > - **Handle overnight services.** `TimetabledPassingTime` may include `DepartureDayOffset` or `ArrivalDayOffset` for journeys crossing midnight. A value of `1` means "next day relative to journey start".
-> - **First stop = DepartureTime only, last stop = ArrivalTime only.** Intermediate stops have both. See the [Journey Lifecycle guide](../JourneyLifecycle/JourneyLifecycle_Guide.md) for the full pattern.
+> - **First stop = DepartureTime only, last stop = ArrivalTime only.** Intermediate stops have both. See the [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) guide for the full pattern.
 > - **External references have no version.** When a reference points to an external system (e.g. `NSR:Quay:111` from the national stop place registry), omit the `version` attribute.
 > - **Use DestinationDisplay inheritance.** The `DestinationDisplayRef` on a `StopPointInJourneyPattern` applies from that stop onward until overridden by another `DestinationDisplayRef` at a later stop.
 > - **DatedServiceJourney is the concrete instance.** Without a `DatedServiceJourney`, a `ServiceJourney` is just a reusable template. The dated version pins it to a specific `OperatingDay`.
@@ -367,7 +367,7 @@ This convention ensures IDs remain unique when datasets from multiple providers 
 
 ### Guides
 - [Get Started](../GetStarted/GetStarted_Guide.md) — Foundational NeTEx concepts and document anatomy
-- [Journey Lifecycle](../JourneyLifecycle/JourneyLifecycle_Guide.md) — Line → Route → JourneyPattern → ServiceJourney → DatedServiceJourney
+- [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) — Line → Route → JourneyPattern → ServiceJourney → DatedServiceJourney
 - [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) — Casing rules, naming patterns, ID format
 - [Organisational Governance](../OrganisationalGovernance/OrganisationalGovernance_Guide.md) — Authority, Operator, and responsibility modelling
 - [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md) — ScheduledStopPoint, Quay, and the PassengerStopAssignment bridge

@@ -339,7 +339,7 @@ A complete example showing how to handle a 3-day track closure:
 ## 10. 🔗 Related Resources
 
 ### Guides
-- [Journey Lifecycle](../JourneyLifecycle/JourneyLifecycle_Guide.md) — The full chain from Line to DatedServiceJourney
+- [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) — The full chain from Line to DatedServiceJourney
 - [Calendar](../Calendar/Calendar_Guide.md) — DayType, OperatingPeriod, DayTypeAssignment, OperatingDay — when services operate
 - [Get Started](../GetStarted/GetStarted_Guide.md) — NeTEx fundamentals and document anatomy
 - [Vehicle Scheduling](../VehicleScheduling/VehicleScheduling_Guide.md) — Block assignment and vehicle continuity

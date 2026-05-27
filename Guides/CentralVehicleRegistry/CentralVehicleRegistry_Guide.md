@@ -490,7 +490,7 @@ Example_CentralVehicleRegistry.xml:  VALID
 - [Separation of Concerns](/Guides/SeparationOfConcerns/SeparationOfConcerns.md) — Data ownership across planning, operational, and real-time layers
 - [IT Architecture](/Guides/ITArchitecture/ITArchitecture_Guide.md) — Registry architecture and data exchange flows
 - [NeTEx Conventions](/Guides/NeTExConventions/NeTEx_Conventions.md) — ID formatting rules and codespace patterns
-- [Journey Lifecycle](/Guides/JourneyLifecycle/JourneyLifecycle_Guide.md) — How ServiceJourney becomes DatedServiceJourney with concrete assignments
+- [How to Build a Timetable](/Guides/HowToBuildATimetable/HowToBuildATimetable_Guide.md) — How ServiceJourney becomes DatedServiceJourney with concrete assignments
 
 ### NeTEx Objects
 - [Vehicle](/Objects/Vehicle/Description_Vehicle.md) — The building block (`@id` + `VehicleTypeRef`)

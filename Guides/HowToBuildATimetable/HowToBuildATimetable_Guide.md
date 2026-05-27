@@ -312,5 +312,4 @@ To produce a working timetable delivery, you need at minimum:
 - [Separation of Concerns](../SeparationOfConcerns/SeparationOfConcerns.md) — how domains stay independent
 
 **Handle special cases:**
-- [Journey Lifecycle](../JourneyLifecycle/JourneyLifecycle_Guide.md) — DatedServiceJourney, cancellations, extras
 - [Vehicle Scheduling](../VehicleScheduling/VehicleScheduling_Guide.md) — blocks and vehicle assignments
