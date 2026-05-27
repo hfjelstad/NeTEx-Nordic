@@ -29,7 +29,7 @@ NeTEx uses two casing patterns consistently:
 <!-- lowerCamelCase: the collection wrapper -->
 <vehicleJourneys>
   <!-- UpperCamelCase: the individual object -->
-  <ServiceJourney id="ERP:ServiceJourney:SJ_001" version="1">
+  <ServiceJourney id="NP:ServiceJourney:SJ_001" version="1">
     <Name>Morning departure</Name>
   </ServiceJourney>
 </vehicleJourneys>
@@ -56,7 +56,7 @@ Codespace:Type:Identifier
 
 | Part | Description | Example |
 |------|-------------|---------|
-| **Codespace** | Namespace prefix declared in `codespaces` | `ERP`, `NP`, `NSR` |
+| **Codespace** | Namespace prefix declared in `codespaces` | `NP`, `NSR`, `KOL` |
 | **Type** | The object type name | `Line`, `ServiceJourney`, `StopPlace` |
 | **Identifier** | Unique value within the codespace and type | `L1`, `SJ_001`, `12345` |
 
@@ -64,29 +64,35 @@ Codespace:Type:Identifier
 
 ```xml
 <!-- Codespace : Type : Identifier -->
-id="ERP:Line:L1"
-id="ERP:ServiceJourney:SJ_001"
-id="NP:StopPlace:Oslo_S"
+id="NP:Line:L1"
+id="NP:ServiceJourney:SJ_001"
+id="KOL:StopPlace:Oslo_S"
 id="NSR:Quay:0301001001"
 ```
 
 ### Codespace Conventions
 
+Just as XML namespaces ensure schema uniqueness, **codespaces** ensure that all object IDs in NeTEx are globally unique when datasets from different providers are combined. In the Nordic Profile, the central agency (Entur) assigns each data provider a unique codespace — a short code (typically three letters) that prefixes all IDs in that provider's dataset. For example, `KOL` for Kolumbus, `RUT` for Ruter. Each dataset must use the correct codespace to pass validation.
+
 | Codespace | Usage |
 |-----------|-------|
-| `ERP` | European Recommended Profile — used in MIN and ERP examples |
-| `NP` | Nordic Profile — used in NP-specific examples |
-| `NSR` | Norwegian StopPlace Registry — used for stop infrastructure references |
+| `NSR` | Norwegian Stop Place Registry — centrally managed stop infrastructure |
+| `KOL` | Kolumbus — assigned by Entur |
+| `RUT` | Ruter — assigned by Entur |
+| `NP` | Nordic Profile - Used in examples in this documentation |
 
 Codespaces are declared at the CompositeFrame level:
 
 ```xml
 <codespaces>
-  <Codespace id="erp">
-    <Xmlns>ERP</Xmlns>
+  <Codespace id="kol">
+    <Xmlns>KOL</Xmlns>
   </Codespace>
 </codespaces>
 ```
+
+> [!NOTE]
+> The codespace prefix in an ID (e.g. `KOL:Line:100`) must match the `Xmlns` value declared in the `codespaces` block. Mismatches will fail validation.
 
 ---
 
@@ -95,7 +101,7 @@ Codespaces are declared at the CompositeFrame level:
 Every object that can change over time has a `@version` attribute:
 
 ```xml
-<Line id="ERP:Line:L1" version="1">
+<Line id="NP:Line:L1" version="1">
 ```
 
 ### Rules
@@ -108,10 +114,10 @@ Every object that can change over time has a `@version` attribute:
 
 ```xml
 <!-- Unversioned reference: resolves to whichever version exists -->
-<LineRef ref="ERP:Line:L1"/>
+<LineRef ref="NP:Line:L1"/>
 
 <!-- Versioned reference: MUST resolve to version="1" in the same file -->
-<LineRef ref="ERP:Line:L1" version="1"/>
+<LineRef ref="NP:Line:L1" version="1"/>
 ```
 
 > ⚠️ **Note:** Adding `version` to a `*Ref` triggers XSD keyref validation — the referenced object must exist with that exact version in the same file. Only use versioned references when you need this strict binding. When referencing external objects (defined in other files/systems), **omit the version attribute**.
@@ -156,10 +162,10 @@ This means `PublicCode` appeared too early — it should come after `Name` and `
 All examples in this repository use:
 
 ```xml
-<ParticipantRef>EuPro</ParticipantRef>
+<ParticipantRef>NP</ParticipantRef>
 ```
 
-This identifies the European Profile Documentation project as the source of the delivery. When creating real deliveries, replace this with your organization's identifier.
+`ParticipantRef` is a free-text declaration in the `PublicationDelivery` header — it is not validated or enforced. In production it typically holds a short identifier for the publishing system or organization.
 
 ---
 
