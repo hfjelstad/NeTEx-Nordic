@@ -19,28 +19,7 @@ In this guide you will learn:
 
 All calendar data lives in the **ServiceCalendarFrame**. Two distinct mechanisms exist — date-based and pattern-based:
 
-```mermaid
-flowchart TD
-    OD["<b>OperatingDay</b><br/><i>Single date</i><br/>e.g. 2026-03-18"]
-    DSJ["<b>DatedServiceJourney</b><br/><i>Instance</i><br/>Runs on a specific date"]
-    SJ["<b>ServiceJourney</b><br/><i>Template</i><br/>Runs on a DayType"]
-    DT["<b>DayType</b><br/><i>Recurring pattern</i><br/>e.g. Weekdays, Saturdays"]
-    OP["<b>OperatingPeriod</b><br/><i>Date range</i><br/>e.g. Jan 1 – Jun 30"]
-    DTA["<b>DayTypeAssignment</b><br/><i>The glue</i><br/>Binds pattern to dates"]
-
-    OD -->|"OperatingDayRef"| DSJ
-    SJ -->|"ServiceJourneyRef"| DSJ
-    DT -->|"DayTypeRef"| SJ
-    DT -->|"referenced by"| DTA
-    OP -->|"referenced by"| DTA
-
-    style OD fill:#0D47A1,stroke:#0D47A1,color:#fff
-    style DSJ fill:#1565C0,stroke:#1565C0,color:#fff
-    style SJ fill:#1976D2,stroke:#1976D2,color:#fff
-    style DT fill:#1E88E5,stroke:#1E88E5,color:#fff
-    style OP fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style DTA fill:#64B5F6,stroke:#64B5F6,color:#fff
-```
+![NeTEx Calendar Objects](../../assets/images/netex_calendar_objects.svg)
 
 | Object | What it represents | Defined in | Referenced by |
 |--------|--------------------|------------|---------------|
