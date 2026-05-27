@@ -42,7 +42,7 @@ Line
 ```
 
 ## 3. Key Elements
-- **Name**: Human-readable line identifier displayed in timetables and passenger information; must be unique within the service delivery scope.
+- **Name**: Internal line identifier used in planning tools and administrative systems; describes the service rather than being shown to passengers.
 - **TransportMode**: Primary public transport mode for the line (e.g., `bus`, `rail`, `water`, `tram`, `metro`). Mandatory in this profile.
 - **TransportSubmode**: Optional refinement of the transport mode (e.g., `regionalBus`, `localRail`). Only one submode element should be present, matching the TransportMode.
 - **OperatorRef**: Mandatory reference to the Operator responsible for running this Line; must resolve to an Operator defined in ResourceFrame.
@@ -63,9 +63,11 @@ Line
 ## 5. Usage Notes
 
 ### 5a. Consistency Rules
-- A Line should have a unique Name within the scope of its Operator to avoid confusion in passenger communication and system references.
+- A Line should have a unique Name within the scope of its Operator to avoid confusion in system references.
 - The OperatorRef must be defined in ResourceFrame/organisations before the Line is referenced by Routes, JourneyPatterns, or ServiceJourneys.
+- The Line @id is used as a trigger mechanism for fare products — sales systems use it to determine which products are valid for a given journey. Producers must ensure Line IDs are stable and consistent across deliveries.
 - Presentation colors (Colour and TextColour) should be consistent across all visual touchpoints (websites, signage, information systems) to reinforce brand identity.
+<!-- PROPOSAL: Document TransportSubmode as a product filtering mechanism. Non-departure-specific products (e.g. monthly tickets) may be filtered to the line with the highest frequency when multiple lines of different submodes serve the same stretch (local, longDistance, regional). Edge case relevant to producers, not passengers. -->
 
 ### 5b. Validation Requirements
 - **Name is mandatory** – Every Line must have a Name element for public identification.
@@ -86,26 +88,6 @@ Line
 ## 6. Additional Information
 See [Table_Line.md](Table_Line.md) for detailed attribute specifications, cardinality rules, and XSD constraints.
 
-<!-- tabs:start -->
-
-#### **MIN (ERP)**
-
-```xml
-<Line id="ERP:Line:1" version="1">
-  <Name>Line 1</Name>
-  <TransportMode>bus</TransportMode>
-  <OperatorRef ref="ERP:Operator:OP1"/>
-  <Presentation>
-    <Colour>005EB8</Colour>
-    <TextColour>FFFFFF</TextColour>
-  </Presentation>
-</Line>
-```
-
-→ [Full file](Example_Line_MIN.xml)
-
-#### **NP (Nordic)**
-
 ```xml
 <Line id="NP:Line:100" version="1">
   <Name>Arendal-Kristiansand</Name>
@@ -125,42 +107,3 @@ See [Table_Line.md](Table_Line.md) for detailed attribute specifications, cardin
 ```
 
 → [Full file](Example_Line_NP.xml)
-
-#### **FR (French)**
-
-```xml
-<Line id="FR:Line:C01" version="1">
-  <Name>Ligne C01 - Rennes ↔ Saint-Malo</Name>
-  <TransportMode>bus</TransportMode>
-  <TransportSubmode>
-    <BusSubmode>regionalBus</BusSubmode>
-  </TransportSubmode>
-  <PublicCode>C01</PublicCode>
-  <OperatorRef ref="FR:Operator:KEOLIS_ARMOR"/>
-  <Monitored>true</Monitored>
-  <TypeOfLineRef ref="FR:TypeOfLine:CommercialLine"/>
-  <RepresentedByGroupRef ref="FR:Network:BreizhGo"/>
-  <AccessibilityAssessment>
-    <MobilityImpairedAccess>partial</MobilityImpairedAccess>
-  </AccessibilityAssessment>
-  <allowedDirections>
-    <AllowedLineDirection>
-      <DirectionRef ref="FR:Direction:Aller"/>
-    </AllowedLineDirection>
-    <AllowedLineDirection>
-      <DirectionRef ref="FR:Direction:Retour"/>
-    </AllowedLineDirection>
-  </allowedDirections>
-  <documentLinks>
-    <InfoLink>https://www.breizhgo.bzh/ligne/C01</InfoLink>
-  </documentLinks>
-  <Presentation>
-    <Colour>E4032E</Colour>
-    <TextColour>FFFFFF</TextColour>
-  </Presentation>
-</Line>
-```
-
-→ [Full file](Example_Line_FR.xml)
-
-<!-- tabs:end -->
