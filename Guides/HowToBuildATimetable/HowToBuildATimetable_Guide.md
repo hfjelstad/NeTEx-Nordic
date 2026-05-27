@@ -48,16 +48,16 @@ A [ScheduledStopPoint](../../Objects/ScheduledStopPoint/Description_ScheduledSto
 
 ```xml
 <scheduledStopPoints>
-    <ScheduledStopPoint id="ENT:ScheduledStopPoint:1" version="1">
+    <ScheduledStopPoint id="NP:ScheduledStopPoint:1" version="1">
         <Name>Location A</Name>
     </ScheduledStopPoint>
-    <ScheduledStopPoint id="ENT:ScheduledStopPoint:2" version="1">
+    <ScheduledStopPoint id="NP:ScheduledStopPoint:2" version="1">
         <Name>Location B</Name>
     </ScheduledStopPoint>
-    <ScheduledStopPoint id="ENT:ScheduledStopPoint:3" version="1">
+    <ScheduledStopPoint id="NP:ScheduledStopPoint:3" version="1">
         <Name>Location C</Name>
     </ScheduledStopPoint>
-    <ScheduledStopPoint id="ENT:ScheduledStopPoint:4" version="1">
+    <ScheduledStopPoint id="NP:ScheduledStopPoint:4" version="1">
         <Name>Location D</Name>
     </ScheduledStopPoint>
 </scheduledStopPoints>
@@ -72,7 +72,7 @@ That's it — a name and a unique ID. But every ScheduledStopPoint must be linke
 > The PassengerStopAssignment is the interface between the operator's timetable delivery and the national stop registry. The operator defines ScheduledStopPoint (logical stops used in planning), while StopPlace and Quay are maintained centrally in the stop registry. The PassengerStopAssignment bridges these two domains — it's where the operator declares "my logical stop corresponds to this physical Quay." For details on the stop registry side, see [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md).
 
 > [!NOTE]
-> The ID follows the pattern `Codespace:ObjectType:LocalId`. Here `ENT` is the codespace (who owns the data), ScheduledStopPoint is the type, and `1` is a local identifier. See [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) for details.
+> The ID follows the pattern `Codespace:ObjectType:LocalId`. Here `NP` is the codespace (who owns the data), ScheduledStopPoint is the type, and `1` is a local identifier. See [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) for details.
 
 ---
 
@@ -82,7 +82,7 @@ A [Line](../../Objects/Line/Description_Line.md) groups related journeys into a 
 
 ```xml
 <lines>
-    <Line id="ENT:Line:1" version="1">
+    <Line id="NP:Line:1" version="1">
         <Name>X</Name>
         <TransportMode> rail / bus / water / tram / metro / air </TransportMode>
     </Line>
@@ -104,20 +104,20 @@ A [JourneyPattern](../../Objects/JourneyPattern/Description_JourneyPattern.md) d
 
 ```xml
 <journeyPatterns>
-    <JourneyPattern id="ENT:JourneyPattern:1" version="1">
+    <JourneyPattern id="NP:JourneyPattern:1" version="1">
         <pointsInSequence>
-            <StopPointInJourneyPattern id="ENT:StopPointInJourneyPattern:1_01" version="1" order="1">
-                <ScheduledStopPointRef ref="ENT:ScheduledStopPoint:1"/>
+            <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:1_01" version="1" order="1">
+                <ScheduledStopPointRef ref="NP:ScheduledStopPoint:1"/>
                 <ForAlighting>false</ForAlighting>
             </StopPointInJourneyPattern>
-            <StopPointInJourneyPattern id="ENT:StopPointInJourneyPattern:1_02" version="1" order="2">
-                <ScheduledStopPointRef ref="ENT:ScheduledStopPoint:2"/>
+            <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:1_02" version="1" order="2">
+                <ScheduledStopPointRef ref="NP:ScheduledStopPoint:2"/>
             </StopPointInJourneyPattern>
-            <StopPointInJourneyPattern id="ENT:StopPointInJourneyPattern:1_03" version="1" order="3">
-                <ScheduledStopPointRef ref="ENT:ScheduledStopPoint:3"/>
+            <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:1_03" version="1" order="3">
+                <ScheduledStopPointRef ref="NP:ScheduledStopPoint:3"/>
             </StopPointInJourneyPattern>
-            <StopPointInJourneyPattern id="ENT:StopPointInJourneyPattern:1_04" version="1" order="4">
-                <ScheduledStopPointRef ref="ENT:ScheduledStopPoint:4"/>
+            <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:1_04" version="1" order="4">
+                <ScheduledStopPointRef ref="NP:ScheduledStopPoint:4"/>
                 <ForBoarding>false</ForBoarding>
             </StopPointInJourneyPattern>
         </pointsInSequence>
@@ -144,28 +144,28 @@ Now we have stops, a line, and an order. The final piece is *time*. A [ServiceJo
 
 ```xml
 <vehicleJourneys>
-    <ServiceJourney id="ENT:ServiceJourney:1" version="1">
+    <ServiceJourney id="NP:ServiceJourney:1" version="1">
         <Name>X</Name>
         <TransportMode>rail</TransportMode>
-        <JourneyPatternRef ref="ENT:JourneyPattern:1" version="1"/>
-        <LineRef ref="ENT:Line:1"/>
+        <JourneyPatternRef ref="NP:JourneyPattern:1" version="1"/>
+        <LineRef ref="NP:Line:1"/>
         <passingTimes>
-            <TimetabledPassingTime id="ENT:TimetabledPassingTime:1_01" version="1">
-                <StopPointInJourneyPatternRef ref="ENT:StopPointInJourneyPattern:1_01"/>
+            <TimetabledPassingTime id="NP:TimetabledPassingTime:1_01" version="1">
+                <StopPointInJourneyPatternRef ref="NP:StopPointInJourneyPattern:1_01"/>
                 <DepartureTime>08:05:00</DepartureTime>
             </TimetabledPassingTime>
-            <TimetabledPassingTime id="ENT:TimetabledPassingTime:1_02" version="1">
-                <StopPointInJourneyPatternRef ref="ENT:StopPointInJourneyPattern:1_02"/>
+            <TimetabledPassingTime id="NP:TimetabledPassingTime:1_02" version="1">
+                <StopPointInJourneyPatternRef ref="NP:StopPointInJourneyPattern:1_02"/>
                 <ArrivalTime>16:20:00</ArrivalTime>
                 <DepartureTime>16:40:00</DepartureTime>
             </TimetabledPassingTime>
-            <TimetabledPassingTime id="ENT:TimetabledPassingTime:1_03" version="1">
-                <StopPointInJourneyPatternRef ref="ENT:StopPointInJourneyPattern:1_03"/>
+            <TimetabledPassingTime id="NP:TimetabledPassingTime:1_03" version="1">
+                <StopPointInJourneyPatternRef ref="NP:StopPointInJourneyPattern:1_03"/>
                 <ArrivalTime>21:30:00</ArrivalTime>
                 <DepartureTime>21:45:00</DepartureTime>
             </TimetabledPassingTime>
-            <TimetabledPassingTime id="ENT:TimetabledPassingTime:1_04" version="1">
-                <StopPointInJourneyPatternRef ref="ENT:StopPointInJourneyPattern:1_04"/>
+            <TimetabledPassingTime id="NP:TimetabledPassingTime:1_04" version="1">
+                <StopPointInJourneyPatternRef ref="NP:StopPointInJourneyPattern:1_04"/>
                 <ArrivalTime>00:15:00</ArrivalTime>
                 <ArrivalDayOffset>1</ArrivalDayOffset>
             </TimetabledPassingTime>
@@ -190,29 +190,29 @@ Key points:
 A ServiceJourney defines *what* happens and *at what time*, but not *on which date*. To assign a journey to a specific calendar day, you create a [DatedServiceJourney](../../Objects/DatedServiceJourney/Description_DatedServiceJourney.md). It references the ServiceJourney (the template) and an OperatingDay (the date).
 
 ```xml
-<ServiceCalendarFrame id="ENT:ServiceCalendarFrame:1" version="1">
+<ServiceCalendarFrame id="NP:ServiceCalendarFrame:1" version="1">
     <operatingDays>
-        <OperatingDay id="ENT:OperatingDay:2026-06-01" version="1">
+        <OperatingDay id="NP:OperatingDay:2026-06-01" version="1">
             <CalendarDate>2026-06-01</CalendarDate>
         </OperatingDay>
-        <OperatingDay id="ENT:OperatingDay:2026-06-02" version="1">
+        <OperatingDay id="NP:OperatingDay:2026-06-02" version="1">
             <CalendarDate>2026-06-02</CalendarDate>
         </OperatingDay>
     </operatingDays>
 </ServiceCalendarFrame>
 
-<TimetableFrame id="ENT:TimetableFrame:1" version="1">
+<TimetableFrame id="NP:TimetableFrame:1" version="1">
     <vehicleJourneys>
-        <ServiceJourney id="ENT:ServiceJourney:1" version="1">
+        <ServiceJourney id="NP:ServiceJourney:1" version="1">
             <!-- ... as before ... -->
         </ServiceJourney>
-        <DatedServiceJourney id="ENT:DatedServiceJourney:1_2026-06-01" version="1">
-            <ServiceJourneyRef ref="ENT:ServiceJourney:1"/>
-            <OperatingDayRef ref="ENT:OperatingDay:2026-06-01"/>
+        <DatedServiceJourney id="NP:DatedServiceJourney:1_2026-06-01" version="1">
+            <ServiceJourneyRef ref="NP:ServiceJourney:1"/>
+            <OperatingDayRef ref="NP:OperatingDay:2026-06-01"/>
         </DatedServiceJourney>
-        <DatedServiceJourney id="ENT:DatedServiceJourney:1_2026-06-02" version="1">
-            <ServiceJourneyRef ref="ENT:ServiceJourney:1"/>
-            <OperatingDayRef ref="ENT:OperatingDay:2026-06-02"/>
+        <DatedServiceJourney id="NP:DatedServiceJourney:1_2026-06-02" version="1">
+            <ServiceJourneyRef ref="NP:ServiceJourney:1"/>
+            <OperatingDayRef ref="NP:OperatingDay:2026-06-02"/>
         </DatedServiceJourney>
     </vehicleJourneys>
 </TimetableFrame>
@@ -255,21 +255,21 @@ In the Nordic Profile, a timetable dataset is split into a **shared data file** 
 Within each file, objects live inside frames in a CompositeFrame:
 
 ```xml
-<CompositeFrame id="ENT:CompositeFrame:1" version="1">
+<CompositeFrame id="NP:CompositeFrame:1" version="1">
     <frames>
-        <ServiceFrame id="ENT:ServiceFrame:1" version="1">
+        <ServiceFrame id="NP:ServiceFrame:1" version="1">
             <lines>…</lines>
             <scheduledStopPoints>…</scheduledStopPoints>
             <journeyPatterns>…</journeyPatterns>
         </ServiceFrame>
 
-        <ServiceCalendarFrame id="ENT:ServiceCalendarFrame:1" version="1">
+        <ServiceCalendarFrame id="NP:ServiceCalendarFrame:1" version="1">
             <operatingDays>
                 <OperatingDay>…</OperatingDay>
             </operatingDays>
         </ServiceCalendarFrame>
 
-        <TimetableFrame id="ENT:TimetableFrame:1" version="1">
+        <TimetableFrame id="NP:TimetableFrame:1" version="1">
             <vehicleJourneys>
                 <ServiceJourney>…</ServiceJourney>
                 <DatedServiceJourney>…</DatedServiceJourney>
