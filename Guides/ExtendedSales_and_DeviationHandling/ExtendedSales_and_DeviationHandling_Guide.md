@@ -80,15 +80,15 @@ When a ticket is sold, it is linked to a specific `DatedServiceJourney.id`. If t
 
 ```text
 Ticket sold (before IM approval):
-  Journey ref = ERP:DatedServiceJourney:100_0730_20260604  version 1
+  Journey ref = NP:DatedServiceJourney:100_0730_20260604  version 1
 
 IM approves yearly timetable → minor time adjustment:
-  Journey ref = ERP:DatedServiceJourney:100_0730_20260604  version 2  (planned, times shifted)
+  Journey ref = NP:DatedServiceJourney:100_0730_20260604  version 2  (planned, times shifted)
   Traveler notified: "Departure time changed from 07:30 to 07:35"
 
 IM reschedules track work → journey replaced:
-  Journey ref = ERP:DatedServiceJourney:100_0730_20260604  version 3  (replaced)
-  Replacement = ERP:DatedServiceJourney:BUS_100_0745_20260604  version 1
+  Journey ref = NP:DatedServiceJourney:100_0730_20260604  version 3  (replaced)
+  Replacement = NP:DatedServiceJourney:BUS_100_0745_20260604  version 1
   Traveler notified: "Your train on June 4 has been replaced by a bus departing at 07:45"
 ```
 
@@ -148,10 +148,10 @@ A planned journey does not operate on a specific date. Typical reasons: infrastr
 
 ```xml
 <!-- Original planned journey — now cancelled on 2026-06-04 -->
-<DatedServiceJourney id="ERP:DatedServiceJourney:100_0730_20260604" version="2">
+<DatedServiceJourney id="NP:DatedServiceJourney:100_0730_20260604" version="2">
   <ServiceAlteration>cancellation</ServiceAlteration>
-  <ServiceJourneyRef ref="ERP:ServiceJourney:100_0730"/>
-  <OperatingDayRef ref="ERP:OperatingDay:2026-06-04"/>
+  <ServiceJourneyRef ref="NP:ServiceJourney:100_0730"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-04"/>
 </DatedServiceJourney>
 ```
 
@@ -166,19 +166,19 @@ A planned journey is replaced by a different service — for example, a replacem
 
 ```xml
 <!-- Step 1: Mark the original journey as replaced -->
-<DatedServiceJourney id="ERP:DatedServiceJourney:100_0730_20260604" version="2">
+<DatedServiceJourney id="NP:DatedServiceJourney:100_0730_20260604" version="2">
   <ServiceAlteration>replaced</ServiceAlteration>
-  <ServiceJourneyRef ref="ERP:ServiceJourney:100_0730"/>
-  <OperatingDayRef ref="ERP:OperatingDay:2026-06-04"/>
+  <ServiceJourneyRef ref="NP:ServiceJourney:100_0730"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-04"/>
 </DatedServiceJourney>
 
 <!-- Step 2: Create the replacing journey referencing the original -->
-<DatedServiceJourney id="ERP:DatedServiceJourney:BUS_100_0745_20260604" version="1">
-  <ServiceJourneyRef ref="ERP:ServiceJourney:BUS_100_0745"/>
+<DatedServiceJourney id="NP:DatedServiceJourney:BUS_100_0745_20260604" version="1">
+  <ServiceJourneyRef ref="NP:ServiceJourney:BUS_100_0745"/>
   <replacedJourneys>
-    <DatedVehicleJourneyRef ref="ERP:DatedServiceJourney:100_0730_20260604"/>
+    <DatedVehicleJourneyRef ref="NP:DatedServiceJourney:100_0730_20260604"/>
   </replacedJourneys>
-  <OperatingDayRef ref="ERP:OperatingDay:2026-06-04"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-04"/>
 </DatedServiceJourney>
 ```
 
@@ -194,10 +194,10 @@ An additional journey is added to handle increased demand — for example, a con
 
 ```xml
 <!-- Extra journey on top of the planned one -->
-<DatedServiceJourney id="ERP:DatedServiceJourney:100_0730_EXTRA_20260605" version="1">
+<DatedServiceJourney id="NP:DatedServiceJourney:100_0730_EXTRA_20260605" version="1">
   <ServiceAlteration>extraJourney</ServiceAlteration>
-  <ServiceJourneyRef ref="ERP:ServiceJourney:100_0730"/>
-  <OperatingDayRef ref="ERP:OperatingDay:2026-06-05"/>
+  <ServiceJourneyRef ref="NP:ServiceJourney:100_0730"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-05"/>
 </DatedServiceJourney>
 ```
 
@@ -212,19 +212,19 @@ A train operates but with reduced material (fewer carriages), so supplementary b
 
 ```xml
 <!-- Original train: runs with reduced capacity, NO ServiceAlteration -->
-<DatedServiceJourney id="ERP:DatedServiceJourney:100_0730_20260604" version="1">
-  <ServiceJourneyRef ref="ERP:ServiceJourney:100_0730"/>
-  <OperatingDayRef ref="ERP:OperatingDay:2026-06-04"/>
+<DatedServiceJourney id="NP:DatedServiceJourney:100_0730_20260604" version="1">
+  <ServiceJourneyRef ref="NP:ServiceJourney:100_0730"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-04"/>
 </DatedServiceJourney>
 
 <!-- Supplementary bus: extraJourney + replacedJourneys linking to the original -->
-<DatedServiceJourney id="ERP:DatedServiceJourney:BUS_100_0730_SUPPL_20260604" version="1">
+<DatedServiceJourney id="NP:DatedServiceJourney:BUS_100_0730_SUPPL_20260604" version="1">
   <ServiceAlteration>extraJourney</ServiceAlteration>
-  <ServiceJourneyRef ref="ERP:ServiceJourney:BUS_100_0730"/>
+  <ServiceJourneyRef ref="NP:ServiceJourney:BUS_100_0730"/>
   <replacedJourneys>
-    <DatedVehicleJourneyRef ref="ERP:DatedServiceJourney:100_0730_20260604"/>
+    <DatedVehicleJourneyRef ref="NP:DatedServiceJourney:100_0730_20260604"/>
   </replacedJourneys>
-  <OperatingDayRef ref="ERP:OperatingDay:2026-06-04"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-04"/>
 </DatedServiceJourney>
 ```
 
@@ -242,11 +242,11 @@ A train operates but with reduced material (fewer carriages), so supplementary b
 When vehicle continuity matters (e.g., a train set must be tracked across multiple trips), use BlockRef:
 
 ```xml
-<DatedServiceJourney id="ERP:DatedServiceJourney:100_0730_20260605" version="1">
+<DatedServiceJourney id="NP:DatedServiceJourney:100_0730_20260605" version="1">
   <ServiceAlteration>planned</ServiceAlteration>
-  <BlockRef ref="ERP:Block:TrainSet_42"/>
-  <ServiceJourneyRef ref="ERP:ServiceJourney:100_0730"/>
-  <OperatingDayRef ref="ERP:OperatingDay:2026-06-05"/>
+  <BlockRef ref="NP:Block:TrainSet_42"/>
+  <ServiceJourneyRef ref="NP:ServiceJourney:100_0730"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-05"/>
 </DatedServiceJourney>
 ```
 
