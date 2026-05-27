@@ -176,9 +176,9 @@ Every XML example must:
 <?xml version="1.0" encoding="UTF-8"?>
 <PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="2.0">
   <PublicationTimestamp>2026-01-01T00:00:00Z</PublicationTimestamp>
-  <ParticipantRef>EuPro</ParticipantRef>
+  <ParticipantRef>NP</ParticipantRef>
   <dataObjects>
-    <ResourceFrame id="ERP:ResourceFrame:1" version="1">
+    <ResourceFrame id="NP:ResourceFrame:1" version="1">
       <!-- content here -->
     </ResourceFrame>
   </dataObjects>

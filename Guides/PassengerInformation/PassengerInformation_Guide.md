@@ -44,16 +44,16 @@ JourneyPattern: Bus 100 Drammen → Asker → Oslo S
 
 ```xml
 <!-- Define the display text once -->
-<DestinationDisplay id="ERP:DestinationDisplay:OsloS" version="1">
+<DestinationDisplay id="NP:DestinationDisplay:OsloS" version="1">
   <FrontText>Oslo S</FrontText>
 </DestinationDisplay>
 
 <!-- Reference it from the departure stop -->
-<StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:1" version="1" order="1">
-  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Drammen"/>
+<StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:1" version="1" order="1">
+  <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Drammen"/>
   <ForAlighting>false</ForAlighting>
   <ForBoarding>true</ForBoarding>
-  <DestinationDisplayRef ref="ERP:DestinationDisplay:OsloS"/>
+  <DestinationDisplayRef ref="NP:DestinationDisplay:OsloS"/>
 </StopPointInJourneyPattern>
 ```
 
@@ -88,14 +88,14 @@ ServiceFrame               TimetableFrame
 
 ```xml
 <!-- Define notice centrally in ServiceFrame -->
-<Notice id="ERP:Notice:BookingRequired" version="1">
+<Notice id="NP:Notice:BookingRequired" version="1">
   <Text>Bestillingstur. Ring 30 min. før avgang.</Text>
 </Notice>
 
 <!-- Assign it to a specific journey in TimetableFrame -->
-<NoticeAssignment id="ERP:NoticeAssignment:1" version="1" order="1">
-  <NoticeRef ref="ERP:Notice:BookingRequired"/>
-  <NoticedObjectRef ref="ERP:ServiceJourney:200_0900"/>
+<NoticeAssignment id="NP:NoticeAssignment:1" version="1" order="1">
+  <NoticeRef ref="NP:Notice:BookingRequired"/>
+  <NoticedObjectRef ref="NP:ServiceJourney:200_0900"/>
 </NoticeAssignment>
 ```
 
@@ -116,7 +116,7 @@ ServiceFrame               TimetableFrame
 For services that don't follow fixed routes or timetables (dial-a-ride, on-demand shuttles), **FlexibleServiceProperties** defines the booking rules:
 
 ```xml
-<FlexibleServiceProperties id="ERP:FlexibleServiceProperties:DialARide" version="1">
+<FlexibleServiceProperties id="NP:FlexibleServiceProperties:DialARide" version="1">
   <BookingMethods>callOffice</BookingMethods>
   <BookingAccess>public</BookingAccess>
   <BookWhen>untilPreviousDay</BookWhen>

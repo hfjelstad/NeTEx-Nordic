@@ -3,12 +3,12 @@
                      xmlns:gml="http://www.opengis.net/gml/3.2"
                      version="1.0">
   <PublicationTimestamp>2026-02-15T11:00:00Z</PublicationTimestamp>
-  <ParticipantRef>EuPro</ParticipantRef>
+  <ParticipantRef>NP</ParticipantRef>
   <dataObjects>
-    <SiteFrame id="ERP:SiteFrame:StopPlaceExample" version="1">
+    <SiteFrame id="NP:SiteFrame:StopPlaceExample" version="1">
       <stopPlaces>
         <!-- Monomodal StopPlace with Quays -->
-        <StopPlace id="ERP:StopPlace:1001" version="1">
+        <StopPlace id="NP:StopPlace:1001" version="1">
           <Name>Oslo gate 1</Name>
           <Centroid>
             <Location>
@@ -17,11 +17,11 @@
           </Centroid>
           <TransportMode>bus</TransportMode>
           <tariffZones>
-            <TariffZoneRef ref="ERP:TariffZone:R1"/>
+            <TariffZoneRef ref="NP:TariffZone:R1"/>
           </tariffZones>
           <StopPlaceType>onstreetBus</StopPlaceType>
           <quays>
-            <Quay id="ERP:Quay:1001-1" version="1">
+            <Quay id="NP:Quay:1001-1" version="1">
               <Name>Retning sentrum</Name>
               <Centroid>
                 <Location>
@@ -29,7 +29,7 @@
                 </Location>
               </Centroid>
             </Quay>
-            <Quay id="ERP:Quay:1001-2" version="1">
+            <Quay id="NP:Quay:1001-2" version="1">
               <Name>Retning vest</Name>
               <Centroid>
                 <Location>
@@ -41,18 +41,18 @@
         </StopPlace>
 
         <!-- Multimodal parent without Quays -->
-        <StopPlace id="ERP:StopPlace:3000" version="1">
+        <StopPlace id="NP:StopPlace:3000" version="1">
           <Name>Oslo knutepunkt</Name>
         </StopPlace>
 
         <!-- Child monomodal pointing to parent -->
-        <StopPlace id="ERP:StopPlace:3001" version="1">
+        <StopPlace id="NP:StopPlace:3001" version="1">
           <Name>Oslo knutepunkt (buss)</Name>
-          <ParentSiteRef ref="ERP:StopPlace:3000"/>
+          <ParentSiteRef ref="NP:StopPlace:3000"/>
           <TransportMode>bus</TransportMode>
           <StopPlaceType>busStation</StopPlaceType>
           <quays>
-            <Quay id="ERP:Quay:3001-A" version="1">
+            <Quay id="NP:Quay:3001-A" version="1">
               <Name>Terminal A</Name>
             </Quay>
           </quays>

@@ -56,7 +56,7 @@ Quay
 - **StopPlaceRef is mandatory** with cardinality 1..1; every Quay must reference a valid StopPlace.
 - **Name is mandatory** – All Quays must have a passenger-facing Name element.
 - **Centroid is mandatory** with both Longitude and Latitude required as WGS84 decimal coordinates; values should have 4+ decimal places (e.g., 59.9127, 10.7461) for sufficient precision.
-- **@id and @version are mandatory** – Follow codespace convention (e.g., `ERP:Quay:1001`); version typically "1" unless updated.
+- **@id and @version are mandatory** – Follow codespace convention (e.g., `NP:Quay:1001`); version typically "1" unless updated.
 - **PublicCode format** – If provided, should be a short alphanumeric string (typically 1–3 characters) matching signage conventions.
 
 ### 5c. Common Pitfalls

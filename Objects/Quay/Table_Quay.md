@@ -28,7 +28,7 @@ Quay
 
 | Element | Type | MIN | NP | SLO | Description | Path |
 |---------|------|-----|-----|-----|-------------|------|
-| @id | ID | 1..1 | 1..1 | 1..1 | Unique identifier for the Quay (e.g., ERP:Quay:1001) | Quay/@id |
+| @id | ID | 1..1 | 1..1 | 1..1 | Unique identifier for the Quay (e.g., NP:Quay:1001) | Quay/@id |
 | @version | String | 1..1 | 1..1 | 1..1 | Version label | Quay/@version |
 | Name | String | 1..1 | 1..1 | 1..1 | Passenger-facing quay name | Quay/Name |
 | Description | String | 0..1 |  |  | Optional free-text description | Quay/Description |

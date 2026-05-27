@@ -70,10 +70,10 @@ The simplest approach: one object directly references another.
 
 ```xml
 <!-- Vehicle operations domain directly references the traveler domain -->
-<Block id="ERP:Block:TB_601" version="1">
+<Block id="NP:Block:TB_601" version="1">
   <Name>Block for IC 601</Name>
   <journeys>
-    <VehicleJourneyRef ref="ERP:ServiceJourney:SJ_001"/>  <!-- direct coupling -->
+    <VehicleJourneyRef ref="NP:ServiceJourney:SJ_001"/>  <!-- direct coupling -->
   </journeys>
 </Block>
 ```
@@ -103,10 +103,10 @@ An intermediate object (link) connects A and B, but the link is managed by one d
 ```xml
 <!-- DatedServiceJourney lives in TimetableFrame (traveler domain) -->
 <!-- It links to the vehicle domain via BlockRef -->
-<DatedServiceJourney id="ERP:DatedServiceJourney:DSJ_001" version="1">
-  <BlockRef ref="ERP:Block:TB_601"/>                        <!-- vehicle domain -->
-  <ServiceJourneyRef ref="ERP:ServiceJourney:SJ_001"/>     <!-- traveler domain -->
-  <OperatingDayRef ref="ERP:OperatingDay:2026-03-12"/>
+<DatedServiceJourney id="NP:DatedServiceJourney:DSJ_001" version="1">
+  <BlockRef ref="NP:Block:TB_601"/>                        <!-- vehicle domain -->
+  <ServiceJourneyRef ref="NP:ServiceJourney:SJ_001"/>     <!-- traveler domain -->
+  <OperatingDayRef ref="NP:OperatingDay:2026-03-12"/>
 </DatedServiceJourney>
 ```
 
@@ -135,9 +135,9 @@ The link object is fully independent — owned by neither A's nor B's system. On
 ```xml
 <!-- Independent link connecting traveler and vehicle domains -->
 <!-- Neither ServiceJourney nor Block contains this reference -->
-<ServiceBlockAssociation id="ERP:ServiceBlockAssociation:SJ1_TB601" version="1">
-  <ServiceJourneyRef ref="ERP:ServiceJourney:SJ_001"/>     <!-- traveler domain -->
-  <BlockRef ref="ERP:Block:TB_601"/>                        <!-- vehicle domain -->
+<ServiceBlockAssociation id="NP:ServiceBlockAssociation:SJ1_TB601" version="1">
+  <ServiceJourneyRef ref="NP:ServiceJourney:SJ_001"/>     <!-- traveler domain -->
+  <BlockRef ref="NP:Block:TB_601"/>                        <!-- vehicle domain -->
   <ValidBetween>
     <FromDate>2026-03-01T00:00:00Z</FromDate>
     <ToDate>2026-12-14T00:00:00Z</ToDate>
@@ -195,12 +195,12 @@ Each domain publishes its data in its own frame within a [CompositeFrame](../../
 The vehicle operations domain uses **Block** (or **TrainBlock** for rail) to represent the planned assignment of vehicles to journeys:
 
 ```xml
-<VehicleScheduleFrame id="ERP:VehicleScheduleFrame:1" version="1">
+<VehicleScheduleFrame id="NP:VehicleScheduleFrame:1" version="1">
   <blocks>
-    <Block id="ERP:Block:TB_601" version="1">
+    <Block id="NP:Block:TB_601" version="1">
       <Name>Block for IC 601</Name>
       <journeys>
-        <VehicleJourneyRef ref="ERP:ServiceJourney:SJ_001"/>
+        <VehicleJourneyRef ref="NP:ServiceJourney:SJ_001"/>
       </journeys>
     </Block>
   </blocks>
@@ -212,10 +212,10 @@ The vehicle operations domain uses **Block** (or **TrainBlock** for rail) to rep
 Rail operations sometimes split a journey into multiple **TrainParts** even when the rolling stock composition is identical — for reasons like crew changes, regulatory segments, or different train numbers per section.
 
 ```xml
-<TrainBlock id="ERP:TrainBlock:GA_601" version="1">
+<TrainBlock id="NP:TrainBlock:GA_601" version="1">
   <trainParts>
-    <TrainPartRef ref="ERP:TrainPart:GA_601_1"/>  <!-- Oslo – Kongsberg -->
-    <TrainPartRef ref="ERP:TrainPart:GA_601_2"/>  <!-- Kongsberg – Kristiansand -->
+    <TrainPartRef ref="NP:TrainPart:GA_601_1"/>  <!-- Oslo – Kongsberg -->
+    <TrainPartRef ref="NP:TrainPart:GA_601_2"/>  <!-- Kongsberg – Kristiansand -->
   </trainParts>
 </TrainBlock>
 ```

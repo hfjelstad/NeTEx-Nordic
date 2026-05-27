@@ -15,17 +15,17 @@
 -->
 <PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="2.0">
   <PublicationTimestamp>2026-03-18T00:00:00Z</PublicationTimestamp>
-  <ParticipantRef>EuPro</ParticipantRef>
+  <ParticipantRef>NP</ParticipantRef>
   <dataObjects>
-    <CompositeFrame id="ERP:CompositeFrame:Stops:1" version="1">
+    <CompositeFrame id="NP:CompositeFrame:Stops:1" version="1">
       <codespaces>
-        <Codespace id="erp">
-          <Xmlns>ERP</Xmlns>
-          <XmlnsUrl>http://www.europeanprofile.eu/ERP</XmlnsUrl>
+        <Codespace id="np">
+          <Xmlns>NP</Xmlns>
+          <XmlnsUrl>http://www.nordicprofile.eu/ns/np</XmlnsUrl>
         </Codespace>
       </codespaces>
       <FrameDefaults>
-        <DefaultCodespaceRef ref="erp"/>
+        <DefaultCodespaceRef ref="np"/>
       </FrameDefaults>
       <frames>
 
@@ -33,9 +33,9 @@
              SITE FRAME
              Physical infrastructure: places, stops, quays
              ============================================================ -->
-        <SiteFrame id="ERP:SiteFrame:Stops:1" version="1">
+        <SiteFrame id="NP:SiteFrame:Stops:1" version="1">
           <topographicPlaces>
-            <TopographicPlace id="ERP:TopographicPlace:Oslo" version="1">
+            <TopographicPlace id="NP:TopographicPlace:Oslo" version="1">
               <Descriptor>
                 <Name>Oslo</Name>
               </Descriptor>
@@ -49,7 +49,7 @@
               MULTIMODAL PARENT: Oslo S
               No TransportMode, no Quays — just a grouping container.
             -->
-            <StopPlace id="ERP:StopPlace:OsloS_Multi" version="1">
+            <StopPlace id="NP:StopPlace:OsloS_Multi" version="1">
               <Name>Oslo S</Name>
               <Centroid>
                 <Location>
@@ -57,9 +57,9 @@
                   <Latitude>59.910890</Latitude>
                 </Location>
               </Centroid>
-              <TopographicPlaceRef ref="ERP:TopographicPlace:Oslo"/>
+              <TopographicPlaceRef ref="NP:TopographicPlace:Oslo"/>
               <tariffZones>
-                <TariffZoneRef ref="ERP:TariffZone:Zone1"/>
+                <TariffZoneRef ref="NP:TariffZone:Zone1"/>
               </tariffZones>
             </StopPlace>
 
@@ -67,7 +67,7 @@
               MONOMODAL CHILD: Oslo S (rail)
               Has TransportMode, has Quays, references the multimodal parent.
             -->
-            <StopPlace id="ERP:StopPlace:OsloS_Rail" version="1">
+            <StopPlace id="NP:StopPlace:OsloS_Rail" version="1">
               <Name>Oslo S</Name>
               <Centroid>
                 <Location>
@@ -75,7 +75,7 @@
                   <Latitude>59.910950</Latitude>
                 </Location>
               </Centroid>
-              <AccessibilityAssessment id="ERP:AccessibilityAssessment:OsloS_Rail" version="1">
+              <AccessibilityAssessment id="NP:AccessibilityAssessment:OsloS_Rail" version="1">
                 <MobilityImpairedAccess>true</MobilityImpairedAccess>
                 <limitations>
                   <AccessibilityLimitation>
@@ -84,12 +84,12 @@
                   </AccessibilityLimitation>
                 </limitations>
               </AccessibilityAssessment>
-              <TopographicPlaceRef ref="ERP:TopographicPlace:Oslo"/>
-              <ParentSiteRef ref="ERP:StopPlace:OsloS_Multi"/>
+              <TopographicPlaceRef ref="NP:TopographicPlace:Oslo"/>
+              <ParentSiteRef ref="NP:StopPlace:OsloS_Multi"/>
               <TransportMode>rail</TransportMode>
               <StopPlaceType>railStation</StopPlaceType>
               <quays>
-                <Quay id="ERP:Quay:OsloS_Spor1" version="1">
+                <Quay id="NP:Quay:OsloS_Spor1" version="1">
                   <Name>Spor 1</Name>
                   <Centroid>
                     <Location>
@@ -99,7 +99,7 @@
                   </Centroid>
                   <PublicCode>1</PublicCode>
                 </Quay>
-                <Quay id="ERP:Quay:OsloS_Spor2" version="1">
+                <Quay id="NP:Quay:OsloS_Spor2" version="1">
                   <Name>Spor 2</Name>
                   <Centroid>
                     <Location>
@@ -115,7 +115,7 @@
             <!--
               MONOMODAL CHILD: Oslo S (bus)
             -->
-            <StopPlace id="ERP:StopPlace:OsloS_Bus" version="1">
+            <StopPlace id="NP:StopPlace:OsloS_Bus" version="1">
               <Name>Oslo S bussterminal</Name>
               <Centroid>
                 <Location>
@@ -123,12 +123,12 @@
                   <Latitude>59.911200</Latitude>
                 </Location>
               </Centroid>
-              <TopographicPlaceRef ref="ERP:TopographicPlace:Oslo"/>
-              <ParentSiteRef ref="ERP:StopPlace:OsloS_Multi"/>
+              <TopographicPlaceRef ref="NP:TopographicPlace:Oslo"/>
+              <ParentSiteRef ref="NP:StopPlace:OsloS_Multi"/>
               <TransportMode>bus</TransportMode>
               <StopPlaceType>busStation</StopPlaceType>
               <quays>
-                <Quay id="ERP:Quay:OsloS_BusA" version="1">
+                <Quay id="NP:Quay:OsloS_BusA" version="1">
                   <Name>Platform A</Name>
                   <Centroid>
                     <Location>
@@ -143,7 +143,7 @@
           </stopPlaces>
 
           <tariffZones>
-            <TariffZone id="ERP:TariffZone:Zone1" version="1">
+            <TariffZone id="NP:TariffZone:Zone1" version="1">
               <Name>Zone 1 - Oslo sentrum</Name>
             </TariffZone>
           </tariffZones>
@@ -153,30 +153,30 @@
              SERVICE FRAME
              Logical stops and their assignment to physical platforms
              ============================================================ -->
-        <ServiceFrame id="ERP:ServiceFrame:Stops:1" version="1">
+        <ServiceFrame id="NP:ServiceFrame:Stops:1" version="1">
           <scheduledStopPoints>
             <!-- Logical stops used by timetable -->
-            <ScheduledStopPoint id="ERP:ScheduledStopPoint:OsloS_Rail" version="1">
+            <ScheduledStopPoint id="NP:ScheduledStopPoint:OsloS_Rail" version="1">
               <Name>Oslo S</Name>
             </ScheduledStopPoint>
-            <ScheduledStopPoint id="ERP:ScheduledStopPoint:OsloS_Bus" version="1">
+            <ScheduledStopPoint id="NP:ScheduledStopPoint:OsloS_Bus" version="1">
               <Name>Oslo S bussterminal</Name>
             </ScheduledStopPoint>
           </scheduledStopPoints>
 
           <stopAssignments>
             <!-- Bridge: rail logical stop -> Spor 1 -->
-            <PassengerStopAssignment id="ERP:PassengerStopAssignment:OsloS_Rail" version="1" order="1">
-              <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS_Rail"/>
-              <StopPlaceRef ref="ERP:StopPlace:OsloS_Rail"/>
-              <QuayRef ref="ERP:Quay:OsloS_Spor1"/>
+            <PassengerStopAssignment id="NP:PassengerStopAssignment:OsloS_Rail" version="1" order="1">
+              <ScheduledStopPointRef ref="NP:ScheduledStopPoint:OsloS_Rail"/>
+              <StopPlaceRef ref="NP:StopPlace:OsloS_Rail"/>
+              <QuayRef ref="NP:Quay:OsloS_Spor1"/>
             </PassengerStopAssignment>
 
             <!-- Bridge: bus logical stop -> Platform A -->
-            <PassengerStopAssignment id="ERP:PassengerStopAssignment:OsloS_Bus" version="1" order="2">
-              <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS_Bus"/>
-              <StopPlaceRef ref="ERP:StopPlace:OsloS_Bus"/>
-              <QuayRef ref="ERP:Quay:OsloS_BusA"/>
+            <PassengerStopAssignment id="NP:PassengerStopAssignment:OsloS_Bus" version="1" order="2">
+              <ScheduledStopPointRef ref="NP:ScheduledStopPoint:OsloS_Bus"/>
+              <StopPlaceRef ref="NP:StopPlace:OsloS_Bus"/>
+              <QuayRef ref="NP:Quay:OsloS_BusA"/>
             </PassengerStopAssignment>
           </stopAssignments>
         </ServiceFrame>

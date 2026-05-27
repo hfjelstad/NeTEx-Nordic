@@ -14,17 +14,17 @@
 -->
 <PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="2.0">
   <PublicationTimestamp>2026-03-18T00:00:00Z</PublicationTimestamp>
-  <ParticipantRef>EuPro</ParticipantRef>
+  <ParticipantRef>NP</ParticipantRef>
   <dataObjects>
-    <CompositeFrame id="ERP:CompositeFrame:Interchange:1" version="1">
+    <CompositeFrame id="NP:CompositeFrame:Interchange:1" version="1">
       <codespaces>
-        <Codespace id="erp">
-          <Xmlns>ERP</Xmlns>
-          <XmlnsUrl>http://www.europeanprofile.eu/ERP</XmlnsUrl>
+        <Codespace id="np">
+          <Xmlns>NP</Xmlns>
+          <XmlnsUrl>http://www.nordicprofile.eu/ns/np</XmlnsUrl>
         </Codespace>
       </codespaces>
       <FrameDefaults>
-        <DefaultCodespaceRef ref="erp"/>
+        <DefaultCodespaceRef ref="np"/>
       </FrameDefaults>
       <frames>
 
@@ -32,15 +32,15 @@
              SERVICE FRAME
              Stop points, routes, and journey patterns
              ============================================================ -->
-        <ServiceFrame id="ERP:ServiceFrame:Interchange:1" version="1">
+        <ServiceFrame id="NP:ServiceFrame:Interchange:1" version="1">
           <scheduledStopPoints>
-            <ScheduledStopPoint id="ERP:ScheduledStopPoint:Drammen" version="1">
+            <ScheduledStopPoint id="NP:ScheduledStopPoint:Drammen" version="1">
               <Name>Drammen stasjon</Name>
             </ScheduledStopPoint>
-            <ScheduledStopPoint id="ERP:ScheduledStopPoint:Asker" version="1">
+            <ScheduledStopPoint id="NP:ScheduledStopPoint:Asker" version="1">
               <Name>Asker stasjon</Name>
             </ScheduledStopPoint>
-            <ScheduledStopPoint id="ERP:ScheduledStopPoint:OsloS" version="1">
+            <ScheduledStopPoint id="NP:ScheduledStopPoint:OsloS" version="1">
               <Name>Oslo S</Name>
             </ScheduledStopPoint>
           </scheduledStopPoints>
@@ -51,15 +51,15 @@
               Note: Asker is interchangeOnly — the bus stops there
               solely to feed passengers to the train.
             -->
-            <JourneyPattern id="ERP:JourneyPattern:Bus100" version="1">
+            <JourneyPattern id="NP:JourneyPattern:Bus100" version="1">
               <pointsInSequence>
-                <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:Bus100_1" version="1" order="1">
-                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Drammen"/>
+                <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:Bus100_1" version="1" order="1">
+                  <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Drammen"/>
                   <ForAlighting>false</ForAlighting>
                   <ForBoarding>true</ForBoarding>
                 </StopPointInJourneyPattern>
-                <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:Bus100_2" version="1" order="2">
-                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Asker"/>
+                <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:Bus100_2" version="1" order="2">
+                  <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Asker"/>
                   <ForAlighting>true</ForAlighting>
                   <ForBoarding>false</ForBoarding>
                   <!-- This stop exists only for the transfer to RE 10 -->
@@ -69,15 +69,15 @@
             </JourneyPattern>
 
             <!-- RE 10: Asker -> Oslo S -->
-            <JourneyPattern id="ERP:JourneyPattern:RE10" version="1">
+            <JourneyPattern id="NP:JourneyPattern:RE10" version="1">
               <pointsInSequence>
-                <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:RE10_1" version="1" order="1">
-                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Asker"/>
+                <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:RE10_1" version="1" order="1">
+                  <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Asker"/>
                   <ForAlighting>false</ForAlighting>
                   <ForBoarding>true</ForBoarding>
                 </StopPointInJourneyPattern>
-                <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:RE10_2" version="1" order="2">
-                  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS"/>
+                <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:RE10_2" version="1" order="2">
+                  <ScheduledStopPointRef ref="NP:ScheduledStopPoint:OsloS"/>
                   <ForAlighting>true</ForAlighting>
                   <ForBoarding>false</ForBoarding>
                 </StopPointInJourneyPattern>
@@ -90,22 +90,22 @@
              TIMETABLE FRAME
              ServiceJourneys and their interchanges
              ============================================================ -->
-        <TimetableFrame id="ERP:TimetableFrame:Interchange:1" version="1">
+        <TimetableFrame id="NP:TimetableFrame:Interchange:1" version="1">
           <vehicleJourneys>
             <!-- Feeder: Bus 100 arriving at Asker -->
-            <ServiceJourney id="ERP:ServiceJourney:Bus100_0730" version="1">
+            <ServiceJourney id="NP:ServiceJourney:Bus100_0730" version="1">
               <Name>Bus 100 Drammen 07:30</Name>
-              <JourneyPatternRef ref="ERP:JourneyPattern:Bus100"/>
+              <JourneyPatternRef ref="NP:JourneyPattern:Bus100"/>
             </ServiceJourney>
 
             <!-- Distributor: RE 10 departing from Asker -->
-            <ServiceJourney id="ERP:ServiceJourney:RE10_0800" version="1">
+            <ServiceJourney id="NP:ServiceJourney:RE10_0800" version="1">
               <Name>RE 10 Asker 08:00</Name>
-              <JourneyPatternRef ref="ERP:JourneyPattern:RE10"/>
+              <JourneyPatternRef ref="NP:JourneyPattern:RE10"/>
             </ServiceJourney>
 
             <!-- Another journey from Drammen (for non-guaranteed interchange) -->
-            <ServiceJourney id="ERP:ServiceJourney:Bus200_0745" version="1">
+            <ServiceJourney id="NP:ServiceJourney:Bus200_0745" version="1">
               <Name>Bus 200 Drammen 07:45</Name>
             </ServiceJourney>
           </vehicleJourneys>
@@ -116,27 +116,27 @@
               The train will wait up to 10 minutes for the bus.
               Passengers need at least 3 minutes to transfer.
             -->
-            <ServiceJourneyInterchange id="ERP:ServiceJourneyInterchange:Bus100_to_RE10" version="1">
+            <ServiceJourneyInterchange id="NP:ServiceJourneyInterchange:Bus100_to_RE10" version="1">
               <Guaranteed>true</Guaranteed>
               <MaximumWaitTime>PT10M</MaximumWaitTime>
               <MinimumTransferTime>PT3M</MinimumTransferTime>
-              <FromPointRef ref="ERP:ScheduledStopPoint:Asker"/>
-              <ToPointRef ref="ERP:ScheduledStopPoint:Asker"/>
-              <FromJourneyRef ref="ERP:ServiceJourney:Bus100_0730"/>
-              <ToJourneyRef ref="ERP:ServiceJourney:RE10_0800"/>
+              <FromPointRef ref="NP:ScheduledStopPoint:Asker"/>
+              <ToPointRef ref="NP:ScheduledStopPoint:Asker"/>
+              <FromJourneyRef ref="NP:ServiceJourney:Bus100_0730"/>
+              <ToJourneyRef ref="NP:ServiceJourney:RE10_0800"/>
             </ServiceJourneyInterchange>
 
             <!--
               NON-GUARANTEED INTERCHANGE: Bus 100 -> Bus 200 at Drammen
               A possible transfer, but the local bus will not wait.
             -->
-            <ServiceJourneyInterchange id="ERP:ServiceJourneyInterchange:Bus100_to_Bus200" version="1">
+            <ServiceJourneyInterchange id="NP:ServiceJourneyInterchange:Bus100_to_Bus200" version="1">
               <Guaranteed>false</Guaranteed>
               <MinimumTransferTime>PT5M</MinimumTransferTime>
-              <FromPointRef ref="ERP:ScheduledStopPoint:Drammen"/>
-              <ToPointRef ref="ERP:ScheduledStopPoint:Drammen"/>
-              <FromJourneyRef ref="ERP:ServiceJourney:Bus100_0730"/>
-              <ToJourneyRef ref="ERP:ServiceJourney:Bus200_0745"/>
+              <FromPointRef ref="NP:ScheduledStopPoint:Drammen"/>
+              <ToPointRef ref="NP:ScheduledStopPoint:Drammen"/>
+              <FromJourneyRef ref="NP:ServiceJourney:Bus100_0730"/>
+              <ToJourneyRef ref="NP:ServiceJourney:Bus200_0745"/>
             </ServiceJourneyInterchange>
           </journeyInterchanges>
         </TimetableFrame>

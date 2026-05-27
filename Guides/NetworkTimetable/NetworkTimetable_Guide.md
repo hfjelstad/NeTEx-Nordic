@@ -318,7 +318,7 @@ All IDs follow a three-part pattern ensuring global uniqueness:
 
 | Codespace | Description |
 |-----------|-------------|
-| `ERP` | European Recommended Profile examples |
+| `NP` | Nordic Profile (documentation examples) |
 | `NP` | Nordic Profile |
 | `NSR` | National Stop Place Registry (external infrastructure) |
 
@@ -326,9 +326,9 @@ Each codespace is declared in the `codespaces` element of the `CompositeFrame`:
 
 ```xml
 <codespaces>
-  <Codespace id="erp">
-    <Xmlns>ERP</Xmlns>
-    <XmlnsUrl>http://www.europeanprofile.eu/ns/erp</XmlnsUrl>
+  <Codespace id="np">
+    <Xmlns>NP</Xmlns>
+    <XmlnsUrl>http://www.nordicprofile.eu/ns/np</XmlnsUrl>
   </Codespace>
 </codespaces>
 ```

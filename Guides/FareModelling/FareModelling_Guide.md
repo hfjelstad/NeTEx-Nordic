@@ -57,9 +57,9 @@ Let's model the most common fare: a **single ticket for Zone 1**.
 ### Step 1: Define the Zone (SiteFrame)
 
 ```xml
-<SiteFrame id="ERP:SiteFrame:1" version="1">
+<SiteFrame id="NP:SiteFrame:1" version="1">
   <tariffZones>
-    <TariffZone id="ERP:TariffZone:Zone1" version="1">
+    <TariffZone id="NP:TariffZone:Zone1" version="1">
       <Name>Zone 1 - Oslo sentrum</Name>
     </TariffZone>
   </tariffZones>
@@ -69,43 +69,43 @@ Let's model the most common fare: a **single ticket for Zone 1**.
 ### Step 2: Define the Fare Structure (FareFrame)
 
 ```xml
-<FareFrame id="ERP:FareFrame:1" version="1">
+<FareFrame id="NP:FareFrame:1" version="1">
   <!-- What pricing rules apply -->
   <tariffs>
-    <Tariff id="ERP:Tariff:ZoneTariff" version="1">
+    <Tariff id="NP:Tariff:ZoneTariff" version="1">
       <Name>Standard zone tariff</Name>
     </Tariff>
   </tariffs>
 
   <!-- What the passenger can travel on -->
   <validableElements>
-    <ValidableElement id="ERP:ValidableElement:SingleZone1" version="1">
+    <ValidableElement id="NP:ValidableElement:SingleZone1" version="1">
       <Name>Single journey in Zone 1</Name>
     </ValidableElement>
   </validableElements>
 
   <!-- The product: combines access right + tariff -->
   <fareProducts>
-    <PreassignedFareProduct id="ERP:PreassignedFareProduct:SingleTicket" version="1">
+    <PreassignedFareProduct id="NP:PreassignedFareProduct:SingleTicket" version="1">
       <Name>Single ticket</Name>
       <accessRightsInProduct>
-        <AccessRightInProduct id="ERP:AccessRightInProduct:1" version="1">
-          <ValidableElementRef ref="ERP:ValidableElement:SingleZone1" version="1"/>
+        <AccessRightInProduct id="NP:AccessRightInProduct:1" version="1">
+          <ValidableElementRef ref="NP:ValidableElement:SingleZone1" version="1"/>
         </AccessRightInProduct>
       </accessRightsInProduct>
       <tariffs>
-        <TariffRef ref="ERP:Tariff:ZoneTariff" version="1"/>
+        <TariffRef ref="NP:Tariff:ZoneTariff" version="1"/>
       </tariffs>
     </PreassignedFareProduct>
   </fareProducts>
 
   <!-- How it's sold -->
   <salesOfferPackages>
-    <SalesOfferPackage id="ERP:SalesOfferPackage:SingleAdult" version="1">
+    <SalesOfferPackage id="NP:SalesOfferPackage:SingleAdult" version="1">
       <Name>Single ticket - Adult</Name>
       <salesOfferPackageElements>
-        <SalesOfferPackageElement id="ERP:SalesOfferPackageElement:1" version="1" order="1">
-          <PreassignedFareProductRef ref="ERP:PreassignedFareProduct:SingleTicket" version="1"/>
+        <SalesOfferPackageElement id="NP:SalesOfferPackageElement:1" version="1" order="1">
+          <PreassignedFareProductRef ref="NP:PreassignedFareProduct:SingleTicket" version="1"/>
         </SalesOfferPackageElement>
       </salesOfferPackageElements>
     </SalesOfferPackage>
@@ -118,15 +118,15 @@ Let's model the most common fare: a **single ticket for Zone 1**.
 When a passenger actually buys a ticket, it becomes a **FareContract**:
 
 ```xml
-<SalesTransactionFrame id="ERP:SalesTransactionFrame:1" version="1">
+<SalesTransactionFrame id="NP:SalesTransactionFrame:1" version="1">
   <fareContracts>
-    <FareContract id="ERP:FareContract:FC_001" version="1">
+    <FareContract id="NP:FareContract:FC_001" version="1">
       <Name>Single ticket purchase</Name>
       <StartDate>2026-03-18T08:00:00Z</StartDate>
       <EndDate>2026-03-18T09:30:00Z</EndDate>
-      <TypeOfFareContractRef ref="ERP:TypeOfFareContract:SingleTrip"/>
+      <TypeOfFareContractRef ref="NP:TypeOfFareContract:SingleTrip"/>
       <fareContractEntries>
-        <SalesTransaction id="ERP:SalesTransaction:ST_001" version="1">
+        <SalesTransaction id="NP:SalesTransaction:ST_001" version="1">
           <Name>Purchase at Ruter app</Name>
           <Amount>42.00</Amount>
           <Currency>NOK</Currency>

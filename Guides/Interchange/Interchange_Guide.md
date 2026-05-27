@@ -70,8 +70,8 @@ TimetableFrame
 Sometimes a stop on a journey exists solely for transfer purposes — passengers are not expected to board or alight there for its own sake. NeTEx models this with the `StopUse` element on `StopPointInJourneyPattern`:
 
 ```xml
-<StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:2" version="1" order="2">
-  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Asker"/>
+<StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:2" version="1" order="2">
+  <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Asker"/>
   <ForAlighting>true</ForAlighting>
   <ForBoarding>false</ForBoarding>
   <StopUse>interchangeOnly</StopUse>
@@ -98,20 +98,20 @@ Sometimes a stop on a journey exists solely for transfer purposes — passengers
 The simplest valid interchange — just two journey references:
 
 ```xml
-<TimetableFrame id="ERP:TimetableFrame:1" version="1">
+<TimetableFrame id="NP:TimetableFrame:1" version="1">
   <vehicleJourneys>
-    <ServiceJourney id="ERP:ServiceJourney:Bus_100" version="1">
+    <ServiceJourney id="NP:ServiceJourney:Bus_100" version="1">
       <Name>Bus 100 Drammen - Asker</Name>
     </ServiceJourney>
-    <ServiceJourney id="ERP:ServiceJourney:RE_10" version="1">
+    <ServiceJourney id="NP:ServiceJourney:RE_10" version="1">
       <Name>RE 10 Asker - Oslo</Name>
     </ServiceJourney>
   </vehicleJourneys>
   <journeyInterchanges>
     <!-- Minimal: only the two mandatory journey references -->
-    <ServiceJourneyInterchange id="ERP:ServiceJourneyInterchange:Bus100_to_RE10" version="1">
-      <FromJourneyRef ref="ERP:ServiceJourney:Bus_100"/>
-      <ToJourneyRef ref="ERP:ServiceJourney:RE_10"/>
+    <ServiceJourneyInterchange id="NP:ServiceJourneyInterchange:Bus100_to_RE10" version="1">
+      <FromJourneyRef ref="NP:ServiceJourney:Bus_100"/>
+      <ToJourneyRef ref="NP:ServiceJourney:RE_10"/>
     </ServiceJourneyInterchange>
   </journeyInterchanges>
 </TimetableFrame>
@@ -152,15 +152,15 @@ Combining the interchange with a transfer-only stop in the journey pattern:
 
 ```xml
 <!-- Journey pattern: the bus stops at Asker only for transfers -->
-<JourneyPattern id="ERP:JourneyPattern:Bus_Drammen_Asker" version="1">
+<JourneyPattern id="NP:JourneyPattern:Bus_Drammen_Asker" version="1">
   <pointsInSequence>
-    <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:1" version="1" order="1">
-      <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Drammen"/>
+    <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:1" version="1" order="1">
+      <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Drammen"/>
       <ForAlighting>false</ForAlighting>
       <ForBoarding>true</ForBoarding>
     </StopPointInJourneyPattern>
-    <StopPointInJourneyPattern id="ERP:StopPointInJourneyPattern:2" version="1" order="2">
-      <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:Asker"/>
+    <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:2" version="1" order="2">
+      <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Asker"/>
       <ForAlighting>true</ForAlighting>
       <ForBoarding>false</ForBoarding>
       <!-- This stop exists only for the transfer to the train -->
@@ -170,13 +170,13 @@ Combining the interchange with a transfer-only stop in the journey pattern:
 </JourneyPattern>
 
 <!-- The interchange linking the two journeys at Asker -->
-<ServiceJourneyInterchange id="ERP:ServiceJourneyInterchange:Bus100_to_RE10" version="1">
+<ServiceJourneyInterchange id="NP:ServiceJourneyInterchange:Bus100_to_RE10" version="1">
   <Guaranteed>true</Guaranteed>
   <MaximumWaitTime>PT10M</MaximumWaitTime>
-  <FromPointRef ref="ERP:ScheduledStopPoint:Asker"/>
-  <ToPointRef ref="ERP:ScheduledStopPoint:Asker"/>
-  <FromJourneyRef ref="ERP:ServiceJourney:Bus_100"/>
-  <ToJourneyRef ref="ERP:ServiceJourney:RE_10"/>
+  <FromPointRef ref="NP:ScheduledStopPoint:Asker"/>
+  <ToPointRef ref="NP:ScheduledStopPoint:Asker"/>
+  <FromJourneyRef ref="NP:ServiceJourney:Bus_100"/>
+  <ToJourneyRef ref="NP:ServiceJourney:RE_10"/>
 </ServiceJourneyInterchange>
 ```
 

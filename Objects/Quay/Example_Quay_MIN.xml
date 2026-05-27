@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PublicationDelivery xmlns="http://www.netex.org.uk/netex" xmlns:ERP="http://www.entur.org/ERP" version="1.0">
+<PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="1.0">
   <PublicationTimestamp>2026-02-15T00:00:00Z</PublicationTimestamp>
-  <ParticipantRef>EuPro</ParticipantRef>
+  <ParticipantRef>NP</ParticipantRef>
   <dataObjects>
-    <GeneralFrame id="ERP:GeneralFrame:1" version="1">
+    <GeneralFrame id="NP:GeneralFrame:1" version="1">
       <codespaces>
-        <Codespace id="ERP">
-          <Xmlns>ERP</Xmlns>
-          <XmlnsUrl>http://www.entur.org/ERP</XmlnsUrl>
+        <Codespace id="np">
+          <Xmlns>NP</Xmlns>
+          <XmlnsUrl>http://www.nordicprofile.eu/ns/np</XmlnsUrl>
         </Codespace>
       </codespaces>
     </GeneralFrame>
-    <SiteFrame id="ERP:SiteFrame:1" version="1">
+    <SiteFrame id="NP:SiteFrame:1" version="1">
       <stopPlaces>
-        <StopPlace id="ERP:StopPlace:100" version="1">
+        <StopPlace id="NP:StopPlace:100" version="1">
           <Name>Example StopPlace</Name>
           <quays>
-            <Quay id="ERP:Quay:1001" version="1">
+            <Quay id="NP:Quay:1001" version="1">
               <Name>Platform A</Name>
               <Description>Northbound boarding bay</Description>
               <Centroid>

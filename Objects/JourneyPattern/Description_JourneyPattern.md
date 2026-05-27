@@ -77,7 +77,7 @@ JourneyPattern
 - **RouteRef is mandatory** — a JourneyPattern without a Route reference is invalid.
 - **pointsInSequence must contain at least one StopPointInJourneyPattern** — empty patterns are invalid.
 - **@order values must be sequential integers** — starting from 1 with no duplicates or gaps.
-- **@id and @version are mandatory** — follow codespace conventions (e.g., `ERP:JourneyPattern:JP_10_out`).
+- **@id and @version are mandatory** — follow codespace conventions (e.g., `NP:JourneyPattern:JP_10_out`).
 
 ### 5c. Common Pitfalls
 

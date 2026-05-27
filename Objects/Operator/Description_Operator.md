@@ -50,7 +50,7 @@ Operator
 
 ### 5b. Validation Requirements
 - **Name is mandatory** – All Operators must have a Name element; ShortName is optional but recommended for UI consistency.
-- **ID format must follow codespace conventions** – e.g., `ERP:Operator:OP1` where "ERP" is the codespace prefix.
+- **ID format must follow codespace conventions** – e.g., `NP:Operator:OP1` where "NP" is the codespace prefix.
 - **AuthorityRef should exist** – While technically optional, unassigned Operators create network governance ambiguity; recommended to include.
 - **No duplicate Operator IDs** – Each Operator must have a unique ID within the dataset; duplicates cause deserialization errors.
 

@@ -46,14 +46,14 @@ The date-based model is the most direct: an **OperatingDay** represents a single
 
 ```xml
 <!-- 1. Define the date -->
-<OperatingDay id="ERP:OperatingDay:2026-03-18" version="1">
+<OperatingDay id="NP:OperatingDay:2026-03-18" version="1">
   <CalendarDate>2026-03-18</CalendarDate>
 </OperatingDay>
 
 <!-- 2. Create a dated instance of a ServiceJourney -->
-<DatedServiceJourney id="ERP:DatedServiceJourney:100_0730_20260318" version="1">
-  <ServiceJourneyRef ref="ERP:ServiceJourney:100_0730"/>
-  <OperatingDayRef ref="ERP:OperatingDay:2026-03-18"/>
+<DatedServiceJourney id="NP:DatedServiceJourney:100_0730_20260318" version="1">
+  <ServiceJourneyRef ref="NP:ServiceJourney:100_0730"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-03-18"/>
 </DatedServiceJourney>
 ```
 
@@ -85,7 +85,7 @@ For recurring schedules ("every weekday from January to June"), the pattern-base
 
 ```xml
 <!-- 1. Define the pattern -->
-<DayType id="ERP:DayType:Weekdays" version="1">
+<DayType id="NP:DayType:Weekdays" version="1">
   <Name>Weekdays</Name>
   <properties>
     <PropertyOfDay>
@@ -95,22 +95,22 @@ For recurring schedules ("every weekday from January to June"), the pattern-base
 </DayType>
 
 <!-- 2. Define the date range -->
-<OperatingPeriod id="ERP:OperatingPeriod:2026H1" version="1">
+<OperatingPeriod id="NP:OperatingPeriod:2026H1" version="1">
   <FromDate>2026-01-01T00:00:00Z</FromDate>
   <ToDate>2026-06-30T00:00:00Z</ToDate>
 </OperatingPeriod>
 
 <!-- 3. Bind pattern to date range -->
-<DayTypeAssignment id="ERP:DayTypeAssignment:WKD_2026H1" version="1" order="1">
-  <OperatingPeriodRef ref="ERP:OperatingPeriod:2026H1"/>
-  <DayTypeRef ref="ERP:DayType:Weekdays"/>
+<DayTypeAssignment id="NP:DayTypeAssignment:WKD_2026H1" version="1" order="1">
+  <OperatingPeriodRef ref="NP:OperatingPeriod:2026H1"/>
+  <DayTypeRef ref="NP:DayType:Weekdays"/>
   <isAvailable>true</isAvailable>
 </DayTypeAssignment>
 
 <!-- 4. ServiceJourney references the DayType -->
-<ServiceJourney id="ERP:ServiceJourney:100_0730" version="1">
+<ServiceJourney id="NP:ServiceJourney:100_0730" version="1">
   <dayTypes>
-    <DayTypeRef ref="ERP:DayType:Weekdays"/>
+    <DayTypeRef ref="NP:DayType:Weekdays"/>
   </dayTypes>
   <!-- ... passingTimes ... -->
 </ServiceJourney>
@@ -129,16 +129,16 @@ Real-world schedules have exceptions: public holidays, one-off closures, seasona
 
 ```xml
 <!-- Base assignment: weekdays in 2026 -->
-<DayTypeAssignment id="ERP:DayTypeAssignment:WKD_2026" version="1" order="1">
-  <OperatingPeriodRef ref="ERP:OperatingPeriod:2026"/>
-  <DayTypeRef ref="ERP:DayType:Weekdays"/>
+<DayTypeAssignment id="NP:DayTypeAssignment:WKD_2026" version="1" order="1">
+  <OperatingPeriodRef ref="NP:OperatingPeriod:2026"/>
+  <DayTypeRef ref="NP:DayType:Weekdays"/>
   <isAvailable>true</isAvailable>
 </DayTypeAssignment>
 
 <!-- Exception: Christmas Day falls on a Friday in 2026 — exclude it -->
-<DayTypeAssignment id="ERP:DayTypeAssignment:WKD_Christmas" version="1" order="2">
+<DayTypeAssignment id="NP:DayTypeAssignment:WKD_Christmas" version="1" order="2">
   <Date>2026-12-25</Date>
-  <DayTypeRef ref="ERP:DayType:Weekdays"/>
+  <DayTypeRef ref="NP:DayType:Weekdays"/>
   <isAvailable>false</isAvailable>
 </DayTypeAssignment>
 ```
@@ -159,9 +159,9 @@ You can also use `isAvailable=true` to add specific dates that wouldn't normally
 
 ```xml
 <!-- Saturdays during football season -->
-<DayTypeAssignment id="ERP:DayTypeAssignment:SAT_Football" version="1" order="1">
+<DayTypeAssignment id="NP:DayTypeAssignment:SAT_Football" version="1" order="1">
   <Date>2026-04-11</Date>
-  <DayTypeRef ref="ERP:DayType:Saturdays"/>
+  <DayTypeRef ref="NP:DayType:Saturdays"/>
   <isAvailable>true</isAvailable>
 </DayTypeAssignment>
 ```

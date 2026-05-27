@@ -41,7 +41,7 @@ StopPlace (Multimodal Parent)
 
 | Element | Type | MIN | NP | SLO | Description | Path |
 |---------|------|-----|-----|-----|-------------|------|
-| @id | ID | 1..1 | 1..1 | 1..1 | Unique identifier (e.g., ERP:StopPlace:1001) | StopPlace/@id |
+| @id | ID | 1..1 | 1..1 | 1..1 | Unique identifier (e.g., NP:StopPlace:1001) | StopPlace/@id |
 | @version | String | 1..1 | 1..1 | 1..1 | Version number | StopPlace/@version |
 | @created | DateTime |  |  | 1..1 | Creation date | StopPlace/@created |
 | @changed | DateTime |  |  |  | Last modification date | StopPlace/@changed |

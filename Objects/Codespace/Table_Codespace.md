@@ -14,5 +14,5 @@ Codespace
 | Element | Type | Description | Path |
 |---------|------|-------------|------|
 | @id | ID | Unique identifier for the codespace | Codespace/@id |
-| Xmlns | String | XML namespace prefix (e.g., ERP, NSR) | Codespace/Xmlns |
+| Xmlns | String | XML namespace prefix (e.g., NP, NSR) | Codespace/Xmlns |
 | XmlnsUrl | String | Full namespace URL for global uniqueness | Codespace/XmlnsUrl |

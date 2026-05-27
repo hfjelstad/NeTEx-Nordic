@@ -67,7 +67,7 @@ StopPlace (Multimodal Parent)
 - **Name is mandatory** – All StopPlaces must have a Name element for identification and display.
 - **TransportMode is mandatory for monomodal StopPlaces** – If the StopPlace contains Quays, TransportMode MUST be present; multimodal parents must NOT have TransportMode.
 - **StopPlaceType is required when Quays are present** – Functional classification enables downstream routing and service assignment.
-- **@id and @version are mandatory** – Follow codespace convention (e.g., `ERP:StopPlace:1001`); version typically "1" unless updated.
+- **@id and @version are mandatory** – Follow codespace convention (e.g., `NP:StopPlace:1001`); version typically "1" unless updated.
 - **ParentSiteRef cardinality** – If used, a child StopPlace references exactly one multimodal parent; no orphaned children or multiple parents allowed.
 - **Quay containment** – Multimodal parents must have zero Quays (cardinality 0); monomodal StopPlaces must have at least one Quay (cardinality 1..n).
 

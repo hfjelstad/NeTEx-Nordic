@@ -37,7 +37,7 @@ Line
 
 | Element | Type | MIN | NP | FR | SLO | Description | Path |
 |---------|------|-----|-----|-----|-----|-------------|------|
-| @id | ID | 1..1 | 1..1 | 1..1 | 1..1 | Unique identifier for the Line (e.g., ERP:Line:5) | Line/@id |
+| @id | ID | 1..1 | 1..1 | 1..1 | 1..1 | Unique identifier for the Line (e.g., NP:Line:5) | Line/@id |
 | @version | String | 1..1 | 1..1 | 1..1 | 1..1 | Version label | Line/@version |
 | Name | String | 1..1 | 1..1 | 1..1 | 1..1 | Human-readable line name | Line/Name |
 | TransportMode | Enum | 1..1 | 1..1 | 1..1 | 1..1 | Primary transport mode (bus, rail, water, tram, metro, air, coach, telecabin) | Line/TransportMode |

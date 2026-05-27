@@ -72,17 +72,17 @@ The connection works in **both directions**:
 
 ```xml
 <!-- In VehicleScheduleFrame -->
-<Block id="ERP:Block:Duty_601" version="1">
+<Block id="NP:Block:Duty_601" version="1">
   <Name>Duty 601</Name>
   <journeys>
-    <VehicleJourneyRef ref="ERP:ServiceJourney:100_0600"/>
-    <VehicleJourneyRef ref="ERP:ServiceJourney:100_0830"/>
+    <VehicleJourneyRef ref="NP:ServiceJourney:100_0600"/>
+    <VehicleJourneyRef ref="NP:ServiceJourney:100_0830"/>
   </journeys>
 </Block>
 
 <!-- In TimetableFrame -->
-<ServiceJourney id="ERP:ServiceJourney:100_0600" version="1">
-  <BlockRef ref="ERP:Block:Duty_601"/>
+<ServiceJourney id="NP:ServiceJourney:100_0600" version="1">
+  <BlockRef ref="NP:Block:Duty_601"/>
   <!-- ... -->
 </ServiceJourney>
 ```
@@ -108,10 +108,10 @@ How you connect timetable and vehicle scheduling depends on your separation of c
 A **DeadRun** represents a non-revenue journey (depot to first stop, last stop to depot, or repositioning). It lives in the TimetableFrame alongside ServiceJourneys and can be part of a Block:
 
 ```xml
-<DeadRun id="ERP:DeadRun:DR_601_return" version="1">
+<DeadRun id="NP:DeadRun:DR_601_return" version="1">
   <Name>Return to depot after duty 601</Name>
-  <JourneyPatternRef ref="ERP:JourneyPattern:Depot_Return"/>
-  <BlockRef ref="ERP:Block:Duty_601"/>
+  <JourneyPatternRef ref="NP:JourneyPattern:Depot_Return"/>
+  <BlockRef ref="NP:Block:Duty_601"/>
 </DeadRun>
 ```
 

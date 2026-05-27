@@ -72,7 +72,7 @@ Line
 ### 5b. Validation Requirements
 - **Name is mandatory** – Every Line must have a Name element for public identification.
 - **OperatorRef is mandatory** – Every Line must reference exactly one Operator with @ref attribute; cardinality is 1..1.
-- **@id and @version are mandatory** – Must follow codespace conventions (e.g., `ERP:Line:1`); version typically "1" or incremental.
+- **@id and @version are mandatory** – Must follow codespace conventions (e.g., `NP:Line:1`); version typically "1" or incremental.
 - **Colour format is strict** – If Presentation is used, Colour must be exactly 6 uppercase hexadecimal digits (0–9, A–F) without a leading # character.
 - **TextColour format is strict** – Same format requirements as Colour; recommended to ensure text-to-background contrast for accessibility.
 

@@ -116,21 +116,21 @@ ResourceFrame
 ### Practical Example
 
 ```xml
-<ResourceFrame id="ERP:ResourceFrame:gov:1" version="1">
+<ResourceFrame id="NP:ResourceFrame:gov:1" version="1">
   <responsibilitySets>
-    <ResponsibilitySet id="ERP:ResponsibilitySet:RS_Ruter_Vy" version="1">
+    <ResponsibilitySet id="NP:ResponsibilitySet:RS_Ruter_Vy" version="1">
       <Name>Ruter commissions Vy for regional rail</Name>
       <roles>
-        <ResponsibilityRoleAssignment id="ERP:ResponsibilityRoleAssignment:1" version="1">
-          <ResponsibleOrganisationRef ref="ERP:Authority:Ruter"/>
+        <ResponsibilityRoleAssignment id="NP:ResponsibilityRoleAssignment:1" version="1">
+          <ResponsibleOrganisationRef ref="NP:Authority:Ruter"/>
           <AssociatedContract>
-            <ContractRef ref="ERP:Contract:Rail_2026"/>
+            <ContractRef ref="NP:Contract:Rail_2026"/>
           </AssociatedContract>
         </ResponsibilityRoleAssignment>
-        <ResponsibilityRoleAssignment id="ERP:ResponsibilityRoleAssignment:2" version="1">
-          <ResponsibleOrganisationRef ref="ERP:Operator:Vy"/>
+        <ResponsibilityRoleAssignment id="NP:ResponsibilityRoleAssignment:2" version="1">
+          <ResponsibleOrganisationRef ref="NP:Operator:Vy"/>
           <AssociatedContract>
-            <ContractRef ref="ERP:Contract:Rail_2026"/>
+            <ContractRef ref="NP:Contract:Rail_2026"/>
           </AssociatedContract>
         </ResponsibilityRoleAssignment>
       </roles>
@@ -138,16 +138,16 @@ ResourceFrame
   </responsibilitySets>
 
   <organisations>
-    <Authority id="ERP:Authority:Ruter" version="1">
+    <Authority id="NP:Authority:Ruter" version="1">
       <Name>Ruter AS</Name>
       <LegalName>Ruter Aksjeselskap</LegalName>
       <ContactDetails>
         <Url>https://ruter.no</Url>
       </ContactDetails>
       <OrganisationType>authority</OrganisationType>
-      <ResponsibilitySetRef ref="ERP:ResponsibilitySet:RS_Ruter_Vy"/>
+      <ResponsibilitySetRef ref="NP:ResponsibilitySet:RS_Ruter_Vy"/>
     </Authority>
-    <Operator id="ERP:Operator:Vy" version="1">
+    <Operator id="NP:Operator:Vy" version="1">
       <Name>Vy</Name>
       <LegalName>Vygruppen AS</LegalName>
       <ContactDetails>
@@ -157,8 +157,8 @@ ResourceFrame
         <Phone>+47 61 05 19 10</Phone>
       </CustomerServiceContactDetails>
       <OrganisationType>operator</OrganisationType>
-      <AuthorityRef ref="ERP:Authority:Ruter"/>
-      <ResponsibilitySetRef ref="ERP:ResponsibilitySet:RS_Ruter_Vy"/>
+      <AuthorityRef ref="NP:Authority:Ruter"/>
+      <ResponsibilitySetRef ref="NP:ResponsibilitySet:RS_Ruter_Vy"/>
     </Operator>
   </organisations>
 </ResourceFrame>

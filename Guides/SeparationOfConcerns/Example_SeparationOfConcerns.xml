@@ -13,17 +13,17 @@
 -->
 <PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="2.0">
   <PublicationTimestamp>2026-03-18T00:00:00Z</PublicationTimestamp>
-  <ParticipantRef>EuPro</ParticipantRef>
+  <ParticipantRef>NP</ParticipantRef>
   <dataObjects>
-    <CompositeFrame id="ERP:CompositeFrame:SoC:1" version="1">
+    <CompositeFrame id="NP:CompositeFrame:SoC:1" version="1">
       <codespaces>
-        <Codespace id="erp">
-          <Xmlns>ERP</Xmlns>
-          <XmlnsUrl>http://www.europeanprofile.eu/ERP</XmlnsUrl>
+        <Codespace id="np">
+          <Xmlns>NP</Xmlns>
+          <XmlnsUrl>http://www.nordicprofile.eu/ns/np</XmlnsUrl>
         </Codespace>
       </codespaces>
       <FrameDefaults>
-        <DefaultCodespaceRef ref="erp"/>
+        <DefaultCodespaceRef ref="np"/>
       </FrameDefaults>
       <frames>
 
@@ -31,14 +31,14 @@
              SHARED RESOURCES
              Organizations and vehicle types used by all domains
              ============================================================ -->
-        <ResourceFrame id="ERP:ResourceFrame:SoC:1" version="1">
+        <ResourceFrame id="NP:ResourceFrame:SoC:1" version="1">
           <organisations>
-            <Operator id="ERP:Operator:GoAhead" version="1">
+            <Operator id="NP:Operator:GoAhead" version="1">
               <Name>Go-Ahead Nordic</Name>
             </Operator>
           </organisations>
           <vehicleTypes>
-            <VehicleType id="ERP:VehicleType:IC_Train" version="1">
+            <VehicleType id="NP:VehicleType:IC_Train" version="1">
               <Name>InterCity Train Set</Name>
               <Description>Electric multiple unit for regional intercity services</Description>
             </VehicleType>
@@ -49,9 +49,9 @@
              SERVICE CALENDAR
              Day types and operating days
              ============================================================ -->
-        <ServiceCalendarFrame id="ERP:ServiceCalendarFrame:SoC:1" version="1">
+        <ServiceCalendarFrame id="NP:ServiceCalendarFrame:SoC:1" version="1">
           <dayTypes>
-            <DayType id="ERP:DayType:Weekday" version="1">
+            <DayType id="NP:DayType:Weekday" version="1">
               <Name>Weekdays (Mon-Fri)</Name>
               <properties>
                 <PropertyOfDay>
@@ -61,7 +61,7 @@
             </DayType>
           </dayTypes>
           <operatingDays>
-            <OperatingDay id="ERP:OperatingDay:2026-03-12" version="1">
+            <OperatingDay id="NP:OperatingDay:2026-03-12" version="1">
               <CalendarDate>2026-03-12</CalendarDate>
             </OperatingDay>
           </operatingDays>
@@ -72,17 +72,17 @@
              What the passenger sees: lines, stops, and journey times.
              This domain should remain clean of operational details.
              ============================================================ -->
-        <ServiceFrame id="ERP:ServiceFrame:SoC:1" version="1">
+        <ServiceFrame id="NP:ServiceFrame:SoC:1" version="1">
           <lines>
-            <Line id="ERP:Line:IC601" version="1">
+            <Line id="NP:Line:IC601" version="1">
               <Name>IC 601 Oslo – Kristiansand</Name>
               <PublicCode>601</PublicCode>
-              <OperatorRef ref="ERP:Operator:GoAhead"/>
+              <OperatorRef ref="NP:Operator:GoAhead"/>
             </Line>
           </lines>
         </ServiceFrame>
 
-        <TimetableFrame id="ERP:TimetableFrame:SoC:1" version="1">
+        <TimetableFrame id="NP:TimetableFrame:SoC:1" version="1">
           <vehicleJourneys>
 
             <!--
@@ -93,12 +93,12 @@
               ServiceJourney must add a BlockRef, or the Block must add a
               VehicleJourneyRef — creating a direct coupling between domains.
             -->
-            <ServiceJourney id="ERP:ServiceJourney:SJ_001" version="1">
+            <ServiceJourney id="NP:ServiceJourney:SJ_001" version="1">
               <Name>IC 601 Morning departure</Name>
               <dayTypes>
-                <DayTypeRef ref="ERP:DayType:Weekday"/>
+                <DayTypeRef ref="NP:DayType:Weekday"/>
               </dayTypes>
-              <LineRef ref="ERP:Line:IC601"/>
+              <LineRef ref="NP:Line:IC601"/>
             </ServiceJourney>
 
             <!--
@@ -113,10 +113,10 @@
               Con:  TimetableFrame (traveler domain) owns the coupling object.
               Risk: Semantic overload — DSJ also carries real-time and deviation data.
             -->
-            <DatedServiceJourney id="ERP:DatedServiceJourney:DSJ_001" version="1">
-              <BlockRef ref="ERP:Block:TB_601"/>
-              <ServiceJourneyRef ref="ERP:ServiceJourney:SJ_001"/>
-              <OperatingDayRef ref="ERP:OperatingDay:2026-03-12"/>
+            <DatedServiceJourney id="NP:DatedServiceJourney:DSJ_001" version="1">
+              <BlockRef ref="NP:Block:TB_601"/>
+              <ServiceJourneyRef ref="NP:ServiceJourney:SJ_001"/>
+              <OperatingDayRef ref="NP:OperatingDay:2026-03-12"/>
             </DatedServiceJourney>
 
           </vehicleJourneys>
@@ -127,14 +127,14 @@
              What the operator plans: which vehicles run which journeys.
              Kept separate from passenger-facing timetable data.
              ============================================================ -->
-        <VehicleScheduleFrame id="ERP:VehicleScheduleFrame:SoC:1" version="1">
+        <VehicleScheduleFrame id="NP:VehicleScheduleFrame:SoC:1" version="1">
           <blocks>
-            <Block id="ERP:Block:TB_601" version="1">
+            <Block id="NP:Block:TB_601" version="1">
               <Name>Block for IC 601 (Oslo – Kristiansand)</Name>
               <Description>Full-day vehicle assignment for the IC 601 service</Description>
               <journeys>
                 <!-- Links this Block back to the ServiceJourney (weak coupling) -->
-                <VehicleJourneyRef ref="ERP:ServiceJourney:SJ_001"/>
+                <VehicleJourneyRef ref="NP:ServiceJourney:SJ_001"/>
               </journeys>
             </Block>
           </blocks>
@@ -154,9 +154,9 @@
           The key principle: neither ServiceJourney nor Block contains
           the coupling reference. A third, independent object does.
 
-          <ServiceBlockAssociation id="ERP:SBA:SJ1_TB601" version="1">
-            <ServiceJourneyRef ref="ERP:ServiceJourney:SJ_001"/>
-            <BlockRef ref="ERP:Block:TB_601"/>
+          <ServiceBlockAssociation id="NP:SBA:SJ1_TB601" version="1">
+            <ServiceJourneyRef ref="NP:ServiceJourney:SJ_001"/>
+            <BlockRef ref="NP:Block:TB_601"/>
             <ValidBetween>
               <FromDate>2026-03-01T00:00:00Z</FromDate>
               <ToDate>2026-12-14T00:00:00Z</ToDate>

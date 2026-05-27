@@ -619,7 +619,7 @@ netex:StopPlace netex:hasRef [
     netex:property "ParentSiteRef" ;
     netex:target netex:StopPlace ;
     netex:xsdCardinality "0..1" ;
-    rdfs:comment "Multimodal parent stop — ERP only"
+    rdfs:comment "Multimodal parent stop — NP only"
 ] , [
     netex:property "TariffZoneRef" ;
     netex:target netex:TariffZone ;

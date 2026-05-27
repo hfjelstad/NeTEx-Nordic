@@ -50,8 +50,8 @@ flowchart LR
 ```
 
 ```xml
-<PassengerStopAssignment id="ERP:PassengerStopAssignment:1" version="1" order="1">
-  <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS"/>
+<PassengerStopAssignment id="NP:PassengerStopAssignment:1" version="1" order="1">
+  <ScheduledStopPointRef ref="NP:ScheduledStopPoint:OsloS"/>
   <StopPlaceRef ref="NSR:StopPlace:59977"/>   <!-- optional, can be inferred -->
   <QuayRef ref="NSR:Quay:107401"/>            <!-- the actual platform -->
 </PassengerStopAssignment>
@@ -159,18 +159,18 @@ Fare zones attach geographic pricing context to stops. The Nordic Profile suppor
 
 ```xml
 <!-- Legacy: TariffZone referenced from StopPlace -->
-<StopPlace id="ERP:StopPlace:OsloS" version="1">
+<StopPlace id="NP:StopPlace:OsloS" version="1">
   <Name>Oslo S</Name>
   <tariffZones>
-    <TariffZoneRef ref="ERP:TariffZone:Zone1"/>
+    <TariffZoneRef ref="NP:TariffZone:Zone1"/>
   </tariffZones>
 </StopPlace>
 
 <!-- Preferred: FareZone with member stops -->
-<FareZone id="ERP:FareZone:1" version="1">
+<FareZone id="NP:FareZone:1" version="1">
   <Name>Zone 1</Name>
   <members>
-    <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS"/>
+    <ScheduledStopPointRef ref="NP:ScheduledStopPoint:OsloS"/>
   </members>
 </FareZone>
 ```
@@ -209,12 +209,12 @@ flowchart TD
 ### Complete Example
 
 ```xml
-<CompositeFrame id="ERP:CompositeFrame:stops:1" version="1">
+<CompositeFrame id="NP:CompositeFrame:stops:1" version="1">
   <frames>
     <!-- PHYSICAL: where things are -->
-    <SiteFrame id="ERP:SiteFrame:1" version="1">
+    <SiteFrame id="NP:SiteFrame:1" version="1">
       <topographicPlaces>
-        <TopographicPlace id="ERP:TopographicPlace:Oslo" version="1">
+        <TopographicPlace id="NP:TopographicPlace:Oslo" version="1">
           <Descriptor>
             <Name>Oslo</Name>
           </Descriptor>
@@ -223,7 +223,7 @@ flowchart TD
         </TopographicPlace>
       </topographicPlaces>
       <stopPlaces>
-        <StopPlace id="ERP:StopPlace:OsloS" version="1">
+        <StopPlace id="NP:StopPlace:OsloS" version="1">
           <Name>Oslo S</Name>
           <Centroid>
             <Location>
@@ -231,11 +231,11 @@ flowchart TD
               <Latitude>59.910890</Latitude>
             </Location>
           </Centroid>
-          <TopographicPlaceRef ref="ERP:TopographicPlace:Oslo"/>
+          <TopographicPlaceRef ref="NP:TopographicPlace:Oslo"/>
           <TransportMode>rail</TransportMode>
           <StopPlaceType>railStation</StopPlaceType>
           <quays>
-            <Quay id="ERP:Quay:OsloS_Spor1" version="1">
+            <Quay id="NP:Quay:OsloS_Spor1" version="1">
               <Name>Spor 1</Name>
               <Centroid>
                 <Location>
@@ -251,18 +251,18 @@ flowchart TD
     </SiteFrame>
 
     <!-- LOGICAL: what the timetable knows -->
-    <ServiceFrame id="ERP:ServiceFrame:1" version="1">
+    <ServiceFrame id="NP:ServiceFrame:1" version="1">
       <scheduledStopPoints>
-        <ScheduledStopPoint id="ERP:ScheduledStopPoint:OsloS" version="1">
+        <ScheduledStopPoint id="NP:ScheduledStopPoint:OsloS" version="1">
           <Name>Oslo S</Name>
         </ScheduledStopPoint>
       </scheduledStopPoints>
       <stopAssignments>
         <!-- THE BRIDGE: logical -> physical -->
-        <PassengerStopAssignment id="ERP:PassengerStopAssignment:OsloS" version="1" order="1">
-          <ScheduledStopPointRef ref="ERP:ScheduledStopPoint:OsloS"/>
-          <StopPlaceRef ref="ERP:StopPlace:OsloS"/>
-          <QuayRef ref="ERP:Quay:OsloS_Spor1"/>
+        <PassengerStopAssignment id="NP:PassengerStopAssignment:OsloS" version="1" order="1">
+          <ScheduledStopPointRef ref="NP:ScheduledStopPoint:OsloS"/>
+          <StopPlaceRef ref="NP:StopPlace:OsloS"/>
+          <QuayRef ref="NP:Quay:OsloS_Spor1"/>
         </PassengerStopAssignment>
       </stopAssignments>
     </ServiceFrame>
