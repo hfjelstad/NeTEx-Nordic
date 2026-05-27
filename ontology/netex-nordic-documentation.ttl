@@ -1020,9 +1020,9 @@ doc:StopInfrastructure a doc:Guide ;
     doc:path "Guides/StopInfrastructure/StopInfrastructure_Guide.md" ;
     skos:definition "Logical stops, physical platforms, and the PassengerStopAssignment bridge" .
 
-doc:JourneyLifecycle a doc:Guide ;
-    rdfs:label "Journey Lifecycle" ;
-    doc:path "Guides/JourneyLifecycle/JourneyLifecycle_Guide.md" ;
+doc:HowToBuildATimetable a doc:Guide ;
+    rdfs:label "How to Build a Timetable" ;
+    doc:path "Guides/HowToBuildATimetable/HowToBuildATimetable_Guide.md" ;
     skos:definition "Line → Route → JourneyPattern → ServiceJourney → DatedServiceJourney" .
 
 doc:VehicleScheduling a doc:Guide ;
