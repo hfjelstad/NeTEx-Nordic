@@ -136,13 +136,15 @@ Each frame type owns a specific domain of transport data. You only include the f
 
 ![Getting on the bike](../../assets/images/getting_on_the_bike.png)
 
-## 5. 🔍 Reading Your First Example
+## 5. 🔍 Reading Your First NeTEx File
 
-The best way to learn NeTEx is to read real XML. Let's walk through a minimal delivery with four frames and see how they connect:
+Let's look at what a real NeTEx file looks like. At this stage, don't worry about what the objects *mean* — focus on the **structure** and the **reference pattern**.
 
 📄 **Full file:** [Example_CompositeFrame.xml](../../Frames/CompositeFrame/Example_CompositeFrame.xml)
 
 ### The Envelope
+
+Every NeTEx file starts the same way:
 
 ```xml
 <PublicationDelivery xmlns="http://www.netex.org.uk/netex" version="2.0">
@@ -150,138 +152,58 @@ The best way to learn NeTEx is to read real XML. Let's walk through a minimal de
   <ParticipantRef>NP</ParticipantRef>
   <dataObjects>
     <CompositeFrame id="NP:CompositeFrame:1" version="1">
+      <frames>
+        <ResourceFrame id="NP:ResourceFrame:1" version="1">…</ResourceFrame>
+        <ServiceCalendarFrame id="NP:ServiceCalendarFrame:1" version="1">…</ServiceCalendarFrame>
+        <ServiceFrame id="NP:ServiceFrame:1" version="1">…</ServiceFrame>
+        <TimetableFrame id="NP:TimetableFrame:1" version="1">…</TimetableFrame>
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+</PublicationDelivery>
 ```
 
-- `PublicationDelivery` — always the root element, with the NeTEx namespace
-- `ParticipantRef` — identifies who created this delivery
-- `CompositeFrame` — wraps all frames; the `id` uses the format `Codespace:Type:Identifier`
+That's it. `PublicationDelivery` → `CompositeFrame` → one or more frames. Every file follows this skeleton.
+
+### The One Pattern That Matters
+
+Inside frames, objects **reference** each other — they never duplicate data:
+
+```xml
+<!-- Defined once in ResourceFrame -->
+<Operator id="NP:Operator:OP_001" version="1">
+  <Name>Example Operator</Name>
+</Operator>
+
+<!-- Referenced from ServiceFrame -->
+<Line id="NP:Line:L1" version="1">
+  <OperatorRef ref="NP:Operator:OP_001"/>
+</Line>
+
+<!-- Referenced from TimetableFrame -->
+<ServiceJourney id="NP:ServiceJourney:SJ_001" version="1">
+  <LineRef ref="NP:Line:L1"/>
+</ServiceJourney>
+```
+
+One object is defined once, then referenced by `id` wherever it's needed. This is how NeTEx avoids redundancy and keeps data consistent across frames.
 
 > [!NOTE]
-> All NeTEx identifiers follow the pattern `Codespace:ObjectType:Identifier` — for example `NP:DayType:WKD` or `NP:ServiceJourney:15044`. The codespace declares who owns the data. See the [NeTEx Conventions guide](../NeTExConventions/NeTEx_Conventions.md) for the full rules.
-
-### Shared Resources (ResourceFrame)
-
-```xml
-<ResourceFrame id="NP:ResourceFrame:1" version="1">
-  <organisations>
-    <Authority id="NP:Authority:AUT_001" version="1">
-      <Name>Example Authority</Name>
-    </Authority>
-    <Operator id="NP:Operator:OP_001" version="1">
-      <Name>Example Operator</Name>
-    </Operator>
-  </organisations>
-</ResourceFrame>
-```
-
-- **Authority** — the public body responsible for transport (Transmodel: AUTHORITY)
-- **Operator** — the company running the vehicles (Transmodel: OPERATOR)
-- Other frames reference these by `id` — they don't repeat the definitions
-
-### Calendar (ServiceCalendarFrame)
-
-```xml
-<ServiceCalendarFrame id="NP:ServiceCalendarFrame:1" version="1">
-  <dayTypes>
-    <DayType id="NP:DayType:WKD" version="1">
-      <Name>Weekdays</Name>
-      <properties>
-        <PropertyOfDay>
-          <DaysOfWeek>Monday Tuesday Wednesday Thursday Friday</DaysOfWeek>
-        </PropertyOfDay>
-      </properties>
-    </DayType>
-  </dayTypes>
-</ServiceCalendarFrame>
-```
-
-- **DayType** defines *when* services operate (Transmodel: DAY TYPE)
-- Journeys reference DayTypes to say "I run on weekdays" without hardcoding dates
-
-### Network (ServiceFrame)
-
-```xml
-<ServiceFrame id="NP:ServiceFrame:1" version="1">
-  <lines>
-    <Line id="NP:Line:L1" version="1">
-      <Name>Line 1</Name>
-      <PublicCode>1</PublicCode>
-      <OperatorRef ref="NP:Operator:OP_001"/>
-    </Line>
-  </lines>
-</ServiceFrame>
-```
-
-- **Line** — a group of routes marketed as one service (Transmodel: LINE)
-- `OperatorRef` points back to the ResourceFrame — this is how frames cross-reference
-
-### Timetable (TimetableFrame)
-
-```xml
-<TimetableFrame id="NP:TimetableFrame:1" version="1">
-  <vehicleJourneys>
-    <ServiceJourney id="NP:ServiceJourney:SJ_001" version="1">
-      <Name>Morning departure</Name>
-      <dayTypes>
-        <DayTypeRef ref="NP:DayType:WKD"/>
-      </dayTypes>
-      <LineRef ref="NP:Line:L1"/>
-    </ServiceJourney>
-  </vehicleJourneys>
-</TimetableFrame>
-```
-
-- **ServiceJourney** — a planned trip (Transmodel: SERVICE JOURNEY)
-- `DayTypeRef` links to the calendar, `LineRef` links to the network
-- Everything connects through references, never by duplicating data
-
-### How the References Connect
-
-```mermaid
-flowchart LR
-    SJ["ServiceJourney"] -->|LineRef| L["Line"]
-    SJ -->|DayTypeRef| DT["DayType"]
-    L -->|OperatorRef| OP["Operator"]
-
-    subgraph TimetableFrame
-        SJ
-    end
-    subgraph ServiceFrame
-        L
-    end
-    subgraph ServiceCalendarFrame
-        DT
-    end
-    subgraph ResourceFrame
-        OP
-    end
-
-    style SJ fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style L fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style DT fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style OP fill:#42A5F5,stroke:#42A5F5,color:#fff
-```
-
-This is the core pattern in NeTEx: objects live in their own frame and connect through `*Ref` elements. Data is defined once and referenced everywhere.
+> All identifiers follow the pattern `Codespace:ObjectType:Identifier` — for example `NP:Operator:OP_001`. The codespace declares who owns the data. See [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) for the full rules.
 
 ---
 
 ## 6. 🧭 Where to Go Next
 
-You now have the foundation — here's where to go depending on what you need.
+You now understand what NeTEx is and how its documents are structured. The next step is to build something.
 
-**Deepen your understanding:**
+**Continue the learning path:**
 
-- [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) — casing, IDs, versioning
-- [Separation of Concerns](../SeparationOfConcerns/SeparationOfConcerns.md) — how domains stay independent
-- [Calendar Guide](../Calendar/Calendar_Guide.md) — DayType, OperatingDay, exceptions
-- [Table of Contents](../../LLM/Tables/TableOfContent.md) — browse all frames and objects
+- [NeTEx Conventions](../NeTExConventions/NeTEx_Conventions.md) — ID patterns, versioning, codespace rules
+- [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) — step-by-step from stops to departures ← **start here**
 
-**Build something:**
+**Go deeper:**
 
-- [How to Build a Timetable](../HowToBuildATimetable/HowToBuildATimetable_Guide.md) — step-by-step guide from stops to departures
-
-**Start working:**
-
+- [Calendar Guide](../Calendar/Calendar_Guide.md) — DayType, OperatingDay, date-based scheduling
+- [Stop Infrastructure](../StopInfrastructure/StopInfrastructure_Guide.md) — StopPlace, Quay, and the assignment bridge
 - [Tools Guide](../Tools/Tools_Guide.md) — editors, plugins, and validation setup
-- [Validation Guide](../Validation/Validation.md) — validate XML against the schema

@@ -248,38 +248,19 @@ Data is defined once and referenced everywhere — no duplication.
 
 ## 9. 📐 Putting It Together — The Frame Structure
 
-In the Nordic Profile, a timetable dataset is split into a **shared data file** and one or more **line files**. Shared objects — like ScheduledStopPoint, PassengerStopAssignment, and DestinationDisplay — are defined once in the shared file and reused across all line files. Line-specific objects — Line, JourneyPattern, ServiceJourney — live in each line file.
+You already know from [Get Started](../GetStarted/GetStarted_Guide.md) that NeTEx files use `PublicationDelivery` → `CompositeFrame` → frames. Here's where the timetable objects land:
+
+| Object | Frame |
+|--------|-------|
+| ScheduledStopPoint, Line, JourneyPattern, PassengerStopAssignment | **ServiceFrame** |
+| OperatingDay, DayType | **ServiceCalendarFrame** |
+| ServiceJourney, DatedServiceJourney | **TimetableFrame** |
+
+In the Nordic Profile, a timetable dataset is split into a **shared data file** and one or more **line files**. Shared objects (ScheduledStopPoint, PassengerStopAssignment, DestinationDisplay) are defined once in the shared file. Line-specific objects (Line, JourneyPattern, ServiceJourney) live in each line file.
 
 ![Line file vs shared data file](../../assets/images/netex_line_file_vs_shared_file_v3.svg)
 
-Within each file, objects live inside frames in a CompositeFrame:
-
-```xml
-<CompositeFrame id="NP:CompositeFrame:1" version="1">
-    <frames>
-        <ServiceFrame id="NP:ServiceFrame:1" version="1">
-            <lines>…</lines>
-            <scheduledStopPoints>…</scheduledStopPoints>
-            <journeyPatterns>…</journeyPatterns>
-        </ServiceFrame>
-
-        <ServiceCalendarFrame id="NP:ServiceCalendarFrame:1" version="1">
-            <operatingDays>
-                <OperatingDay>…</OperatingDay>
-            </operatingDays>
-        </ServiceCalendarFrame>
-
-        <TimetableFrame id="NP:TimetableFrame:1" version="1">
-            <vehicleJourneys>
-                <ServiceJourney>…</ServiceJourney>
-                <DatedServiceJourney>…</DatedServiceJourney>
-            </vehicleJourneys>
-        </TimetableFrame>
-    </frames>
-</CompositeFrame>
-```
-
-The **ServiceFrame** holds the structural objects (what exists), and the **TimetableFrame** holds the temporal objects (when things happen). See the [Network Timetable Guide](../NetworkTimetable/NetworkTimetable_Guide.md) for full details on the file split.
+See the [Network Timetable Guide](../NetworkTimetable/NetworkTimetable_Guide.md) for full details on the file split.
 
 ---
 
