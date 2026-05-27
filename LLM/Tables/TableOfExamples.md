@@ -5,7 +5,7 @@ Complete index of all XML examples in the repository.
 ## Guides
 
 - [Example_SeparationOfConcerns.xml](../../Guides/SeparationOfConcerns/Example_SeparationOfConcerns.xml) – Multi-frame delivery demonstrating domain separation
-- [Example_Interchange.xml](../../Guides/InterchangeOnly/Example_Interchange.xml) – Planned transfers and guaranteed connections
+- [Example_Interchange.xml](../../Guides/Interchange/Example_Interchange.xml) – Planned transfers and guaranteed connections
 - [Example_OrganisationalGovernance.xml](../../Guides/OrganisationalGovernance/Example_OrganisationalGovernance.xml) – Authority, Operator, Contract, and ResponsibilitySet
 - [Example_StopInfrastructure.xml](../../Guides/StopInfrastructure/Example_StopInfrastructure.xml) – Logical stops, physical platforms, and stop assignments
 - [Example_JourneyLifecycle.xml](../../Guides/JourneyLifecycle/Example_JourneyLifecycle.xml) – Line through Route, JourneyPattern, and ServiceJourney

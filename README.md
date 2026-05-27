@@ -61,7 +61,7 @@ flowchart LR
 | Vehicle assignment & blocks | [Vehicle Scheduling](Guides/VehicleScheduling/VehicleScheduling_Guide.md) |
 | Rolling stock | [Rolling Stock](Guides/RollingStock/RollingStock_Guide.md) |
 | Demand-responsive & booking | [Passenger Information](Guides/PassengerInformation/PassengerInformation_Guide.md) |
-| Interchanges & connections | [Interchange](Guides/InterchangeOnly/Interchange_Guide.md) |
+| Interchanges & connections | [Interchange](Guides/Interchange/Interchange_Guide.md) |
 | Fares & zones | [Fare Modelling](Guides/FareModelling/FareModelling_Guide.md) |
 | Deviations & replacements | [Extended Sales & Deviation](Guides/ExtendedSales_and_DeviationHandling/ExtendedSales_and_DeviationHandling_Guide.md) |
 | Separation of concerns | [Separation of Concerns](Guides/SeparationOfConcerns/SeparationOfConcerns.md) |

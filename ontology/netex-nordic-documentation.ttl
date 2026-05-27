@@ -1007,7 +1007,7 @@ doc:Tools a doc:Guide ;
 
 doc:Interchange a doc:Guide ;
     rdfs:label "Interchange" ;
-    doc:path "Guides/InterchangeOnly/Interchange_Guide.md" ;
+    doc:path "Guides/Interchange/Interchange_Guide.md" ;
     skos:definition "Planned transfers, guaranteed connections, and interchangeOnly stops" .
 
 doc:OrganisationalGovernance a doc:Guide ;

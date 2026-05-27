@@ -8,7 +8,7 @@
   - [Network Timetable](/Guides/NetworkTimetable/NetworkTimetable_Guide.md)
   - [Calendar](/Guides/Calendar/Calendar_Guide.md)
   - [Passenger Information](/Guides/PassengerInformation/PassengerInformation_Guide.md)
-  - [Interchange](/Guides/InterchangeOnly/Interchange_Guide.md)
+  - [Interchange](/Guides/Interchange/Interchange_Guide.md)
   - [Organisational Governance](/Guides/OrganisationalGovernance/OrganisationalGovernance_Guide.md)
   - [Separation of Concerns](/Guides/SeparationOfConcerns/SeparationOfConcerns.md)
   - [Vehicle Scheduling](/Guides/VehicleScheduling/VehicleScheduling_Guide.md)

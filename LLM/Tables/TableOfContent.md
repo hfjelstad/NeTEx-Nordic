@@ -9,7 +9,7 @@ How-to guides, conceptual overviews, and reference material:
 - [SeparationOfConcerns](../../Guides/SeparationOfConcerns/SeparationOfConcerns.md) – Domain separation, coupling strategies, and cross-frame patterns
 - [Tools](../../Guides/Tools/Tools_Guide.md) – Editors, plugins, validators, and development workflow
 - [Validation](../../Guides/Validation/Validation.md) – How to validate NeTEx XML against schemas and rules
-- [Interchange](../../Guides/InterchangeOnly/Interchange_Guide.md) – Planned transfers, guaranteed connections, and interchangeOnly stops
+- [Interchange](../../Guides/Interchange/Interchange_Guide.md) – Planned transfers, guaranteed connections, and interchangeOnly stops
 - [OrganisationalGovernance](../../Guides/OrganisationalGovernance/OrganisationalGovernance_Guide.md) – Authority, Operator, Contract, and ResponsibilitySet
 - [StopInfrastructure](../../Guides/StopInfrastructure/StopInfrastructure_Guide.md) – Logical stops, physical platforms, and the PassengerStopAssignment bridge
 - [JourneyLifecycle](../../Guides/JourneyLifecycle/JourneyLifecycle_Guide.md) – Line → Route → JourneyPattern → ServiceJourney → DatedServiceJourney
