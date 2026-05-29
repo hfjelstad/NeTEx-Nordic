@@ -207,12 +207,19 @@ netex:SalesTransactionFrame a owl:Class ;
 ## ResourceFrame objects
 ## -----------------------------------------------------------------
 
+netex:Organisation a owl:Class ;
+    rdfs:label "Organisation" ;
+    skos:definition "Abstract superclass for all organisation types (Authority, Operator)" ;
+    rdfs:comment "Abstract — not instantiated directly in NeTEx data" ;
+    netex:inFrame netex:ResourceFrame .
+
 netex:Authority a owl:Class ;
     rdfs:label "Authority" ;
     skos:definition "Transit authority — the public body responsible for organizing transport" ;
     doc:description "Objects/Authority/Description_Authority.md" ;
     doc:example "Objects/Authority/Example_Authority_NP.xml" ;
     doc:table "Objects/Authority/Table_Authority.md" ;
+    rdfs:subClassOf netex:Organisation ;
     netex:inFrame netex:ResourceFrame .
 
 netex:Operator a owl:Class ;
@@ -221,6 +228,7 @@ netex:Operator a owl:Class ;
     doc:description "Objects/Operator/Description_Operator.md" ;
     doc:example "Objects/Operator/Example_Operator_NP.xml" ;
     doc:table "Objects/Operator/Table_Operator.md" ;
+    rdfs:subClassOf netex:Organisation ;
     netex:inFrame netex:ResourceFrame .
 
 netex:VehicleType a owl:Class ;
@@ -261,6 +269,22 @@ netex:Contract a owl:Class ;
     doc:description "Objects/Contract/Description_Contract.md" ;
     doc:example "Objects/Contract/Example_Contract_Minimal.xml" ;
     doc:table "Objects/Contract/Table_Contract.md" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:CompoundTrain a owl:Class ;
+    rdfs:label "CompoundTrain" ;
+    skos:definition "Composed rolling stock formation consisting of multiple Train units coupled together" ;
+    doc:description "Objects/CompoundTrain/Description_CompoundTrain.md" ;
+    doc:example "Objects/CompoundTrain/Example_CompoundTrain_NP.xml" ;
+    doc:table "Objects/CompoundTrain/Table_CompoundTrain.md" ;
+    netex:inFrame netex:ResourceFrame .
+
+netex:Train a owl:Class ;
+    rdfs:label "Train" ;
+    skos:definition "A single train unit with its components (coaches, wagons)" ;
+    doc:description "Objects/Train/Description_Train.md" ;
+    doc:example "Objects/Train/Example_Train_NP.xml" ;
+    doc:table "Objects/Train/Table_Train.md" ;
     netex:inFrame netex:ResourceFrame .
 
 ## -----------------------------------------------------------------
@@ -354,6 +378,14 @@ netex:TicketingEquipment a owl:Class ;
 ## -----------------------------------------------------------------
 ## ServiceCalendarFrame objects
 ## -----------------------------------------------------------------
+
+netex:ServiceCalendar a owl:Class ;
+    rdfs:label "ServiceCalendar" ;
+    skos:definition "Logical container with shared validity period for calendar-related elements" ;
+    doc:description "Objects/ServiceCalendar/Description_ServiceCalendar.md" ;
+    doc:example "Objects/ServiceCalendar/Example_ServiceCalendar_NP.xml" ;
+    doc:table "Objects/ServiceCalendar/Table_ServiceCalendar.md" ;
+    netex:inFrame netex:ServiceCalendarFrame .
 
 netex:DayType a owl:Class ;
     rdfs:label "DayType" ;
@@ -476,6 +508,30 @@ netex:LinkSequenceProjection a owl:Class ;
     doc:table "Objects/LinkSequenceProjection/Table_LinkSequenceProjection.md" ;
     netex:inFrame netex:ServiceFrame .
 
+netex:RoutePoint a owl:Class ;
+    rdfs:label "RoutePoint" ;
+    skos:definition "A point that identifies a location in a Route, used as building block for PointOnRoute" ;
+    doc:description "Objects/RoutePoint/Description_RoutePoint.md" ;
+    doc:example "Objects/RoutePoint/Example_RoutePoint_NP.xml" ;
+    doc:table "Objects/RoutePoint/Table_RoutePoint.md" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:ServiceLink a owl:Class ;
+    rdfs:label "ServiceLink" ;
+    skos:definition "Directed link between two ScheduledStopPoints, carrying distance and optional GML projection" ;
+    doc:description "Objects/ServiceLink/Description_ServiceLink.md" ;
+    doc:example "Objects/ServiceLink/Example_ServiceLink_NP.xml" ;
+    doc:table "Objects/ServiceLink/Table_ServiceLink.md" ;
+    netex:inFrame netex:ServiceFrame .
+
+netex:SiteConnection a owl:Class ;
+    rdfs:label "SiteConnection" ;
+    skos:definition "Transfer connection between two stop places with walking duration" ;
+    doc:description "Objects/SiteConnection/Description_SiteConnection.md" ;
+    doc:example "Objects/SiteConnection/Example_SiteConnection_NP.xml" ;
+    doc:table "Objects/SiteConnection/Table_SiteConnection.md" ;
+    netex:inFrame netex:ServiceFrame .
+
 ## -----------------------------------------------------------------
 ## TimetableFrame objects
 ## -----------------------------------------------------------------
@@ -503,6 +559,14 @@ netex:Interchange a owl:Class ;
     doc:description "Objects/Interchange/Description_Interchange.md" ;
     doc:example "Objects/Interchange/Example_Interchange_NP.xml" ;
     doc:table "Objects/Interchange/Table_Interchange.md" ;
+    netex:inFrame netex:TimetableFrame .
+
+netex:TrainNumber a owl:Class ;
+    rdfs:label "TrainNumber" ;
+    skos:definition "Railway-specific train service number, referenced via JourneyPart" ;
+    doc:description "Objects/TrainNumber/Description_TrainNumber.md" ;
+    doc:example "Objects/TrainNumber/Example_TrainNumber_NP.xml" ;
+    doc:table "Objects/TrainNumber/Table_TrainNumber.md" ;
     netex:inFrame netex:TimetableFrame .
 
 ## -----------------------------------------------------------------
