@@ -20,7 +20,7 @@ In this guide you will learn:
 
 An **interchange** is a planned transfer opportunity between two ServiceJourneys — a **feeder** (the arriving service) and a **distributor** (the departing service). It answers the question: *"Can a passenger get off journey A and onto journey B at this location?"*
 
-<img src="interchange_concept.svg" alt="Interchange concept: feeder arrives, passenger transfers, distributor departs" width="680" />
+![Interchange concept: feeder arrives, passenger transfers, distributor departs](interchange_concept.svg ':size=680')
 
 <!-- Fallback for renderers without SVG support -->
 <details><summary>Text version</summary>

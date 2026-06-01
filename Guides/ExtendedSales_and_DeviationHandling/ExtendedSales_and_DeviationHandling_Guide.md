@@ -20,7 +20,7 @@ This guide explains:
 
 Public transport services follow a multi-year lifecycle. The diagram below shows how planning, approval, and operations relate in time:
 
-<img src="service_lifecycle.svg" alt="Public Transport Service Lifecycle: from planning (2+ years) through IM approval (~1 year) to deviations to real-time" width="820" />
+![Public Transport Service Lifecycle: from planning (2+ years) through IM approval (~1 year) to deviations to real-time](service_lifecycle.svg ':size=820')
 
 <details><summary>Text version</summary>
 
@@ -303,7 +303,7 @@ When vehicle continuity matters (e.g., a train set must be tracked across multip
 
 The following diagram shows how deviations enter the system during the sales window — starting from DSJ creation (which can precede IM approval) through deviation and optional revert:
 
-<img src="deviation_flow.svg" alt="Deviation flow: DSJ created → IM approves → deviation detected → optional revert → downstream notified" width="820" />
+![Deviation flow: DSJ created → IM approves → deviation detected → optional revert → downstream notified](deviation_flow.svg ':size=820')
 
 <details><summary>Text version</summary>
 
