@@ -115,6 +115,12 @@ netex:Organisation   netex:npDataSource netex:CentralRegistry .
 ## netex:Authority/Operator — MERGED into Organisation (CEN PROPOSAL)
 ## netex:TariffZone    REMOVED in 3.0 (transferred to FareZone)
 netex:FareZone       netex:npDataSource netex:CentralRegistry .
+netex:VehicleType    netex:npDataSource netex:CentralRegistry .
+netex:Vehicle        netex:npDataSource netex:CentralRegistry .
+netex:CompoundTrain  netex:npDataSource netex:CentralRegistry .
+netex:Train          netex:npDataSource netex:CentralRegistry .
+## Rolling stock components in central registry: modality-independent
+## composition (Train/CompoundTrain) built from registered VehicleTypes.
 
 ## --- Operator-produced data (delivered to central system) ---
 
@@ -134,16 +140,14 @@ netex:Notice             netex:npDataSource netex:OperatorDelivery .
 netex:GroupOfLines       netex:npDataSource netex:OperatorDelivery .
 netex:Interchange        netex:npDataSource netex:OperatorDelivery .
 netex:TrainBlock         netex:npDataSource netex:OperatorDelivery .
-netex:Vehicle            netex:npDataSource netex:OperatorDelivery .
-netex:VehicleType        netex:npDataSource netex:OperatorDelivery .
+## Vehicle, VehicleType — MOVED to CentralRegistry in 3.0
 netex:Codespace          netex:npDataSource netex:OperatorDelivery .
 netex:ServiceCalendar    netex:npDataSource netex:OperatorDelivery .
 ## netex:RoutePoint      REMOVED in 3.0 (cascade from Route removal)
 netex:ServiceLink        netex:npDataSource netex:OperatorDelivery .
 netex:SiteConnection     netex:npDataSource netex:OperatorDelivery .
 netex:TrainNumber        netex:npDataSource netex:OperatorDelivery .
-netex:CompoundTrain      netex:npDataSource netex:OperatorDelivery .
-netex:Train              netex:npDataSource netex:OperatorDelivery .
+## CompoundTrain, Train — MOVED to CentralRegistry in 3.0
 
 ## =================================================================
 ## FRAME CLASSES (Containers)
