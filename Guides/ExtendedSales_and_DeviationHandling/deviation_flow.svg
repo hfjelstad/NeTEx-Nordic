@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 520" font-family="'Segoe UI', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="gFlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8f4fd"/>
+      <stop offset="100%" stop-color="#f8fcfe"/>
+    </linearGradient>
+    <linearGradient id="gStep" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a73e8"/>
+      <stop offset="100%" stop-color="#4285f4"/>
+    </linearGradient>
+    <linearGradient id="gDeviation" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e65100"/>
+      <stop offset="100%" stop-color="#f4811f"/>
+    </linearGradient>
+    <linearGradient id="gRevert" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#43a047"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#4285f4"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#f4811f"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#43a047"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="520" fill="url(#gFlow)" rx="12"/>
+
+  <!-- Title -->
+  <text x="410" y="32" text-anchor="middle" font-size="15" font-weight="600" fill="#1a2b3c">Deviation Flow in the Sales Window</text>
+
+  <!-- Step 1: DSJ Created -->
+  <rect x="40" y="52" width="220" height="56" rx="8" fill="url(#gStep)" filter="url(#shadow)"/>
+  <text x="150" y="74" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">DSJ Created — v1</text>
+  <text x="150" y="92" text-anchor="middle" font-size="9.5" fill="#dce8f7">Sales window opens</text>
+
+  <!-- Step 2: IM Approves -->
+  <rect x="300" y="52" width="220" height="56" rx="8" fill="url(#gStep)" filter="url(#shadow)"/>
+  <text x="410" y="74" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">IM Approves / Revises — v2</text>
+  <text x="410" y="92" text-anchor="middle" font-size="9.5" fill="#dce8f7">Times adjusted, version incremented</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="260" y1="80" x2="298" y2="80" stroke="#4285f4" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Step 3: Deviation -->
+  <rect x="560" y="52" width="220" height="56" rx="8" fill="url(#gDeviation)" filter="url(#shadow)"/>
+  <text x="670" y="74" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Deviation Detected — v3</text>
+  <text x="670" y="92" text-anchor="middle" font-size="9.5" fill="#fde0cc">cancelled | replaced | extraJourney</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="520" y1="80" x2="558" y2="80" stroke="#4285f4" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Branch: Deviation actions (below step 3) -->
+  <!-- Cancellation path -->
+  <rect x="40" y="150" width="230" height="70" rx="8" fill="#fff" stroke="#e65100" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="155" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#e65100">Cancellation</text>
+  <text x="155" y="189" text-anchor="middle" font-size="9" fill="#555">ServiceAlteration = cancellation</text>
+  <text x="155" y="204" text-anchor="middle" font-size="9" fill="#555">No alternative provided</text>
+
+  <!-- Replacement path -->
+  <rect x="295" y="150" width="230" height="70" rx="8" fill="#fff" stroke="#e65100" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="410" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#e65100">Replacement</text>
+  <text x="410" y="189" text-anchor="middle" font-size="9" fill="#555">Original: ServiceAlteration = replaced</text>
+  <text x="410" y="204" text-anchor="middle" font-size="9" fill="#555">New DSJ with replacedJourneys ref</text>
+
+  <!-- Extra/Supplement path -->
+  <rect x="550" y="150" width="230" height="70" rx="8" fill="#fff" stroke="#e65100" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="665" y="172" text-anchor="middle" font-size="10.5" font-weight="600" fill="#e65100">Reinforcement / Supplement</text>
+  <text x="665" y="189" text-anchor="middle" font-size="9" fill="#555">ServiceAlteration = extraJourney</text>
+  <text x="665" y="204" text-anchor="middle" font-size="9" fill="#555">+ replacedJourneys (if supplement)</text>
+
+  <!-- Arrows from Step 3 down to branches -->
+  <line x1="610" y1="108" x2="155" y2="148" stroke="#f4811f" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+  <line x1="670" y1="108" x2="410" y2="148" stroke="#f4811f" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+  <line x1="720" y1="108" x2="665" y2="148" stroke="#f4811f" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+
+  <!-- Revert path (central, green) -->
+  <rect x="220" y="270" width="380" height="70" rx="8" fill="#fff" stroke="#2e7d32" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="410" y="292" text-anchor="middle" font-size="10.5" font-weight="600" fill="#2e7d32">Revert — Deviation Withdrawn (v4)</text>
+  <text x="410" y="309" text-anchor="middle" font-size="9" fill="#555">Original DSJ: version++, ServiceAlteration → planned</text>
+  <text x="410" y="324" text-anchor="middle" font-size="9" fill="#555">Replacement DSJ: version++, ServiceAlteration → cancellation</text>
+
+  <!-- Arrow from replacement/cancel down to revert -->
+  <path d="M155,220 L155,250 Q155,260 165,260 L218,260" stroke="#43a047" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)"/>
+  <path d="M410,220 L410,268" stroke="#43a047" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)"/>
+  <text x="430" y="252" font-size="8.5" fill="#2e7d32" font-style="italic">optional</text>
+
+  <!-- Downstream notification box -->
+  <rect x="140" y="385" width="540" height="56" rx="8" fill="#f3f3f3" stroke="#888" stroke-width="1" filter="url(#shadow)"/>
+  <text x="410" y="407" text-anchor="middle" font-size="10.5" font-weight="600" fill="#333">Downstream Systems Notified (at every version change)</text>
+  <text x="410" y="425" text-anchor="middle" font-size="9" fill="#555">Passenger information • Ticket sales / reservations • SIRI real-time feeds</text>
+
+  <!-- Arrows down to downstream -->
+  <line x1="155" y1="220" x2="155" y2="360" stroke="#888" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+  <line x1="665" y1="220" x2="665" y2="360" stroke="#888" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+  <line x1="410" y1="340" x2="410" y2="383" stroke="#888" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- Version timeline at bottom -->
+  <rect x="40" y="465" width="740" height="40" rx="6" fill="#1a2b3c" opacity="0.05"/>
+  <text x="410" y="482" text-anchor="middle" font-size="9.5" font-weight="600" fill="#1a2b3c">DSJ.id remains stable throughout — only version increments</text>
+  <text x="410" y="497" text-anchor="middle" font-size="9" fill="#555">v1 (created) → v2 (IM adjusts) → v3 (deviation) → v4 (revert or real-time)</text>
+</svg>

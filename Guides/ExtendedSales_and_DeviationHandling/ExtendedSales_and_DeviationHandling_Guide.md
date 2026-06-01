@@ -20,21 +20,25 @@ This guide explains:
 
 Public transport services follow a multi-year lifecycle. The diagram below shows how planning, approval, and operations relate in time:
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'cScale0': '#1565C0', 'cScaleLabel0': '#ffffff', 'cScale1': '#1E88E5', 'cScaleLabel1': '#ffffff', 'cScale2': '#42A5F5', 'cScaleLabel2': '#ffffff', 'cScalePeer0': '#BBDEFB', 'cScalePeer1': '#90CAF9', 'cScalePeer2': '#64B5F6'}}}%%
-timeline
-    title Public Transport Service Lifecycle
-    section 2+ years before
-        Service created : Planning phase begins
-        Service application : Route and capacity applied for
-    section ~1 year before
-        Service refinement : Times and stops adjusted
-        Service approval : IM approves yearly timetable
-    section Sales window ≈90 days
-        Service deviations : Cancellations, replacements, reinforcements
-        Service running : Recalculating and RealTime
-        Service logged : Archived for analysis
+<img src="service_lifecycle.svg" alt="Public Transport Service Lifecycle: from planning (2+ years) through IM approval (~1 year) to deviations to real-time" width="820" />
+
+<details><summary>Text version</summary>
+
+```text
+  DatedServiceJourney ─── created at start, versioned throughout ──────────────────────→
+
+  2+ YEARS BEFORE       ~1 YEAR BEFORE         DEVIATIONS            REAL-TIME
+ ┌────────────────┐    ┌────────────────┐    ┌────────────────┐    ┌────────────────┐
+ │ Service created│    │ Times adjusted │    │ Cancellations  │    │ SIRI updates   │
+ │ Route applied  │    │ IM approves    │    │ Replacements   │    │ Day of ops     │
+ └───────┬────────┘    └───────┬────────┘    └───────┬────────┘    └───────┬────────┘
+ ────────●─────────────────────●─────────────────────●─────────────────────●────────→
+      DSJ v1               DSJ v2                DSJ v3                DSJ v4
+    (created)           (IM adjusts)          (deviation)           (real-time)
+
+ └────────────────── Sales window (from DSJ creation) ─────────────────────────────────┘
 ```
+</details>
 
 ### Two Distinct Planning Horizons
 
@@ -237,7 +241,46 @@ A train operates but with reduced material (fewer carriages), so supplementary b
 
 > ⚠️ **Semantic note:** Using `replacedJourneys` on an `extraJourney` stretches the intended meaning of `replacedJourneys`. However, this is the best available mechanism to link a supplementary journey to the journey it supports. Consumers should interpret `extraJourney` + `replacedJourneys` as "supplementing" rather than "replacing."
 
-### 5e. Block-Linked Deviation
+### 5e. Revert — Deviation Cancelled
+
+A deviation that was previously announced is withdrawn, and the original journey runs after all. For example: track work was planned for June 4, the journey was marked `replaced`, but then the track work is postponed — the train operates as originally planned.
+
+```xml
+<!-- Step 1: Revert the original journey back to planned (version incremented) -->
+<DatedServiceJourney id="NP:DatedServiceJourney:100_0730_20260604" version="3">
+  <ServiceAlteration>planned</ServiceAlteration>
+  <ServiceJourneyRef ref="NP:ServiceJourney:100_0730"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-04"/>
+</DatedServiceJourney>
+
+<!-- Step 2: Cancel the replacement journey that is no longer needed -->
+<DatedServiceJourney id="NP:DatedServiceJourney:BUS_100_0745_20260604" version="2">
+  <ServiceAlteration>cancellation</ServiceAlteration>
+  <ServiceJourneyRef ref="NP:ServiceJourney:BUS_100_0745"/>
+  <OperatingDayRef ref="NP:OperatingDay:2026-06-04"/>
+</DatedServiceJourney>
+```
+
+**Version history of the original journey:**
+
+| Version | ServiceAlteration | What happened |
+|---------|-------------------|---------------|
+| 1 | `planned` | Journey created, tickets sold |
+| 2 | `replaced` | Track work announced, replacement bus published |
+| 3 | `planned` | Track work postponed — original journey reinstated |
+
+**Rules:**
+- The original DSJ's version is incremented and `ServiceAlteration` set back to `planned`. The id remains stable — travelers who held tickets against v1 or v2 still hold the same reference.
+- The replacement DSJ must be explicitly cancelled (version incremented, `ServiceAlteration=cancellation`). Simply omitting it from a delivery is not sufficient — consumers need the explicit signal to remove it.
+- Downstream systems detect the version change and notify travelers: "Your journey has been reinstated to the original plan."
+- The same pattern applies for reverting a cancellation: increment version, set `ServiceAlteration=planned`.
+
+> ⚠️ **Note — current practice vs. recommendation:**
+> Today, most Nordic implementations simply omit the replacement service from subsequent deliveries rather than explicitly cancelling it. In this model, the *missing object* is the trigger — consumers must infer cancellation from absence. This is actionable (consumers can detect the absence and react), but it is not optimal: there is no version increment to track, no explicit state change to propagate, and downstream systems must perform full-set comparison rather than responding to a discrete event. Once sales or reservation systems bind to the replacement journey's id, explicit cancellation (version increment + `ServiceAlteration=cancellation`) provides a cleaner contract and should be adopted as the standard practice going forward.
+
+> 💡 **Tip:** The version sequence tells the full story. Systems that track version history can show travelers the complete timeline of changes, building trust in the information quality.
+
+### 5f. Block-Linked Deviation
 
 When vehicle continuity matters (e.g., a train set must be tracked across multiple trips), use BlockRef:
 
@@ -258,37 +301,37 @@ When vehicle continuity matters (e.g., a train set must be tracked across multip
 
 ## 6. 📊 Deviation Flow in the Sales Window
 
-The following sequence illustrates how deviations enter the system during the sales window:
+The following diagram shows how deviations enter the system during the sales window — starting from DSJ creation (which can precede IM approval) through deviation and optional revert:
+
+<img src="deviation_flow.svg" alt="Deviation flow: DSJ created → IM approves → deviation detected → optional revert → downstream notified" width="820" />
+
+<details><summary>Text version</summary>
 
 ```text
-Step 1: Yearly timetable approved
-        ServiceJourney templates + DayType assignments published
+Step 1: DSJ created (v1) — sales window opens
+        DatedServiceJourney instances generated from ServiceJourney templates
+        May precede IM approval by months
         ↓
-Step 2: Sales window opens (may extend BEYOND IM approval horizon)
-        DatedServiceJourney instances created for each date
-        ServiceAlteration = planned (or omitted)
-        Tickets go on sale — even for dates not yet confirmed by IM
+Step 2: IM approves or revises yearly timetable (v2)
+        Times adjusted, capacity confirmed
+        Version incremented — travelers notified of changes
         ↓
-Step 3: IM approves or revises the yearly timetable
-        Affected DatedServiceJourneys updated (version incremented)
-        Travelers notified of any changes
+Step 3: Deviation detected (v3)
+        Version incremented, ServiceAlteration set:
+        - cancellation (no alternative)
+        - replaced (alternative provided → new DSJ with replacedJourneys)
+        - extraJourney (reinforcement or supplement)
         ↓
-Step 4: Further deviation detected (e.g., track work on June 4)
+Step 4: (Optional) Deviation reverted (v4)
+        Original DSJ: version incremented, ServiceAlteration → planned
+        Replacement DSJ: version incremented, ServiceAlteration → cancellation
         ↓
-Step 5: Affected DatedServiceJourney updated
-        - Version incremented
-        - ServiceAlteration set to cancellation (no alternative)
-          or replaced (alternative provided)
-        ↓
-Step 6: Replacement/extra journeys created if needed
-        - New DatedServiceJourney with replacedJourneys referencing the original
-        - ServiceAlteration = extraJourney only for reinforcements
-        ↓
-Step 7: Downstream systems notified
+Step 5: Downstream systems notified (at every version change)
         - Passenger information updated
-        - Ticket sales reflect new availability
+        - Ticket sales / reservations adjusted
         - SIRI real-time feeds aligned
 ```
+</details>
 
 > 💡 **Tip:** The sales window is where NeTEx (planned data) and SIRI (real-time data) meet. A DatedServiceJourney cancelled in NeTEx should also be reflected as a SituationExchange in SIRI for real-time passenger information.
 
