@@ -599,7 +599,7 @@ netex:ServiceJourney netex:elementOrder [
 ] , [
     netex:position 4 ; netex:element "Name"
 ] , [
-    netex:position 5 ; netex:element "PrivateCode"
+    netex:position 5 ; netex:element "privateCodes"
 ] , [
     netex:position 6 ; netex:element "Description"
 ] , [
@@ -692,7 +692,7 @@ netex:Line netex:elementOrder [
 ] , [
     netex:position 6 ; netex:element "PublicCode"
 ] , [
-    netex:position 7 ; netex:element "PrivateCode"
+    netex:position 7 ; netex:element "privateCodes"
 ] , [
     netex:position 8 ; netex:element "responsibilitySetRef"
 ] , [
@@ -1133,7 +1133,7 @@ profile:NP netex:allows [
     netex:cardinality "0..1"
 ] , [
     netex:class netex:Line ;
-    netex:property "PrivateCode" ;
+    netex:property "privateCodes" ;
     netex:cardinality "0..1"
 ] , [
     netex:class netex:DatedServiceJourney ;
