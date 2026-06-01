@@ -251,38 +251,46 @@ netex:Organisation a owl:Class ;
     change:scope change:CENProposal ;
     rdfs:comment "CEN PROPOSAL: Made concrete. Authority/Operator become OrganisationType values, not subclasses. Role assignment lives in ResponsibilitySet; OrganisationType enables machine verification." .
 
-## --- OrganisationType vs StakeholderRoleType ---
+## --- OrganisationType & StakeholderRoleType: SHARED ENUM (CEN PROPOSAL) ---
 ##
-## StakeholderRoleType (on ResponsibilityRoleAssignment) = ASSIGNED ROLE:
-##   Declares what the org does in this context.
-##   Values: Planning | Operation | Control | Reservation |
-##           EntityLegalOwnership | FareManagement | SecurityManagement |
-##           DataRegistrar | Other
+## PROPOSED unified enum values for BOTH OrganisationType AND StakeholderRoleType:
 ##
-## OrganisationType (on Organisation) = VERIFIED STATUS from external registry:
-##   Machine-checkable classification sourced from e.g. løyveregister.
-##   Values: authority | operator | railOperator | railFreightOperator |
-##           statutoryBody | facilityOperator | travelAgent |
-##           servicedOrganisation | retailConsortium | other
+##   Planner                  — plans services (was: authority/Planning)
+##   PublicTransportOperator  — operates services (was: operator/Operation)
+##   PublicTransportAuthority — commissions/finances (was: authority/Planning)
+##   Controller               — real-time control (was: —/Control)
 ##
-## CROSS-VALIDATION:
-##   When RS assigns StakeholderRoleType=Operation → verify that
-##   Organisation.OrganisationType=operator (has PTO license).
-##   Same semantics, different layers: assignment vs verification.
+## Same values in both places. Difference is WHERE it's used:
+##   OrganisationType (on Organisation) = what the org IS (from registry)
+##   StakeholderRoleType (on ResponsibilityRoleAssignment) = what the org DOES here
 ##
-## Example: Vy assigned StakeholderRoleType=Operation in ResponsibilitySet
-##          for line 400. OrganisationType=operator confirms Vy holds
-##          the operator license (from løyveregisteret).
+## CROSS-VALIDATION becomes equality check:
+##   RS assigns StakeholderRoleType=PublicTransportOperator →
+##   verify Organisation.OrganisationType=PublicTransportOperator
+##
+## EXISTING XSD VALUES TO DEPRECATE/REPLACE:
+##   OrganisationType:    authority → PublicTransportAuthority
+##                        operator  → PublicTransportOperator
+##   StakeholderRoleType: Planning  → Planner
+##                        Operation → PublicTransportOperator
+##                        Control   → Controller
+##
+## RETAINED FROM EXISTING XSD (unchanged):
+##   StakeholderRoleType: Reservation | EntityLegalOwnership |
+##                        FareManagement | SecurityManagement |
+##                        DataRegistrar | Other
+##   OrganisationType:   railOperator | railFreightOperator |
+##                        facilityOperator | travelAgent | other
 ## -----------------------------------------------------------------
 
 ## --- Authority/Operator: DEPRECATED subtypes (CEN PROPOSAL) ---
 ## Retained as aliases during transition. In 3.0 target state, only Organisation exists.
-## OrganisationType=authority replaces Authority class.
-## OrganisationType=operator replaces Operator class.
+## OrganisationType=PublicTransportAuthority replaces Authority class.
+## OrganisationType=PublicTransportOperator replaces Operator class.
 
 netex:Authority a owl:Class ;
     rdfs:label "Authority" ;
-    skos:definition "DEPRECATED — use Organisation with OrganisationType=authority" ;
+    skos:definition "DEPRECATED — use Organisation with OrganisationType=PublicTransportAuthority" ;
     rdfs:subClassOf netex:Organisation ;
     owl:deprecated true ;
     change:scope change:CENProposal ;
@@ -290,7 +298,7 @@ netex:Authority a owl:Class ;
 
 netex:Operator a owl:Class ;
     rdfs:label "Operator" ;
-    skos:definition "DEPRECATED — use Organisation with OrganisationType=operator" ;
+    skos:definition "DEPRECATED — use Organisation with OrganisationType=PublicTransportOperator" ;
     rdfs:subClassOf netex:Organisation ;
     owl:deprecated true ;
     change:scope change:CENProposal ;
@@ -796,7 +804,7 @@ netex:ResponsibilitySet netex:hasRef [
     netex:target xsd:string ;
     netex:xsdCardinality "1..1" ;
     netex:path "roles/ResponsibilityRoleAssignment/StakeholderRoleType" ;
-    rdfs:comment "ASSIGNED ROLE: declares the org's function here. Verifiable against OrganisationType. Enum: Planning | Operation | Control | Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar | Other"
+    rdfs:comment "ASSIGNED ROLE: declares the org's function here. Verifiable against OrganisationType (shared enum). CEN PROPOSAL new values: Planner | PublicTransportOperator | PublicTransportAuthority | Controller. Retained: Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar | Other"
 ] , [
     netex:property "ContractRef" ;
     netex:target netex:Contract ;
