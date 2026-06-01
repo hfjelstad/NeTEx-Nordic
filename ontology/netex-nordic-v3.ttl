@@ -246,18 +246,35 @@ netex:SalesTransactionFrame a owl:Class ;
 
 netex:Organisation a owl:Class ;
     rdfs:label "Organisation" ;
-    skos:definition "A legal entity involved in public transport: may hold planning, operation, control, or data roles via ResponsibilitySet" ;
+    skos:definition "A legal entity involved in public transport. Classified by OrganisationType (what it IS) and assigned context-specific roles via StakeholderRoleType (what it DOES here)." ;
     netex:inFrame netex:ResourceFrame ;
     change:scope change:CENProposal ;
-    rdfs:comment "CEN PROPOSAL: Made concrete. Replaces Authority+Operator subclass hierarchy. Role differentiation moves to StakeholderRoleType in ResponsibilityRoleAssignment." .
+    rdfs:comment "CEN PROPOSAL: Made concrete. Authority/Operator become OrganisationType values, not subclasses. A PTA (OrganisationType=authority) can still hold StakeholderRoleType=Operation in a specific context." .
+
+## --- OrganisationType vs StakeholderRoleType ---
+##
+## OrganisationType (on Organisation) = IDENTITY — what the org IS:
+##   authority | operator | railOperator | railFreightOperator |
+##   statutoryBody | facilityOperator | travelAgent | servicedOrganisation |
+##   retailConsortium | other
+##
+## StakeholderRoleType (on ResponsibilityRoleAssignment) = CONTEXT ROLE — what it DOES here:
+##   Planning | Operation | Control | Reservation | EntityLegalOwnership |
+##   FareManagement | SecurityManagement | DataRegistrar | Other
+##
+## Example: Ruter (OrganisationType=authority) with StakeholderRoleType=Operation
+##          for T-banen. Vy (OrganisationType=operator) with
+##          StakeholderRoleType=Planning for regional rail.
+## -----------------------------------------------------------------
 
 ## --- Authority/Operator: DEPRECATED subtypes (CEN PROPOSAL) ---
 ## Retained as aliases during transition. In 3.0 target state, only Organisation exists.
-## StakeholderRoleType enum: Planning | Operation | Control | DataOwner | Financing
+## OrganisationType=authority replaces Authority class.
+## OrganisationType=operator replaces Operator class.
 
 netex:Authority a owl:Class ;
     rdfs:label "Authority" ;
-    skos:definition "DEPRECATED — use Organisation with StakeholderRoleType=Planning in ResponsibilitySet" ;
+    skos:definition "DEPRECATED — use Organisation with OrganisationType=authority" ;
     rdfs:subClassOf netex:Organisation ;
     owl:deprecated true ;
     change:scope change:CENProposal ;
@@ -265,7 +282,7 @@ netex:Authority a owl:Class ;
 
 netex:Operator a owl:Class ;
     rdfs:label "Operator" ;
-    skos:definition "DEPRECATED — use Organisation with StakeholderRoleType=Operation in ResponsibilitySet" ;
+    skos:definition "DEPRECATED — use Organisation with OrganisationType=operator" ;
     rdfs:subClassOf netex:Organisation ;
     owl:deprecated true ;
     change:scope change:CENProposal ;
@@ -765,13 +782,13 @@ netex:ResponsibilitySet netex:hasRef [
     netex:target netex:Organisation ;
     netex:xsdCardinality "1..n" ;
     netex:path "roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef" ;
-    rdfs:comment "CEN PROPOSAL: targets Organisation (not Authority/Operator). Role determined by StakeholderRoleType."
+    rdfs:comment "CEN PROPOSAL: targets Organisation (not Authority/Operator). OrganisationType on the org says what it IS; StakeholderRoleType here says what it DOES in this context."
 ] , [
     netex:property "StakeholderRoleType" ;
     netex:target xsd:string ;
     netex:xsdCardinality "1..1" ;
     netex:path "roles/ResponsibilityRoleAssignment/StakeholderRoleType" ;
-    rdfs:comment "Enum: Planning | Operation | Control | DataOwner | Financing"
+    rdfs:comment "CONTEXT ROLE enum: Planning | Operation | Control | Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar | Other"
 ] , [
     netex:property "ContractRef" ;
     netex:target netex:Contract ;
