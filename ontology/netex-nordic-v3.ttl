@@ -119,15 +119,32 @@ netex:VehicleType    netex:npDataSource netex:CentralRegistry .
 netex:Vehicle        netex:npDataSource netex:CentralRegistry .
 netex:Train          netex:npDataSource netex:CentralRegistry .
 ## Rolling stock in central registry: VehicleType (classification),
-## Vehicle (individual unit), Train (single unit with components).
-## CompoundTrain (formation) is operational — stays in OperatorDelivery.
+## Vehicle (individual registered unit, may have components).
+## CompoundVehicle (formation of multiple Vehicles) is operational — OperatorDelivery.
 ##
-## CEN WISH — modality-neutral naming for rolling stock hierarchy:
-##   Train → VehicleUnit (it's already a composition of coaches/wagons)
-##   CompoundTrain → Formation (or CompoundVehicle)
-##   Current naming is circular: "Train" IS compound by definition,
-##   so "CompoundTrain" = compound of compounds. Rail-biased and
-##   meaningless for bus/ferry/tram formations.
+## CEN WISH — modality-neutral rolling stock model:
+##
+##   CURRENT NeTEx          →  PROPOSED
+##   VehicleType               VehicleType (unchanged — classification)
+##   Vehicle                   Vehicle (expanded — any registered unit incl. wagons)
+##   Train                     Vehicle + components (internal structure)
+##   TrainComponent            VehicleComponent (child of Vehicle)
+##   CompoundTrain             CompoundVehicle (coupling of Vehicles)
+##
+##   Vehicle: Anything registered as a unit. Oxford definition — includes
+##   bus, tram, EMU, locomotive, wagon, coach, ferry. An articulated bus
+##   or tram is ONE Vehicle with VehicleComponents (sections). An EMU
+##   (motorvognsett) is ONE Vehicle with VehicleComponents (coaches).
+##
+##   VehicleComponent: Internal part of a Vehicle. Carries per-component
+##   facilities (ServiceFacilitySet), capacity, accessibility. Ordered.
+##   A standalone bus has 0 components. A BM73 has 3 (vogn A/B/C).
+##
+##   CompoundVehicle: Operational coupling of multiple registered Vehicles.
+##   Examples: lok + vogner, dobbelt motorvognsett, two ferries.
+##   This is the formation — assembled per journey/block, NOT registry-owned.
+##
+##   Covers both horizontal (trains, buses) and vertical (ferries with decks).
 
 ## --- Operator-produced data (delivered to central system) ---
 
@@ -342,8 +359,9 @@ netex:VehicleType a owl:Class ;
 
 netex:Vehicle a owl:Class ;
     rdfs:label "Vehicle" ;
-    skos:definition "Individual rolling stock unit assigned to an operator" ;
-    netex:inFrame netex:ResourceFrame .
+    skos:definition "Any individually registered transport unit (bus, tram, EMU, locomotive, wagon, coach, ferry). May contain VehicleComponents for internal structure (sections, coaches)." ;
+    netex:inFrame netex:ResourceFrame ;
+    rdfs:comment "CEN WISH: absorbs Train semantics. A Vehicle with components replaces Train+TrainComponent. Articulated bus, tram, EMU = one Vehicle with ordered components." .
 
 netex:PurposeOfGrouping a owl:Class ;
     rdfs:label "PurposeOfGrouping" ;
@@ -362,13 +380,15 @@ netex:Contract a owl:Class ;
 
 netex:CompoundTrain a owl:Class ;
     rdfs:label "CompoundTrain" ;
-    skos:definition "Composed rolling stock formation consisting of multiple Train units coupled together" ;
-    netex:inFrame netex:ResourceFrame .
+    skos:definition "Operational coupling of multiple registered Vehicles into a formation" ;
+    netex:inFrame netex:ResourceFrame ;
+    rdfs:comment "CEN WISH: rename to CompoundVehicle. Formation of Vehicles assembled per journey/block (lok+vogner, dobbelt motorvognsett, etc)." .
 
 netex:Train a owl:Class ;
     rdfs:label "Train" ;
-    skos:definition "A single train unit with its components (coaches, wagons)" ;
-    netex:inFrame netex:ResourceFrame .
+    skos:definition "DEPRECATED in CEN WISH — replaced by Vehicle with VehicleComponents. Currently: a single unit with internal component structure." ;
+    netex:inFrame netex:ResourceFrame ;
+    rdfs:comment "CEN WISH: merge into Vehicle. Train IS a Vehicle; its components become VehicleComponent children of Vehicle." .
 
 ## -----------------------------------------------------------------
 ## SiteFrame objects
