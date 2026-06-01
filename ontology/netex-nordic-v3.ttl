@@ -117,10 +117,11 @@ netex:Organisation   netex:npDataSource netex:CentralRegistry .
 netex:FareZone       netex:npDataSource netex:CentralRegistry .
 netex:VehicleType    netex:npDataSource netex:CentralRegistry .
 netex:Vehicle        netex:npDataSource netex:CentralRegistry .
-netex:CompoundTrain  netex:npDataSource netex:CentralRegistry .
 netex:Train          netex:npDataSource netex:CentralRegistry .
-## Rolling stock components in central registry: modality-independent
-## composition (Train/CompoundTrain) built from registered VehicleTypes.
+## Rolling stock in central registry: VehicleType (classification),
+## Vehicle (individual unit), Train (single unit with components).
+## CompoundTrain (formation) is operational — stays in OperatorDelivery.
+## CEN WISH: CompoundTrain → CompoundVehicle (modality-neutral naming).
 
 ## --- Operator-produced data (delivered to central system) ---
 
@@ -147,7 +148,9 @@ netex:ServiceCalendar    netex:npDataSource netex:OperatorDelivery .
 netex:ServiceLink        netex:npDataSource netex:OperatorDelivery .
 netex:SiteConnection     netex:npDataSource netex:OperatorDelivery .
 netex:TrainNumber        netex:npDataSource netex:OperatorDelivery .
-## CompoundTrain, Train — MOVED to CentralRegistry in 3.0
+netex:CompoundTrain      netex:npDataSource netex:OperatorDelivery .
+## Train — MOVED to CentralRegistry in 3.0
+## CompoundTrain stays operational (formation is assembled per journey/block)
 
 ## =================================================================
 ## FRAME CLASSES (Containers)
