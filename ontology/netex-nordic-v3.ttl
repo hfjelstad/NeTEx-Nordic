@@ -255,10 +255,24 @@ netex:Organisation a owl:Class ;
 ##
 ## PROPOSED unified enum values for BOTH OrganisationType AND StakeholderRoleType:
 ##
+##   CORE ROLES (transport-specific):
 ##   Planner                  — plans services (was: authority/Planning)
 ##   PublicTransportOperator  — operates services (was: operator/Operation)
 ##   PublicTransportAuthority — commissions/finances (was: authority/Planning)
 ##   Controller               — real-time control (was: —/Control)
+##
+##   SERVICE ROLES (can be assigned to any org via RS):
+##   StatutoryBody            — regulatory oversight, permits, compliance
+##   CustomerService          — passenger inquiries, complaints, information
+##   LostAndFound             — lost property handling
+##
+##   RETAINED FROM EXISTING XSD (unchanged semantics):
+##   Reservation              — booking/reservation services
+##   EntityLegalOwnership     — asset ownership
+##   FareManagement           — fare products, pricing, revenue
+##   SecurityManagement       — safety and security
+##   DataRegistrar            — master data governance
+##   Other                    — catch-all
 ##
 ## Same values in both places. Difference is WHERE it's used:
 ##   OrganisationType (on Organisation) = what the org IS (from registry)
@@ -271,9 +285,13 @@ netex:Organisation a owl:Class ;
 ## EXISTING XSD VALUES TO DEPRECATE/REPLACE:
 ##   OrganisationType:    authority → PublicTransportAuthority
 ##                        operator  → PublicTransportOperator
+##                        statutoryBody → StatutoryBody (camelCase alignment)
 ##   StakeholderRoleType: Planning  → Planner
 ##                        Operation → PublicTransportOperator
 ##                        Control   → Controller
+##
+## NEW VALUES (CEN PROPOSAL):
+##   CustomerService, LostAndFound
 ##
 ## RETAINED FROM EXISTING XSD (unchanged):
 ##   StakeholderRoleType: Reservation | EntityLegalOwnership |
@@ -804,7 +822,7 @@ netex:ResponsibilitySet netex:hasRef [
     netex:target xsd:string ;
     netex:xsdCardinality "1..1" ;
     netex:path "roles/ResponsibilityRoleAssignment/StakeholderRoleType" ;
-    rdfs:comment "ASSIGNED ROLE: declares the org's function here. Verifiable against OrganisationType (shared enum). CEN PROPOSAL new values: Planner | PublicTransportOperator | PublicTransportAuthority | Controller. Retained: Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar | Other"
+    rdfs:comment "ASSIGNED ROLE: declares the org's function here. Verifiable against OrganisationType (shared enum). CEN PROPOSAL new values: Planner | PublicTransportOperator | PublicTransportAuthority | Controller | StatutoryBody | CustomerService | LostAndFound. Retained: Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar | Other"
 ] , [
     netex:property "ContractRef" ;
     netex:target netex:Contract ;
