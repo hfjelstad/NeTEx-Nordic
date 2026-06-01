@@ -81,6 +81,55 @@ change:CENProposal a change:Scope ;
     change:scope change:CENProposal ;
     rdfs:comment "Requires XSD change: Organisation abstract→concrete, Authority/Operator deprecated. StakeholderRoleType in ResponsibilityRoleAssignment replaces class hierarchy." ] .
 
+[ a change:BreakingChange ;
+    rdfs:label "Version attribute restricted to objects; refVersion on references" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "XSD currently allows @version on both objects and refs (ambiguous). Proposal: @version ONLY on object definitions. References use @refVersion to pin target version. @versionRef DEPRECATED." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "VehicleJourney renamed to PublicTransportJourney; Block renamed to VehicleJourney" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "Abstract VehicleJourney→PublicTransportJourney (it's the SERVICE's journey, not the vehicle's). Block/TrainBlock→VehicleJourney (it IS the vehicle's journey through the day). DeadRun becomes VehicleJourneyPart (non-revenue segment of vehicle's working day)." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "InfrastructurePathRef on VehicleJourneyPart" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "New element: InfrastructurePathRef (0..1) on VehicleJourneyPart. Opaque reference to IM's granted path (trassé). Bridges vehicle schedule to infrastructure capacity allocation. Absent = path not yet granted (normal for commercial plan). Present = path confirmed by IM." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "OperationalNumber on VehicleJourneyPart (replaces TrainNumber.forProduction)" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "New element: OperationalNumber (0..1) on VehicleJourneyPart. Mode-agnostic production number identifying a physical movement to infrastructure manager/dispatcher. Rail: train number in signalling. Ferry: voyage number. Replaces TrainNumber.forProduction. TrainNumber.forAdvertisement replaced by SJ.PublicCode." ] .
+
+## =================================================================
+## VERSIONING CONVENTIONS (NP 3.0)
+## =================================================================
+## NeTEx objects carry @id and @version. References point to objects.
+## Problem: XSD uses @version on BOTH objects and refs — ambiguous.
+##
+## 3.0 RULE:
+##   ON OBJECTS:     @version (mandatory) — the version of THIS object.
+##   ON REFERENCES:  @refVersion (optional) — the version of the TARGET object.
+##                   If absent: "latest version" (konsument resolver siste).
+##                   If present: pins to exact version (snapshot/audit).
+##   DEPRECATED:     @versionRef on references — replaced by @refVersion.
+##
+## Rationale:
+##   - @version on a ref looks like the version of the reference itself
+##     (which doesn't exist — a ref has no identity/lifecycle)
+##   - @refVersion is unambiguous: "the version I'm referring to"
+##   - @versionRef was a synonym that added confusion
+##
+## CEN PROPOSAL: rename attribute in XSD. In transition, profile
+## validators accept both but warn on @versionRef usage.
+##
+## Example:
+##   <ServiceJourney id="NOR:SJ:1" version="3">  ← object version
+##     <LineRef ref="NOR:Line:60" refVersion="2"/>  ← pinned to Line v2
+##     <JourneyPatternRef ref="NOR:JP:1"/>          ← latest version
+##   </ServiceJourney>
+## -----------------------------------------------------------------
+
 ## =================================================================
 ## PROFILE
 ## =================================================================
@@ -115,36 +164,76 @@ netex:Organisation   netex:npDataSource netex:CentralRegistry .
 ## netex:Authority/Operator — MERGED into Organisation (CEN PROPOSAL)
 ## netex:TariffZone    REMOVED in 3.0 (transferred to FareZone)
 netex:FareZone       netex:npDataSource netex:CentralRegistry .
-netex:VehicleType    netex:npDataSource netex:CentralRegistry .
+netex:VehicleModel   netex:npDataSource netex:CentralRegistry .
+netex:VehicleConfiguration netex:npDataSource netex:CentralRegistry .
 netex:Vehicle        netex:npDataSource netex:CentralRegistry .
-netex:Train          netex:npDataSource netex:CentralRegistry .
-## Rolling stock in central registry: VehicleType (classification),
-## Vehicle (individual registered unit, may have components).
-## CompoundVehicle (formation of multiple Vehicles) is operational — OperatorDelivery.
+## netex:VehicleType  DEPRECATED in 3.0 (split into VehicleModel + VehicleConfiguration)
+## netex:Train        DEPRECATED in 3.0 (merged into Vehicle with VehicleComponents)
 ##
-## CEN WISH — modality-neutral rolling stock model:
+## CEN WISH — rolling stock model redesign:
 ##
-##   CURRENT NeTEx          →  PROPOSED
-##   VehicleType               VehicleType (unchanged — classification)
-##   Vehicle                   Vehicle (expanded — any registered unit incl. wagons)
-##   Train                     Vehicle + components (internal structure)
+##   CURRENT NeTEx          →  PROPOSED 3.0
+##   VehicleType               DEPRECATED → split into:
+##                               VehicleModel (what it IS — immutable)
+##                               VehicleConfiguration (how it's configured — mutable)
+##   Vehicle                   Vehicle (dual role: template OR physical unit)
+##   Train                     Vehicle + VehicleComponents
 ##   TrainComponent            VehicleComponent (child of Vehicle)
-##   CompoundTrain             CompoundVehicle (coupling of Vehicles)
+##   CompoundTrain             Vehicle (recursive composition via VehicleInFormation)
 ##
-##   Vehicle: Anything registered as a unit. Oxford definition — includes
-##   bus, tram, EMU, locomotive, wagon, coach, ferry. An articulated bus
-##   or tram is ONE Vehicle with VehicleComponents (sections). An EMU
-##   (motorvognsett) is ONE Vehicle with VehicleComponents (coaches).
+##   VehicleModel: Manufacturer's product. Immutable for a given vehicle.
+##     Stadler FLIRT 75, Solaris Urbino 12, MF Bastø VI.
+##     Carries: manufacturer, model name, length, axle load, propulsion,
+##     emissions class, energy source. A vehicle never changes model.
 ##
-##   VehicleComponent: Internal part of a Vehicle. Carries per-component
-##   facilities (ServiceFacilitySet), capacity, accessibility. Ordered.
-##   A standalone bus has 0 components. A BM73 has 3 (vogn A/B/C).
+##   VehicleConfiguration: Interior arrangement. Mutable (re-fits happen).
+##     Seating map, capacity, accessibility profile, facilities, component
+##     structure. Reusable — many vehicles share the same configuration.
+##     A configuration change = new version (refurbishment, class change).
 ##
-##   CompoundVehicle: Operational coupling of multiple registered Vehicles.
-##   Examples: lok + vogner, dobbelt motorvognsett, two ferries.
-##   This is the formation — assembled per journey/block, NOT registry-owned.
+##   Vehicle: Transport unit. Three modes:
+##     ATOMIC WITH VIN → physical registered unit (in registry, assigned to blocks)
+##     ATOMIC WITHOUT VIN → template/profile ("what we promise the passenger")
+##     COMPOUND → contains child Vehicles via vehicles/VehicleInFormation
+##     Atomic: VehicleModelRef (1..1) and VehicleConfigurationRef (0..1).
+##     Compound: only vehicles — no model/config/VIN (those are on members).
+##     XOR rule: exactly-one-of(VehicleModelRef, vehicles).
 ##
-##   Covers both horizontal (trains, buses) and vertical (ferries with decks).
+##   ServiceJourney.VehicleRef → points to a Vehicle template (without VIN).
+##     Can be atomic (single unit) or compound (formation).
+##     This IS the passenger promise. One ref gives you:
+##       - Emissions/energy (via →VehicleModel on members)
+##       - Seats/accessibility (via →VehicleConfiguration on members)
+##       - Formation order + orientation (via vehicles/VehicleInFormation)
+##
+##   DEVIATION DETECTION (three steps):
+##     1. Slå opp:  Vehicle monitoring starts → AVL/APC sends VIN →
+##        registry lookup by VIN → returns NeTEx Vehicle ID.
+##        This ID is used as VehicleRef in SIRI VM stream.
+##        NOTE: VIN→ID API requires access control (fleet data is sensitive).
+##        Only authorised operational systems may resolve VIN to NeTEx ID.
+##     2. Hente:    Consuming system resolves Vehicle →
+##        VehicleModelRef + VehicleConfigurationRef from registry.
+##     3. Kommunisere: compare against plan (DSJ.VehicleRef or SJ.VehicleRef
+##        → template Vehicle → Model X, Config Y)
+##        If actual Model≠X or Config≠Y → SIRI SX with passenger info
+##        (capacity change, HC accessibility, different comfort class)
+##
+##   VehicleComponent: Internal part of a Vehicle. Ordered. Carries
+##     per-component facilities, capacity, accessibility.
+##
+##   CompoundVehicle → ABSORBED into Vehicle (recursive composition):
+##     Vehicle can contain child Vehicles via vehicles/VehicleInFormation.
+##     VehicleInFormation carries: @order, ReverseDirection (boolean), VehicleRef.
+##     Template compound (members without VIN) = planned formation promise.
+##       Used in SJ.VehicleRef and JourneyPart.VehicleRef.
+##       "This journey runs as 2x FLIRT 75 enkelt sett."
+##     Physical compound (members with VIN) = actual operational formation.
+##       Used in DSJ/real-time (SIRI VM) after VIN resolution.
+##     Deviation: compare sum-capacity of actual formation against template.
+##     XOR rule: exactly-one-of(VehicleModelRef, vehicles) on Vehicle.
+##     ReverseDirection enables seat-in-travel-direction derivation
+##       from VehicleConfiguration seatplan (the customer service use case).
 
 ## --- Operator-produced data (delivered to central system) ---
 
@@ -163,7 +252,9 @@ netex:DestinationDisplay netex:npDataSource netex:OperatorDelivery .
 netex:Notice             netex:npDataSource netex:OperatorDelivery .
 netex:GroupOfLines       netex:npDataSource netex:OperatorDelivery .
 netex:Interchange        netex:npDataSource netex:OperatorDelivery .
-netex:TrainBlock         netex:npDataSource netex:OperatorDelivery .
+netex:VehicleJourney     netex:npDataSource netex:OperatorDelivery .
+## netex:TrainBlock — DEPRECATED (renamed to VehicleJourney)
+## DatedVehicleJourney NOT NEEDED — vehicle's day is derived from DSJs referencing VehicleJourney + OperatingDay
 ## Vehicle, VehicleType — MOVED to CentralRegistry in 3.0
 netex:Codespace          netex:npDataSource netex:OperatorDelivery .
 netex:ServiceCalendar    netex:npDataSource netex:OperatorDelivery .
@@ -171,9 +262,8 @@ netex:ServiceCalendar    netex:npDataSource netex:OperatorDelivery .
 netex:ServiceLink        netex:npDataSource netex:OperatorDelivery .
 netex:SiteConnection     netex:npDataSource netex:OperatorDelivery .
 netex:TrainNumber        netex:npDataSource netex:OperatorDelivery .
-netex:CompoundTrain      netex:npDataSource netex:OperatorDelivery .
+## netex:CompoundTrain — DEPRECATED (absorbed into Vehicle recursive composition)
 ## Train — MOVED to CentralRegistry in 3.0
-## CompoundTrain stays operational (formation is assembled per journey/block)
 
 ## =================================================================
 ## FRAME CLASSES (Containers)
@@ -197,13 +287,15 @@ netex:ResourceFrame a owl:Class ;
     skos:definition "Organizations, vehicle types, vehicles and shared resources" ;
     netex:containedIn netex:CompositeFrame ;
     netex:contains netex:Organisation ,
-                   netex:VehicleType ,
+                   netex:VehicleModel ,
+                   netex:VehicleConfiguration ,
                    netex:Vehicle ,
                    netex:ResponsibilitySet ,
                    netex:Contract ,
-                   netex:PurposeOfGrouping ,
-                   netex:CompoundTrain ,
-                   netex:Train .
+                   netex:PurposeOfGrouping .
+    ## netex:VehicleType — DEPRECATED (split into VehicleModel + VehicleConfiguration)
+    ## netex:Train — DEPRECATED (merged into Vehicle)
+    ## netex:CompoundTrain — DEPRECATED (absorbed into Vehicle recursive composition)
 
 netex:SiteFrame a owl:Class ;
     rdfs:label "SiteFrame" ;
@@ -250,9 +342,10 @@ netex:TimetableFrame a owl:Class ;
 
 netex:VehicleScheduleFrame a owl:Class ;
     rdfs:label "VehicleScheduleFrame" ;
-    skos:definition "Vehicle blocks and scheduling assignments" ;
+    skos:definition "Vehicle journeys (complete working days) and scheduling" ;
     netex:containedIn netex:CompositeFrame ;
-    netex:contains netex:TrainBlock .
+    netex:contains netex:VehicleJourney .
+    ## netex:TrainBlock — DEPRECATED (renamed to VehicleJourney)
 
 netex:FareFrame a owl:Class ;
     rdfs:label "FareFrame" ;
@@ -354,14 +447,29 @@ netex:Operator a owl:Class ;
 
 netex:VehicleType a owl:Class ;
     rdfs:label "VehicleType" ;
-    skos:definition "Vehicle classification with capacity and propulsion characteristics" ;
+    skos:definition "DEPRECATED — split into VehicleModel (immutable product) + VehicleConfiguration (mutable arrangement)" ;
+    owl:deprecated true ;
+    change:scope change:CENProposal ;
     netex:inFrame netex:ResourceFrame .
+
+netex:VehicleModel a owl:Class ;
+    rdfs:label "VehicleModel" ;
+    skos:definition "Manufacturer's product identity. Immutable for a given vehicle — a FLIRT 75 never becomes a Coradia. Carries physical characteristics: manufacturer, model name, length, axle load, propulsion, emissions, energy source." ;
+    netex:inFrame netex:ResourceFrame ;
+    change:scope change:CENProposal .
+
+netex:VehicleConfiguration a owl:Class ;
+    rdfs:label "VehicleConfiguration" ;
+    skos:definition "Interior arrangement and passenger-facing properties. Mutable — changes on refurbishment. Carries: seating map, capacity, accessibility profile, ServiceFacilitySet, VehicleComponents (ordered). Reusable across many vehicles." ;
+    netex:inFrame netex:ResourceFrame ;
+    change:scope change:CENProposal .
 
 netex:Vehicle a owl:Class ;
     rdfs:label "Vehicle" ;
-    skos:definition "Any individually registered transport unit (bus, tram, EMU, locomotive, wagon, coach, ferry). May contain VehicleComponents for internal structure (sections, coaches)." ;
+    skos:definition "Transport unit. Two modes: ATOMIC (VehicleModelRef present) = single unit; COMPOUND (vehicles present) = formation of child Vehicles. Atomic with VIN = physical registered unit; without VIN = template/passenger promise. Compound carries only composition — model/config/VIN live on members." ;
     netex:inFrame netex:ResourceFrame ;
-    rdfs:comment "CEN WISH: absorbs Train semantics. A Vehicle with components replaces Train+TrainComponent. Articulated bus, tram, EMU = one Vehicle with ordered components." .
+    change:scope change:CENProposal ;
+    rdfs:comment "CEN WISH: absorbs Train AND CompoundTrain. Recursive composition (like StopPlace containing StopPlaces). XOR rule: exactly-one-of(VehicleModelRef, vehicles). ServiceJourney.VehicleRef points to template Vehicle (atomic or compound). Deviation detection compares planned template vs actual." .
 
 netex:PurposeOfGrouping a owl:Class ;
     rdfs:label "PurposeOfGrouping" ;
@@ -380,9 +488,18 @@ netex:Contract a owl:Class ;
 
 netex:CompoundTrain a owl:Class ;
     rdfs:label "CompoundTrain" ;
-    skos:definition "Operational coupling of multiple registered Vehicles into a formation" ;
+    skos:definition "DEPRECATED — absorbed into Vehicle with recursive composition (vehicles/VehicleInFormation). Use Vehicle with child Vehicles instead." ;
+    owl:deprecated true ;
     netex:inFrame netex:ResourceFrame ;
-    rdfs:comment "CEN WISH: rename to CompoundVehicle. Formation of Vehicles assembled per journey/block (lok+vogner, dobbelt motorvognsett, etc)." .
+    change:scope change:CENProposal ;
+    rdfs:comment "CEN WISH: CompoundTrain functionality absorbed into Vehicle. A compound Vehicle contains VehicleInFormation children with @order and ReverseDirection. No separate class needed." .
+
+netex:VehicleInFormation a owl:Class ;
+    rdfs:label "VehicleInFormation" ;
+    skos:definition "Ordered wrapper placing a Vehicle in a formation. Carries position (@order) and orientation (ReverseDirection) relative to formation direction. Analogous to StopPointInJourneyPattern." ;
+    netex:childOf netex:Vehicle ;
+    change:scope change:CENProposal ;
+    rdfs:comment "Formation direction defined by @order: order=1 is front. ReverseDirection (boolean, default false) indicates if this unit's 'ende A' points backward relative to formation front. Required for seat-in-travel-direction derivation from VehicleConfiguration seatplan." .
 
 netex:Train a owl:Class ;
     rdfs:label "Train" ;
@@ -546,6 +663,26 @@ netex:SiteConnection a owl:Class ;
 ## TimetableFrame objects
 ## -----------------------------------------------------------------
 
+## CEN PROPOSAL: Journey hierarchy (abstract VehicleJourney → PublicTransportJourney)
+##
+##   PublicTransportJourney (abstract, was VehicleJourney)
+##     └── ServiceJourney           (planned trip template)
+##          └── DatedServiceJourney  (instance on a date — alterations, cancellations)
+##
+##   VehicleJourney (was Block/TrainBlock, in VehicleScheduleFrame)
+##     └── VehicleJourneyPart (ordered segments)
+##          ├── revenue:     JourneyPartRef (one vehicle's contribution to an SJ)
+##          └── non-revenue: DeadRun (no JourneyPartRef, has from/to/duration)
+##
+##   DatedServiceJourney dates both perspectives:
+##     ServiceJourneyRef + OperatingDayRef + VehicleJourneyRef
+##     = "SJ:1 runs on June 1st, performed as part of VJ:42"
+##     Vehicle's actual day on a date = all DSJs where VehicleJourneyRef=VJ:42 AND date=X
+##     No DatedVehicleJourney needed — the dating is implicit through DSJs.
+##
+## Note: PublicTransportJourney is abstract and not instantiated in data.
+## ServiceJourney.rdfs:subClassOf would be PublicTransportJourney once CEN publishes.
+
 netex:ServiceJourney a owl:Class ;
     rdfs:label "ServiceJourney" ;
     skos:definition "A planned trip template in the timetable, reusable across dates" ;
@@ -571,17 +708,118 @@ netex:Interchange a owl:Class ;
 
 netex:TrainNumber a owl:Class ;
     rdfs:label "TrainNumber" ;
-    skos:definition "Railway-specific train service number, referenced via JourneyPart" ;
-    netex:inFrame netex:TimetableFrame .
+    skos:definition "DEPRECATED — operational number now lives on VehicleJourneyPart as OperationalNumber. TrainNumber was rail-specific; OperationalNumber is mode-agnostic." ;
+    owl:deprecated true ;
+    change:scope change:CENProposal ;
+    netex:inFrame netex:TimetableFrame ;
+    rdfs:comment "CEN PROPOSAL: TrainNumber.forAdvertisement replaced by SJ.PublicCode (mode-agnostic). TrainNumber.forProduction replaced by VehicleJourneyPart.OperationalNumber (mode-agnostic). TrainNumber object retained for backward compatibility but no longer profiled." .
 
 ## -----------------------------------------------------------------
 ## VehicleScheduleFrame objects
 ## -----------------------------------------------------------------
 
+netex:VehicleJourney a owl:Class ;
+    rdfs:label "VehicleJourney" ;
+    skos:definition "A vehicle's complete working day: the ordered sequence of revenue trips (ServiceJourney) and non-revenue movements (DeadRun) that one vehicle performs. Contains VehicleJourneyParts." ;
+    netex:inFrame netex:VehicleScheduleFrame ;
+    change:scope change:CENProposal ;
+    rdfs:comment "CEN PROPOSAL: was Block/TrainBlock. Renamed because it IS the vehicle's journey. The old name 'Block' was scheduling jargon; VehicleJourney matches Transmodel semantics and is self-documenting." .
+
+## --- WHY Vehicle (CentralRegistry) is prerequisite for VehicleJourney ---
+##
+## You cannot build a VehicleJourney without knowing the fleet.
+## The scheduler asks: "which vehicle should perform this working day?"
+## That decision requires TWO sources:
+##
+##   CENTRAL REGISTRY (shared, static catalog):
+##   - IDENTITY:      what vehicles exist? (Vehicle with VIN)
+##   - CAPABILITY:    does this model fit the route? (VehicleModel: axle load, length)
+##   - CONFIGURATION: does this layout meet the service promise? (VehicleConfiguration: seats, HC)
+##
+##   OPERATOR (own systems, NOT in NeTEx):
+##   - AVAILABILITY:  which units are in service today?
+##   - MAINTENANCE:   when is this unit scheduled for workshop?
+##   - MILEAGE:       is this unit approaching a service interval?
+##   - CONFLICTS:     is it already assigned to another working day?
+##
+## The registry answers "what CAN run" (physical truth).
+## The operator decides "what WILL run" (operational plan).
+##
+## This is why Vehicle lives in CentralRegistry (ResourceFrame) and
+## VehicleJourney lives in OperatorDelivery (VehicleScheduleFrame):
+##   Vehicle = shared fleet catalog (identity + capabilities)
+##   VehicleJourney = operator's plan for how to USE that fleet
+##
+## The CEN WISH for VehicleModel + VehicleConfiguration enables this:
+##   VehicleModel → "can it physically run here?" (registry knows)
+##   VehicleConfiguration → "does it meet the service promise?" (registry knows)
+##   Availability/maintenance/mileage → operator's own scheduling system
+##
+## NeTEx carries the RESULT of the operator's decision (VehicleRef on VJ),
+## not the reasoning behind it.
+## -----------------------------------------------------------------
+
 netex:TrainBlock a owl:Class ;
     rdfs:label "TrainBlock" ;
-    skos:definition "Block of journeys assigned to a single vehicle" ;
+    skos:definition "DEPRECATED — renamed to VehicleJourney. A vehicle's working day." ;
+    owl:deprecated true ;
+    change:scope change:CENProposal ;
     netex:inFrame netex:VehicleScheduleFrame .
+
+netex:VehicleJourneyPart a owl:Class ;
+    rdfs:label "VehicleJourneyPart" ;
+    skos:definition "One segment of a VehicleJourney: either a revenue segment (references JourneyPart) or a non-revenue DeadRun (positioning, garage-in/out). Ordered by sequence in the working day." ;
+    netex:childOf netex:VehicleJourney ;
+    change:scope change:CENProposal ;
+    rdfs:comment "DeadRun = VehicleJourneyPart without JourneyPartRef (carries only from/to points and duration). Revenue = has JourneyPartRef. JourneyPart is always the reference granularity — even buses have one JourneyPart per SJ. Consumer derives DSJ from DSJ.ServiceJourneyRef (via JourneyPart→SJ) + DSJ.OperatingDayRef." .
+
+## --- InfrastructurePathRef — infrastructure capacity linkage (CEN PROPOSAL) ---
+##
+## CONTEXT: Tickets are sold months before path confirmation.
+## The commercial plan (SJ + VJ) is published and sellable immediately.
+## Path requests to IM follow later (~90 days ahead for annual timetable).
+## NeTEx is NOT a gate — it records the outcome.
+##
+## LIFECYCLE (sell first, confirm later):
+##
+##   1. PUBLISH (months ahead):
+##      SJ v1 published → tickets on sale
+##      VJ v1 with VehicleJourneyParts → no InfrastructurePathRef yet
+##      DSJ v1: ServiceJourneyRef refVersion="1", VehicleJourneyRef refVersion="1"
+##
+##   2. PATH REQUEST (~90 days):
+##      Operator submits to IM (via TAF/TAP TSI or national system)
+##      NeTEx unchanged — still selling against v1
+##
+##   3a. APPROVED (no change):
+##      VJ v2: InfrastructurePathRef added (confirmation, audit trail)
+##      DSJ v2: VehicleJourneyRef refVersion="2" (points to confirmed VJ)
+##      Customer: no impact, no notification needed
+##
+##   3b. REJECTED / ALTERED (plan must change):
+##      SJ v2: passingTimes updated (new departure time from IM's offer)
+##      VJ v2: timing adjusted, InfrastructurePathRef = granted slot
+##      DSJ v2: ServiceJourneyRef refVersion="2", VehicleJourneyRef refVersion="2"
+##      Customer: refVersion change on ServiceJourneyRef detected →
+##        diff SJ v1 vs v2 → times differ → notification triggered
+##
+## CHANGE DETECTION via refVersion:
+##   Consumer compares DSJ v(n) vs v(n-1):
+##     ServiceJourneyRef refVersion changed? → customer-relevant (times/stops)
+##     VehicleJourneyRef refVersion changed? → operational (vehicle schedule)
+##     Both? → infrastructure change caused service change
+##
+## InfrastructurePathRef (0..1) on VehicleJourneyPart:
+##   Absent: path not yet granted (normal — plan published before confirmation)
+##   Present: path confirmed by IM — opaque ID into IM's system
+##   Applies to BOTH revenue segments AND DeadRuns (all physical movements)
+##   Bus/tram: typically absent (no path regime for road-based modes)
+##   Rail/ferry: expected once annual timetable process completes
+##
+## NOT modelled: request lifecycle, negotiation rounds, capacity offers.
+## Those live in TAF/TAP TSI (rail) or national path systems (BEST, TPS, PCS).
+## NeTEx only carries the RESULT: "this movement has path X" or "not yet".
+## -----------------------------------------------------------------
 
 ## -----------------------------------------------------------------
 ## SalesTransactionFrame objects
@@ -644,9 +882,9 @@ netex:ServiceJourney netex:elementOrder [
 ] , [
     netex:position 10 ; netex:element "JourneyPatternRef"
 ] , [
-    netex:position 11 ; netex:element "VehicleTypeRef"
+    netex:position 11 ; netex:element "VehicleRef"
 ] , [
-    netex:position 12 ; netex:element "BlockRef"
+    netex:position 12 ; netex:element "VehicleJourneyRef"
 ] , [
     netex:position 13 ; netex:element "responsibilitySetRef"
 ] , [
@@ -709,17 +947,37 @@ netex:Vehicle netex:elementOrder [
 ] , [
     netex:position 4 ; netex:element "VehicleIdentificationNumber"
 ] , [
-    netex:position 5 ; netex:element "VehicleTypeRef"
+    netex:position 5 ; netex:element "VehicleModelRef"
 ] , [
-    netex:position 6 ; netex:element "OrganisationRef"
+    netex:position 6 ; netex:element "VehicleConfigurationRef"
+] , [
+    netex:position 7 ; netex:element "OrganisationRef"
+] , [
+    netex:position 8 ; netex:element "vehicles"
 ] .
-## CEN WISH: VehicleIdentificationNumber is a first-class element (not privateCodes).
-## Harmonised identity across modes:
-##   Road: ISO 3779 VIN (17 chars)
-##   Rail: EVN/European Vehicle Number (12 digits, ERA TSI OPE)
-##   Maritime: IMO number (7 digits)
-##   Tram: national registration number
-## Analogous to CompanyNumber on Organisation.
+## VehicleIdentificationNumber (0..1):
+##   Present → physical registered unit. Absent → template/profile.
+##   Harmonised identity across modes:
+##     Road: ISO 3779 VIN (17 chars)
+##     Rail: EVN/European Vehicle Number (12 digits, ERA TSI OPE)
+##     Maritime: IMO number (7 digits)
+##     Tram: national registration number
+##   Analogous to CompanyNumber on Organisation.
+##
+## XOR RULE: exactly-one-of(VehicleModelRef, vehicles)
+##   ATOMIC Vehicle:   VehicleModelRef (1..1), VehicleConfigurationRef (0..1), VIN (0..1)
+##   COMPOUND Vehicle: vehicles/VehicleInFormation (1..n), NO model/config/VIN
+##
+## VehicleModelRef (0..1, immutable): what it IS — present on atomic, absent on compound
+## VehicleConfigurationRef (0..1, mutable): how it's arranged (changes on refit)
+## vehicles (0..n): VehicleInFormation children — present on compound, absent on atomic
+##
+## VehicleInFormation elementOrder: @order, ReverseDirection, VehicleRef
+##   @order (1..1): position in formation, 1 = front
+##   ReverseDirection (0..1, boolean, default=false): unit rotated 180° relative to formation
+##     Enables: seat-in-travel-direction derivation from VehicleConfiguration seatplan
+##     Reuses existing XSD element from TrainComponent — no new XSD needed
+##   VehicleRef (1..1): points to atomic Vehicle (template or physical)
 
 netex:StopPlace netex:elementOrder [
     netex:position 1 ; netex:element "@id"
@@ -794,14 +1052,55 @@ netex:DatedServiceJourney netex:elementOrder [
 ] , [
     netex:position 3 ; netex:element "ServiceAlteration"
 ] , [
-    netex:position 4 ; netex:element "BlockRef"
+    netex:position 4 ; netex:element "VehicleRef"
 ] , [
-    netex:position 5 ; netex:element "ServiceJourneyRef"
+    netex:position 5 ; netex:element "VehicleJourneyRef"
 ] , [
-    netex:position 6 ; netex:element "replacedJourneys"
+    netex:position 6 ; netex:element "ServiceJourneyRef"
 ] , [
-    netex:position 7 ; netex:element "OperatingDayRef"
+    netex:position 7 ; netex:element "replacedJourneys"
+] , [
+    netex:position 8 ; netex:element "OperatingDayRef"
 ] .
+## VehicleRef on DSJ (0..1): overrides SJ.VehicleRef when planned deviation is known.
+## Flow: DSJ version+1 with new VehicleRef = "vi vet nå at det blir annet materiell"
+## This communicates the change BEFORE operational block assignment.
+
+netex:VehicleJourneyPart netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "@order"
+] , [
+    netex:position 4 ; netex:element "JourneyPartRef"
+] , [
+    netex:position 5 ; netex:element "FromStopPointRef"
+] , [
+    netex:position 6 ; netex:element "ToStopPointRef"
+] , [
+    netex:position 7 ; netex:element "StartTime"
+] , [
+    netex:position 8 ; netex:element "Duration"
+] , [
+    netex:position 9 ; netex:element "InfrastructurePathRef"
+] , [
+    netex:position 10 ; netex:element "OperationalNumber"
+] .
+## JourneyPartRef (0..1): present = revenue segment; absent = DeadRun
+## FromStopPointRef / ToStopPointRef: physical movement endpoints
+## StartTime + Duration: when this segment executes within the working day
+## InfrastructurePathRef (0..1): opaque reference to IM's granted path
+##   Rail: path ID from PCS/BEST/TPS (IM's capacity allocation system)
+##   Ferry: fairway slot from maritime authority
+##   Bus/tram: absent (no path regime for road)
+##   Semantics: present = IM confirmed this slot; absent = not yet granted or N/A
+## OperationalNumber (0..1): the number IM/dispatcher knows this movement by
+##   Rail: train number in signalling/TAF-TAP (e.g. "4063")
+##   Ferry: voyage number in maritime dispatch
+##   Bus: dispatch trip number (if applicable)
+##   Mode-agnostic. NOT the public-facing number (that's SJ.PublicCode).
+##   Travels with InfrastructurePathRef — same conversation with IM.
 
 netex:DayType netex:elementOrder [
     netex:position 1 ; netex:element "@id"
@@ -868,14 +1167,34 @@ netex:DestinationDisplay netex:elementOrder [
 ## Replaced by: Organisation referenced via ResponsibilitySet with StakeholderRoleType
 
 netex:Vehicle netex:hasRef [
+    netex:property "VehicleModelRef" ;
+    netex:target netex:VehicleModel ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: immutable — present on atomic Vehicle, absent on compound. XOR with vehicles."
+] , [
+    netex:property "VehicleConfigurationRef" ;
+    netex:target netex:VehicleConfiguration ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: mutable — changes on refurbishment/refit. Only on atomic Vehicle."
+] , [
     netex:property "OrganisationRef" ;
     netex:target netex:Organisation ;
     netex:xsdCardinality "0..1" ;
     rdfs:comment "CEN PROPOSAL: was OperatorRef targeting Operator"
-] , [
-    netex:property "VehicleTypeRef" ;
-    netex:target netex:VehicleType ;
-    netex:xsdCardinality "0..1"
+] .
+
+netex:Vehicle netex:hasComposition [
+    netex:property "vehicles" ;
+    netex:target netex:VehicleInFormation ;
+    netex:xsdCardinality "0..n" ;
+    rdfs:comment "CEN PROPOSAL: recursive composition. Present on compound Vehicle, absent on atomic. XOR with VehicleModelRef. Each VehicleInFormation carries @order, ReverseDirection (boolean), and VehicleRef to an atomic Vehicle."
+] .
+
+netex:VehicleInFormation netex:hasRef [
+    netex:property "VehicleRef" ;
+    netex:target netex:Vehicle ;
+    netex:xsdCardinality "1..1" ;
+    rdfs:comment "Points to an atomic Vehicle (template or physical). The member unit in this formation position."
 ] .
 
 netex:ResponsibilitySet netex:hasRef [
@@ -910,6 +1229,9 @@ netex:Contract netex:hasRef [
     netex:path "contractors/OrganisationRef" ;
     rdfs:comment "CEN PROPOSAL: was typed to Operator"
 ] .
+
+## --- CompoundTrain relationships — DEPRECATED (absorbed into Vehicle.vehicles) ---
+## CompoundTrain.hasComposition REMOVED — replaced by Vehicle.hasComposition → VehicleInFormation
 
 ## --- SiteFrame relationships ---
 
@@ -1045,19 +1367,20 @@ netex:ServiceJourney netex:hasRef [
     netex:xsdCardinality "0..1" ;
     rdfs:comment "Overrides Line-level responsibility (e.g. replacement bus operator)"
 ] , [
-    netex:property "VehicleTypeRef" ;
-    netex:target netex:VehicleType ;
+    netex:property "VehicleRef" ;
+    netex:target netex:Vehicle ;
     netex:xsdCardinality "0..1" ;
-    rdfs:comment "Passenger-facing hint (expect low-floor bus), NOT operational assignment. Use BlockRef for actual vehicle assignment."
+    rdfs:comment "CEN PROPOSAL: was VehicleTypeRef. Points to Vehicle template (without VIN) = the passenger promise. Deviation detected by comparing against actual assigned vehicle."
 ] , [
     netex:property "DayTypeRef" ;
     netex:target netex:DayType ;
     netex:xsdCardinality "0..n" ;
     netex:path "dayTypes/DayTypeRef"
 ] , [
-    netex:property "BlockRef" ;
-    netex:target netex:TrainBlock ;
-    netex:xsdCardinality "0..1"
+    netex:property "VehicleJourneyRef" ;
+    netex:target netex:VehicleJourney ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: was BlockRef targeting TrainBlock"
 ] .
 
 netex:ServiceJourney netex:hasComposition [
@@ -1084,6 +1407,12 @@ netex:JourneyPart netex:hasRef [
     netex:target netex:TrainNumber ;
     netex:xsdCardinality "0..1"
 ] , [
+    netex:property "VehicleRef" ;
+    netex:target netex:Vehicle ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: per-segment rolling stock. Overrides SJ-level VehicleRef for this part. Enables coupling/splitting: part A = enkelt sett, part B = dobbelt sett. Can point to compound Vehicle (formation template)."
+] , [
+    ## CompoundVehicleRef — REMOVED (CompoundTrain deprecated, use VehicleRef to compound Vehicle instead)
     netex:property "FromStopPointRef" ;
     netex:target netex:ScheduledStopPoint ;
     netex:xsdCardinality "1..1"
@@ -1102,15 +1431,21 @@ netex:DatedServiceJourney netex:hasRef [
     netex:target netex:OperatingDay ;
     netex:xsdCardinality "1..1"
 ] , [
-    netex:property "BlockRef" ;
-    netex:target netex:TrainBlock ;
-    netex:xsdCardinality "0..1"
+    netex:property "VehicleRef" ;
+    netex:target netex:Vehicle ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: overrides SJ-level VehicleRef when planned deviation is known. DSJ version+1 with new VehicleRef = communicated change before operational assignment."
 ] , [
-    netex:property "DatedVehicleJourneyRef" ;
+    netex:property "VehicleJourneyRef" ;
+    netex:target netex:VehicleJourney ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: was BlockRef targeting TrainBlock"
+] , [
+    netex:property "DatedServiceJourneyRef" ;
     netex:target netex:DatedServiceJourney ;
     netex:xsdCardinality "0..n" ;
-    netex:path "replacedJourneys/DatedVehicleJourneyRef" ;
-    rdfs:comment "Replaced/reinforced journeys"
+    netex:path "replacedJourneys/DatedServiceJourneyRef" ;
+    rdfs:comment "CEN PROPOSAL: was DatedVehicleJourneyRef (misleading name — always targeted DSJ). DSJ replaces other DSJs, never a DVJ."
 ] .
 
 netex:Interchange netex:hasRef [
@@ -1133,19 +1468,41 @@ netex:Interchange netex:hasRef [
 
 ## --- VehicleScheduleFrame relationships ---
 
-netex:TrainBlock netex:hasRef [
+netex:VehicleJourney netex:hasRef [
     netex:property "OrganisationRef" ;
     netex:target netex:Organisation ;
     netex:xsdCardinality "0..1" ;
     rdfs:comment "CEN PROPOSAL: was OperatorRef targeting Operator"
+] , [
+    netex:property "VehicleRef" ;
+    netex:target netex:Vehicle ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "The physical vehicle assigned to work this VehicleJourney"
 ] .
 
-netex:TrainBlock netex:hasComposition [
-    netex:property "journeys" ;
-    netex:target netex:ServiceJourney ;
-    netex:xsdCardinality "0..n" ;
-    netex:path "journeys/VehicleJourneyRef" ;
-    rdfs:comment "Bidirectional: Block lists its journeys, journeys reference Block via BlockRef"
+netex:VehicleJourney netex:hasComposition [
+    netex:property "parts" ;
+    netex:target netex:VehicleJourneyPart ;
+    netex:xsdCardinality "1..n" ;
+    netex:path "parts/VehicleJourneyPart" ;
+    rdfs:comment "CEN PROPOSAL: ordered sequence of revenue and non-revenue segments. Replaces journeys/VehicleJourneyRef."
+] .
+
+netex:VehicleJourneyPart netex:hasRef [
+    netex:property "JourneyPartRef" ;
+    netex:target netex:JourneyPart ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "Present = revenue segment. Absent = DeadRun (non-revenue positioning). JourneyPart is the granularity that matches one vehicle's contribution to a ServiceJourney. Even buses have one JourneyPart (the whole SJ). From JourneyPartRef you derive the ServiceJourney (JourneyPart.childOf ServiceJourney)."
+] , [
+    netex:property "FromStopPointRef" ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "Start point (required for DeadRun, derivable for revenue parts)"
+] , [
+    netex:property "ToStopPointRef" ;
+    netex:target netex:ScheduledStopPoint ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "End point (required for DeadRun, derivable for revenue parts)"
 ] .
 
 ## =================================================================
@@ -1164,7 +1521,7 @@ profile:NP netex:excludes [
     netex:property "FlexibleLineRef"
 ] , [
     netex:class netex:ServiceJourney ;
-    netex:property "BlockRef"
+    netex:property "VehicleJourneyRef"
 ] .
 
 ## --- Elements allowed in NP (with cardinality) ---
@@ -1207,9 +1564,9 @@ profile:NP netex:allows [
     netex:cardinality "0..1"
 ] , [
     netex:class netex:DatedServiceJourney ;
-    netex:property "DatedVehicleJourneyRef" ;
+    netex:property "DatedServiceJourneyRef" ;
     netex:cardinality "0..n" ;
-    rdfs:comment "Deviation/replacement tracking"
+    rdfs:comment "CEN PROPOSAL: was DatedVehicleJourneyRef. Deviation/replacement tracking"
 ] , [
     netex:class netex:Interchange ;
     netex:property "FromPointRef" ;
@@ -1234,16 +1591,16 @@ profile:NP netex:requires [
     rdfs:comment "3.0 replaces OperatorRef — must declare operation responsibility"
 ] , [
     netex:class netex:Vehicle ;
-    netex:property "VehicleTypeRef" ;
-    netex:cardinality "1..1" ;
-    rdfs:comment "XSD allows 0..1, NP mandates"
+    netex:property "VehicleModelRef" ;
+    netex:cardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: conditional — required on atomic Vehicle (XOR with vehicles). Absent on compound Vehicle."
 ] , [
     netex:class netex:Organisation ;
     netex:property "Name" ;
     netex:cardinality "1..1" ;
     rdfs:comment "CEN PROPOSAL: was separate Authority.Name + Operator.Name requirements"
 ] , [
-    netex:class netex:VehicleType ;
+    netex:class netex:VehicleModel ;
     netex:property "Name" ;
     netex:cardinality "1..1"
 ] , [
@@ -1383,7 +1740,12 @@ netex:DestinationDisplay skos:exactMatch tm-journeys:DestinationDisplay .
 netex:Network skos:closeMatch tm-commons:GroupOfEntities .
 
 netex:ServiceJourney skos:exactMatch tm-journeys:ServiceJourney .
-netex:DatedServiceJourney skos:exactMatch tm-journeys:DatedVehicleJourney .
+netex:DatedServiceJourney skos:exactMatch tm-journeys:DatedServiceJourney .
+    ## CEN PROPOSAL: was tm-journeys:DatedVehicleJourney (TM name was misleading)
+netex:VehicleJourney skos:exactMatch tm-journeys:Block .
+    ## CEN PROPOSAL: TM Block → VehicleJourney (the vehicle's working day)
+## DatedVehicleJourney NOT USED — dating via DSJ.VehicleJourneyRef + DSJ.OperatingDayRef
+netex:VehicleJourneyPart skos:closeMatch tm-journeys:BlockPart .
 netex:Interchange skos:closeMatch tm-journeys:Connection .
 netex:StopPointInJourneyPattern skos:exactMatch tm-journeys:StopPointInJourneyPattern .
 
