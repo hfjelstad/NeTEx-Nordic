@@ -246,25 +246,33 @@ netex:SalesTransactionFrame a owl:Class ;
 
 netex:Organisation a owl:Class ;
     rdfs:label "Organisation" ;
-    skos:definition "A legal entity involved in public transport. Classified by OrganisationType (what it IS) and assigned context-specific roles via StakeholderRoleType (what it DOES here)." ;
+    skos:definition "A legal entity involved in public transport. Role assigned via StakeholderRoleType in ResponsibilitySet; verified against OrganisationType from external registry." ;
     netex:inFrame netex:ResourceFrame ;
     change:scope change:CENProposal ;
-    rdfs:comment "CEN PROPOSAL: Made concrete. Authority/Operator become OrganisationType values, not subclasses. A PTA (OrganisationType=authority) can still hold StakeholderRoleType=Operation in a specific context." .
+    rdfs:comment "CEN PROPOSAL: Made concrete. Authority/Operator become OrganisationType values, not subclasses. Role assignment lives in ResponsibilitySet; OrganisationType enables machine verification." .
 
 ## --- OrganisationType vs StakeholderRoleType ---
 ##
-## OrganisationType (on Organisation) = IDENTITY — what the org IS:
-##   authority | operator | railOperator | railFreightOperator |
-##   statutoryBody | facilityOperator | travelAgent | servicedOrganisation |
-##   retailConsortium | other
+## StakeholderRoleType (on ResponsibilityRoleAssignment) = ASSIGNED ROLE:
+##   Declares what the org does in this context.
+##   Values: Planning | Operation | Control | Reservation |
+##           EntityLegalOwnership | FareManagement | SecurityManagement |
+##           DataRegistrar | Other
 ##
-## StakeholderRoleType (on ResponsibilityRoleAssignment) = CONTEXT ROLE — what it DOES here:
-##   Planning | Operation | Control | Reservation | EntityLegalOwnership |
-##   FareManagement | SecurityManagement | DataRegistrar | Other
+## OrganisationType (on Organisation) = VERIFIED STATUS from external registry:
+##   Machine-checkable classification sourced from e.g. løyveregister.
+##   Values: authority | operator | railOperator | railFreightOperator |
+##           statutoryBody | facilityOperator | travelAgent |
+##           servicedOrganisation | retailConsortium | other
 ##
-## Example: Ruter (OrganisationType=authority) with StakeholderRoleType=Operation
-##          for T-banen. Vy (OrganisationType=operator) with
-##          StakeholderRoleType=Planning for regional rail.
+## CROSS-VALIDATION:
+##   When RS assigns StakeholderRoleType=Operation → verify that
+##   Organisation.OrganisationType=operator (has PTO license).
+##   Same semantics, different layers: assignment vs verification.
+##
+## Example: Vy assigned StakeholderRoleType=Operation in ResponsibilitySet
+##          for line 400. OrganisationType=operator confirms Vy holds
+##          the operator license (from løyveregisteret).
 ## -----------------------------------------------------------------
 
 ## --- Authority/Operator: DEPRECATED subtypes (CEN PROPOSAL) ---
@@ -782,13 +790,13 @@ netex:ResponsibilitySet netex:hasRef [
     netex:target netex:Organisation ;
     netex:xsdCardinality "1..n" ;
     netex:path "roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef" ;
-    rdfs:comment "CEN PROPOSAL: targets Organisation (not Authority/Operator). OrganisationType on the org says what it IS; StakeholderRoleType here says what it DOES in this context."
+    rdfs:comment "CEN PROPOSAL: targets Organisation (not Authority/Operator). Cross-validate StakeholderRoleType assignment against Organisation.OrganisationType from registry."
 ] , [
     netex:property "StakeholderRoleType" ;
     netex:target xsd:string ;
     netex:xsdCardinality "1..1" ;
     netex:path "roles/ResponsibilityRoleAssignment/StakeholderRoleType" ;
-    rdfs:comment "CONTEXT ROLE enum: Planning | Operation | Control | Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar | Other"
+    rdfs:comment "ASSIGNED ROLE: declares the org's function here. Verifiable against OrganisationType. Enum: Planning | Operation | Control | Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar | Other"
 ] , [
     netex:property "ContractRef" ;
     netex:target netex:Contract ;
