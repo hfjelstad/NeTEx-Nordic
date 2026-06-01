@@ -20,20 +20,23 @@ In this guide you will learn:
 
 An **interchange** is a planned transfer opportunity between two ServiceJourneys — a **feeder** (the arriving service) and a **distributor** (the departing service). It answers the question: *"Can a passenger get off journey A and onto journey B at this location?"*
 
+<img src="interchange_concept.svg" alt="Interchange concept: feeder arrives, passenger transfers, distributor departs" width="680" />
+
+<!-- Fallback for renderers without SVG support -->
+<details><summary>Text version</summary>
+
 ```text
   Feeder journey                            Distributor journey
-+--------------------+                    +--------------------+
-| ServiceJourney A   |                    | ServiceJourney B   |
-| (Bus line 100)     |                    | (Train RE 10)      |
-+--------+-----------+                    +-----------+--------+
-         |                                            |
-         |  arrives at stop                departs from stop
-         v                                            ^
-    +----+--------------------------------------------+----+
-    |                  Transfer stop                        |
-    |            (e.g., Asker station)                      |
-    +------------------------------------------------------+
+  ServiceJourney A                          ServiceJourney B
+  (Bus line 100)                            (Train RE 10)
+        │                                            │
+        │ arrives at stop                 departs from stop
+        ▼                                            ▲
+    ┌────────────────────────────────────────────────────┐
+    │              Transfer stop (Asker stasjon)         │
+    └────────────────────────────────────────────────────┘
 ```
+</details>
 
 ### Key Properties
 
@@ -72,7 +75,7 @@ Sometimes a stop on a journey exists solely for transfer purposes — passengers
 ```xml
 <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:2" version="1" order="2">
   <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Asker"/>
-  <ForAlighting>true</ForAlighting>
+  <ForAlighting>false</ForAlighting>
   <ForBoarding>false</ForBoarding>
   <StopUse>interchangeOnly</StopUse>
 </StopPointInJourneyPattern>
@@ -84,10 +87,20 @@ Sometimes a stop on a journey exists solely for transfer purposes — passengers
 |----------|---------------------|
 | Bus terminates at a rail station purely for train connections | Yes |
 | Express train stops only to enable transfers to local services | Yes |
+| Deviation adds a temporary stop outside the operator's license area ("løyve") | Yes |
+| Deviation stops at a location not in the commercial plan, solely for passenger transfer | Yes |
 | Regular stop where passengers also board/alight normally | No |
 | Hub station with many connections but also local demand | No |
 
 > ⚠️ **Note:** `StopUse` is a property of the stop *within a specific journey pattern*, not of the stop itself. The same ScheduledStopPoint can be `interchangeOnly` on one journey and a regular stop on another.
+
+### Nordic Profile Rules
+
+1. **Pair with a ServiceJourneyInterchange.** In the Nordic Profile, every `interchangeOnly` stop **must** have a corresponding `ServiceJourneyInterchange` that explicitly describes the planned transfer. The flag alone is not sufficient — the interchange rule makes the connection machine-readable for journey planners.
+
+2. **The receiving operator defines the interchange.** To avoid misuse and conflicting guarantees, the **distributor** (the party whose service waits or departs) is responsible for publishing the `ServiceJourneyInterchange`. This prevents a feeder operator from unilaterally declaring guarantees on another operator's service.
+
+3. **Deviation use case.** When an operational deviation contradicts the commercial plan — for instance adding a stop at a location the operator does not hold a commercial license ("løyve") for, or temporarily picking up passengers at a stop not normally served — `interchangeOnly` signals that the stop exists solely for the transfer and is not part of the regular commercial offer.
 
 ---
 
@@ -161,7 +174,7 @@ Combining the interchange with a transfer-only stop in the journey pattern:
     </StopPointInJourneyPattern>
     <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:2" version="1" order="2">
       <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Asker"/>
-      <ForAlighting>true</ForAlighting>
+      <ForAlighting>false</ForAlighting>
       <ForBoarding>false</ForBoarding>
       <!-- This stop exists only for the transfer to the train -->
       <StopUse>interchangeOnly</StopUse>

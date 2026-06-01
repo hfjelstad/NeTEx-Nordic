@@ -60,7 +60,7 @@
                 </StopPointInJourneyPattern>
                 <StopPointInJourneyPattern id="NP:StopPointInJourneyPattern:Bus100_2" version="1" order="2">
                   <ScheduledStopPointRef ref="NP:ScheduledStopPoint:Asker"/>
-                  <ForAlighting>true</ForAlighting>
+                  <ForAlighting>false</ForAlighting>
                   <ForBoarding>false</ForBoarding>
                   <!-- This stop exists only for the transfer to RE 10 -->
                   <StopUse>interchangeOnly</StopUse>
