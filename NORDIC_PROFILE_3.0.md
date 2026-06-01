@@ -11,28 +11,33 @@
 
 ## Breaking Changes
 
-### 1. Route — demote to optional, repurpose
+### 1. Route — remove
 
 | Aspect | 2.x (current) | 3.0 (proposed) |
 |--------|---------------|----------------|
-| Cardinality | 1..n per Line (mandatory) | 0..n (optional) |
-| PointOnRoute | Mirrors full stop sequence | Key waypoints only (if present) |
-| LineRef on Route | Bridge to Line | Redundant — ServiceJourney carries LineRef directly |
-| JourneyPattern.RouteRef | Mandatory | Optional |
+| Cardinality | 1..n per Line (mandatory) | **Removed** (0..n transitionally, then gone) |
+| PointOnRoute | Mirrors full stop sequence | Removed |
+| RoutePoint | Exists in shared file | Removed |
+| LineRef on Route | Bridge to Line | Removed — ServiceJourney.LineRef is the path |
+| JourneyPattern.RouteRef | Mandatory | Removed |
 
-**Rationale:** ServiceJourney can reference Line directly. JourneyPattern already defines the full stop sequence via StopPointInJourneyPattern. Route's PointOnRoute duplicates this without adding value. If Route is used, it should describe *corridor-level* waypoints (e.g. "via Kongsberg") — not repeat every stop.
+**Rationale:** Route carries no independent information. ServiceJourney references Line directly. JourneyPattern defines the full stop sequence via StopPointInJourneyPattern. PointOnRoute duplicates this. Route exists only because Transmodel said so in the 1990s.
 
-**Migration:** Existing data remains valid (Route is optional, not removed). New deliveries may omit Route entirely.
+**Migration path:**
+1. 3.0-early: Route becomes optional (0..n). Validators stop requiring it.
+2. 3.0-stable: Route is removed from the profile. Validators reject it.
+
+**Cascade:** Removing Route also removes RoutePoint from the shared data file.
 
 ---
 
-### 2. ResponsibilitySet — promote to primary governance mechanism
+### 2. ResponsibilitySet — replace typed refs
 
 | Aspect | 2.x (current) | 3.0 (proposed) |
 |--------|---------------|----------------|
-| Network.AuthorityRef | Mandatory 1..1 | Optional (if responsibilitySetRef with `authority` role present) |
-| Line.OperatorRef | Mandatory 1..1 | Optional (if responsibilitySetRef with `operation` role present) |
-| ServiceJourney.OperatorRef | Optional | Optional (prefer responsibilitySetRef) |
+| Network.AuthorityRef | Mandatory 1..1 | **Removed** — use responsibilitySetRef with `authority` role |
+| Line.OperatorRef | Mandatory 1..1 | **Removed** — use responsibilitySetRef with `operation` role |
+| ServiceJourney.OperatorRef | Optional | **Removed** — use responsibilitySetRef |
 | JourneyPart.responsibilitySetRef | Undocumented | Profiled — per-leg operator assignment |
 | Frame-level responsibilitySetRef | Undocumented | Profiled — data governance |
 
@@ -47,55 +52,51 @@ Frame.responsibilitySetRef          → default for all objects in frame
 
 Most specific wins. Absent = inherit from parent.
 
-**Typed refs as derivable shortcuts:**
-- If `Line.OperatorRef` is present, it MUST match the `operation` role in the applicable ResponsibilitySet (if both are specified).
-- If `Network.AuthorityRef` is present, it MUST match the `authority` role in the applicable ResponsibilitySet.
-- Consumers SHOULD resolve from ResponsibilitySet when available; fall back to typed refs when not.
-
-**Transition rule:** Producers MUST provide at least one mechanism (typed ref OR responsibilitySetRef). Both are valid. Conflict = validation error.
+**Migration path:**
+1. 3.0-early: Typed refs become optional. responsibilitySetRef accepted as alternative. Either mechanism satisfies validation.
+2. 3.0-stable: Typed refs removed. responsibilitySetRef mandatory.
 
 ---
 
-### 3. ServiceJourney.LineRef — explicitly profiled
+### 3. ServiceJourney.LineRef — make mandatory
 
 | Aspect | 2.x (current) | 3.0 (proposed) |
 |--------|---------------|----------------|
-| LineRef on ServiceJourney | Not in NP table (schema allows it) | Profiled as 0..1, recommended |
-| Path to Line | SJ → JP → Route → Line (mandatory chain) | SJ → LineRef (direct, preferred) |
+| LineRef on ServiceJourney | Not in NP table (schema allows it) | **Mandatory 1..1** |
+| Path to Line | SJ → JP → Route → Line (mandatory chain) | SJ → LineRef (direct, only path) |
 
-**Rationale:** Production data already uses it (e.g. ENT:ServiceJourney:191). It simplifies consumer logic and removes Route dependency.
+**Rationale:** Route is removed. LineRef on ServiceJourney is now the only path to Line. Production data already uses it. Making it mandatory ensures every journey is traceable to its product.
 
 ---
 
-### 4. TransportMode override at ServiceJourney level
+### 4. Network/GroupOfLines — TBD
 
 | Aspect | 2.x (current) | 3.0 (proposed) |
 |--------|---------------|----------------|
-| Replacement bus | Some create separate Line (R10B) | Override TransportMode on ServiceJourney |
-| Profile guidance | Silent | Explicit: SJ.TransportMode overrides Line.TransportMode |
-| BusSubmode `railReplacementBus` | Allowed but undocumented | Profiled submode for this scenario |
+| RepresentedByGroupRef | Confusing polymorphic name | **Under discussion** |
+| Network purpose | Authority bridge + brand | Brand identity + fare grouping (TariffZone) — authority moves to ResponsibilitySet |
+| Bidirectional membership | Both Network.members.LineRef AND Line.RepresentedByGroupRef | **Under discussion** |
 
-**Rule:** Line.TransportMode is the default. ServiceJourney.TransportMode overrides it for that journey. No new Line required for mode substitution.
-
----
-
-### 5. Network/GroupOfLines — clarify role
-
-| Aspect | 2.x (current) | 3.0 (proposed) |
-|--------|---------------|----------------|
-| RepresentedByGroupRef | Confusing polymorphic name | Document as "NetworkRef equivalent" |
-| Network purpose | Authority bridge + brand | Brand identity + fare grouping (TariffZone) |
-| Bidirectional membership | Both Network.members.LineRef AND Line.RepresentedByGroupRef | One direction sufficient — recommend Network→Line only |
+> Status: Not yet decided. Network may remain for brand/fare grouping even after AuthorityRef is removed.
 
 ---
 
-### 6. JourneyPart — profile for multi-operator journeys
+### 5. JourneyPart — profile for multi-operator journeys
 
 | Aspect | 2.x (current) | 3.0 (proposed) |
 |--------|---------------|----------------|
 | JourneyPart | Not profiled in NP | Profiled for international/multi-operator services |
 | Key elements | — | FromStopPointRef, ToStopPointRef, StartTime, EndTime, responsibilitySetRef, order |
 | ServiceFacilitySet per part | — | Profiled (reservations, fare classes per leg) |
+| EndTimeDayOffset | — | Profiled (overnight legs) |
+
+---
+
+## Already Implemented (carried forward)
+
+| Change | Status |
+|--------|--------|
+| TransportMode override at ServiceJourney level | Done — SJ.TransportMode overrides Line.TransportMode. `railReplacementBus` submode used for replacement bus. No separate Line required. |
 
 ---
 
@@ -111,20 +112,18 @@ Most specific wins. Absent = inherit from parent.
 
 ## Backward Compatibility
 
-- All 2.x data validates against 3.0 (nothing is *removed*, only made optional)
-- 3.0 data that uses only typed refs validates against 2.x validators
-- 3.0 data that uses responsibilitySetRef will fail 2.x validators (new objects)
-- Migration path: keep typed refs, add responsibilitySetRef in parallel, eventually drop typed refs
+- All 2.x data validates against 3.0-early (removed objects become optional first)
+- 3.0-stable removes Route, typed refs — clean break
+- Migration path: 2.x → 3.0-early (add responsibilitySetRef + LineRef on SJ, Route still accepted) → 3.0-stable (Route gone, typed refs gone)
 
 ---
 
 ## Open Questions
 
-- Should Route be fully removed or kept as optional "corridor hints"?
-- Should Network.AuthorityRef be deprecated in 4.0?
+- Network/GroupOfLines: keep for brand/fare grouping? Simplify bidirectional membership?
 - Should RepresentedByGroupRef be renamed to NetworkRef in a CEN proposal?
-- How to handle validation when both typed ref and responsibilitySetRef are present — must they agree?
-- JourneyPart: should EndTimeDayOffset be profiled (for overnight legs)?
+- JourneyPart.EndTimeDayOffset: profile for overnight legs? (likely yes)
+- Organisation Registry: central vs. per-delivery definitions — how to reference?
 
 ---
 
