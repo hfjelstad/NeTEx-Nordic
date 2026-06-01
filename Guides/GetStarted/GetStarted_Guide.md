@@ -37,7 +37,46 @@ NeTEx doesn't exist in isolation — it's part of a European standards family fo
 
 Once you know the outer structure, every NeTEx file becomes predictable. Here's the pattern they all follow:
 
-![NeTEx document anatomy: PublicationDelivery → dataObjects → CompositeFrame → frames](document_anatomy.svg ':size=720')
+```mermaid
+flowchart TD
+    PD["<b>PublicationDelivery</b><br/><i>The envelope: who sent this, when?</i>"]
+    DO["dataObjects"]
+    CF["<b>CompositeFrame</b><br/><i>Groups all frames into one delivery</i>"]
+    CS["codespaces<br/><i>Declares namespace prefixes, e.g. NP</i>"]
+    FR["frames"]
+
+    RF["🏢 <b>ResourceFrame</b><br/>Organizations, operators"]
+    SF["📍 <b>SiteFrame</b><br/>Stop places, facilities"]
+    SCF["📅 <b>ServiceCalendarFrame</b><br/>Day types, calendars"]
+    SVF["🚌 <b>ServiceFrame</b><br/>Lines, routes, patterns"]
+    TF["🕐 <b>TimetableFrame</b><br/>Journeys, timetables"]
+    VSF["🚃 <b>VehicleScheduleFrame</b><br/>Vehicle blocks"]
+    FF["💰 <b>FareFrame</b><br/>Fares and tariffs"]
+
+    PD --> DO --> CF
+    CF --> CS
+    CF --> FR
+    FR --> RF
+    FR --> SF
+    FR --> SCF
+    FR --> SVF
+    FR --> TF
+    FR --> VSF
+    FR --> FF
+
+    style PD fill:#0D47A1,stroke:#0D47A1,color:#fff
+    style DO fill:#1565C0,stroke:#1565C0,color:#fff
+    style CF fill:#1565C0,stroke:#1565C0,color:#fff
+    style CS fill:#1976D2,stroke:#1976D2,color:#fff
+    style FR fill:#1976D2,stroke:#1976D2,color:#fff
+    style RF fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style SF fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style SCF fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style SVF fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style TF fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style VSF fill:#42A5F5,stroke:#42A5F5,color:#fff
+    style FF fill:#42A5F5,stroke:#42A5F5,color:#fff
+```
 
 ### Key Concepts
 

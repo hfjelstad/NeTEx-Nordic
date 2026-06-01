@@ -42,11 +42,6 @@
   <line x1="360" y1="100" x2="360" y2="165" stroke="#90a4ae" stroke-width="1.8" marker-end="url(#arrowW)"/>
   <line x1="460" y1="100" x2="560" y2="165" stroke="#90a4ae" stroke-width="1.8" marker-end="url(#arrowW)"/>
 
-  <!-- Arrow labels -->
-  <text x="195" y="135" text-anchor="middle" font-size="8.5" fill="#607d8b" transform="rotate(-22 195 135)">implemented as XML</text>
-  <text x="375" y="140" text-anchor="start" font-size="8.5" fill="#607d8b">implemented as XML</text>
-  <text x="525" y="135" text-anchor="middle" font-size="8.5" fill="#607d8b" transform="rotate(22 525 135)">implemented as XML</text>
-
   <!-- NeTEx box -->
   <rect x="60" y="170" width="200" height="100" rx="10" fill="url(#gNeTEx)" filter="url(#shadow)"/>
   <text x="160" y="198" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">NeTEx</text>
