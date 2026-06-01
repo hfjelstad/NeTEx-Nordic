@@ -209,8 +209,9 @@ netex:SalesTransactionFrame a owl:Class ;
 
 netex:Organisation a owl:Class ;
     rdfs:label "Organisation" ;
-    skos:definition "Abstract superclass for all organisation types (Authority, Operator)" ;
     rdfs:comment "Abstract — not instantiated directly in NeTEx data" ;
+    doc:description "Objects/Organisation/Description_Organisation.md" ;
+    doc:table "Objects/Organisation/Table_Organisation.md" ;
     netex:inFrame netex:ResourceFrame .
 
 netex:Authority a owl:Class ;
