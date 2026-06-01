@@ -26,32 +26,7 @@ NeTEx is one piece of a European standards ecosystem. Understanding where it fit
 
 NeTEx doesn't exist in isolation — it's part of a European standards family for public transport:
 
-```mermaid
-flowchart TD
-    TM["<b>TRANSMODEL</b><br/>EN 12896 — Conceptual Reference Model<br/><i>Defines the concepts: Line, Journey,<br/>StopPlace, Operator, DayType…</i>"]
-
-    TM -->|"implemented as XML by"| NeTEx
-    TM -->|"implemented as XML by"| SIRI
-    TM -->|"implemented as XML by"| OpRa
-
-    NeTEx["<b>NeTEx</b><br/>CEN/TS 16614<br/><br/>Planned data:<br/>timetables, fares, stops"]
-    SIRI["<b>SIRI</b><br/>CEN/TS 15531<br/><br/>Real-time data:<br/>vehicle positions,<br/>delays, alerts"]
-    OpRa["<b>OpRa</b><br/>CEN, in dev.<br/><br/>Historical data:<br/>operational raw data,<br/>KPIs"]
-
-    NeTEx -->|"profiled by"| PROF
-
-    PROF["<b>Profile</b><br/><br/>Selects which NeTEx<br/>elements to use and how"]
-
-    click TM "https://www.transmodel-cen.eu/" _blank
-    click NeTEx "https://www.netex-cen.eu/" _blank
-    click SIRI "https://www.siri-cen.eu/" _blank
-
-    style TM fill:#0D47A1,stroke:#0D47A1,color:#fff
-    style NeTEx fill:#1565C0,stroke:#1565C0,color:#fff
-    style SIRI fill:#1976D2,stroke:#1976D2,color:#fff
-    style OpRa fill:#1E88E5,stroke:#1E88E5,color:#fff
-    style PROF fill:#42A5F5,stroke:#42A5F5,color:#fff
-```
+![Standards family: Transmodel implemented by NeTEx, SIRI, and OpRa — NeTEx profiled by the Nordic Profile](standards_family.svg ':size=720')
 
 > [!TIP]
 > Click any box to visit its standard. When you see a NeTEx element like `ServiceJourney`, it maps directly to the Transmodel concept of a "SERVICE JOURNEY". Transmodel defines the semantics, NeTEx defines the XML.
@@ -62,46 +37,7 @@ flowchart TD
 
 Once you know the outer structure, every NeTEx file becomes predictable. Here's the pattern they all follow:
 
-```mermaid
-flowchart TD
-    PD["<b>PublicationDelivery</b><br/><i>The envelope: who sent this, when?</i>"]
-    DO["dataObjects"]
-    CF["<b>CompositeFrame</b><br/><i>Groups all frames into one delivery</i>"]
-    CS["codespaces<br/><i>Declares namespace prefixes, e.g. NP</i>"]
-    FR["frames"]
-
-    RF["🏢 <b>ResourceFrame</b><br/>Organizations, operators"]
-    SF["📍 <b>SiteFrame</b><br/>Stop places, facilities"]
-    SCF["📅 <b>ServiceCalendarFrame</b><br/>Day types, calendars"]
-    SVF["🚌 <b>ServiceFrame</b><br/>Lines, routes, patterns"]
-    TF["🕐 <b>TimetableFrame</b><br/>Journeys, timetables"]
-    VSF["🚃 <b>VehicleScheduleFrame</b><br/>Vehicle blocks"]
-    FF["💰 <b>FareFrame</b><br/>Fares and tariffs"]
-
-    PD --> DO --> CF
-    CF --> CS
-    CF --> FR
-    FR --> RF
-    FR --> SF
-    FR --> SCF
-    FR --> SVF
-    FR --> TF
-    FR --> VSF
-    FR --> FF
-
-    style PD fill:#0D47A1,stroke:#0D47A1,color:#fff
-    style DO fill:#1565C0,stroke:#1565C0,color:#fff
-    style CF fill:#1565C0,stroke:#1565C0,color:#fff
-    style CS fill:#1976D2,stroke:#1976D2,color:#fff
-    style FR fill:#1976D2,stroke:#1976D2,color:#fff
-    style RF fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style SF fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style SCF fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style SVF fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style TF fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style VSF fill:#42A5F5,stroke:#42A5F5,color:#fff
-    style FF fill:#42A5F5,stroke:#42A5F5,color:#fff
-```
+![NeTEx document anatomy: PublicationDelivery → dataObjects → CompositeFrame → frames](document_anatomy.svg ':size=720')
 
 ### Key Concepts
 
