@@ -694,6 +694,13 @@ netex:Organisation netex:elementOrder [
 ## On StopPlace/Quay:
 ##   type="UicCode" — UIC station code (international station identifier)
 ##
+## On Vehicle:
+##   type="VehicleIdentificationNumber" — Unique vehicle identity (harmonised)
+##     Road: ISO 3779 VIN (17 chars)
+##     Rail: EVN/European Vehicle Number (12 digits, ERA TSI OPE)
+##     Maritime: IMO number (7 digits)
+##     Tram: national registration number
+##
 ## Pattern (CEN PROPOSAL — replaces single PrivateCode element):
 ##   <privateCodes>
 ##     <PrivateCode type="RICS">1242</PrivateCode>
