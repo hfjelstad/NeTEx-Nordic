@@ -639,17 +639,33 @@ netex:Organisation netex:elementOrder [
 ] , [
     netex:position 6 ; netex:element "LegalName"
 ] , [
-    netex:position 7 ; netex:element "ContactDetails"
+    netex:position 7 ; netex:element "privateCodes"
 ] , [
-    netex:position 8 ; netex:element "OrganisationType"
+    netex:position 8 ; netex:element "ContactDetails"
 ] , [
-    netex:position 9 ; netex:element "CountryRef"
+    netex:position 9 ; netex:element "OrganisationType"
 ] , [
-    netex:position 10 ; netex:element "PrimaryMode"
+    netex:position 10 ; netex:element "CountryRef"
 ] , [
-    netex:position 11 ; netex:element "CustomerServiceContactDetails"
+    netex:position 11 ; netex:element "PrimaryMode"
+] , [
+    netex:position 12 ; netex:element "CustomerServiceContactDetails"
 ] .
 ## CEN PROPOSAL: was netex:Operator, now Organisation (same elements)
+
+## --- privateCodes/PrivateCode[@type] — known type values ---
+##
+## On Organisation:
+##   type="RICS"    — Railway Interchange Code System (4-digit railway company code)
+##
+## On StopPlace/Quay:
+##   type="UicCode" — UIC station code (international station identifier)
+##
+## Pattern (CEN PROPOSAL — replaces single PrivateCode element):
+##   <privateCodes>
+##     <PrivateCode type="RICS">1242</PrivateCode>
+##   </privateCodes>
+## -----------------------------------------------------------------
 
 netex:StopPlace netex:elementOrder [
     netex:position 1 ; netex:element "@id"
