@@ -113,7 +113,7 @@ netex:Quay           netex:npDataSource netex:CentralRegistry .
 netex:TopographicPlace netex:npDataSource netex:CentralRegistry .
 netex:Organisation   netex:npDataSource netex:CentralRegistry .
 ## netex:Authority/Operator — MERGED into Organisation (CEN PROPOSAL)
-netex:TariffZone     netex:npDataSource netex:CentralRegistry .
+## netex:TariffZone    REMOVED in 3.0 (transferred to FareZone)
 netex:FareZone       netex:npDataSource netex:CentralRegistry .
 
 ## --- Operator-produced data (delivered to central system) ---
@@ -181,8 +181,8 @@ netex:SiteFrame a owl:Class ;
     netex:containedIn netex:CompositeFrame ;
     netex:contains netex:StopPlace ,
                    netex:TopographicPlace ,
-                   netex:Parking ,
-                   netex:TariffZone .
+                   netex:Parking .
+    ## netex:TariffZone — REMOVED in 3.0 (transferred to FareZone)
 
 netex:ServiceCalendarFrame a owl:Class ;
     rdfs:label "ServiceCalendarFrame" ;
@@ -381,10 +381,7 @@ netex:Parking a owl:Class ;
     skos:definition "Parking facility, typically associated with a StopPlace" ;
     netex:inFrame netex:SiteFrame .
 
-netex:TariffZone a owl:Class ;
-    rdfs:label "TariffZone" ;
-    skos:definition "Geographic zone used for fare calculation" ;
-    netex:inFrame netex:SiteFrame .
+## netex:TariffZone — REMOVED in 3.0 (transferred to FareZone)
 
 netex:FareZone a owl:Class ;
     rdfs:label "FareZone" ;
@@ -855,11 +852,8 @@ netex:StopPlace netex:hasRef [
     netex:target netex:StopPlace ;
     netex:xsdCardinality "0..1" ;
     rdfs:comment "Multimodal parent stop — NP only"
-] , [
-    netex:property "TariffZoneRef" ;
-    netex:target netex:TariffZone ;
-    netex:xsdCardinality "0..n"
 ] .
+## TariffZoneRef — REMOVED in 3.0 (TariffZone transferred to FareZone)
 
 netex:StopPlace netex:hasComposition [
     netex:property "quays" ;
@@ -1095,9 +1089,6 @@ netex:TrainBlock netex:hasComposition [
 profile:NP netex:excludes [
     netex:class netex:StopPlace ;
     netex:property "ParentSiteRef"
-] , [
-    netex:class netex:StopPlace ;
-    netex:property "TariffZoneRef"
 ] , [
     netex:class netex:ServiceJourney ;
     netex:property "FlexibleLineRef"
@@ -1338,7 +1329,7 @@ netex:WaitingRoomEquipment skos:exactMatch tm-fac:WaitingRoomEquipment .
 netex:SanitaryEquipment skos:exactMatch tm-fac:SanitaryEquipment .
 netex:TicketingEquipment skos:exactMatch tm-fac:TicketingEquipment .
 
-netex:TariffZone skos:closeMatch tm-commons:Zone .
+## netex:TariffZone — REMOVED in 3.0
 netex:FareZone skos:closeMatch tm-commons:Zone .
 
 netex:AccessibilityAssessment skos:exactMatch tm-fac:AccessibilityAssessment .
