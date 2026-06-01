@@ -121,7 +121,13 @@ netex:Train          netex:npDataSource netex:CentralRegistry .
 ## Rolling stock in central registry: VehicleType (classification),
 ## Vehicle (individual unit), Train (single unit with components).
 ## CompoundTrain (formation) is operational — stays in OperatorDelivery.
-## CEN WISH: CompoundTrain → CompoundVehicle (modality-neutral naming).
+##
+## CEN WISH — modality-neutral naming for rolling stock hierarchy:
+##   Train → VehicleUnit (it's already a composition of coaches/wagons)
+##   CompoundTrain → Formation (or CompoundVehicle)
+##   Current naming is circular: "Train" IS compound by definition,
+##   so "CompoundTrain" = compound of compounds. Rail-biased and
+##   meaningless for bus/ferry/tram formations.
 
 ## --- Operator-produced data (delivered to central system) ---
 
