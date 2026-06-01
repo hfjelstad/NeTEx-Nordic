@@ -251,54 +251,54 @@ netex:Organisation a owl:Class ;
     change:scope change:CENProposal ;
     rdfs:comment "CEN PROPOSAL: Made concrete. Authority/Operator become OrganisationType values, not subclasses. Role assignment lives in ResponsibilitySet; OrganisationType enables machine verification." .
 
-## --- OrganisationType & StakeholderRoleType: SHARED ENUM (CEN PROPOSAL) ---
+## --- OrganisationType & StakeholderRoleType: SEPARATE ENUMS (CEN PROPOSAL) ---
 ##
-## PROPOSED unified enum values for BOTH OrganisationType AND StakeholderRoleType:
+## These are DIFFERENT concerns with DIFFERENT value sets:
 ##
-##   CORE ROLES (transport-specific):
-##   Planner                  — plans services (was: authority/Planning)
-##   PublicTransportOperator  — operates services (was: operator/Operation)
-##   PublicTransportAuthority — commissions/finances (was: authority/Planning)
-##   Controller               — real-time control (was: —/Control)
+## OrganisationType (on Organisation) = WHAT THE ORG IS (verified from registry):
+##   PublicTransportAuthority — PTA (bestiller, har myndighet)
+##   PublicTransportOperator  — PTO (har løyve for drift)
+##   StatutoryBody            — tilsynsmyndighet (Sjøfartsdirektoratet, etc.)
+##   RailOperator             — jernbaneoperatør (spesialtilfelle av PTO)
+##   RailFreightOperator      — godsoperatør
+##   FacilityOperator         — drifter infrastruktur/anlegg
+##   TravelAgent              — salgskanal
+##   → NO "other". Use TypeOfOrganisation (TypeOfValue) for extension.
 ##
-##   SERVICE ROLES (can be assigned to any org via RS):
-##   StatutoryBody            — regulatory oversight, permits, compliance
-##   CustomerService          — passenger inquiries, complaints, information
-##   LostAndFound             — lost property handling
+## StakeholderRoleType (on ResponsibilityRoleAssignment) = WHAT THE ORG DOES HERE:
+##   Planner                  — planlegger ruter/tilbud
+##   PublicTransportOperator  — drifter tjenester (operasjon)
+##   PublicTransportAuthority — bestiller/finansierer
+##   Controller               — sanntidsstyring
+##   StatutoryBody            — regulatorisk tilsyn
+##   CustomerService          — kundehenvendelser, klager
+##   LostAndFound             — hittegods
+##   Reservation              — booking
+##   EntityLegalOwnership     — eierskap av eiendeler
+##   FareManagement           — billett/takstforvaltning
+##   SecurityManagement       — sikkerhet
+##   DataRegistrar            — datastyrende
+##   → NO "other". Extend enum at CEN level when needed.
 ##
-##   RETAINED FROM EXISTING XSD (unchanged semantics):
-##   Reservation              — booking/reservation services
-##   EntityLegalOwnership     — asset ownership
-##   FareManagement           — fare products, pricing, revenue
-##   SecurityManagement       — safety and security
-##   DataRegistrar            — master data governance
-##   Other                    — catch-all
+## TypeOfOrganisation (TypeOfValue pattern):
+##   Open-ended extension mechanism for OrganisationType.
+##   Profile or local implementations define TypeOfOrganisation instances
+##   for domain-specific classifications not in the fixed enum.
+##   Example: TypeOfOrganisation id="NOR:TypeOfOrganisation:MaaS-provider"
 ##
-## Same values in both places. Difference is WHERE it's used:
-##   OrganisationType (on Organisation) = what the org IS (from registry)
-##   StakeholderRoleType (on ResponsibilityRoleAssignment) = what the org DOES here
-##
-## CROSS-VALIDATION becomes equality check:
+## CROSS-VALIDATION (rule-based, NOT equality):
 ##   RS assigns StakeholderRoleType=PublicTransportOperator →
-##   verify Organisation.OrganisationType=PublicTransportOperator
+##   verify Organisation.OrganisationType ∈ {PublicTransportOperator, RailOperator}
+##   (RailOperator is a specialization that qualifies for Operation role)
 ##
-## EXISTING XSD VALUES TO DEPRECATE/REPLACE:
+## EXISTING XSD VALUES TO DEPRECATE:
 ##   OrganisationType:    authority → PublicTransportAuthority
 ##                        operator  → PublicTransportOperator
-##                        statutoryBody → StatutoryBody (camelCase alignment)
+##                        other     → REMOVED (use TypeOfOrganisation)
 ##   StakeholderRoleType: Planning  → Planner
 ##                        Operation → PublicTransportOperator
 ##                        Control   → Controller
-##
-## NEW VALUES (CEN PROPOSAL):
-##   CustomerService, LostAndFound
-##
-## RETAINED FROM EXISTING XSD (unchanged):
-##   StakeholderRoleType: Reservation | EntityLegalOwnership |
-##                        FareManagement | SecurityManagement |
-##                        DataRegistrar | Other
-##   OrganisationType:   railOperator | railFreightOperator |
-##                        facilityOperator | travelAgent | other
+##                        Other     → REMOVED
 ## -----------------------------------------------------------------
 
 ## --- Authority/Operator: DEPRECATED subtypes (CEN PROPOSAL) ---
@@ -822,7 +822,7 @@ netex:ResponsibilitySet netex:hasRef [
     netex:target xsd:string ;
     netex:xsdCardinality "1..1" ;
     netex:path "roles/ResponsibilityRoleAssignment/StakeholderRoleType" ;
-    rdfs:comment "ASSIGNED ROLE: declares the org's function here. Verifiable against OrganisationType (shared enum). CEN PROPOSAL new values: Planner | PublicTransportOperator | PublicTransportAuthority | Controller | StatutoryBody | CustomerService | LostAndFound. Retained: Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar | Other"
+    rdfs:comment "ASSIGNED ROLE: what the org does in this context. Verifiable against OrganisationType (rule-based). Enum: Planner | PublicTransportOperator | PublicTransportAuthority | Controller | StatutoryBody | CustomerService | LostAndFound | Reservation | EntityLegalOwnership | FareManagement | SecurityManagement | DataRegistrar. NO 'Other'."
 ] , [
     netex:property "ContractRef" ;
     netex:target netex:Contract ;
