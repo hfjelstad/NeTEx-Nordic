@@ -63,15 +63,16 @@
   <text x="560" y="238" text-anchor="middle" font-size="10" fill="#e3f2fd">Historical data:</text>
   <text x="560" y="254" text-anchor="middle" font-size="9.5" fill="#90caf9">operational raw data, KPIs</text>
 
-  <!-- Arrow from NeTEx down to Profile -->
-  <line x1="160" y1="270" x2="160" y2="330" stroke="#90a4ae" stroke-width="1.8" marker-end="url(#arrowW)"/>
-  <text x="175" y="305" text-anchor="start" font-size="8.5" fill="#607d8b">profiled by</text>
+  <!-- Arrows from standards down to Profile -->
+  <line x1="160" y1="270" x2="260" y2="330" stroke="#90a4ae" stroke-width="1.8" marker-end="url(#arrowW)"/>
+  <line x1="360" y1="270" x2="360" y2="330" stroke="#90a4ae" stroke-width="1.8" marker-end="url(#arrowW)"/>
+  <line x1="560" y1="270" x2="460" y2="330" stroke="#90a4ae" stroke-width="1.8" marker-end="url(#arrowW)"/>
 
   <!-- Profile box -->
-  <rect x="60" y="335" width="200" height="65" rx="10" fill="url(#gProf)" filter="url(#shadow)"/>
-  <text x="160" y="362" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Nordic Profile</text>
-  <text x="160" y="382" text-anchor="middle" font-size="9.5" fill="#e3f2fd">Selects which NeTEx elements</text>
-  <text x="160" y="395" text-anchor="middle" font-size="9.5" fill="#e3f2fd">to use and how</text>
+  <rect x="210" y="335" width="300" height="65" rx="10" fill="url(#gProf)" filter="url(#shadow)"/>
+  <text x="360" y="362" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Nordic Profile</text>
+  <text x="360" y="382" text-anchor="middle" font-size="9.5" fill="#e3f2fd">Selects which elements to use</text>
+  <text x="360" y="395" text-anchor="middle" font-size="9.5" fill="#e3f2fd">and how to apply them</text>
 
   <!-- Clickable links (as anchors wrapping transparent rects) -->
   <a href="https://www.transmodel-cen.eu/" target="_blank">
