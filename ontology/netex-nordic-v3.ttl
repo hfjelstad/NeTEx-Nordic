@@ -5,11 +5,19 @@
 ## cardinality constraints, and profile restrictions for the Nordic Profile (NP).
 ##
 ## VERSION 3.0 CHANGES:
-##   - Route REMOVED (class, relationships, RoutePoint)
+##
+##   PROFILE-ONLY (Nordic decides unilaterally):
+##   - Route REMOVED from profile (class, relationships, RoutePoint)
 ##   - ServiceJourney.LineRef MANDATORY (1..1)
-##   - OperatorRef/AuthorityRef typed refs REMOVED
+##   - Typed refs (OperatorRef, AuthorityRef) REMOVED from Line/SJ
 ##   - responsibilitySetRef is the governance mechanism
 ##   - JourneyPart PROFILED (multi-operator journeys)
+##
+##   PROPOSED CEN CHANGES (require NeTEx XSD modification):
+##   - Organisation made CONCRETE (Authority/Operator become roles)
+##   - StakeholderRoleType in ResponsibilityRoleAssignment is the
+##     mechanism that distinguishes planning vs operation vs control
+##   - OrganisationRef replaces AuthorityRef/OperatorRef everywhere
 ##
 ## This file is the PROFILE SCHEMA only. For documentation file paths,
 ## guides, and example references see netex-nordic-documentation-v3.ttl.
@@ -19,6 +27,7 @@
 
 @prefix netex:   <https://netex-cen.eu/ontology#> .
 @prefix profile: <https://netex-cen.eu/profile#> .
+@prefix change:  <https://netex-cen.eu/change#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
@@ -28,6 +37,49 @@
 @prefix tm-fac:      <https://w3id.org/transmodel/facilities#> .
 @prefix tm-org:      <https://w3id.org/transmodel/organisations#> .
 @prefix tm-fares:    <https://w3id.org/transmodel/fares#> .
+
+## =================================================================
+## CHANGE CLASSIFICATION
+## =================================================================
+## Each breaking change is tagged with its scope:
+##   change:ProfileOnly  — Nordic can decide unilaterally (profile restriction)
+##   change:CENProposal  — Requires NeTEx XSD/Transmodel change at CEN level
+## -----------------------------------------------------------------
+
+change:ProfileOnly a change:Scope ;
+    rdfs:label "Profile-only" ;
+    skos:definition "Change that the Nordic Profile can implement by restricting/extending within existing XSD capabilities." .
+
+change:CENProposal a change:Scope ;
+    rdfs:label "CEN proposal" ;
+    skos:definition "Change that requires modification to the NeTEx XSD or Transmodel conceptual model at CEN TC278 level." .
+
+## --- Tag each breaking change ---
+
+[ a change:BreakingChange ;
+    rdfs:label "Route removal" ;
+    change:scope change:ProfileOnly ;
+    rdfs:comment "Route exists in XSD but profile simply stops using it. No XSD change needed." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "ServiceJourney.LineRef mandatory" ;
+    change:scope change:ProfileOnly ;
+    rdfs:comment "XSD already has LineRef on SJ as optional. Profile tightens to 1..1." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "Typed refs removed (OperatorRef/AuthorityRef on Line/SJ)" ;
+    change:scope change:ProfileOnly ;
+    rdfs:comment "Profile stops requiring them; responsibilitySetRef used instead." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "JourneyPart profiled" ;
+    change:scope change:ProfileOnly ;
+    rdfs:comment "JourneyPart exists in XSD. Profile adds cardinality and usage rules." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "Organisation made concrete (Authority/Operator become roles)" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "Requires XSD change: Organisation abstract→concrete, Authority/Operator deprecated. StakeholderRoleType in ResponsibilityRoleAssignment replaces class hierarchy." ] .
 
 ## =================================================================
 ## PROFILE
@@ -59,8 +111,8 @@ netex:OperatorDelivery a netex:DataSource ;
 netex:StopPlace      netex:npDataSource netex:CentralRegistry .
 netex:Quay           netex:npDataSource netex:CentralRegistry .
 netex:TopographicPlace netex:npDataSource netex:CentralRegistry .
-netex:Authority      netex:npDataSource netex:CentralRegistry .
-netex:Operator       netex:npDataSource netex:CentralRegistry .
+netex:Organisation   netex:npDataSource netex:CentralRegistry .
+## netex:Authority/Operator — MERGED into Organisation (CEN PROPOSAL)
 netex:TariffZone     netex:npDataSource netex:CentralRegistry .
 netex:FareZone       netex:npDataSource netex:CentralRegistry .
 
@@ -114,10 +166,11 @@ netex:ResourceFrame a owl:Class ;
     rdfs:label "ResourceFrame" ;
     skos:definition "Organizations, vehicle types, vehicles and shared resources" ;
     netex:containedIn netex:CompositeFrame ;
-    netex:contains netex:Authority ,
-                   netex:Operator ,
+    netex:contains netex:Organisation ,
                    netex:VehicleType ,
                    netex:Vehicle ,
+                   netex:ResponsibilitySet ,
+                   netex:Contract ,
                    netex:PurposeOfGrouping ,
                    netex:CompoundTrain ,
                    netex:Train .
@@ -193,20 +246,29 @@ netex:SalesTransactionFrame a owl:Class ;
 
 netex:Organisation a owl:Class ;
     rdfs:label "Organisation" ;
-    skos:definition "Abstract superclass for all organisational entities (Authority, Operator, etc.)" ;
+    skos:definition "A legal entity involved in public transport: may hold planning, operation, control, or data roles via ResponsibilitySet" ;
     netex:inFrame netex:ResourceFrame ;
-    rdfs:comment "Not instantiated directly in NP deliveries. Used as reference target where XSD allows any Organisation subtype." .
+    change:scope change:CENProposal ;
+    rdfs:comment "CEN PROPOSAL: Made concrete. Replaces Authority+Operator subclass hierarchy. Role differentiation moves to StakeholderRoleType in ResponsibilityRoleAssignment." .
+
+## --- Authority/Operator: DEPRECATED subtypes (CEN PROPOSAL) ---
+## Retained as aliases during transition. In 3.0 target state, only Organisation exists.
+## StakeholderRoleType enum: Planning | Operation | Control | DataOwner | Financing
 
 netex:Authority a owl:Class ;
     rdfs:label "Authority" ;
-    skos:definition "Transit authority — the public body responsible for organizing transport" ;
+    skos:definition "DEPRECATED — use Organisation with StakeholderRoleType=Planning in ResponsibilitySet" ;
     rdfs:subClassOf netex:Organisation ;
+    owl:deprecated true ;
+    change:scope change:CENProposal ;
     netex:inFrame netex:ResourceFrame .
 
 netex:Operator a owl:Class ;
     rdfs:label "Operator" ;
-    skos:definition "Transport operator — the company running the services" ;
+    skos:definition "DEPRECATED — use Organisation with StakeholderRoleType=Operation in ResponsibilitySet" ;
     rdfs:subClassOf netex:Organisation ;
+    owl:deprecated true ;
+    change:scope change:CENProposal ;
     netex:inFrame netex:ResourceFrame .
 
 netex:VehicleType a owl:Class ;
@@ -505,7 +567,7 @@ netex:ServiceJourney netex:elementOrder [
 ] , [
     netex:position 12 ; netex:element "BlockRef"
 ] , [
-    netex:position 13 ; netex:element "OperatorRef"
+    netex:position 13 ; netex:element "responsibilitySetRef"
 ] , [
     netex:position 14 ; netex:element "LineRef"
 ] , [
@@ -516,7 +578,7 @@ netex:ServiceJourney netex:elementOrder [
     netex:position 17 ; netex:element "parts"
 ] .
 
-netex:Operator netex:elementOrder [
+netex:Organisation netex:elementOrder [
     netex:position 1 ; netex:element "@id"
 ] , [
     netex:position 2 ; netex:element "@version"
@@ -539,6 +601,7 @@ netex:Operator netex:elementOrder [
 ] , [
     netex:position 11 ; netex:element "CustomerServiceContactDetails"
 ] .
+## CEN PROPOSAL: was netex:Operator, now Organisation (same elements)
 
 netex:StopPlace netex:elementOrder [
     netex:position 1 ; netex:element "@id"
@@ -583,7 +646,7 @@ netex:Line netex:elementOrder [
 ] , [
     netex:position 7 ; netex:element "PrivateCode"
 ] , [
-    netex:position 8 ; netex:element "OperatorRef"
+    netex:position 8 ; netex:element "responsibilitySetRef"
 ] , [
     netex:position 9 ; netex:element "Monitored"
 ] , [
@@ -683,16 +746,14 @@ netex:DestinationDisplay netex:elementOrder [
 
 ## --- ResourceFrame relationships ---
 
-netex:Operator netex:hasRef [
-    netex:property "AuthorityRef" ;
-    netex:target netex:Authority ;
-    netex:xsdCardinality "0..1"
-] .
+## netex:Operator.AuthorityRef — DEPRECATED (CEN PROPOSAL)
+## Replaced by: Organisation referenced via ResponsibilitySet with StakeholderRoleType
 
 netex:Vehicle netex:hasRef [
-    netex:property "OperatorRef" ;
-    netex:target netex:Operator ;
-    netex:xsdCardinality "0..1"
+    netex:property "OrganisationRef" ;
+    netex:target netex:Organisation ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: was OperatorRef targeting Operator"
 ] , [
     netex:property "VehicleTypeRef" ;
     netex:target netex:VehicleType ;
@@ -701,9 +762,16 @@ netex:Vehicle netex:hasRef [
 
 netex:ResponsibilitySet netex:hasRef [
     netex:property "ResponsibleOrganisationRef" ;
-    netex:target netex:Authority ;
-    netex:xsdCardinality "0..1" ;
-    netex:path "roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef"
+    netex:target netex:Organisation ;
+    netex:xsdCardinality "1..n" ;
+    netex:path "roles/ResponsibilityRoleAssignment/ResponsibleOrganisationRef" ;
+    rdfs:comment "CEN PROPOSAL: targets Organisation (not Authority/Operator). Role determined by StakeholderRoleType."
+] , [
+    netex:property "StakeholderRoleType" ;
+    netex:target xsd:string ;
+    netex:xsdCardinality "1..1" ;
+    netex:path "roles/ResponsibilityRoleAssignment/StakeholderRoleType" ;
+    rdfs:comment "Enum: Planning | Operation | Control | DataOwner | Financing"
 ] , [
     netex:property "ContractRef" ;
     netex:target netex:Contract ;
@@ -713,14 +781,16 @@ netex:ResponsibilitySet netex:hasRef [
 
 netex:Contract netex:hasRef [
     netex:property "OrganisationRef (contractees)" ;
-    netex:target netex:Authority ;
+    netex:target netex:Organisation ;
     netex:xsdCardinality "0..n" ;
-    netex:path "contractees/OrganisationRef"
+    netex:path "contractees/OrganisationRef" ;
+    rdfs:comment "CEN PROPOSAL: was typed to Authority"
 ] , [
     netex:property "OrganisationRef (contractors)" ;
-    netex:target netex:Operator ;
+    netex:target netex:Organisation ;
     netex:xsdCardinality "0..n" ;
-    netex:path "contractors/OrganisationRef"
+    netex:path "contractors/OrganisationRef" ;
+    rdfs:comment "CEN PROPOSAL: was typed to Operator"
 ] .
 
 ## --- SiteFrame relationships ---
@@ -949,9 +1019,10 @@ netex:Interchange netex:hasRef [
 ## --- VehicleScheduleFrame relationships ---
 
 netex:TrainBlock netex:hasRef [
-    netex:property "OperatorRef" ;
-    netex:target netex:Operator ;
-    netex:xsdCardinality "0..1"
+    netex:property "OrganisationRef" ;
+    netex:target netex:Organisation ;
+    netex:xsdCardinality "0..1" ;
+    rdfs:comment "CEN PROPOSAL: was OperatorRef targeting Operator"
 ] .
 
 netex:TrainBlock netex:hasComposition [
@@ -1055,13 +1126,10 @@ profile:NP netex:requires [
     netex:cardinality "1..1" ;
     rdfs:comment "XSD allows 0..1, NP mandates"
 ] , [
-    netex:class netex:Authority ;
+    netex:class netex:Organisation ;
     netex:property "Name" ;
-    netex:cardinality "1..1"
-] , [
-    netex:class netex:Operator ;
-    netex:property "Name" ;
-    netex:cardinality "1..1"
+    netex:cardinality "1..1" ;
+    rdfs:comment "CEN PROPOSAL: was separate Authority.Name + Operator.Name requirements"
 ] , [
     netex:class netex:VehicleType ;
     netex:property "Name" ;
@@ -1106,16 +1174,16 @@ netex:CalendarChain rdfs:comment """
     netex:step3 netex:OperatingPeriod .
 
 netex:OrganisationChain rdfs:comment """
-    ResponsibilitySet → Authority / Operator / Contract
+    ResponsibilitySet → Organisation (with StakeholderRoleType) → Contract
     ResponsibilitySet is the single governance mechanism in 3.0.
-    It assigns roles (authority, operation, data, financing) to organisations,
-    optionally linked to a Contract. Applied via responsibilitySetRef on
-    Network, Line, ServiceJourney, or JourneyPart with inheritance semantics.
+    It assigns roles to Organisations via StakeholderRoleType enum:
+      Planning (was Authority), Operation (was Operator), Control, DataOwner, Financing.
+    Optionally linked to a Contract.
+    CEN PROPOSAL: Authority/Operator classes deprecated in favour of roles.
 """ ;
     netex:step1 netex:ResponsibilitySet ;
-    netex:step2 netex:Authority ;
-    netex:step3 netex:Operator ;
-    netex:step4 netex:Contract .
+    netex:step2 netex:Organisation ;
+    netex:step3 netex:Contract .
 
 netex:ResponsibilityInheritanceChain rdfs:comment """
     Frame → Network → Line → ServiceJourney → JourneyPart
@@ -1167,8 +1235,8 @@ netex:DatedServiceJourney netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , s
 netex:JourneyPattern netex:referencedBySIRI siri:SIRI_ET ;
     rdfs:comment "Via JourneyPatternRef in EstimatedVehicleJourney" .
 
-netex:Operator netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX , siri:SIRI_FM ;
-    rdfs:comment "Via OperatorRef in all services" .
+netex:Organisation netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX , siri:SIRI_FM ;
+    rdfs:comment "CEN PROPOSAL: was Operator. Via OperatorRef in all services — becomes OrganisationRef" .
 
 netex:Quay netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_VM , siri:SIRI_SX ;
     rdfs:comment "Via StopPointRef in EstimatedCall, RecordedCall, MonitoredCall, AffectedStopPoint" .
@@ -1183,11 +1251,12 @@ netex:GroupOfLines netex:referencedBySIRI siri:SIRI_ET , siri:SIRI_SX ;
 ## TRANSMODEL ALIGNMENT
 ## =================================================================
 
-netex:Authority skos:exactMatch tm-org:Authority ;
-    rdfs:seeAlso tm-org:Organisation .
+netex:Organisation skos:exactMatch tm-org:Organisation ;
+    rdfs:comment "CEN PROPOSAL: concrete Organisation. Transmodel already has Organisation as superclass." .
 
-netex:Operator skos:exactMatch tm-org:Operator ;
-    rdfs:seeAlso tm-org:Organisation .
+## netex:Authority/Operator Transmodel alignment — DEPRECATED (CEN PROPOSAL)
+## Authority mapped to tm-org:Authority (role, not class in target state)
+## Operator mapped to tm-org:Operator (role, not class in target state)
 
 netex:StopPlace skos:exactMatch tm-fac:StopPlace .
 netex:Quay skos:exactMatch tm-fac:Quay .
