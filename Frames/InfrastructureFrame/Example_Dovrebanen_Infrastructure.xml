@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Dovrebanen InfrastructureFrame — Physical railway network graph
+  
+  Eidsvoll (km 67.86) → Trondheim S (km 552.87)
+  All stations from Wikipedia linjekart, uni-directional RailwayElements.
+  
+  Conventions:
+    RailwayJunction id: NOR:RailwayJunction:Dovrebanen:<StationCode>
+    RailwayElement id:  NOR:RailwayElement:Dovrebanen:<From>-<To>:<direction>
+    Direction suffixes: :up (southbound, decreasing km) / :down (northbound, increasing km)
+    Distance in metres (derived from km markers)
+-->
+<PublicationDelivery xmlns="http://www.netex.org.uk/netex"
+                    xmlns:gml="http://www.opengis.net/gml/3.2"
+                    version="1.0">
+  <PublicationTimestamp>2026-06-10T12:00:00</PublicationTimestamp>
+  <ParticipantRef>NOR</ParticipantRef>
+  <dataObjects>
+    <CompositeFrame id="NOR:CompositeFrame:Dovrebanen" version="1">
+      <validityConditions>
+        <AvailabilityCondition id="NOR:AvailabilityCondition:Dovrebanen" version="1">
+          <FromDate>2026-01-01T00:00:00</FromDate>
+        </AvailabilityCondition>
+      </validityConditions>
+      <codespaces>
+        <Codespace id="nor">
+          <Xmlns>NOR</Xmlns>
+          <XmlnsUrl>http://www.rutebanken.org/ns/nor</XmlnsUrl>
+        </Codespace>
+      </codespaces>
+      <frames>
+
+        <InfrastructureFrame id="NOR:InfrastructureFrame:Dovrebanen" version="1">
+          <Name>Dovrebanen — Physical Railway Infrastructure</Name>
+
+          <!-- ============================================================ -->
+          <!-- RAILWAY JUNCTIONS (stations/passing loops)                    -->
+          <!-- ============================================================ -->
+          <junctions>
+            <!-- Km 67.86 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Eidsvoll" version="1">
+              <Name>Eidsvoll</Name>
+              <Location>
+                <Longitude>11.1769</Longitude>
+                <Latitude>60.3310</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>67.86</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>127.2</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 101.77 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Tangen" version="1">
+              <Name>Tangen</Name>
+              <Location>
+                <Longitude>11.1700</Longitude>
+                <Latitude>60.6200</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>101.77</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>164.4</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 114.42 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Stange" version="1">
+              <Name>Stange</Name>
+              <Location>
+                <Longitude>11.1030</Longitude>
+                <Latitude>60.7100</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>114.42</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>222.4</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 126.26 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Hamar" version="1">
+              <Name>Hamar</Name>
+              <Location>
+                <Longitude>11.0679</Longitude>
+                <Latitude>60.7945</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>126.26</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>127.0</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 139.90 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Brumunddal" version="1">
+              <Name>Brumunddal</Name>
+              <Location>
+                <Longitude>10.9430</Longitude>
+                <Latitude>60.8810</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>139.90</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>134.0</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 155.95 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Moelv" version="1">
+              <Name>Moelv</Name>
+              <Location>
+                <Longitude>10.6960</Longitude>
+                <Latitude>60.9370</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>155.95</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>147.3</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 184.48 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Lillehammer" version="1">
+              <Name>Lillehammer</Name>
+              <Location>
+                <Longitude>10.4663</Longitude>
+                <Latitude>61.1152</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>184.48</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>179.5</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 198.26 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Hunderfossen" version="1">
+              <Name>Hunderfossen</Name>
+              <Location>
+                <Longitude>10.4310</Longitude>
+                <Latitude>61.1680</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>198.26</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 220.03 (approx) -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Favang" version="1">
+              <Name>Fåvang</Name>
+              <Location>
+                <Longitude>10.2230</Longitude>
+                <Latitude>61.2460</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>220.03</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 242.55 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Ringebu" version="1">
+              <Name>Ringebu</Name>
+              <Location>
+                <Longitude>10.1670</Longitude>
+                <Latitude>61.3890</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>242.55</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>197.1</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 266.50 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Vinstra" version="1">
+              <Name>Vinstra</Name>
+              <Location>
+                <Longitude>10.0830</Longitude>
+                <Latitude>61.5910</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>266.50</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>241.4</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 276.57 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Kvam" version="1">
+              <Name>Kvam</Name>
+              <Location>
+                <Longitude>9.9990</Longitude>
+                <Latitude>61.6480</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>276.57</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>253.0</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 297.24 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Otta" version="1">
+              <Name>Otta</Name>
+              <Location>
+                <Longitude>9.5380</Longitude>
+                <Latitude>61.7720</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>297.24</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>287.7</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 330.82 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Dovre" version="1">
+              <Name>Dovre</Name>
+              <Location>
+                <Longitude>9.5780</Longitude>
+                <Latitude>62.0480</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>330.82</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>485.3</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 343.04 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Dombas" version="1">
+              <Name>Dombås</Name>
+              <Location>
+                <Longitude>9.1260</Longitude>
+                <Latitude>62.0740</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>343.04</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>659.3</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 381.74 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Hjerkinn" version="1">
+              <Name>Hjerkinn</Name>
+              <Location>
+                <Longitude>9.5500</Longitude>
+                <Latitude>62.2230</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>381.74</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>1017.0</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 393.23 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Kongsvoll" version="1">
+              <Name>Kongsvoll</Name>
+              <Location>
+                <Longitude>9.6020</Longitude>
+                <Latitude>62.3000</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>393.23</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>886.5</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 429.28 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Oppdal" version="1">
+              <Name>Oppdal</Name>
+              <Location>
+                <Longitude>9.6890</Longitude>
+                <Latitude>62.5930</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>429.28</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>544.9</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 466.35 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Berkak" version="1">
+              <Name>Berkåk</Name>
+              <Location>
+                <Longitude>10.0050</Longitude>
+                <Latitude>62.8270</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>466.35</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>450.6</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 501.20 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Storen" version="1">
+              <Name>Støren</Name>
+              <Location>
+                <Longitude>10.2870</Longitude>
+                <Latitude>63.0370</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>501.20</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>66.0</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 507.89 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Hovin" version="1">
+              <Name>Hovin</Name>
+              <Location>
+                <Longitude>10.3120</Longitude>
+                <Latitude>63.0740</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>507.89</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>54.8</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 514.78 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Lundamo" version="1">
+              <Name>Lundamo</Name>
+              <Location>
+                <Longitude>10.3480</Longitude>
+                <Latitude>63.1120</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>514.78</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>34.3</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 520.48 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Ler" version="1">
+              <Name>Ler</Name>
+              <Location>
+                <Longitude>10.3900</Longitude>
+                <Latitude>63.1450</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>520.48</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>26.3</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 524.95 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Kval" version="1">
+              <Name>Kvål</Name>
+              <Location>
+                <Longitude>10.3850</Longitude>
+                <Latitude>63.1700</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>524.95</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>50.3</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 531.42 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Melhus" version="1">
+              <Name>Melhus skysstasjon</Name>
+              <Location>
+                <Longitude>10.2790</Longitude>
+                <Latitude>63.2870</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>531.42</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>24.4</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 541.41 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Heimdal" version="1">
+              <Name>Heimdal</Name>
+              <Location>
+                <Longitude>10.3510</Longitude>
+                <Latitude>63.3530</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>541.41</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>143.5</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 546.44 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Selsbakk" version="1">
+              <Name>Selsbakk</Name>
+              <Location>
+                <Longitude>10.3590</Longitude>
+                <Latitude>63.3880</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>546.44</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>66.7</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 549.95 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Marienborg" version="1">
+              <Name>Marienborg</Name>
+              <Location>
+                <Longitude>10.3740</Longitude>
+                <Latitude>63.4170</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>549.95</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 551.67 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Skansen" version="1">
+              <Name>Skansen</Name>
+              <Location>
+                <Longitude>10.3860</Longitude>
+                <Latitude>63.4290</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>551.67</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+
+            <!-- Km 552.87 -->
+            <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:TrondheimS" version="1">
+              <Name>Trondheim S</Name>
+              <Location>
+                <Longitude>10.3992</Longitude>
+                <Latitude>63.4366</Latitude>
+              </Location>
+              <keyList>
+                <KeyValue><Key>km</Key><Value>552.87</Value></KeyValue>
+                <KeyValue><Key>elevation_m</Key><Value>5.1</Value></KeyValue>
+              </keyList>
+            </RailwayJunction>
+          </junctions>
+
+          <!-- ============================================================ -->
+          <!-- RAILWAY ELEMENTS (directional links between junctions)        -->
+          <!-- :down = northbound (increasing km), :up = southbound          -->
+          <!-- ============================================================ -->
+          <elements>
+            <!-- Eidsvoll → Tangen (33.91 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Eidsvoll-Tangen:down" version="1">
+              <Distance>33910</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Eidsvoll"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Tangen"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Tangen-Eidsvoll:up" version="1">
+              <Distance>33910</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Tangen"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Eidsvoll"/>
+            </RailwayElement>
+
+            <!-- Tangen → Stange (12.65 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Tangen-Stange:down" version="1">
+              <Distance>12650</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Tangen"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Stange"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Stange-Tangen:up" version="1">
+              <Distance>12650</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Stange"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Tangen"/>
+            </RailwayElement>
+
+            <!-- Stange → Hamar (11.84 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Stange-Hamar:down" version="1">
+              <Distance>11840</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Stange"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hamar"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hamar-Stange:up" version="1">
+              <Distance>11840</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hamar"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Stange"/>
+            </RailwayElement>
+
+            <!-- Hamar → Brumunddal (13.64 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hamar-Brumunddal:down" version="1">
+              <Distance>13640</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hamar"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Brumunddal"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Brumunddal-Hamar:up" version="1">
+              <Distance>13640</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Brumunddal"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hamar"/>
+            </RailwayElement>
+
+            <!-- Brumunddal → Moelv (16.05 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Brumunddal-Moelv:down" version="1">
+              <Distance>16050</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Brumunddal"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Moelv"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Moelv-Brumunddal:up" version="1">
+              <Distance>16050</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Moelv"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Brumunddal"/>
+            </RailwayElement>
+
+            <!-- Moelv → Lillehammer (28.53 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Moelv-Lillehammer:down" version="1">
+              <Distance>28530</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Moelv"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Lillehammer"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Lillehammer-Moelv:up" version="1">
+              <Distance>28530</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Lillehammer"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Moelv"/>
+            </RailwayElement>
+
+            <!-- Lillehammer → Hunderfossen (13.78 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Lillehammer-Hunderfossen:down" version="1">
+              <Distance>13780</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Lillehammer"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hunderfossen"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hunderfossen-Lillehammer:up" version="1">
+              <Distance>13780</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hunderfossen"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Lillehammer"/>
+            </RailwayElement>
+
+            <!-- Hunderfossen → Fåvang (21.77 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hunderfossen-Favang:down" version="1">
+              <Distance>21770</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hunderfossen"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Favang"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Favang-Hunderfossen:up" version="1">
+              <Distance>21770</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Favang"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hunderfossen"/>
+            </RailwayElement>
+
+            <!-- Fåvang → Ringebu (22.52 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Favang-Ringebu:down" version="1">
+              <Distance>22520</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Favang"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Ringebu"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Ringebu-Favang:up" version="1">
+              <Distance>22520</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Ringebu"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Favang"/>
+            </RailwayElement>
+
+            <!-- Ringebu → Vinstra (23.95 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Ringebu-Vinstra:down" version="1">
+              <Distance>23950</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Ringebu"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Vinstra"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Vinstra-Ringebu:up" version="1">
+              <Distance>23950</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Vinstra"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Ringebu"/>
+            </RailwayElement>
+
+            <!-- Vinstra → Kvam (10.07 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Vinstra-Kvam:down" version="1">
+              <Distance>10070</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Vinstra"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kvam"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kvam-Vinstra:up" version="1">
+              <Distance>10070</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kvam"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Vinstra"/>
+            </RailwayElement>
+
+            <!-- Kvam → Otta (20.67 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kvam-Otta:down" version="1">
+              <Distance>20670</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kvam"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Otta"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Otta-Kvam:up" version="1">
+              <Distance>20670</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Otta"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kvam"/>
+            </RailwayElement>
+
+            <!-- Otta → Dovre (33.58 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Otta-Dovre:down" version="1">
+              <Distance>33580</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Otta"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Dovre"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Dovre-Otta:up" version="1">
+              <Distance>33580</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Dovre"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Otta"/>
+            </RailwayElement>
+
+            <!-- Dovre → Dombås (12.22 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Dovre-Dombas:down" version="1">
+              <Distance>12220</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Dovre"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Dombas"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Dombas-Dovre:up" version="1">
+              <Distance>12220</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Dombas"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Dovre"/>
+            </RailwayElement>
+
+            <!-- Dombås → Hjerkinn (38.70 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Dombas-Hjerkinn:down" version="1">
+              <Distance>38700</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Dombas"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hjerkinn"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hjerkinn-Dombas:up" version="1">
+              <Distance>38700</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hjerkinn"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Dombas"/>
+            </RailwayElement>
+
+            <!-- Hjerkinn → Kongsvoll (11.49 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hjerkinn-Kongsvoll:down" version="1">
+              <Distance>11490</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hjerkinn"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kongsvoll"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kongsvoll-Hjerkinn:up" version="1">
+              <Distance>11490</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kongsvoll"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hjerkinn"/>
+            </RailwayElement>
+
+            <!-- Kongsvoll → Oppdal (36.05 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kongsvoll-Oppdal:down" version="1">
+              <Distance>36050</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kongsvoll"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Oppdal"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Oppdal-Kongsvoll:up" version="1">
+              <Distance>36050</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Oppdal"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kongsvoll"/>
+            </RailwayElement>
+
+            <!-- Oppdal → Berkåk (37.07 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Oppdal-Berkak:down" version="1">
+              <Distance>37070</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Oppdal"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Berkak"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Berkak-Oppdal:up" version="1">
+              <Distance>37070</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Berkak"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Oppdal"/>
+            </RailwayElement>
+
+            <!-- Berkåk → Støren (34.85 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Berkak-Storen:down" version="1">
+              <Distance>34850</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Berkak"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Storen"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Storen-Berkak:up" version="1">
+              <Distance>34850</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Storen"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Berkak"/>
+            </RailwayElement>
+
+            <!-- Støren → Hovin (6.69 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Storen-Hovin:down" version="1">
+              <Distance>6690</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Storen"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hovin"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hovin-Storen:up" version="1">
+              <Distance>6690</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hovin"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Storen"/>
+            </RailwayElement>
+
+            <!-- Hovin → Lundamo (6.89 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hovin-Lundamo:down" version="1">
+              <Distance>6890</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hovin"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Lundamo"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Lundamo-Hovin:up" version="1">
+              <Distance>6890</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Lundamo"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hovin"/>
+            </RailwayElement>
+
+            <!-- Lundamo → Ler (5.70 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Lundamo-Ler:down" version="1">
+              <Distance>5700</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Lundamo"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Ler"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Ler-Lundamo:up" version="1">
+              <Distance>5700</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Ler"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Lundamo"/>
+            </RailwayElement>
+
+            <!-- Ler → Kvål (4.47 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Ler-Kval:down" version="1">
+              <Distance>4470</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Ler"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kval"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kval-Ler:up" version="1">
+              <Distance>4470</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kval"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Ler"/>
+            </RailwayElement>
+
+            <!-- Kvål → Melhus (6.47 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kval-Melhus:down" version="1">
+              <Distance>6470</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kval"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Melhus"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Melhus-Kval:up" version="1">
+              <Distance>6470</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Melhus"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kval"/>
+            </RailwayElement>
+
+            <!-- Melhus → Heimdal (9.99 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Melhus-Heimdal:down" version="1">
+              <Distance>9990</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Melhus"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Heimdal"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Heimdal-Melhus:up" version="1">
+              <Distance>9990</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Heimdal"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Melhus"/>
+            </RailwayElement>
+
+            <!-- Heimdal → Selsbakk (5.03 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Heimdal-Selsbakk:down" version="1">
+              <Distance>5030</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Heimdal"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Selsbakk"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Selsbakk-Heimdal:up" version="1">
+              <Distance>5030</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Selsbakk"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Heimdal"/>
+            </RailwayElement>
+
+            <!-- Selsbakk → Marienborg (3.51 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Selsbakk-Marienborg:down" version="1">
+              <Distance>3510</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Selsbakk"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Marienborg"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Marienborg-Selsbakk:up" version="1">
+              <Distance>3510</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Marienborg"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Selsbakk"/>
+            </RailwayElement>
+
+            <!-- Marienborg → Skansen (1.72 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Marienborg-Skansen:down" version="1">
+              <Distance>1720</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Marienborg"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Skansen"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Skansen-Marienborg:up" version="1">
+              <Distance>1720</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Skansen"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Marienborg"/>
+            </RailwayElement>
+
+            <!-- Skansen → Trondheim S (1.20 km) -->
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:Skansen-TrondheimS:down" version="1">
+              <Distance>1200</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Skansen"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:TrondheimS"/>
+            </RailwayElement>
+            <RailwayElement id="NOR:RailwayElement:Dovrebanen:TrondheimS-Skansen:up" version="1">
+              <Distance>1200</Distance>
+              <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:TrondheimS"/>
+              <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Skansen"/>
+            </RailwayElement>
+          </elements>
+
+        </InfrastructureFrame>
+      </frames>
+    </CompositeFrame>
+  </dataObjects>
+</PublicationDelivery>

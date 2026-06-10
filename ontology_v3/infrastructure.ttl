@@ -1,0 +1,232 @@
+## -----------------------------------------------------------------
+## Infrastructure Network Ontology (v3.0 extension)
+## -----------------------------------------------------------------
+## Physical railway/road/wire network: junctions and elements.
+## This extends netex.ttl with InfrastructureFrame classes.
+##
+## Imports: netex.ttl
+##
+## Generated: 2026-06-10
+## -----------------------------------------------------------------
+
+@prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix infra:   <https://netex-cen.eu/ontology/infrastructure#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+## --- Import base NeTEx ontology ---
+<https://netex-cen.eu/ontology/infrastructure> a owl:Ontology ;
+    owl:imports <https://netex-cen.eu/ontology> .
+
+## =================================================================
+## FRAME
+## =================================================================
+
+netex:InfrastructureFrame a owl:Class ;
+    rdfs:label "InfrastructureFrame" ;
+    skos:definition "A coherent set of infrastructure network description data: junctions, elements (links), restrictions, vehicle types, and spatial features." ;
+    netex:containedIn netex:CompositeFrame ;
+    netex:contains infra:RailwayJunction ,
+                   infra:RoadJunction ,
+                   infra:WireJunction ,
+                   infra:RailwayElement ,
+                   infra:RoadElement ,
+                   infra:WireElement .
+
+## =================================================================
+## ABSTRACT BASE CLASSES
+## =================================================================
+
+infra:InfrastructurePoint a owl:Class ;
+    rdfs:label "InfrastructurePoint" ;
+    skos:definition "Abstract supertype for all points in the physical network. Extends Point." ;
+    rdfs:comment "Concrete subtypes: RailwayJunction, RoadJunction, WireJunction." .
+
+infra:InfrastructureLink a owl:Class ;
+    rdfs:label "InfrastructureLink" ;
+    skos:definition "Abstract supertype for all directional links in the physical network. Extends Link. Carries Distance and optional gml:LineString geometry." ;
+    rdfs:comment "Concrete subtypes: RailwayElement, RoadElement, WireElement. Directional — separate links per direction." .
+
+## =================================================================
+## RAILWAY CLASSES
+## =================================================================
+
+infra:RailwayJunction a owl:Class ;
+    rdfs:label "RailwayJunction" ;
+    skos:definition "A point in the physical railway network: station, passing loop, or junction where tracks diverge." ;
+    rdfs:subClassOf infra:InfrastructurePoint ;
+    netex:inFrame netex:InfrastructureFrame .
+
+infra:RailwayElement a owl:Class ;
+    rdfs:label "RailwayElement" ;
+    skos:definition "A directional track segment between two RailwayJunctions. Carries distance in metres." ;
+    rdfs:subClassOf infra:InfrastructureLink ;
+    netex:inFrame netex:InfrastructureFrame .
+
+## =================================================================
+## ROAD CLASSES
+## =================================================================
+
+infra:RoadJunction a owl:Class ;
+    rdfs:label "RoadJunction" ;
+    skos:definition "A point in the physical road network." ;
+    rdfs:subClassOf infra:InfrastructurePoint ;
+    netex:inFrame netex:InfrastructureFrame .
+
+infra:RoadElement a owl:Class ;
+    rdfs:label "RoadElement" ;
+    skos:definition "A directional road segment between two RoadJunctions." ;
+    rdfs:subClassOf infra:InfrastructureLink ;
+    netex:inFrame netex:InfrastructureFrame .
+
+## =================================================================
+## WIRE CLASSES (trolleybus, tram overhead)
+## =================================================================
+
+infra:WireJunction a owl:Class ;
+    rdfs:label "WireJunction" ;
+    skos:definition "A point in a wire/overhead line network." ;
+    rdfs:subClassOf infra:InfrastructurePoint ;
+    netex:inFrame netex:InfrastructureFrame .
+
+infra:WireElement a owl:Class ;
+    rdfs:label "WireElement" ;
+    skos:definition "A directional wire segment between two WireJunctions." ;
+    rdfs:subClassOf infra:InfrastructureLink ;
+    netex:inFrame netex:InfrastructureFrame .
+
+## =================================================================
+## RELATIONSHIPS
+## =================================================================
+
+infra:RailwayElement netex:hasRef [
+    netex:property "FromPointRef" ;
+    netex:target infra:RailwayJunction ;
+    netex:xsdCardinality "1..1"
+] , [
+    netex:property "ToPointRef" ;
+    netex:target infra:RailwayJunction ;
+    netex:xsdCardinality "1..1"
+] .
+
+infra:RoadElement netex:hasRef [
+    netex:property "FromPointRef" ;
+    netex:target infra:RoadJunction ;
+    netex:xsdCardinality "1..1"
+] , [
+    netex:property "ToPointRef" ;
+    netex:target infra:RoadJunction ;
+    netex:xsdCardinality "1..1"
+] .
+
+infra:WireElement netex:hasRef [
+    netex:property "FromPointRef" ;
+    netex:target infra:WireJunction ;
+    netex:xsdCardinality "1..1"
+] , [
+    netex:property "ToPointRef" ;
+    netex:target infra:WireJunction ;
+    netex:xsdCardinality "1..1"
+] .
+
+## =================================================================
+## PROPERTIES (inherited from Link)
+## =================================================================
+
+infra:InfrastructureLink netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "Name"
+] , [
+    netex:position 4 ; netex:element "Distance"
+] , [
+    netex:position 5 ; netex:element "gml:LineString"
+] , [
+    netex:position 6 ; netex:element "FromPointRef"
+] , [
+    netex:position 7 ; netex:element "ToPointRef"
+] .
+
+infra:InfrastructurePoint netex:elementOrder [
+    netex:position 1 ; netex:element "@id"
+] , [
+    netex:position 2 ; netex:element "@version"
+] , [
+    netex:position 3 ; netex:element "Name"
+] , [
+    netex:position 4 ; netex:element "Location"
+] , [
+    netex:position 5 ; netex:element "keyList"
+] .
+
+## =================================================================
+## NETWORK RESTRICTIONS (optional, in InfrastructureFrame)
+## =================================================================
+
+infra:MeetingRestriction a owl:Class ;
+    rdfs:label "MeetingRestriction" ;
+    skos:definition "Constraint on where two trains may pass (single-track restrictions)." ;
+    netex:inFrame netex:InfrastructureFrame .
+
+infra:OvertakingPossibility a owl:Class ;
+    rdfs:label "OvertakingPossibility" ;
+    skos:definition "Defines where a faster train may overtake a slower one." ;
+    netex:inFrame netex:InfrastructureFrame .
+
+infra:RestrictedManoeuvre a owl:Class ;
+    rdfs:label "RestrictedManoeuvre" ;
+    skos:definition "Constraint on turn/manoeuvre capabilities at a junction." ;
+    netex:inFrame netex:InfrastructureFrame .
+
+## =================================================================
+## DOVREBANEN INSTANCE DATA
+## =================================================================
+## Example: key junctions from the Dovrebanen XML instance.
+## Full data in: Frames/InfrastructureFrame/Example_Dovrebanen_Infrastructure.xml
+## -----------------------------------------------------------------
+
+<https://netex-cen.eu/instance/dovrebanen/Eidsvoll> a infra:RailwayJunction ;
+    rdfs:label "Eidsvoll" ;
+    infra:km "67.86"^^xsd:decimal ;
+    infra:elevation "127.2"^^xsd:decimal .
+
+<https://netex-cen.eu/instance/dovrebanen/Hamar> a infra:RailwayJunction ;
+    rdfs:label "Hamar" ;
+    infra:km "126.26"^^xsd:decimal ;
+    infra:elevation "127.0"^^xsd:decimal .
+
+<https://netex-cen.eu/instance/dovrebanen/Lillehammer> a infra:RailwayJunction ;
+    rdfs:label "Lillehammer" ;
+    infra:km "184.48"^^xsd:decimal ;
+    infra:elevation "179.5"^^xsd:decimal .
+
+<https://netex-cen.eu/instance/dovrebanen/Dombas> a infra:RailwayJunction ;
+    rdfs:label "Dombås" ;
+    infra:km "343.04"^^xsd:decimal ;
+    infra:elevation "659.3"^^xsd:decimal .
+
+<https://netex-cen.eu/instance/dovrebanen/Hjerkinn> a infra:RailwayJunction ;
+    rdfs:label "Hjerkinn" ;
+    infra:km "381.74"^^xsd:decimal ;
+    infra:elevation "1017.0"^^xsd:decimal ;
+    rdfs:comment "Near highest point on Dovrebanen (1024.4 m at km 382.74)" .
+
+<https://netex-cen.eu/instance/dovrebanen/Oppdal> a infra:RailwayJunction ;
+    rdfs:label "Oppdal" ;
+    infra:km "429.28"^^xsd:decimal ;
+    infra:elevation "544.9"^^xsd:decimal .
+
+<https://netex-cen.eu/instance/dovrebanen/Storen> a infra:RailwayJunction ;
+    rdfs:label "Støren" ;
+    infra:km "501.20"^^xsd:decimal ;
+    infra:elevation "66.0"^^xsd:decimal ;
+    rdfs:comment "Junction with Rørosbanen" .
+
+<https://netex-cen.eu/instance/dovrebanen/TrondheimS> a infra:RailwayJunction ;
+    rdfs:label "Trondheim S" ;
+    infra:km "552.87"^^xsd:decimal ;
+    infra:elevation "5.1"^^xsd:decimal .
