@@ -1,0 +1,99 @@
+## -----------------------------------------------------------------
+## Rolling Stock Service Sub-Profile (v3.0)
+## -----------------------------------------------------------------
+## Declares exactly which NeTEx elements the Rolling Stock service
+## (PEN/Plass) consumes and produces, using URI-based references
+## to the base ontology.
+##
+## Imports: entur.ttl (Entur governance + codespaces)
+##          → netex-nordic.ttl → netex.ttl
+##
+## Generated: 2026-06-10
+## -----------------------------------------------------------------
+
+@prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix profile: <https://netex-cen.eu/profile#> .
+@prefix entur:   <https://entur.org/ontology#> .
+@prefix svc:     <https://entur.org/service/rolling-stock#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+## --- Import Entur governance ---
+<https://entur.org/service/rolling-stock> a owl:Ontology ;
+    owl:imports <https://entur.org/ontology> .
+
+## =================================================================
+## SERVICE DEFINITION
+## =================================================================
+
+svc:RollingStockService a netex:SubProfile ;
+    rdfs:label "Rolling Stock Service Profile" ;
+    skos:definition "Sub-profile for rolling stock planning: train composition, block assignments, facilities, and timetable integration" ;
+    netex:basedOn profile:NP ;
+    svc:managedBy entur:PartnerPlass ;
+    svc:codespace entur:CodespacePEN .
+
+## =================================================================
+## CONSUMED REFERENCES (reads from operator deliveries)
+## =================================================================
+
+svc:RollingStockService svc:consumes
+    ## --- Timetable core ---
+    netex:ServiceJourney_JourneyPatternRef ,
+    netex:ServiceJourney_LineRef ,
+    netex:ServiceJourney_DayTypeRef ,
+    netex:ServiceJourney_passingTimes ,
+    netex:ServiceJourney_parts ,
+    netex:DatedServiceJourney_ServiceJourneyRef ,
+    netex:DatedServiceJourney_OperatingDayRef ,
+    netex:DatedServiceJourney_VehicleJourneyRef ,
+    ## --- Journey pattern / stops ---
+    netex:JourneyPattern_pointsInSequence ,
+    netex:StopPointInJourneyPattern_ScheduledStopPointRef ,
+    netex:PassengerStopAssignment_ScheduledStopPointRef ,
+    netex:PassengerStopAssignment_QuayRef ,
+    ## --- VehicleJourney → composition ---
+    netex:VehicleJourney_parts ,
+    netex:VehicleJourneyPart_JourneyPartRef ,
+    ## --- Vehicle registry ---
+    netex:Vehicle_VehicleModelRef ,
+    netex:Vehicle_VehicleConfigurationRef ,
+    netex:Vehicle_vehicles ,
+    netex:VehicleInFormation_VehicleRef ,
+    ## --- JourneyPart ---
+    netex:JourneyPart_FromStopPointRef ,
+    netex:JourneyPart_ToStopPointRef ,
+    netex:JourneyPart_VehicleRef .
+
+## =================================================================
+## PRODUCED DATA (written by Rolling Stock service)
+## =================================================================
+
+svc:RollingStockService svc:produces
+    ## --- Vehicle registry (central) ---
+    netex:Vehicle ,
+    netex:VehicleModel ,
+    netex:VehicleConfiguration ,
+    netex:VehicleInFormation ,
+    ## --- Vehicle scheduling ---
+    netex:VehicleJourney ,
+    netex:VehicleJourneyPart ,
+    netex:SharedFormationSegment ,
+    netex:JourneyInSharedFormationSegment .
+
+## =================================================================
+## INTEGRATION POINTS
+## =================================================================
+
+svc:RollingStockService svc:integratesWith [
+    svc:system entur:Ninkasi ;
+    svc:direction "consumes" ;
+    svc:data "ServiceJourney, DatedServiceJourney, JourneyPattern" ;
+    rdfs:comment "Reads timetable structure to build vehicle scheduling"
+] , [
+    svc:system entur:Chouette ;
+    svc:direction "produces-to" ;
+    svc:data "VehicleScheduleFrame contents" ;
+    rdfs:comment "Publishes vehicle schedules for validation and distribution"
+] .

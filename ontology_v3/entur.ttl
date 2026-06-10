@@ -1,0 +1,122 @@
+## -----------------------------------------------------------------
+## Entur Data Governance Ontology (v3.0)
+## -----------------------------------------------------------------
+## Entur-specific codespace rules, central registry ownership,
+## and data source assignments for Norwegian NeTEx deliveries.
+##
+## Imports: netex-nordic.ttl (Nordic Profile constraints)
+##          → which imports netex.ttl (base NeTEx classes)
+##
+## Generated: 2026-06-10
+## -----------------------------------------------------------------
+
+@prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix entur:   <https://entur.org/ontology#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+## --- Import Nordic Profile ---
+<https://entur.org/ontology> a owl:Ontology ;
+    owl:imports <https://netex-cen.eu/profile/nordic> .
+
+## =================================================================
+## META-CLASSES (entur vocabulary)
+## =================================================================
+
+entur:System a owl:Class ;
+    rdfs:label "System" ;
+    skos:definition "An Entur platform or application managing NeTEx data" .
+
+entur:PartnerModule a owl:Class ;
+    rdfs:label "PartnerModule" ;
+    skos:definition "A microservice module within the Entur Partner portal" .
+
+## =================================================================
+## DATA GOVERNANCE
+## =================================================================
+
+entur:CentralRegistry a netex:DataSource ;
+    rdfs:label "Central registry (Entur)" ;
+    skos:definition "Mastered in Entur's shared national registry. Operators reference these objects by id but do not produce or version them." .
+
+entur:OperatorDelivery a netex:DataSource ;
+    rdfs:label "Operator delivery" ;
+    skos:definition "Produced by operators in their NeTEx deliveries to Entur. May contain references to central registry objects." .
+
+## =================================================================
+## DATA OWNERSHIP PER CLASS
+## =================================================================
+
+## --- Central registries (operators reference these via @ref) ---
+
+netex:StopPlace         entur:dataSource entur:CentralRegistry .
+netex:Quay              entur:dataSource entur:CentralRegistry .
+netex:TopographicPlace  entur:dataSource entur:CentralRegistry .
+netex:Organisation      entur:dataSource entur:CentralRegistry .
+netex:FareZone          entur:dataSource entur:CentralRegistry .
+netex:VehicleModel      entur:dataSource entur:CentralRegistry .
+netex:VehicleConfiguration entur:dataSource entur:CentralRegistry .
+netex:Vehicle           entur:dataSource entur:CentralRegistry .
+
+## --- Operator-produced data (delivered to Entur) ---
+
+netex:Line               entur:dataSource entur:OperatorDelivery .
+netex:JourneyPattern     entur:dataSource entur:OperatorDelivery .
+netex:ServiceJourney     entur:dataSource entur:OperatorDelivery .
+netex:DatedServiceJourney entur:dataSource entur:OperatorDelivery .
+netex:DayType            entur:dataSource entur:OperatorDelivery .
+netex:DayTypeAssignment  entur:dataSource entur:OperatorDelivery .
+netex:OperatingPeriod    entur:dataSource entur:OperatorDelivery .
+netex:OperatingDay       entur:dataSource entur:OperatorDelivery .
+netex:ScheduledStopPoint entur:dataSource entur:OperatorDelivery .
+netex:PassengerStopAssignment entur:dataSource entur:OperatorDelivery .
+netex:DestinationDisplay entur:dataSource entur:OperatorDelivery .
+netex:Notice             entur:dataSource entur:OperatorDelivery .
+netex:GroupOfLines       entur:dataSource entur:OperatorDelivery .
+netex:Interchange        entur:dataSource entur:OperatorDelivery .
+netex:VehicleJourney     entur:dataSource entur:OperatorDelivery .
+netex:SharedFormationSegment entur:dataSource entur:OperatorDelivery .
+netex:ServiceLink        entur:dataSource entur:OperatorDelivery .
+
+## =================================================================
+## CODESPACE DEFINITIONS
+## =================================================================
+
+entur:CodespaceNSR a netex:Codespace ;
+    rdfs:label "NSR" ;
+    netex:xmlns "NSR" ;
+    netex:xmlnsUrl "http://www.rutebanken.org/ns/nsr" ;
+    skos:definition "National Stop Registry — stop places, quays, topographic places" .
+
+entur:CodespaceNOR a netex:Codespace ;
+    rdfs:label "NOR" ;
+    netex:xmlns "NOR" ;
+    netex:xmlnsUrl "http://www.rutebanken.org/ns/nor" ;
+    skos:definition "Norwegian national codespace for shared objects" .
+
+entur:CodespacePEN a netex:Codespace ;
+    rdfs:label "PEN" ;
+    netex:xmlns "PEN" ;
+    netex:xmlnsUrl "http://www.rutebanken.org/ns/pen" ;
+    skos:definition "Rolling stock / vehicle registry codespace" .
+
+## =================================================================
+## SYSTEMS & MODULES
+## =================================================================
+
+entur:Ninkasi a entur:System ;
+    rdfs:label "Ninkasi" ;
+    skos:definition "Timetable administration — manages NeTEx line files and shared data" .
+
+entur:Chouette a entur:System ;
+    rdfs:label "Chouette" ;
+    skos:definition "NeTEx validation and import pipeline" .
+
+entur:Marduk a entur:System ;
+    rdfs:label "Marduk" ;
+    skos:definition "Data distribution — publishes validated NeTEx to consumers" .
+
+entur:PartnerPlass a entur:PartnerModule ;
+    rdfs:label "Partner Plass (Rolling Stock)" ;
+    skos:definition "Module for managing train composition, vehicle assignments, and facilities" .

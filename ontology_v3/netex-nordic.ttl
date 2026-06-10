@@ -1,0 +1,231 @@
+## -----------------------------------------------------------------
+## Nordic NeTEx Profile Ontology — v3.0
+## -----------------------------------------------------------------
+## Profile-specific constraints, breaking changes, element ordering
+## overrides, and exclusions for the Nordic Profile (NP) 3.0.
+##
+## Imports: netex.ttl (base NeTEx classes and relationships)
+##
+## Generated: 2026-06-10
+## -----------------------------------------------------------------
+
+@prefix netex:   <https://netex-cen.eu/ontology#> .
+@prefix profile: <https://netex-cen.eu/profile#> .
+@prefix change:  <https://netex-cen.eu/change#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+## --- Import base NeTEx ontology ---
+<https://netex-cen.eu/profile/nordic> a owl:Ontology ;
+    owl:imports <https://netex-cen.eu/ontology> .
+
+## =================================================================
+## PROFILE DEFINITION
+## =================================================================
+
+profile:NP a netex:Profile ;
+    rdfs:label "Nordic Profile" ;
+    skos:notation "NP" ;
+    skos:definition "Shared NeTEx profile for Norway, Sweden, Finland and Denmark" ;
+    rdfs:comment "Version 3.0" .
+
+## =================================================================
+## BREAKING CHANGES (v3.0)
+## =================================================================
+
+[ a change:BreakingChange ;
+    rdfs:label "Route removal" ;
+    change:scope change:ProfileOnly ;
+    rdfs:comment "Route exists in XSD but profile simply stops using it. No XSD change needed." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "ServiceJourney.LineRef mandatory" ;
+    change:scope change:ProfileOnly ;
+    rdfs:comment "XSD already has LineRef on SJ as optional. Profile tightens to 1..1." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "Typed refs removed (OperatorRef/AuthorityRef on Line/SJ)" ;
+    change:scope change:ProfileOnly ;
+    rdfs:comment "Profile stops requiring them; responsibilitySetRef used instead." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "JourneyPart profiled" ;
+    change:scope change:ProfileOnly ;
+    rdfs:comment "JourneyPart exists in XSD. Profile adds cardinality and usage rules." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "Organisation made concrete (Authority/Operator become roles)" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "Requires XSD change: Organisation abstract→concrete, Authority/Operator deprecated." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "Version attribute restricted to objects; refVersion on references" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "XSD currently allows @version on both objects and refs. Proposal: @version ONLY on objects. @refVersion on refs. @versionRef DEPRECATED." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "VehicleJourney renamed to PublicTransportJourney; Block renamed to VehicleJourney" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "Abstract VehicleJourney→PublicTransportJourney. Block/TrainBlock→VehicleJourney. DeadRun becomes VehicleJourneyPart (non-revenue segment)." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "InfrastructurePathRef on VehicleJourneyPart" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "New element: InfrastructurePathRef (0..1) on VehicleJourneyPart. Opaque reference to IM's granted path." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "OperationalNumber on VehicleJourneyPart (replaces TrainNumber.forProduction)" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "New element: OperationalNumber (0..1) on VehicleJourneyPart. Mode-agnostic production number." ] .
+
+[ a change:BreakingChange ;
+    rdfs:label "SharedFormationSegment replaces CompoundBlock + CompoundTrain" ;
+    change:scope change:CENProposal ;
+    rdfs:comment "New class: SharedFormationSegment. Identity-based ordering replaces type-based. Solves CompoundBlock ambiguity." ] .
+
+## =================================================================
+## DATA GOVERNANCE (NP)
+## =================================================================
+
+netex:CentralRegistry a netex:DataSource ;
+    rdfs:label "Central registry" ;
+    skos:definition "Mastered in a shared national registry. Operators reference these objects by id but do not produce or version them." .
+
+netex:OperatorDelivery a netex:DataSource ;
+    rdfs:label "Operator delivery" ;
+    skos:definition "Produced by operators in their NeTEx deliveries. May contain references to central registry objects." .
+
+## --- Central registry classes ---
+netex:StopPlace         netex:npDataSource netex:CentralRegistry .
+netex:Quay              netex:npDataSource netex:CentralRegistry .
+netex:TopographicPlace  netex:npDataSource netex:CentralRegistry .
+netex:Organisation      netex:npDataSource netex:CentralRegistry .
+netex:FareZone          netex:npDataSource netex:CentralRegistry .
+netex:VehicleModel      netex:npDataSource netex:CentralRegistry .
+netex:VehicleConfiguration netex:npDataSource netex:CentralRegistry .
+netex:Vehicle           netex:npDataSource netex:CentralRegistry .
+
+## --- Operator-produced data ---
+netex:Line               netex:npDataSource netex:OperatorDelivery .
+netex:JourneyPattern     netex:npDataSource netex:OperatorDelivery .
+netex:ServiceJourney     netex:npDataSource netex:OperatorDelivery .
+netex:DatedServiceJourney netex:npDataSource netex:OperatorDelivery .
+netex:DayType            netex:npDataSource netex:OperatorDelivery .
+netex:DayTypeAssignment  netex:npDataSource netex:OperatorDelivery .
+netex:OperatingPeriod    netex:npDataSource netex:OperatorDelivery .
+netex:OperatingDay       netex:npDataSource netex:OperatorDelivery .
+netex:ScheduledStopPoint netex:npDataSource netex:OperatorDelivery .
+netex:PassengerStopAssignment netex:npDataSource netex:OperatorDelivery .
+netex:DestinationDisplay netex:npDataSource netex:OperatorDelivery .
+netex:Notice             netex:npDataSource netex:OperatorDelivery .
+netex:GroupOfLines       netex:npDataSource netex:OperatorDelivery .
+netex:Interchange        netex:npDataSource netex:OperatorDelivery .
+netex:VehicleJourney     netex:npDataSource netex:OperatorDelivery .
+netex:SharedFormationSegment netex:npDataSource netex:OperatorDelivery .
+netex:Codespace          netex:npDataSource netex:OperatorDelivery .
+netex:ServiceCalendar    netex:npDataSource netex:OperatorDelivery .
+netex:ServiceLink        netex:npDataSource netex:OperatorDelivery .
+netex:SiteConnection     netex:npDataSource netex:OperatorDelivery .
+netex:TrainNumber        netex:npDataSource netex:OperatorDelivery .
+
+## =================================================================
+## PROFILE CONSTRAINTS (NP 3.0)
+## =================================================================
+
+## --- Elements excluded from NP ---
+
+profile:NP netex:excludes [
+    netex:class netex:StopPlace ;
+    netex:property "ParentSiteRef"
+] , [
+    netex:class netex:ServiceJourney ;
+    netex:property "FlexibleLineRef"
+] , [
+    netex:class netex:ServiceJourney ;
+    netex:property "VehicleJourneyRef"
+] .
+
+## --- Elements allowed in NP (with cardinality) ---
+
+profile:NP netex:allows [
+    netex:class netex:StopPlace ;
+    netex:property "TopographicPlaceRef" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:StopPlace ;
+    netex:property "ValidBetween" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:StopPlace ;
+    netex:property "AccessibilityAssessment" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:Quay ;
+    netex:property "AccessibilityAssessment" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:Quay ;
+    netex:property "boardingPositions" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:Line ;
+    netex:property "RepresentedByGroupRef" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:Line ;
+    netex:property "TransportSubmode" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:Line ;
+    netex:property "PublicCode" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:Line ;
+    netex:property "privateCodes" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:DatedServiceJourney ;
+    netex:property "DatedServiceJourneyRef" ;
+    netex:cardinality "0..n"
+] , [
+    netex:class netex:Interchange ;
+    netex:property "FromPointRef" ;
+    netex:cardinality "0..1"
+] , [
+    netex:class netex:Interchange ;
+    netex:property "ToPointRef" ;
+    netex:cardinality "0..1"
+] .
+
+## --- Cardinality tightening (XSD is looser than NP requires) ---
+
+profile:NP netex:requires [
+    netex:class netex:ServiceJourney ;
+    netex:property "LineRef" ;
+    netex:cardinality "1..1" ;
+    rdfs:comment "MANDATORY in 3.0 — only path to Line (Route removed)"
+] , [
+    netex:class netex:Line ;
+    netex:property "responsibilitySetRef" ;
+    netex:cardinality "1..1" ;
+    rdfs:comment "3.0 replaces OperatorRef — must declare operation responsibility"
+] , [
+    netex:class netex:Vehicle ;
+    netex:property "VehicleModelRef" ;
+    netex:cardinality "0..1" ;
+    rdfs:comment "Conditional — required on atomic Vehicle (XOR with vehicles)."
+] , [
+    netex:class netex:Organisation ;
+    netex:property "Name" ;
+    netex:cardinality "1..1"
+] , [
+    netex:class netex:VehicleModel ;
+    netex:property "Name" ;
+    netex:cardinality "1..1"
+] , [
+    netex:class netex:FareZone ;
+    netex:property "Name" ;
+    netex:cardinality "1..1"
+] .
