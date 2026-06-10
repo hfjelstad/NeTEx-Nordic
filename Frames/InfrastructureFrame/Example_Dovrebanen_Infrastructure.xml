@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Dovrebanen InfrastructureFrame — Physical railway network graph
-  
+  with LineString geometries from OpenStreetMap.
+
   Eidsvoll (km 67.86) → Trondheim S (km 552.87)
-  All stations from Wikipedia linjekart, uni-directional RailwayElements.
-  
+  30 RailwayJunctions, 58 RailwayElements (uni-directional pairs)
+
   Conventions:
     RailwayJunction id: NOR:RailwayJunction:Dovrebanen:<StationCode>
     RailwayElement id:  NOR:RailwayElement:Dovrebanen:<From>-<To>:<direction>
-    Direction suffixes: :up (southbound, decreasing km) / :down (northbound, increasing km)
-    Distance in metres (derived from km markers)
+    Direction suffixes: :up (southbound) / :down (northbound)
+    Distance in metres (from OSM track geometry)
+
+  Geometry source: © OpenStreetMap contributors (ODbL)
 -->
 <PublicationDelivery xmlns="http://www.netex.org.uk/netex"
                     xmlns:gml="http://www.opengis.net/gml/3.2"
@@ -98,7 +101,7 @@
                 <Latitude>60.8810</Latitude>
               </Location>
               <keyList>
-                <KeyValue><Key>km</Key><Value>139.90</Value></KeyValue>
+                <KeyValue><Key>km</Key><Value>139.9</Value></KeyValue>
                 <KeyValue><Key>elevation_m</Key><Value>134.0</Value></KeyValue>
               </keyList>
             </RailwayJunction>
@@ -133,15 +136,15 @@
             <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Hunderfossen" version="1">
               <Name>Hunderfossen</Name>
               <Location>
-                <Longitude>10.4310</Longitude>
-                <Latitude>61.1680</Latitude>
+                <Longitude>10.4386</Longitude>
+                <Latitude>61.2233</Latitude>
               </Location>
               <keyList>
                 <KeyValue><Key>km</Key><Value>198.26</Value></KeyValue>
               </keyList>
             </RailwayJunction>
 
-            <!-- Km 220.03 (approx) -->
+            <!-- Km 220.03 -->
             <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Favang" version="1">
               <Name>Fåvang</Name>
               <Location>
@@ -174,7 +177,7 @@
                 <Latitude>61.5910</Latitude>
               </Location>
               <keyList>
-                <KeyValue><Key>km</Key><Value>266.50</Value></KeyValue>
+                <KeyValue><Key>km</Key><Value>266.5</Value></KeyValue>
                 <KeyValue><Key>elevation_m</Key><Value>241.4</Value></KeyValue>
               </keyList>
             </RailwayJunction>
@@ -183,8 +186,8 @@
             <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Kvam" version="1">
               <Name>Kvam</Name>
               <Location>
-                <Longitude>9.9990</Longitude>
-                <Latitude>61.6480</Latitude>
+                <Longitude>9.7010</Longitude>
+                <Latitude>61.6648</Latitude>
               </Location>
               <keyList>
                 <KeyValue><Key>km</Key><Value>276.57</Value></KeyValue>
@@ -209,8 +212,8 @@
             <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Dovre" version="1">
               <Name>Dovre</Name>
               <Location>
-                <Longitude>9.5780</Longitude>
-                <Latitude>62.0480</Latitude>
+                <Longitude>9.2570</Longitude>
+                <Latitude>61.9845</Latitude>
               </Location>
               <keyList>
                 <KeyValue><Key>km</Key><Value>330.82</Value></KeyValue>
@@ -291,7 +294,7 @@
                 <Latitude>63.0370</Latitude>
               </Location>
               <keyList>
-                <KeyValue><Key>km</Key><Value>501.20</Value></KeyValue>
+                <KeyValue><Key>km</Key><Value>501.2</Value></KeyValue>
                 <KeyValue><Key>elevation_m</Key><Value>66.0</Value></KeyValue>
               </keyList>
             </RailwayJunction>
@@ -313,8 +316,8 @@
             <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Lundamo" version="1">
               <Name>Lundamo</Name>
               <Location>
-                <Longitude>10.3480</Longitude>
-                <Latitude>63.1120</Latitude>
+                <Longitude>10.2801</Longitude>
+                <Latitude>63.1520</Latitude>
               </Location>
               <keyList>
                 <KeyValue><Key>km</Key><Value>514.78</Value></KeyValue>
@@ -326,8 +329,8 @@
             <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Ler" version="1">
               <Name>Ler</Name>
               <Location>
-                <Longitude>10.3900</Longitude>
-                <Latitude>63.1450</Latitude>
+                <Longitude>10.2985</Longitude>
+                <Latitude>63.1989</Latitude>
               </Location>
               <keyList>
                 <KeyValue><Key>km</Key><Value>520.48</Value></KeyValue>
@@ -339,8 +342,8 @@
             <RailwayJunction id="NOR:RailwayJunction:Dovrebanen:Kval" version="1">
               <Name>Kvål</Name>
               <Location>
-                <Longitude>10.3850</Longitude>
-                <Latitude>63.1700</Latitude>
+                <Longitude>10.2800</Longitude>
+                <Latitude>63.2334</Latitude>
               </Location>
               <keyList>
                 <KeyValue><Key>km</Key><Value>524.95</Value></KeyValue>
@@ -423,360 +426,536 @@
                 <KeyValue><Key>elevation_m</Key><Value>5.1</Value></KeyValue>
               </keyList>
             </RailwayJunction>
+
           </junctions>
 
           <!-- ============================================================ -->
-          <!-- RAILWAY ELEMENTS (directional links between junctions)        -->
+          <!-- RAILWAY ELEMENTS (directional links with OSM geometry)       -->
           <!-- :down = northbound (increasing km), :up = southbound          -->
           <!-- ============================================================ -->
           <elements>
-            <!-- Eidsvoll → Tangen (33.91 km) -->
+            <!-- Eidsvoll → Tangen -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Eidsvoll-Tangen:down" version="1">
-              <Distance>33910</Distance>
+              <Distance>38995</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Eidsvoll_Tangen_down">
+              <gml:posList srsDimension="2">60.333517 11.247467 60.342724 11.245977 60.346349 11.245703 60.341794 11.246265 60.354848 11.245532 60.371807 11.243415 60.378142 11.240018 60.384470 11.237659 60.393657 11.238064 60.402405 11.236552 60.407706 11.236761 60.414667 11.239095 60.434940 11.239656 60.446542 11.241373 60.462891 11.247348 60.481975 11.238516 60.492106 11.232034 60.499970 11.233865 60.508037 11.241337 60.515215 11.242484 60.525207 11.241267 60.537618 11.242934 60.547778 11.246266 60.556421 11.249584 60.562559 11.251939 60.571287 11.260961 60.580312 11.269937 60.583804 11.275338 60.588595 11.281898 60.599660 11.292837 60.603088 11.291769 60.605702 11.284432 60.610039 11.282085 60.611846 11.274844 60.616450 11.269630 60.619961 11.264634 60.620902 11.257167 60.623875 11.252512 60.627065 11.248158 60.632225 11.241227 60.634937 11.236004 60.637542 11.232311</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Eidsvoll"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Tangen"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Tangen-Eidsvoll:up" version="1">
-              <Distance>33910</Distance>
+              <Distance>38995</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Tangen_Eidsvoll_up">
+              <gml:posList srsDimension="2">60.637542 11.232311 60.634937 11.236004 60.632225 11.241227 60.627065 11.248158 60.623875 11.252512 60.620902 11.257167 60.619961 11.264634 60.616450 11.269630 60.611846 11.274844 60.610039 11.282085 60.605702 11.284432 60.603088 11.291769 60.599660 11.292837 60.588595 11.281898 60.583804 11.275338 60.580312 11.269937 60.571287 11.260961 60.562559 11.251939 60.556421 11.249584 60.547778 11.246266 60.537618 11.242934 60.525207 11.241267 60.515215 11.242484 60.508037 11.241337 60.499970 11.233865 60.492106 11.232034 60.481975 11.238516 60.462891 11.247348 60.446542 11.241373 60.434940 11.239656 60.414667 11.239095 60.407706 11.236761 60.402405 11.236552 60.393657 11.238064 60.384470 11.237659 60.378142 11.240018 60.371807 11.243415 60.354848 11.245532 60.341794 11.246265 60.346349 11.245703 60.342724 11.245977 60.333517 11.247467</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Tangen"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Eidsvoll"/>
             </RailwayElement>
 
-            <!-- Tangen → Stange (12.65 km) -->
+            <!-- Tangen → Stange -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Tangen-Stange:down" version="1">
-              <Distance>12650</Distance>
+              <Distance>13457</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Tangen_Stange_down">
+              <gml:posList srsDimension="2">60.637542 11.232311 60.639424 11.230782 60.641934 11.229499 60.643467 11.228387 60.645487 11.226585 60.647473 11.225570 60.649211 11.225181 60.653148 11.224896 60.656574 11.224280 60.658769 11.223932 60.663863 11.224345 60.666747 11.224559 60.667641 11.224418 60.668690 11.223910 60.669731 11.222975 60.672299 11.219342 60.673692 11.217620 60.675550 11.215942 60.677243 11.214912 60.678734 11.214319 60.680169 11.214013 60.687497 11.213047 60.688796 11.212777 60.690135 11.212217 60.694779 11.209485 60.695764 11.209205 60.697341 11.209133 60.698824 11.208615 60.706163 11.204850 60.710494 11.201285 60.718464 11.194422 60.726374 11.187608 60.727905 11.186599 60.729863 11.186294 60.731576 11.185236 60.736550 11.180061 60.737931 11.177251 60.738533 11.173484 60.738276 11.168201 60.738440 11.163469 60.739299 11.158545 60.741700 11.150674 60.742400 11.148499</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Tangen"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Stange"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Stange-Tangen:up" version="1">
-              <Distance>12650</Distance>
+              <Distance>13457</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Stange_Tangen_up">
+              <gml:posList srsDimension="2">60.742400 11.148499 60.741700 11.150674 60.739299 11.158545 60.738440 11.163469 60.738276 11.168201 60.738533 11.173484 60.737931 11.177251 60.736550 11.180061 60.731576 11.185236 60.729863 11.186294 60.727905 11.186599 60.726374 11.187608 60.718464 11.194422 60.710494 11.201285 60.706163 11.204850 60.698824 11.208615 60.697341 11.209133 60.695764 11.209205 60.694779 11.209485 60.690135 11.212217 60.688796 11.212777 60.687497 11.213047 60.680169 11.214013 60.678734 11.214319 60.677243 11.214912 60.675550 11.215942 60.673692 11.217620 60.672299 11.219342 60.669731 11.222975 60.668690 11.223910 60.667641 11.224418 60.666747 11.224559 60.663863 11.224345 60.658769 11.223932 60.656574 11.224280 60.653148 11.224896 60.649211 11.225181 60.647473 11.225570 60.645487 11.226585 60.643467 11.228387 60.641934 11.229499 60.639424 11.230782 60.637542 11.232311</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Stange"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Tangen"/>
             </RailwayElement>
 
-            <!-- Stange → Hamar (11.84 km) -->
+            <!-- Stange → Hamar -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Stange-Hamar:down" version="1">
-              <Distance>11840</Distance>
+              <Distance>8219</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Stange_Hamar_down">
+              <gml:posList srsDimension="2">60.742400 11.148499 60.743213 11.146533 60.744413 11.144608 60.745303 11.143286 60.746061 11.141814 60.747033 11.139331 60.749661 11.132433 60.752099 11.125943 60.752997 11.123249 60.753926 11.119489 60.754577 11.116014 60.755453 11.113007 60.756500 11.110779 60.758653 11.107855 60.766234 11.097932 60.768457 11.095129 60.769919 11.094055 60.771384 11.093529 60.772775 11.093236 60.773937 11.093144 60.775025 11.093551 60.775935 11.094388 60.776871 11.095940 60.777956 11.098227 60.779118 11.100122 60.780258 11.100997 60.781243 11.101189 60.782196 11.100918 60.783152 11.100146 60.787270 11.094422 60.788312 11.092865 60.789083 11.091361 60.789530 11.090326 60.790233 11.088483 60.790500 11.087490 60.790767 11.085778 60.790914 11.084369 60.791025 11.083154 60.791450 11.076237 60.791612 11.075217 60.791910 11.074232 60.792154 11.073708 60.792760 11.072714 60.793087 11.072080 60.793419 11.071072 60.793635 11.069909 60.793704 11.068356 60.793689 11.068045</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Stange"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hamar"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hamar-Stange:up" version="1">
-              <Distance>11840</Distance>
+              <Distance>8219</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Hamar_Stange_up">
+              <gml:posList srsDimension="2">60.793689 11.068045 60.793704 11.068356 60.793635 11.069909 60.793419 11.071072 60.793087 11.072080 60.792760 11.072714 60.792154 11.073708 60.791910 11.074232 60.791612 11.075217 60.791450 11.076237 60.791025 11.083154 60.790914 11.084369 60.790767 11.085778 60.790500 11.087490 60.790233 11.088483 60.789530 11.090326 60.789083 11.091361 60.788312 11.092865 60.787270 11.094422 60.783152 11.100146 60.782196 11.100918 60.781243 11.101189 60.780258 11.100997 60.779118 11.100122 60.777956 11.098227 60.776871 11.095940 60.775935 11.094388 60.775025 11.093551 60.773937 11.093144 60.772775 11.093236 60.771384 11.093529 60.769919 11.094055 60.768457 11.095129 60.766234 11.097932 60.758653 11.107855 60.756500 11.110779 60.755453 11.113007 60.754577 11.116014 60.753926 11.119489 60.752997 11.123249 60.752099 11.125943 60.749661 11.132433 60.747033 11.139331 60.746061 11.141814 60.745303 11.143286 60.744413 11.144608 60.743213 11.146533 60.742400 11.148499</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hamar"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Stange"/>
             </RailwayElement>
 
-            <!-- Hamar → Brumunddal (13.64 km) -->
+            <!-- Hamar → Brumunddal -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hamar-Brumunddal:down" version="1">
-              <Distance>13640</Distance>
+              <Distance>12927</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Hamar_Brumunddal_down">
+              <gml:posList srsDimension="2">60.793689 11.068045 60.793528 11.064584 60.794091 11.060569 60.797846 11.046689 60.800795 11.035881 60.802141 11.033024 60.804364 11.030739 60.806376 11.027593 60.808281 11.023424 60.810984 11.019056 60.812200 11.015227 60.813715 11.010292 60.815778 11.006938 60.817131 11.006013 60.818562 11.006984 60.819993 11.007612 60.821271 11.006333 60.823287 11.001505 60.826418 10.992164 60.831213 10.978219 60.832497 10.976231 60.834513 10.976199 60.836169 10.976024 60.837048 10.974910 60.837825 10.972539 60.839023 10.968399 60.840933 10.965546 60.842162 10.965174 60.845021 10.964965 60.847545 10.963335 60.850842 10.958637 60.852749 10.956279 60.855040 10.956790 60.859043 10.957257 60.863986 10.956848 60.865674 10.955823 60.868236 10.951964 60.870359 10.949738 60.874416 10.944632 60.876353 10.942086 60.878235 10.940861 60.879535 10.939047</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hamar"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Brumunddal"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Brumunddal-Hamar:up" version="1">
-              <Distance>13640</Distance>
+              <Distance>12927</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Brumunddal_Hamar_up">
+              <gml:posList srsDimension="2">60.879535 10.939047 60.878235 10.940861 60.876353 10.942086 60.874416 10.944632 60.870359 10.949738 60.868236 10.951964 60.865674 10.955823 60.863986 10.956848 60.859043 10.957257 60.855040 10.956790 60.852749 10.956279 60.850842 10.958637 60.847545 10.963335 60.845021 10.964965 60.842162 10.965174 60.840933 10.965546 60.839023 10.968399 60.837825 10.972539 60.837048 10.974910 60.836169 10.976024 60.834513 10.976199 60.832497 10.976231 60.831213 10.978219 60.826418 10.992164 60.823287 11.001505 60.821271 11.006333 60.819993 11.007612 60.818562 11.006984 60.817131 11.006013 60.815778 11.006938 60.813715 11.010292 60.812200 11.015227 60.810984 11.019056 60.808281 11.023424 60.806376 11.027593 60.804364 11.030739 60.802141 11.033024 60.800795 11.035881 60.797846 11.046689 60.794091 11.060569 60.793528 11.064584 60.793689 11.068045</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Brumunddal"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hamar"/>
             </RailwayElement>
 
-            <!-- Brumunddal → Moelv (16.05 km) -->
+            <!-- Brumunddal → Moelv -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Brumunddal-Moelv:down" version="1">
-              <Distance>16050</Distance>
+              <Distance>17119</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Brumunddal_Moelv_down">
+              <gml:posList srsDimension="2">60.879535 10.939047 60.884095 10.929878 60.886241 10.924951 60.888305 10.917928 60.889065 10.913470 60.888824 10.909681 60.887345 10.904540 60.887187 10.899182 60.890875 10.888241 60.893615 10.882494 60.894719 10.879139 60.899290 10.871946 60.908837 10.852659 60.913406 10.844699 60.915919 10.839889 60.916344 10.835309 60.915564 10.812731 60.915712 10.784094 60.915552 10.767323 60.916181 10.762091 60.916209 10.758649 60.915179 10.755705 60.913660 10.752133 60.913291 10.747393 60.912584 10.742563 60.912374 10.737450 60.912765 10.730834 60.912565 10.727155 60.912847 10.723925 60.914276 10.721564 60.915174 10.721319 60.916485 10.721019 60.917576 10.719128 60.917903 10.716444 60.918155 10.712474 60.919265 10.709468 60.920996 10.708190 60.922804 10.708261 60.923899 10.706766 60.924882 10.703914 60.927525 10.701215 60.929807 10.698429 60.932258 10.694846 60.937669 10.692552</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Brumunddal"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Moelv"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Moelv-Brumunddal:up" version="1">
-              <Distance>16050</Distance>
+              <Distance>17119</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Moelv_Brumunddal_up">
+              <gml:posList srsDimension="2">60.937669 10.692552 60.932258 10.694846 60.929807 10.698429 60.927525 10.701215 60.924882 10.703914 60.923899 10.706766 60.922804 10.708261 60.920996 10.708190 60.919265 10.709468 60.918155 10.712474 60.917903 10.716444 60.917576 10.719128 60.916485 10.721019 60.915174 10.721319 60.914276 10.721564 60.912847 10.723925 60.912565 10.727155 60.912765 10.730834 60.912374 10.737450 60.912584 10.742563 60.913291 10.747393 60.913660 10.752133 60.915179 10.755705 60.916209 10.758649 60.916181 10.762091 60.915552 10.767323 60.915712 10.784094 60.915564 10.812731 60.916344 10.835309 60.915919 10.839889 60.913406 10.844699 60.908837 10.852659 60.899290 10.871946 60.894719 10.879139 60.893615 10.882494 60.890875 10.888241 60.887187 10.899182 60.887345 10.904540 60.888824 10.909681 60.889065 10.913470 60.888305 10.917928 60.886241 10.924951 60.884095 10.929878 60.879535 10.939047</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Moelv"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Brumunddal"/>
             </RailwayElement>
 
-            <!-- Moelv → Lillehammer (28.53 km) -->
+            <!-- Moelv → Lillehammer -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Moelv-Lillehammer:down" version="1">
-              <Distance>28530</Distance>
+              <Distance>27205</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Moelv_Lillehammer_down">
+              <gml:posList srsDimension="2">60.937669 10.692552 60.943404 10.686223 60.947698 10.684643 60.955609 10.671087 60.959889 10.666581 60.963548 10.662843 60.967901 10.655625 60.972344 10.654041 60.977456 10.652195 60.981403 10.646171 60.982362 10.638598 60.983038 10.631649 60.985189 10.625572 60.986164 10.617371 60.987646 10.608309 60.991377 10.600688 60.994558 10.597299 60.997673 10.588877 61.000451 10.581257 61.004580 10.566175 61.009409 10.553639 61.008230 10.542540 61.009950 10.525741 61.013229 10.517503 61.019093 10.503901 61.022571 10.499860 61.024472 10.491699 61.032007 10.492499 61.035346 10.488959 61.039945 10.480775 61.046305 10.463761 61.051174 10.459613 61.058888 10.457948 61.063927 10.455611 61.072505 10.457275 61.082496 10.461388 61.088920 10.464075 61.095491 10.466179 61.098901 10.466810 61.103609 10.464962 61.106838 10.464425 61.115322 10.461111</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Moelv"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Lillehammer"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Lillehammer-Moelv:up" version="1">
-              <Distance>28530</Distance>
+              <Distance>27205</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Lillehammer_Moelv_up">
+              <gml:posList srsDimension="2">61.115322 10.461111 61.106838 10.464425 61.103609 10.464962 61.098901 10.466810 61.095491 10.466179 61.088920 10.464075 61.082496 10.461388 61.072505 10.457275 61.063927 10.455611 61.058888 10.457948 61.051174 10.459613 61.046305 10.463761 61.039945 10.480775 61.035346 10.488959 61.032007 10.492499 61.024472 10.491699 61.022571 10.499860 61.019093 10.503901 61.013229 10.517503 61.009950 10.525741 61.008230 10.542540 61.009409 10.553639 61.004580 10.566175 61.000451 10.581257 60.997673 10.588877 60.994558 10.597299 60.991377 10.600688 60.987646 10.608309 60.986164 10.617371 60.985189 10.625572 60.983038 10.631649 60.982362 10.638598 60.981403 10.646171 60.977456 10.652195 60.972344 10.654041 60.967901 10.655625 60.963548 10.662843 60.959889 10.666581 60.955609 10.671087 60.947698 10.684643 60.943404 10.686223 60.937669 10.692552</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Lillehammer"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Moelv"/>
             </RailwayElement>
 
-            <!-- Lillehammer → Hunderfossen (13.78 km) -->
+            <!-- Lillehammer → Hunderfossen -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Lillehammer-Hunderfossen:down" version="1">
-              <Distance>13780</Distance>
+              <Distance>13955</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Lillehammer_Hunderfossen_down">
+              <gml:posList srsDimension="2">61.115322 10.461111 61.117483 10.460526 61.118524 10.459823 61.121356 10.454330 61.130988 10.438263 61.133501 10.432031 61.136984 10.425149 61.139926 10.421636 61.142701 10.419351 61.144614 10.419453 61.146879 10.419635 61.148725 10.418719 61.152972 10.414703 61.153867 10.412764 61.154989 10.406946 61.155861 10.405083 61.157164 10.404506 61.158743 10.405029 61.160165 10.404502 61.161960 10.405100 61.163649 10.405321 61.167868 10.403761 61.169434 10.404183 61.173386 10.407708 61.180569 10.414192 61.183201 10.416515 61.184823 10.416834 61.186594 10.416014 61.188849 10.414596 61.190238 10.412774 61.192634 10.410057 61.193768 10.409571 61.195164 10.410443 61.198862 10.415969 61.200532 10.419389 61.202652 10.421400 61.205270 10.424315 61.206905 10.427337 61.209189 10.432494 61.212293 10.437332 61.213319 10.437855 61.216096 10.437414 61.220775 10.438335 61.223188 10.438729</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Lillehammer"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hunderfossen"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hunderfossen-Lillehammer:up" version="1">
-              <Distance>13780</Distance>
+              <Distance>13955</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Hunderfossen_Lillehammer_up">
+              <gml:posList srsDimension="2">61.223188 10.438729 61.220775 10.438335 61.216096 10.437414 61.213319 10.437855 61.212293 10.437332 61.209189 10.432494 61.206905 10.427337 61.205270 10.424315 61.202652 10.421400 61.200532 10.419389 61.198862 10.415969 61.195164 10.410443 61.193768 10.409571 61.192634 10.410057 61.190238 10.412774 61.188849 10.414596 61.186594 10.416014 61.184823 10.416834 61.183201 10.416515 61.180569 10.414192 61.173386 10.407708 61.169434 10.404183 61.167868 10.403761 61.163649 10.405321 61.161960 10.405100 61.160165 10.404502 61.158743 10.405029 61.157164 10.404506 61.155861 10.405083 61.154989 10.406946 61.153867 10.412764 61.152972 10.414703 61.148725 10.418719 61.146879 10.419635 61.144614 10.419453 61.142701 10.419351 61.139926 10.421636 61.136984 10.425149 61.133501 10.432031 61.130988 10.438263 61.121356 10.454330 61.118524 10.459823 61.117483 10.460526 61.115322 10.461111</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hunderfossen"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Lillehammer"/>
             </RailwayElement>
 
-            <!-- Hunderfossen → Fåvang (21.77 km) -->
+            <!-- Hunderfossen → Fåvang -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hunderfossen-Favang:down" version="1">
-              <Distance>21770</Distance>
+              <Distance>11599</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Hunderfossen_Favang_down">
+              <gml:posList srsDimension="2">61.223188 10.438729 61.229241 10.437792 61.230758 10.436931 61.236874 10.431788 61.239498 10.430240 61.240652 10.429256 61.242607 10.427664 61.244913 10.426702 61.246775 10.426104 61.248435 10.424517 61.249988 10.423861 61.251596 10.422329 61.252876 10.421157 61.254542 10.420182 61.256139 10.418408 61.257941 10.416555 61.259304 10.414393 61.262190 10.409053 61.264690 10.405448 61.265773 10.403726 61.267368 10.400021 61.270707 10.391795 61.271873 10.387906 61.272922 10.382994 61.273765 10.377694 61.274364 10.373659 61.274868 10.371371 61.275600 10.364918 61.275693 10.361418 61.275363 10.357242 61.275267 10.354558 61.274975 10.352760 61.273954 10.349064 61.273579 10.346675 61.273646 10.343702 61.273619 10.341499 61.272885 10.332837 61.272543 10.329568 61.271971 10.321423 61.272036 10.318565 61.273140 10.310304 61.273782 10.307497 61.275222 10.303548 61.276444 10.300004 61.277189 10.296706 61.277583 10.295217 61.277979 10.294338</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hunderfossen"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Favang"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Favang-Hunderfossen:up" version="1">
-              <Distance>21770</Distance>
+              <Distance>11599</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Favang_Hunderfossen_up">
+              <gml:posList srsDimension="2">61.277979 10.294338 61.277583 10.295217 61.277189 10.296706 61.276444 10.300004 61.275222 10.303548 61.273782 10.307497 61.273140 10.310304 61.272036 10.318565 61.271971 10.321423 61.272543 10.329568 61.272885 10.332837 61.273619 10.341499 61.273646 10.343702 61.273579 10.346675 61.273954 10.349064 61.274975 10.352760 61.275267 10.354558 61.275363 10.357242 61.275693 10.361418 61.275600 10.364918 61.274868 10.371371 61.274364 10.373659 61.273765 10.377694 61.272922 10.382994 61.271873 10.387906 61.270707 10.391795 61.267368 10.400021 61.265773 10.403726 61.264690 10.405448 61.262190 10.409053 61.259304 10.414393 61.257941 10.416555 61.256139 10.418408 61.254542 10.420182 61.252876 10.421157 61.251596 10.422329 61.249988 10.423861 61.248435 10.424517 61.246775 10.426104 61.244913 10.426702 61.242607 10.427664 61.240652 10.429256 61.239498 10.430240 61.236874 10.431788 61.230758 10.436931 61.229241 10.437792 61.223188 10.438729</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Favang"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hunderfossen"/>
             </RailwayElement>
 
-            <!-- Fåvang → Ringebu (22.52 km) -->
+            <!-- Fåvang → Ringebu -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Favang-Ringebu:down" version="1">
-              <Distance>22520</Distance>
+              <Distance>15473</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Favang_Ringebu_down">
+              <gml:posList srsDimension="2">61.277979 10.294338 61.282179 10.286510 61.284278 10.284035 61.287942 10.278689 61.289670 10.277835 61.292999 10.277535 61.294650 10.279048 61.296192 10.283093 61.298703 10.286405 61.302602 10.291479 61.306228 10.294197 61.309199 10.296510 61.311309 10.296046 61.314214 10.293102 61.316842 10.288263 61.318771 10.284882 61.320759 10.279551 61.322908 10.276915 61.326189 10.276547 61.329735 10.276318 61.332717 10.276670 61.334526 10.275415 61.336762 10.270470 61.338706 10.268863 61.343463 10.268992 61.346086 10.268365 61.348783 10.268434 61.354336 10.269194 61.357698 10.269023 61.359748 10.265098 61.361255 10.263442 61.364329 10.264592 61.367837 10.264284 61.369582 10.260660 61.372233 10.258511 61.374465 10.254683 61.376978 10.247315 61.378347 10.241764 61.381453 10.232304 61.383578 10.230005 61.385463 10.224000 61.387137 10.219860 61.391997 10.215413 61.394504 10.214110</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Favang"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Ringebu"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Ringebu-Favang:up" version="1">
-              <Distance>22520</Distance>
+              <Distance>15473</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Ringebu_Favang_up">
+              <gml:posList srsDimension="2">61.394504 10.214110 61.391997 10.215413 61.387137 10.219860 61.385463 10.224000 61.383578 10.230005 61.381453 10.232304 61.378347 10.241764 61.376978 10.247315 61.374465 10.254683 61.372233 10.258511 61.369582 10.260660 61.367837 10.264284 61.364329 10.264592 61.361255 10.263442 61.359748 10.265098 61.357698 10.269023 61.354336 10.269194 61.348783 10.268434 61.346086 10.268365 61.343463 10.268992 61.338706 10.268863 61.336762 10.270470 61.334526 10.275415 61.332717 10.276670 61.329735 10.276318 61.326189 10.276547 61.322908 10.276915 61.320759 10.279551 61.318771 10.284882 61.316842 10.288263 61.314214 10.293102 61.311309 10.296046 61.309199 10.296510 61.306228 10.294197 61.302602 10.291479 61.298703 10.286405 61.296192 10.283093 61.294650 10.279048 61.292999 10.277535 61.289670 10.277835 61.287942 10.278689 61.284278 10.284035 61.282179 10.286510 61.277979 10.294338</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Ringebu"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Favang"/>
             </RailwayElement>
 
-            <!-- Ringebu → Vinstra (23.95 km) -->
+            <!-- Ringebu → Vinstra -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Ringebu-Vinstra:down" version="1">
-              <Distance>23950</Distance>
+              <Distance>21987</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Ringebu_Vinstra_down">
+              <gml:posList srsDimension="2">61.394504 10.214110 61.397625 10.213345 61.400573 10.211299 61.406289 10.203641 61.409256 10.202349 61.416637 10.206390 61.419169 10.206088 61.421087 10.203999 61.427000 10.189994 61.428715 10.188110 61.431579 10.188456 61.434903 10.187710 61.440541 10.185443 61.442554 10.187246 61.444692 10.187901 61.449016 10.185178 61.451786 10.183233 61.453128 10.179920 61.453459 10.175046 61.453893 10.171136 61.455934 10.168358 61.460045 10.167059 61.466465 10.165491 61.471808 10.165874 61.474929 10.165029 61.481470 10.167615 61.488809 10.164840 61.491786 10.165224 61.500345 10.158962 61.503509 10.155403 61.506647 10.149848 61.508611 10.145848 61.512292 10.141956 61.516574 10.140668 61.521027 10.144749 61.525374 10.149595 61.527217 10.148423 61.528441 10.144119 61.529434 10.135446 61.530524 10.125794 61.539140 10.090642 61.543798 10.081407 61.545681 10.076643 61.549933 10.059853 61.550103 10.058735</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Ringebu"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Vinstra"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Vinstra-Ringebu:up" version="1">
-              <Distance>23950</Distance>
+              <Distance>21987</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Vinstra_Ringebu_up">
+              <gml:posList srsDimension="2">61.550103 10.058735 61.549933 10.059853 61.545681 10.076643 61.543798 10.081407 61.539140 10.090642 61.530524 10.125794 61.529434 10.135446 61.528441 10.144119 61.527217 10.148423 61.525374 10.149595 61.521027 10.144749 61.516574 10.140668 61.512292 10.141956 61.508611 10.145848 61.506647 10.149848 61.503509 10.155403 61.500345 10.158962 61.491786 10.165224 61.488809 10.164840 61.481470 10.167615 61.474929 10.165029 61.471808 10.165874 61.466465 10.165491 61.460045 10.167059 61.455934 10.168358 61.453893 10.171136 61.453459 10.175046 61.453128 10.179920 61.451786 10.183233 61.449016 10.185178 61.444692 10.187901 61.442554 10.187246 61.440541 10.185443 61.434903 10.187710 61.431579 10.188456 61.428715 10.188110 61.427000 10.189994 61.421087 10.203999 61.419169 10.206088 61.416637 10.206390 61.409256 10.202349 61.406289 10.203641 61.400573 10.211299 61.397625 10.213345 61.394504 10.214110</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Vinstra"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Ringebu"/>
             </RailwayElement>
 
-            <!-- Vinstra → Kvam (10.07 km) -->
+            <!-- Vinstra → Kvam -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Vinstra-Kvam:down" version="1">
-              <Distance>10070</Distance>
+              <Distance>28952</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Vinstra_Kvam_down">
+              <gml:posList srsDimension="2">61.550103 10.058735 61.550507 10.051403 61.548500 10.045414 61.547847 10.035274 61.548559 9.996229 61.548426 9.985792 61.547954 9.971918 61.546518 9.961792 61.551530 9.930458 61.555512 9.927849 61.562450 9.924682 61.566082 9.908736 61.569210 9.898354 61.569624 9.882464 61.570431 9.877573 61.574185 9.866803 61.575483 9.855498 61.578350 9.847078 61.582630 9.840059 61.585485 9.826524 61.585329 9.812051 61.584667 9.804855 61.584046 9.792793 61.585832 9.778371 61.588190 9.768913 61.596258 9.744453 61.599802 9.741275 61.604347 9.740757 61.609779 9.733091 61.615007 9.730996 61.616925 9.724687 61.624017 9.723821 61.631291 9.720256 61.637796 9.718542 61.640663 9.720915 61.644239 9.727308 61.649949 9.732761 61.655669 9.735845 61.664399 9.723652 61.665908 9.718027 61.666012 9.711991 61.664730 9.700931</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Vinstra"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kvam"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kvam-Vinstra:up" version="1">
-              <Distance>10070</Distance>
+              <Distance>28952</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Kvam_Vinstra_up">
+              <gml:posList srsDimension="2">61.664730 9.700931 61.666012 9.711991 61.665908 9.718027 61.664399 9.723652 61.655669 9.735845 61.649949 9.732761 61.644239 9.727308 61.640663 9.720915 61.637796 9.718542 61.631291 9.720256 61.624017 9.723821 61.616925 9.724687 61.615007 9.730996 61.609779 9.733091 61.604347 9.740757 61.599802 9.741275 61.596258 9.744453 61.588190 9.768913 61.585832 9.778371 61.584046 9.792793 61.584667 9.804855 61.585329 9.812051 61.585485 9.826524 61.582630 9.840059 61.578350 9.847078 61.575483 9.855498 61.574185 9.866803 61.570431 9.877573 61.569624 9.882464 61.569210 9.898354 61.566082 9.908736 61.562450 9.924682 61.555512 9.927849 61.551530 9.930458 61.546518 9.961792 61.547954 9.971918 61.548426 9.985792 61.548559 9.996229 61.547847 10.035274 61.548500 10.045414 61.550507 10.051403 61.550103 10.058735</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kvam"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Vinstra"/>
             </RailwayElement>
 
-            <!-- Kvam → Otta (20.67 km) -->
+            <!-- Kvam → Otta -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kvam-Otta:down" version="1">
-              <Distance>20670</Distance>
+              <Distance>20532</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Kvam_Otta_down">
+              <gml:posList srsDimension="2">61.664730 9.700931 61.662952 9.682758 61.663030 9.672311 61.663713 9.644329 61.662432 9.635301 61.659246 9.614297 61.659449 9.609214 61.661244 9.602883 61.663763 9.587446 61.665430 9.579289 61.667875 9.562930 61.671935 9.551142 61.674553 9.547322 61.676220 9.544128 61.678287 9.541972 61.680066 9.540222 61.682434 9.541782 61.685791 9.545750 61.691645 9.548048 61.694397 9.548915 61.698669 9.546563 61.701238 9.547911 61.703750 9.548817 61.706737 9.545751 61.710073 9.538756 61.712881 9.536017 61.715702 9.533185 61.719216 9.533037 61.725155 9.536892 61.729193 9.538757 61.736078 9.548241 61.738683 9.550035 61.741717 9.548170 61.743850 9.543630 61.747471 9.538817 61.750782 9.536292 61.753279 9.534802 61.756038 9.535721 61.759141 9.535395 61.763871 9.538234 61.769827 9.538273 61.771770 9.537375</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kvam"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Otta"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Otta-Kvam:up" version="1">
-              <Distance>20670</Distance>
+              <Distance>20532</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Otta_Kvam_up">
+              <gml:posList srsDimension="2">61.771770 9.537375 61.769827 9.538273 61.763871 9.538234 61.759141 9.535395 61.756038 9.535721 61.753279 9.534802 61.750782 9.536292 61.747471 9.538817 61.743850 9.543630 61.741717 9.548170 61.738683 9.550035 61.736078 9.548241 61.729193 9.538757 61.725155 9.536892 61.719216 9.533037 61.715702 9.533185 61.712881 9.536017 61.710073 9.538756 61.706737 9.545751 61.703750 9.548817 61.701238 9.547911 61.698669 9.546563 61.694397 9.548915 61.691645 9.548048 61.685791 9.545750 61.682434 9.541782 61.680066 9.540222 61.678287 9.541972 61.676220 9.544128 61.674553 9.547322 61.671935 9.551142 61.667875 9.562930 61.665430 9.579289 61.663763 9.587446 61.661244 9.602883 61.659449 9.609214 61.659246 9.614297 61.662432 9.635301 61.663713 9.644329 61.663030 9.672311 61.662952 9.682758 61.664730 9.700931</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Otta"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kvam"/>
             </RailwayElement>
 
-            <!-- Otta → Dovre (33.58 km) -->
+            <!-- Otta → Dovre -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Otta-Dovre:down" version="1">
-              <Distance>33580</Distance>
+              <Distance>33528</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Otta_Dovre_down">
+              <gml:posList srsDimension="2">61.771770 9.537375 61.777056 9.536474 61.788810 9.545827 61.807134 9.538947 61.813910 9.531113 61.827313 9.486237 61.831684 9.466201 61.833478 9.450195 61.835472 9.436397 61.838076 9.417744 61.841596 9.409321 61.844186 9.411154 61.848759 9.413360 61.852831 9.411005 61.855704 9.407723 61.860546 9.399143 61.863748 9.394481 61.866137 9.394744 61.868208 9.404052 61.871211 9.415092 61.875775 9.419351 61.878404 9.412176 61.882350 9.404329 61.886072 9.403571 61.889817 9.405185 61.894030 9.398984 61.898819 9.380723 61.902898 9.370178 61.915701 9.355872 61.918100 9.349889 61.919603 9.337368 61.927245 9.313889 61.930912 9.305710 61.936712 9.303158 61.944090 9.300315 61.948212 9.292585 61.951151 9.277909 61.955930 9.267788 61.959753 9.263373 61.964016 9.255144 61.972558 9.253213 61.979517 9.255849 61.984409 9.257167</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Otta"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Dovre"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Dovre-Otta:up" version="1">
-              <Distance>33580</Distance>
+              <Distance>33528</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Dovre_Otta_up">
+              <gml:posList srsDimension="2">61.984409 9.257167 61.979517 9.255849 61.972558 9.253213 61.964016 9.255144 61.959753 9.263373 61.955930 9.267788 61.951151 9.277909 61.948212 9.292585 61.944090 9.300315 61.936712 9.303158 61.930912 9.305710 61.927245 9.313889 61.919603 9.337368 61.918100 9.349889 61.915701 9.355872 61.902898 9.370178 61.898819 9.380723 61.894030 9.398984 61.889817 9.405185 61.886072 9.403571 61.882350 9.404329 61.878404 9.412176 61.875775 9.419351 61.871211 9.415092 61.868208 9.404052 61.866137 9.394744 61.863748 9.394481 61.860546 9.399143 61.855704 9.407723 61.852831 9.411005 61.848759 9.413360 61.844186 9.411154 61.841596 9.409321 61.838076 9.417744 61.835472 9.436397 61.833478 9.450195 61.831684 9.466201 61.827313 9.486237 61.813910 9.531113 61.807134 9.538947 61.788810 9.545827 61.777056 9.536474 61.771770 9.537375</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Dovre"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Otta"/>
             </RailwayElement>
 
-            <!-- Dovre → Dombås (12.22 km) -->
+            <!-- Dovre → Dombås -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Dovre-Dombas:down" version="1">
-              <Distance>12220</Distance>
+              <Distance>12693</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Dovre_Dombas_down">
+              <gml:posList srsDimension="2">61.984409 9.257167 61.989849 9.255652 61.992231 9.253924 61.995112 9.250062 61.997991 9.244886 61.999105 9.242174 62.000265 9.238351 62.001950 9.231479 62.003119 9.228463 62.004753 9.226947 62.007555 9.226342 62.009982 9.224907 62.011989 9.222532 62.015159 9.217336 62.017292 9.214573 62.018192 9.213026 62.019222 9.209464 62.020398 9.206993 62.031646 9.187409 62.035889 9.177944 62.039837 9.168804 62.041916 9.164816 62.045159 9.159886 62.046754 9.157934 62.047688 9.156127 62.049242 9.153036 62.050816 9.150969 62.051446 9.148909 62.052429 9.143768 62.053424 9.140047 62.054923 9.137398 62.057078 9.133439 62.058452 9.130089 62.059462 9.128957 62.061264 9.128349 62.062079 9.127517 62.063068 9.125390 62.064183 9.123869 62.065281 9.123809 62.065984 9.124140 62.067530 9.125322 62.069140 9.126218 62.070601 9.126948 62.072392 9.127823 62.073059 9.128566</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Dovre"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Dombas"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Dombas-Dovre:up" version="1">
-              <Distance>12220</Distance>
+              <Distance>12693</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Dombas_Dovre_up">
+              <gml:posList srsDimension="2">62.073059 9.128566 62.072392 9.127823 62.070601 9.126948 62.069140 9.126218 62.067530 9.125322 62.065984 9.124140 62.065281 9.123809 62.064183 9.123869 62.063068 9.125390 62.062079 9.127517 62.061264 9.128349 62.059462 9.128957 62.058452 9.130089 62.057078 9.133439 62.054923 9.137398 62.053424 9.140047 62.052429 9.143768 62.051446 9.148909 62.050816 9.150969 62.049242 9.153036 62.047688 9.156127 62.046754 9.157934 62.045159 9.159886 62.041916 9.164816 62.039837 9.168804 62.035889 9.177944 62.031646 9.187409 62.020398 9.206993 62.019222 9.209464 62.018192 9.213026 62.017292 9.214573 62.015159 9.217336 62.011989 9.222532 62.009982 9.224907 62.007555 9.226342 62.004753 9.226947 62.003119 9.228463 62.001950 9.231479 62.000265 9.238351 61.999105 9.242174 61.997991 9.244886 61.995112 9.250062 61.992231 9.253924 61.989849 9.255652 61.984409 9.257167</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Dombas"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Dovre"/>
             </RailwayElement>
 
-            <!-- Dombås → Hjerkinn (38.70 km) -->
+            <!-- Dombås → Hjerkinn -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Dombas-Hjerkinn:down" version="1">
-              <Distance>38700</Distance>
+              <Distance>38072</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Dombas_Hjerkinn_down">
+              <gml:posList srsDimension="2">62.073059 9.128566 62.075372 9.133045 62.083232 9.137487 62.085966 9.143139 62.088043 9.144720 62.095084 9.135032 62.100924 9.124195 62.106686 9.114178 62.109569 9.104909 62.111425 9.089312 62.113669 9.086811 62.115927 9.090536 62.114918 9.096506 62.111854 9.099188 62.110755 9.108019 62.107480 9.123124 62.097817 9.149416 62.095824 9.154728 62.098537 9.170221 62.099097 9.176883 62.098346 9.186323 62.103146 9.214500 62.104116 9.224941 62.103665 9.238771 62.106341 9.251217 62.114169 9.269672 62.146575 9.314932 62.157180 9.334321 62.164783 9.354925 62.170512 9.369165 62.176026 9.387466 62.177524 9.405012 62.175289 9.438953 62.179052 9.461539 62.182138 9.469103 62.189377 9.482094 62.200507 9.523876 62.206200 9.541507 62.209359 9.552581 62.211889 9.554174 62.215582 9.546579 62.219979 9.540861</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Dombas"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hjerkinn"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hjerkinn-Dombas:up" version="1">
-              <Distance>38700</Distance>
+              <Distance>38072</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Hjerkinn_Dombas_up">
+              <gml:posList srsDimension="2">62.219979 9.540861 62.215582 9.546579 62.211889 9.554174 62.209359 9.552581 62.206200 9.541507 62.200507 9.523876 62.189377 9.482094 62.182138 9.469103 62.179052 9.461539 62.175289 9.438953 62.177524 9.405012 62.176026 9.387466 62.170512 9.369165 62.164783 9.354925 62.157180 9.334321 62.146575 9.314932 62.114169 9.269672 62.106341 9.251217 62.103665 9.238771 62.104116 9.224941 62.103146 9.214500 62.098346 9.186323 62.099097 9.176883 62.098537 9.170221 62.095824 9.154728 62.097817 9.149416 62.107480 9.123124 62.110755 9.108019 62.111854 9.099188 62.114918 9.096506 62.115927 9.090536 62.113669 9.086811 62.111425 9.089312 62.109569 9.104909 62.106686 9.114178 62.100924 9.124195 62.095084 9.135032 62.088043 9.144720 62.085966 9.143139 62.083232 9.137487 62.075372 9.133045 62.073059 9.128566</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hjerkinn"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Dombas"/>
             </RailwayElement>
 
-            <!-- Hjerkinn → Kongsvoll (11.49 km) -->
+            <!-- Hjerkinn → Kongsvoll -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hjerkinn-Kongsvoll:down" version="1">
-              <Distance>11490</Distance>
+              <Distance>10672</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Hjerkinn_Kongsvoll_down">
+              <gml:posList srsDimension="2">62.219979 9.540861 62.223041 9.537403 62.225755 9.534790 62.229091 9.532179 62.233617 9.529623 62.235423 9.529068 62.237066 9.529174 62.239765 9.530241 62.241867 9.531533 62.243724 9.533330 62.247554 9.538174 62.248948 9.539371 62.251421 9.540630 62.252940 9.541953 62.254282 9.543781 62.255714 9.546728 62.256970 9.550465 62.258369 9.553570 62.264725 9.565419 62.265492 9.567686 62.266156 9.570472 62.266695 9.573971 62.267254 9.576524 62.268105 9.578668 62.269315 9.580390 62.270775 9.581297 62.275407 9.581204 62.276546 9.581541 62.277297 9.582147 62.278238 9.583454 62.279214 9.585722 62.281446 9.590851 62.283433 9.594441 62.284351 9.595397 62.285663 9.595933 62.286785 9.595722 62.290889 9.591923 62.292075 9.591081 62.293649 9.591301 62.296613 9.592486 62.297903 9.593381 62.298603 9.594368 62.300334 9.598895 62.300818 9.600013</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hjerkinn"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kongsvoll"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kongsvoll-Hjerkinn:up" version="1">
-              <Distance>11490</Distance>
+              <Distance>10672</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Kongsvoll_Hjerkinn_up">
+              <gml:posList srsDimension="2">62.300818 9.600013 62.300334 9.598895 62.298603 9.594368 62.297903 9.593381 62.296613 9.592486 62.293649 9.591301 62.292075 9.591081 62.290889 9.591923 62.286785 9.595722 62.285663 9.595933 62.284351 9.595397 62.283433 9.594441 62.281446 9.590851 62.279214 9.585722 62.278238 9.583454 62.277297 9.582147 62.276546 9.581541 62.275407 9.581204 62.270775 9.581297 62.269315 9.580390 62.268105 9.578668 62.267254 9.576524 62.266695 9.573971 62.266156 9.570472 62.265492 9.567686 62.264725 9.565419 62.258369 9.553570 62.256970 9.550465 62.255714 9.546728 62.254282 9.543781 62.252940 9.541953 62.251421 9.540630 62.248948 9.539371 62.247554 9.538174 62.243724 9.533330 62.241867 9.531533 62.239765 9.530241 62.237066 9.529174 62.235423 9.529068 62.233617 9.529623 62.229091 9.532179 62.225755 9.534790 62.223041 9.537403 62.219979 9.540861</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kongsvoll"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hjerkinn"/>
             </RailwayElement>
 
-            <!-- Kongsvoll → Oppdal (36.05 km) -->
+            <!-- Kongsvoll → Oppdal -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kongsvoll-Oppdal:down" version="1">
-              <Distance>36050</Distance>
+              <Distance>36508</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Kongsvoll_Oppdal_down">
+              <gml:posList srsDimension="2">62.300818 9.600013 62.305140 9.603028 62.314517 9.613417 62.321086 9.617543 62.326802 9.618274 62.341200 9.617614 62.345137 9.617558 62.348379 9.625489 62.354616 9.628887 62.367804 9.632150 62.375355 9.635786 62.381211 9.637715 62.388536 9.636579 62.392500 9.634625 62.397990 9.632688 62.403284 9.634424 62.412798 9.634874 62.417856 9.633482 62.427088 9.621191 62.435996 9.606015 62.441934 9.592939 62.446444 9.584303 62.450920 9.574146 62.458720 9.574695 62.464208 9.575757 62.476847 9.574971 62.485907 9.583174 62.496154 9.588372 62.506298 9.588631 62.509213 9.594171 62.511590 9.603534 62.518703 9.610796 62.526230 9.612406 62.530142 9.619627 62.530648 9.629418 62.538977 9.636461 62.549548 9.639391 62.556701 9.645505 62.560346 9.652187 62.568923 9.660766 62.575169 9.666144 62.582254 9.672697 62.591927 9.690403</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kongsvoll"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Oppdal"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Oppdal-Kongsvoll:up" version="1">
-              <Distance>36050</Distance>
+              <Distance>36508</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Oppdal_Kongsvoll_up">
+              <gml:posList srsDimension="2">62.591927 9.690403 62.582254 9.672697 62.575169 9.666144 62.568923 9.660766 62.560346 9.652187 62.556701 9.645505 62.549548 9.639391 62.538977 9.636461 62.530648 9.629418 62.530142 9.619627 62.526230 9.612406 62.518703 9.610796 62.511590 9.603534 62.509213 9.594171 62.506298 9.588631 62.496154 9.588372 62.485907 9.583174 62.476847 9.574971 62.464208 9.575757 62.458720 9.574695 62.450920 9.574146 62.446444 9.584303 62.441934 9.592939 62.435996 9.606015 62.427088 9.621191 62.417856 9.633482 62.412798 9.634874 62.403284 9.634424 62.397990 9.632688 62.392500 9.634625 62.388536 9.636579 62.381211 9.637715 62.375355 9.635786 62.367804 9.632150 62.354616 9.628887 62.348379 9.625489 62.345137 9.617558 62.341200 9.617614 62.326802 9.618274 62.321086 9.617543 62.314517 9.613417 62.305140 9.603028 62.300818 9.600013</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Oppdal"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kongsvoll"/>
             </RailwayElement>
 
-            <!-- Oppdal → Berkåk (37.07 km) -->
+            <!-- Oppdal → Berkåk -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Oppdal-Berkak:down" version="1">
-              <Distance>37070</Distance>
+              <Distance>37578</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Oppdal_Berkak_down">
+              <gml:posList srsDimension="2">62.591927 9.690403 62.599360 9.720695 62.610112 9.745815 62.625663 9.774551 62.646145 9.844386 62.650184 9.878545 62.658016 9.888310 62.665948 9.899667 62.668846 9.910506 62.671011 9.922292 62.675957 9.932013 62.688393 9.937783 62.696169 9.943523 62.701348 9.956470 62.708076 9.959890 62.713327 9.966638 62.720418 9.970385 62.722685 9.981452 62.727597 9.997802 62.733599 9.990531 62.741072 9.984661 62.747357 9.984392 62.753589 9.989532 62.755492 9.996486 62.760870 9.995914 62.767389 9.991114 62.772102 9.989605 62.776699 9.989391 62.784217 9.996948 62.789290 10.005825 62.791054 10.014050 62.792313 10.023544 62.795110 10.029448 62.799482 10.030750 62.801105 10.039642 62.805800 10.038085 62.814402 10.037237 62.817338 10.035306 62.816462 10.026753 62.818601 10.019525 62.826300 10.012478</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Oppdal"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Berkak"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Berkak-Oppdal:up" version="1">
-              <Distance>37070</Distance>
+              <Distance>37578</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Berkak_Oppdal_up">
+              <gml:posList srsDimension="2">62.826300 10.012478 62.818601 10.019525 62.816462 10.026753 62.817338 10.035306 62.814402 10.037237 62.805800 10.038085 62.801105 10.039642 62.799482 10.030750 62.795110 10.029448 62.792313 10.023544 62.791054 10.014050 62.789290 10.005825 62.784217 9.996948 62.776699 9.989391 62.772102 9.989605 62.767389 9.991114 62.760870 9.995914 62.755492 9.996486 62.753589 9.989532 62.747357 9.984392 62.741072 9.984661 62.733599 9.990531 62.727597 9.997802 62.722685 9.981452 62.720418 9.970385 62.713327 9.966638 62.708076 9.959890 62.701348 9.956470 62.696169 9.943523 62.688393 9.937783 62.675957 9.932013 62.671011 9.922292 62.668846 9.910506 62.665948 9.899667 62.658016 9.888310 62.650184 9.878545 62.646145 9.844386 62.625663 9.774551 62.610112 9.745815 62.599360 9.720695 62.591927 9.690403</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Berkak"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Oppdal"/>
             </RailwayElement>
 
-            <!-- Berkåk → Støren (34.85 km) -->
+            <!-- Berkåk → Støren -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Berkak-Storen:down" version="1">
-              <Distance>34850</Distance>
+              <Distance>32501</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Berkak_Storen_down">
+              <gml:posList srsDimension="2">62.826300 10.012478 62.830488 10.018163 62.835237 10.021668 62.842752 10.022637 62.856064 10.023393 62.867032 10.029160 62.869647 10.040256 62.865949 10.061683 62.864821 10.073899 62.869234 10.085008 62.877621 10.092600 62.887033 10.105006 62.900267 10.114458 62.907312 10.129975 62.914532 10.140907 62.919444 10.146965 62.923081 10.152820 62.926649 10.153499 62.928852 10.157470 62.929472 10.166148 62.930614 10.176934 62.935966 10.182665 62.947693 10.182836 62.958366 10.175449 62.965877 10.176002 62.969625 10.185441 62.974620 10.200115 62.977713 10.206047 62.979088 10.217476 62.981622 10.228505 62.988175 10.240042 62.993584 10.240360 62.998208 10.231329 63.003841 10.233124 63.009344 10.238713 63.013891 10.241414 63.017904 10.239510 63.022180 10.246921 63.025985 10.251491 63.030111 10.261867 63.033525 10.272371 63.035916 10.289672 63.036319 10.290212</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Berkak"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Storen"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Storen-Berkak:up" version="1">
-              <Distance>34850</Distance>
+              <Distance>32501</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Storen_Berkak_up">
+              <gml:posList srsDimension="2">63.036319 10.290212 63.035916 10.289672 63.033525 10.272371 63.030111 10.261867 63.025985 10.251491 63.022180 10.246921 63.017904 10.239510 63.013891 10.241414 63.009344 10.238713 63.003841 10.233124 62.998208 10.231329 62.993584 10.240360 62.988175 10.240042 62.981622 10.228505 62.979088 10.217476 62.977713 10.206047 62.974620 10.200115 62.969625 10.185441 62.965877 10.176002 62.958366 10.175449 62.947693 10.182836 62.935966 10.182665 62.930614 10.176934 62.929472 10.166148 62.928852 10.157470 62.926649 10.153499 62.923081 10.152820 62.919444 10.146965 62.914532 10.140907 62.907312 10.129975 62.900267 10.114458 62.887033 10.105006 62.877621 10.092600 62.869234 10.085008 62.864821 10.073899 62.865949 10.061683 62.869647 10.040256 62.867032 10.029160 62.856064 10.023393 62.842752 10.022637 62.835237 10.021668 62.830488 10.018163 62.826300 10.012478</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Storen"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Berkak"/>
             </RailwayElement>
 
-            <!-- Støren → Hovin (6.69 km) -->
+            <!-- Støren → Hovin -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Storen-Hovin:down" version="1">
-              <Distance>6690</Distance>
+              <Distance>3531</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Storen_Hovin_down">
+              <gml:posList srsDimension="2">63.036319 10.290212 63.036648 10.290476 63.036915 10.290614 63.037182 10.290666 63.037467 10.290648 63.037836 10.290524 63.038271 10.290282 63.038692 10.289977 63.039165 10.289522 63.039524 10.289089 63.039955 10.288468 63.040455 10.287646 63.040905 10.286879 63.042033 10.284841 63.042882 10.283250 63.043285 10.282515 63.043596 10.282085 63.043909 10.281802 63.044231 10.281615 63.044506 10.281540 63.044821 10.281551 63.045106 10.281649 63.045383 10.281822 63.045625 10.282037 63.046333 10.282758 63.046551 10.282953 63.047361 10.283557 63.047724 10.283770 63.048642 10.284149 63.050099 10.284660 63.050961 10.284961 63.051565 10.285177 63.053134 10.285727 63.054584 10.286236 63.056085 10.286762 63.057346 10.287204 63.059562 10.287969 63.060361 10.288150 63.061101 10.288206 63.061716 10.288173 63.062304 10.288087 63.063090 10.287880 63.063845 10.287584 63.064516 10.287231 63.064869 10.286997 63.065329 10.286610 63.065816 10.286093 63.066239 10.285566</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Storen"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hovin"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hovin-Storen:up" version="1">
-              <Distance>6690</Distance>
+              <Distance>3531</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Hovin_Storen_up">
+              <gml:posList srsDimension="2">63.066239 10.285566 63.065816 10.286093 63.065329 10.286610 63.064869 10.286997 63.064516 10.287231 63.063845 10.287584 63.063090 10.287880 63.062304 10.288087 63.061716 10.288173 63.061101 10.288206 63.060361 10.288150 63.059562 10.287969 63.057346 10.287204 63.056085 10.286762 63.054584 10.286236 63.053134 10.285727 63.051565 10.285177 63.050961 10.284961 63.050099 10.284660 63.048642 10.284149 63.047724 10.283770 63.047361 10.283557 63.046551 10.282953 63.046333 10.282758 63.045625 10.282037 63.045383 10.281822 63.045106 10.281649 63.044821 10.281551 63.044506 10.281540 63.044231 10.281615 63.043909 10.281802 63.043596 10.282085 63.043285 10.282515 63.042882 10.283250 63.042033 10.284841 63.040905 10.286879 63.040455 10.287646 63.039955 10.288468 63.039524 10.289089 63.039165 10.289522 63.038692 10.289977 63.038271 10.290282 63.037836 10.290524 63.037467 10.290648 63.037182 10.290666 63.036915 10.290614 63.036648 10.290476 63.036319 10.290212</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hovin"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Storen"/>
             </RailwayElement>
 
-            <!-- Hovin → Lundamo (6.89 km) -->
+            <!-- Hovin → Lundamo -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Hovin-Lundamo:down" version="1">
-              <Distance>6890</Distance>
+              <Distance>11845</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Hovin_Lundamo_down">
+              <gml:posList srsDimension="2">63.066239 10.285566 63.067358 10.283727 63.067818 10.282311 63.068054 10.280731 63.068275 10.272239 63.068410 10.269927 63.068727 10.267761 63.070701 10.258432 63.071197 10.257085 63.071843 10.256083 63.072570 10.255519 63.073352 10.255400 63.074380 10.255367 63.077857 10.252277 63.086949 10.243310 63.095879 10.233605 63.098940 10.230605 63.100313 10.229657 63.104801 10.228301 63.106953 10.227809 63.107726 10.228021 63.108536 10.228679 63.112856 10.233598 63.113455 10.234789 63.113858 10.236008 63.114311 10.238332 63.114599 10.239515 63.115157 10.240790 63.115929 10.241739 63.117974 10.242957 63.121279 10.244660 63.121835 10.244640 63.122515 10.244280 63.125596 10.242086 63.126303 10.242094 63.129294 10.243668 63.130435 10.244693 63.138888 10.253804 63.140234 10.255673 63.145814 10.265025 63.149035 10.271251 63.150560 10.274365 63.151038 10.275767 63.152008 10.279760</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Hovin"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Lundamo"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Lundamo-Hovin:up" version="1">
-              <Distance>6890</Distance>
+              <Distance>11845</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Lundamo_Hovin_up">
+              <gml:posList srsDimension="2">63.152008 10.279760 63.151038 10.275767 63.150560 10.274365 63.149035 10.271251 63.145814 10.265025 63.140234 10.255673 63.138888 10.253804 63.130435 10.244693 63.129294 10.243668 63.126303 10.242094 63.125596 10.242086 63.122515 10.244280 63.121835 10.244640 63.121279 10.244660 63.117974 10.242957 63.115929 10.241739 63.115157 10.240790 63.114599 10.239515 63.114311 10.238332 63.113858 10.236008 63.113455 10.234789 63.112856 10.233598 63.108536 10.228679 63.107726 10.228021 63.106953 10.227809 63.104801 10.228301 63.100313 10.229657 63.098940 10.230605 63.095879 10.233605 63.086949 10.243310 63.077857 10.252277 63.074380 10.255367 63.073352 10.255400 63.072570 10.255519 63.071843 10.256083 63.071197 10.257085 63.070701 10.258432 63.068727 10.267761 63.068410 10.269927 63.068275 10.272239 63.068054 10.280731 63.067818 10.282311 63.067358 10.283727 63.066239 10.285566</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Lundamo"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Hovin"/>
             </RailwayElement>
 
-            <!-- Lundamo → Ler (5.70 km) -->
+            <!-- Lundamo → Ler -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Lundamo-Ler:down" version="1">
-              <Distance>5700</Distance>
+              <Distance>5842</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Lundamo_Ler_down">
+              <gml:posList srsDimension="2">63.152008 10.279760 63.152533 10.281467 63.152962 10.282353 63.153306 10.282912 63.153752 10.283453 63.154235 10.283798 63.154894 10.283945 63.155887 10.284064 63.156570 10.284424 63.157587 10.285214 63.159266 10.286866 63.159985 10.287872 63.160553 10.289066 63.161476 10.291752 63.162989 10.295944 63.163709 10.297202 63.164538 10.298197 63.165239 10.298749 63.169044 10.300747 63.170011 10.301474 63.171178 10.302799 63.172144 10.304016 63.173511 10.305365 63.174646 10.306207 63.176663 10.307138 63.178268 10.307460 63.180716 10.307902 63.183557 10.308414 63.184720 10.308585 63.185674 10.308440 63.186501 10.308015 63.187509 10.307090 63.188305 10.305950 63.188923 10.304734 63.190165 10.301580 63.190970 10.299972 63.191802 10.298826 63.192772 10.297965 63.193573 10.297547 63.194838 10.297318 63.195941 10.297492 63.197666 10.297952 63.198947 10.298368</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Lundamo"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Ler"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Ler-Lundamo:up" version="1">
-              <Distance>5700</Distance>
+              <Distance>5842</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Ler_Lundamo_up">
+              <gml:posList srsDimension="2">63.198947 10.298368 63.197666 10.297952 63.195941 10.297492 63.194838 10.297318 63.193573 10.297547 63.192772 10.297965 63.191802 10.298826 63.190970 10.299972 63.190165 10.301580 63.188923 10.304734 63.188305 10.305950 63.187509 10.307090 63.186501 10.308015 63.185674 10.308440 63.184720 10.308585 63.183557 10.308414 63.180716 10.307902 63.178268 10.307460 63.176663 10.307138 63.174646 10.306207 63.173511 10.305365 63.172144 10.304016 63.171178 10.302799 63.170011 10.301474 63.169044 10.300747 63.165239 10.298749 63.164538 10.298197 63.163709 10.297202 63.162989 10.295944 63.161476 10.291752 63.160553 10.289066 63.159985 10.287872 63.159266 10.286866 63.157587 10.285214 63.156570 10.284424 63.155887 10.284064 63.154894 10.283945 63.154235 10.283798 63.153752 10.283453 63.153306 10.282912 63.152962 10.282353 63.152533 10.281467 63.152008 10.279760</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Ler"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Lundamo"/>
             </RailwayElement>
 
-            <!-- Ler → Kvål (4.47 km) -->
+            <!-- Ler → Kvål -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Ler-Kval:down" version="1">
-              <Distance>4470</Distance>
+              <Distance>4672</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Ler_Kval_down">
+              <gml:posList srsDimension="2">63.198947 10.298368 63.200525 10.298806 63.201391 10.299028 63.204287 10.299789 63.205624 10.300135 63.206579 10.300471 63.207380 10.301027 63.207868 10.301520 63.208373 10.302162 63.208907 10.303021 63.209322 10.303845 63.210620 10.307141 63.211235 10.308729 63.211595 10.309637 63.211928 10.310301 63.212245 10.310761 63.212631 10.311152 63.213111 10.311430 63.213796 10.311552 63.215312 10.311690 63.215834 10.311639 63.216178 10.311484 63.216601 10.311122 63.216982 10.310616 63.217378 10.309815 63.217684 10.308886 63.218273 10.306656 63.218615 10.305710 63.218973 10.305029 63.219905 10.303810 63.220458 10.302967 63.220998 10.301790 63.221845 10.299750 63.222816 10.297758 63.223083 10.297091 63.223400 10.296064 63.223819 10.294228 63.224126 10.293145 63.224445 10.292397 63.224776 10.291843 63.225172 10.291370 63.226058 10.290558 63.227031 10.289203 63.231131 10.282564 63.231610 10.281867 63.232321 10.281026 63.232908 10.280468 63.233512 10.280019</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Ler"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kval"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kval-Ler:up" version="1">
-              <Distance>4470</Distance>
+              <Distance>4672</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Kval_Ler_up">
+              <gml:posList srsDimension="2">63.233512 10.280019 63.232908 10.280468 63.232321 10.281026 63.231610 10.281867 63.231131 10.282564 63.227031 10.289203 63.226058 10.290558 63.225172 10.291370 63.224776 10.291843 63.224445 10.292397 63.224126 10.293145 63.223819 10.294228 63.223400 10.296064 63.223083 10.297091 63.222816 10.297758 63.221845 10.299750 63.220998 10.301790 63.220458 10.302967 63.219905 10.303810 63.218973 10.305029 63.218615 10.305710 63.218273 10.306656 63.217684 10.308886 63.217378 10.309815 63.216982 10.310616 63.216601 10.311122 63.216178 10.311484 63.215834 10.311639 63.215312 10.311690 63.213796 10.311552 63.213111 10.311430 63.212631 10.311152 63.212245 10.310761 63.211928 10.310301 63.211595 10.309637 63.211235 10.308729 63.210620 10.307141 63.209322 10.303845 63.208907 10.303021 63.208373 10.302162 63.207868 10.301520 63.207380 10.301027 63.206579 10.300471 63.205624 10.300135 63.204287 10.299789 63.201391 10.299028 63.200525 10.298806 63.198947 10.298368</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kval"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Ler"/>
             </RailwayElement>
 
-            <!-- Kvål → Melhus (6.47 km) -->
+            <!-- Kvål → Melhus skysstasjon -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Kval-Melhus:down" version="1">
-              <Distance>6470</Distance>
+              <Distance>6363</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Kval_Melhus_down">
+              <gml:posList srsDimension="2">63.233512 10.280019 63.233892 10.279812 63.234296 10.279674 63.234885 10.279614 63.235384 10.279707 63.236377 10.280094 63.236849 10.280105 63.237820 10.279954 63.238298 10.280080 63.238709 10.280357 63.239541 10.281325 63.240118 10.281867 63.240528 10.282070 63.240955 10.282138 63.241307 10.282086 63.241835 10.281814 63.242346 10.281328 63.245317 10.278012 63.245674 10.277652 63.246458 10.277029 63.246891 10.276808 63.247352 10.276735 63.247924 10.276889 63.248279 10.277134 63.248845 10.277802 63.250743 10.280922 63.251542 10.282136 63.252302 10.283092 63.253052 10.283871 63.253892 10.284567 63.254460 10.284941 63.259161 10.287447 63.261454 10.288664 63.262430 10.289183 63.268453 10.292372 63.269141 10.292710 63.269864 10.292990 63.270823 10.293226 63.271358 10.293202 63.271905 10.292946 63.272355 10.292525 63.274080 10.290267 63.278371 10.284594 63.279306 10.283352 63.281055 10.281043 63.284015 10.277119 63.286243 10.274141</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Kval"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Melhus"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Melhus-Kval:up" version="1">
-              <Distance>6470</Distance>
+              <Distance>6363</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Melhus_Kval_up">
+              <gml:posList srsDimension="2">63.286243 10.274141 63.284015 10.277119 63.281055 10.281043 63.279306 10.283352 63.278371 10.284594 63.274080 10.290267 63.272355 10.292525 63.271905 10.292946 63.271358 10.293202 63.270823 10.293226 63.269864 10.292990 63.269141 10.292710 63.268453 10.292372 63.262430 10.289183 63.261454 10.288664 63.259161 10.287447 63.254460 10.284941 63.253892 10.284567 63.253052 10.283871 63.252302 10.283092 63.251542 10.282136 63.250743 10.280922 63.248845 10.277802 63.248279 10.277134 63.247924 10.276889 63.247352 10.276735 63.246891 10.276808 63.246458 10.277029 63.245674 10.277652 63.245317 10.278012 63.242346 10.281328 63.241835 10.281814 63.241307 10.282086 63.240955 10.282138 63.240528 10.282070 63.240118 10.281867 63.239541 10.281325 63.238709 10.280357 63.238298 10.280080 63.237820 10.279954 63.236849 10.280105 63.236377 10.280094 63.235384 10.279707 63.234885 10.279614 63.234296 10.279674 63.233892 10.279812 63.233512 10.280019</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Melhus"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Kval"/>
             </RailwayElement>
 
-            <!-- Melhus → Heimdal (9.99 km) -->
+            <!-- Melhus skysstasjon → Heimdal -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Melhus-Heimdal:down" version="1">
-              <Distance>9990</Distance>
+              <Distance>9841</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Melhus_Heimdal_down">
+              <gml:posList srsDimension="2">63.286243 10.274141 63.287174 10.273083 63.288062 10.272673 63.290218 10.273193 63.291179 10.274214 63.291952 10.275879 63.292501 10.278239 63.299301 10.318944 63.299957 10.321470 63.301270 10.324105 63.301862 10.326213 63.302424 10.329566 63.303174 10.331832 63.304103 10.333361 63.308678 10.337469 63.310079 10.337881 63.311343 10.338488 63.312906 10.339516 63.314272 10.338830 63.317155 10.336491 63.318245 10.336026 63.319444 10.336345 63.320309 10.337424 63.321838 10.340116 63.322924 10.340847 63.323866 10.340679 63.325724 10.339482 63.327699 10.339052 63.329966 10.339750 63.332521 10.341347 63.333779 10.342876 63.334599 10.343412 63.335486 10.343321 63.337135 10.341703 63.338311 10.341171 63.340647 10.341273 63.341765 10.342717 63.342476 10.344832 63.343275 10.348338 63.344888 10.351797 63.346997 10.354729 63.347618 10.355345 63.350258 10.357325 63.352451 10.358172</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Melhus"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Heimdal"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Heimdal-Melhus:up" version="1">
-              <Distance>9990</Distance>
+              <Distance>9841</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Heimdal_Melhus_up">
+              <gml:posList srsDimension="2">63.352451 10.358172 63.350258 10.357325 63.347618 10.355345 63.346997 10.354729 63.344888 10.351797 63.343275 10.348338 63.342476 10.344832 63.341765 10.342717 63.340647 10.341273 63.338311 10.341171 63.337135 10.341703 63.335486 10.343321 63.334599 10.343412 63.333779 10.342876 63.332521 10.341347 63.329966 10.339750 63.327699 10.339052 63.325724 10.339482 63.323866 10.340679 63.322924 10.340847 63.321838 10.340116 63.320309 10.337424 63.319444 10.336345 63.318245 10.336026 63.317155 10.336491 63.314272 10.338830 63.312906 10.339516 63.311343 10.338488 63.310079 10.337881 63.308678 10.337469 63.304103 10.333361 63.303174 10.331832 63.302424 10.329566 63.301862 10.326213 63.301270 10.324105 63.299957 10.321470 63.299301 10.318944 63.292501 10.278239 63.291952 10.275879 63.291179 10.274214 63.290218 10.273193 63.288062 10.272673 63.287174 10.273083 63.286243 10.274141</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Heimdal"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Melhus"/>
             </RailwayElement>
 
-            <!-- Heimdal → Selsbakk (5.03 km) -->
+            <!-- Heimdal → Selsbakk -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Heimdal-Selsbakk:down" version="1">
-              <Distance>5030</Distance>
+              <Distance>4071</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Heimdal_Selsbakk_down">
+              <gml:posList srsDimension="2">63.352451 10.358172 63.352901 10.358285 63.353221 10.358294 63.353497 10.358258 63.353809 10.358170 63.354599 10.357908 63.354996 10.357868 63.355531 10.357976 63.356152 10.358244 63.360586 10.360313 63.361562 10.360952 63.362740 10.362113 63.363362 10.362651 63.363940 10.363020 63.369647 10.365390 63.370213 10.365598 63.370709 10.365641 63.371190 10.365493 63.371716 10.365078 63.372204 10.364421 63.372546 10.363724 63.372774 10.363089 63.372995 10.362254 63.373416 10.360338 63.374036 10.358582 63.374696 10.357403 63.375309 10.356709 63.376041 10.356266 63.376623 10.356156 63.377215 10.356224 63.377818 10.356445 63.378557 10.356933 63.379648 10.357952 63.380294 10.358337 63.381027 10.358341 63.381524 10.358085 63.382433 10.357270 63.382980 10.356976 63.383371 10.356928 63.383803 10.357026 63.384207 10.357267 63.384644 10.357710 63.384916 10.358109 63.385197 10.358647 63.385449 10.359280 63.385664 10.360008 63.385824 10.360772</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Heimdal"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Selsbakk"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Selsbakk-Heimdal:up" version="1">
-              <Distance>5030</Distance>
+              <Distance>4071</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Selsbakk_Heimdal_up">
+              <gml:posList srsDimension="2">63.385824 10.360772 63.385664 10.360008 63.385449 10.359280 63.385197 10.358647 63.384916 10.358109 63.384644 10.357710 63.384207 10.357267 63.383803 10.357026 63.383371 10.356928 63.382980 10.356976 63.382433 10.357270 63.381524 10.358085 63.381027 10.358341 63.380294 10.358337 63.379648 10.357952 63.378557 10.356933 63.377818 10.356445 63.377215 10.356224 63.376623 10.356156 63.376041 10.356266 63.375309 10.356709 63.374696 10.357403 63.374036 10.358582 63.373416 10.360338 63.372995 10.362254 63.372774 10.363089 63.372546 10.363724 63.372204 10.364421 63.371716 10.365078 63.371190 10.365493 63.370709 10.365641 63.370213 10.365598 63.369647 10.365390 63.363940 10.363020 63.363362 10.362651 63.362740 10.362113 63.361562 10.360952 63.360586 10.360313 63.356152 10.358244 63.355531 10.357976 63.354996 10.357868 63.354599 10.357908 63.353809 10.358170 63.353497 10.358258 63.353221 10.358294 63.352901 10.358285 63.352451 10.358172</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Selsbakk"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Heimdal"/>
             </RailwayElement>
 
-            <!-- Selsbakk → Marienborg (3.51 km) -->
+            <!-- Selsbakk → Marienborg -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Selsbakk-Marienborg:down" version="1">
-              <Distance>3510</Distance>
+              <Distance>4115</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Selsbakk_Marienborg_down">
+              <gml:posList srsDimension="2">63.385824 10.360772 63.385977 10.362077 63.386047 10.363445 63.386153 10.364646 63.386397 10.365919 63.386784 10.367074 63.387114 10.367722 63.387977 10.368927 63.388435 10.369785 63.388710 10.370543 63.388868 10.371050 63.389404 10.372780 63.389695 10.373606 63.390199 10.374805 63.390537 10.375488 63.391256 10.376757 63.391607 10.377472 63.392016 10.378516 63.392458 10.379567 63.392811 10.380145 63.393208 10.380604 63.393961 10.381355 63.394450 10.382004 63.395209 10.383239 63.395568 10.383678 63.395895 10.383952 63.396299 10.384146 63.397212 10.384478 63.397648 10.384831 63.398388 10.385772 63.399001 10.386372 63.399518 10.386592 63.400365 10.386624 63.400975 10.386700 63.401876 10.386991 63.402455 10.387045 63.402978 10.386862 63.403452 10.386486 63.404044 10.385774 63.404486 10.385308 63.404985 10.384995 63.405860 10.384636 63.406306 10.384367 63.407265 10.383587 63.407801 10.383253 63.408281 10.383083 63.408951 10.383039 63.409676 10.383125 63.411686 10.383556 63.412581 10.383857 63.414298 10.383929 63.416499 10.383473 63.417266 10.383319</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Selsbakk"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Marienborg"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Marienborg-Selsbakk:up" version="1">
-              <Distance>3510</Distance>
+              <Distance>4115</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Marienborg_Selsbakk_up">
+              <gml:posList srsDimension="2">63.417266 10.383319 63.416499 10.383473 63.414298 10.383929 63.412581 10.383857 63.411686 10.383556 63.409676 10.383125 63.408951 10.383039 63.408281 10.383083 63.407801 10.383253 63.407265 10.383587 63.406306 10.384367 63.405860 10.384636 63.404985 10.384995 63.404486 10.385308 63.404044 10.385774 63.403452 10.386486 63.402978 10.386862 63.402455 10.387045 63.401876 10.386991 63.400975 10.386700 63.400365 10.386624 63.399518 10.386592 63.399001 10.386372 63.398388 10.385772 63.397648 10.384831 63.397212 10.384478 63.396299 10.384146 63.395895 10.383952 63.395568 10.383678 63.395209 10.383239 63.394450 10.382004 63.393961 10.381355 63.393208 10.380604 63.392811 10.380145 63.392458 10.379567 63.392016 10.378516 63.391607 10.377472 63.391256 10.376757 63.390537 10.375488 63.390199 10.374805 63.389695 10.373606 63.389404 10.372780 63.388868 10.371050 63.388710 10.370543 63.388435 10.369785 63.387977 10.368927 63.387114 10.367722 63.386784 10.367074 63.386397 10.365919 63.386153 10.364646 63.386047 10.363445 63.385977 10.362077 63.385824 10.360772</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Marienborg"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Selsbakk"/>
             </RailwayElement>
 
-            <!-- Marienborg → Skansen (1.72 km) -->
+            <!-- Marienborg → Skansen -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Marienborg-Skansen:down" version="1">
-              <Distance>1720</Distance>
+              <Distance>2063</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Marienborg_Skansen_down">
+              <gml:posList srsDimension="2">63.417266 10.383319 63.417705 10.383205 63.417875 10.383161 63.417971 10.383128 63.418049 10.383101 63.418158 10.383055 63.418282 10.383002 63.418407 10.382942 63.418526 10.382882 63.418645 10.382816 63.418698 10.382786 63.418881 10.382667 63.419005 10.382586 63.419173 10.382462 63.419312 10.382336 63.419380 10.382268 63.419447 10.382189 63.419544 10.382074 63.419786 10.381797 63.420383 10.381097 63.420630 10.380801 63.420767 10.380634 63.421183 10.380058 63.421528 10.379548 63.421915 10.378953 63.422288 10.378384 63.422743 10.377652 63.423008 10.377180 63.423325 10.376576 63.423740 10.375755 63.424135 10.374969 63.424722 10.373805 63.424917 10.373409 63.425311 10.372623 63.425446 10.372358 63.425537 10.372180 63.425621 10.372030 63.425676 10.371941 63.425735 10.371851 63.425811 10.371756 63.425945 10.371578 63.426107 10.371410 63.426333 10.371239 63.426521 10.371124 63.426799 10.371020 63.427112 10.370960 63.427371 10.370973 63.427579 10.371003 63.427835 10.371096 63.428046 10.371215 63.428230 10.371332 63.428448 10.371511 63.428650 10.371707 63.428842 10.371928 63.429088 10.372240 63.429201 10.372387 63.429353 10.372606 63.429637 10.373057 63.429778 10.373296 63.430000 10.373714 63.430211 10.374158 63.430441 10.374706 63.430566 10.375042 63.430668 10.375364 63.430700 10.375478 63.430869 10.376148 63.431009 10.376744 63.431265 10.377822 63.431389 10.378342 63.431484 10.378742 63.431503 10.378822 63.431608 10.379278 63.431850 10.380271 63.431887 10.380436 63.431952 10.380708 63.431996 10.380894</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Marienborg"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Skansen"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Skansen-Marienborg:up" version="1">
-              <Distance>1720</Distance>
+              <Distance>2063</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Skansen_Marienborg_up">
+              <gml:posList srsDimension="2">63.431996 10.380894 63.431952 10.380708 63.431887 10.380436 63.431850 10.380271 63.431608 10.379278 63.431503 10.378822 63.431484 10.378742 63.431389 10.378342 63.431265 10.377822 63.431009 10.376744 63.430869 10.376148 63.430700 10.375478 63.430668 10.375364 63.430566 10.375042 63.430441 10.374706 63.430211 10.374158 63.430000 10.373714 63.429778 10.373296 63.429637 10.373057 63.429353 10.372606 63.429201 10.372387 63.429088 10.372240 63.428842 10.371928 63.428650 10.371707 63.428448 10.371511 63.428230 10.371332 63.428046 10.371215 63.427835 10.371096 63.427579 10.371003 63.427371 10.370973 63.427112 10.370960 63.426799 10.371020 63.426521 10.371124 63.426333 10.371239 63.426107 10.371410 63.425945 10.371578 63.425811 10.371756 63.425735 10.371851 63.425676 10.371941 63.425621 10.372030 63.425537 10.372180 63.425446 10.372358 63.425311 10.372623 63.424917 10.373409 63.424722 10.373805 63.424135 10.374969 63.423740 10.375755 63.423325 10.376576 63.423008 10.377180 63.422743 10.377652 63.422288 10.378384 63.421915 10.378953 63.421528 10.379548 63.421183 10.380058 63.420767 10.380634 63.420630 10.380801 63.420383 10.381097 63.419786 10.381797 63.419544 10.382074 63.419447 10.382189 63.419380 10.382268 63.419312 10.382336 63.419173 10.382462 63.419005 10.382586 63.418881 10.382667 63.418698 10.382786 63.418645 10.382816 63.418526 10.382882 63.418407 10.382942 63.418282 10.383002 63.418158 10.383055 63.418049 10.383101 63.417971 10.383128 63.417875 10.383161 63.417705 10.383205 63.417266 10.383319</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Skansen"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Marienborg"/>
             </RailwayElement>
 
-            <!-- Skansen → Trondheim S (1.20 km) -->
+            <!-- Skansen → Trondheim S -->
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:Skansen-TrondheimS:down" version="1">
-              <Distance>1200</Distance>
+              <Distance>996</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_Skansen_TrondheimS_down">
+              <gml:posList srsDimension="2">63.431996 10.380894 63.432595 10.383414 63.433026 10.385173 63.433209 10.385845 63.433449 10.386670 63.433703 10.387448 63.434120 10.388629 63.434676 10.390186 63.435010 10.391158 63.435051 10.391273 63.435317 10.392165 63.435334 10.392227 63.435531 10.392927 63.435555 10.393012 63.435624 10.393268 63.435891 10.394230 63.435954 10.394469 63.435994 10.394642 63.436076 10.395032 63.436129 10.395327 63.436174 10.395610 63.436221 10.395938 63.436256 10.396259 63.436282 10.396548 63.436400 10.398110</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:Skansen"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:TrondheimS"/>
             </RailwayElement>
             <RailwayElement id="NOR:RailwayElement:Dovrebanen:TrondheimS-Skansen:up" version="1">
-              <Distance>1200</Distance>
+              <Distance>996</Distance>
+              <gml:LineString srsName="urn:ogc:def:crs:EPSG::4326" gml:id="geom_TrondheimS_Skansen_up">
+              <gml:posList srsDimension="2">63.436400 10.398110 63.436282 10.396548 63.436256 10.396259 63.436221 10.395938 63.436174 10.395610 63.436129 10.395327 63.436076 10.395032 63.435994 10.394642 63.435954 10.394469 63.435891 10.394230 63.435624 10.393268 63.435555 10.393012 63.435531 10.392927 63.435334 10.392227 63.435317 10.392165 63.435051 10.391273 63.435010 10.391158 63.434676 10.390186 63.434120 10.388629 63.433703 10.387448 63.433449 10.386670 63.433209 10.385845 63.433026 10.385173 63.432595 10.383414 63.431996 10.380894</gml:posList>
+              </gml:LineString>
               <FromPointRef ref="NOR:RailwayJunction:Dovrebanen:TrondheimS"/>
               <ToPointRef ref="NOR:RailwayJunction:Dovrebanen:Skansen"/>
             </RailwayElement>
+
           </elements>
 
         </InfrastructureFrame>
