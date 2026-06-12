@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 🚍 NeTEx Nordic Profile
+# 🚍 NeTEx Nordic Profile - NOT OFFICIAL PROFILE
 
 **The open documentation for Nordic public transport data**
 
