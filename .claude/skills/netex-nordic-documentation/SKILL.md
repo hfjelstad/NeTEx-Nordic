@@ -66,16 +66,24 @@ Same three files. Description uses a 5-section template:
 ### 3. Guides (`Guides/<Name>/`)
 
 Conceptual documents that teach patterns spanning multiple objects.
+Guides are **more flexible** than Object/Frame docs — section names and count may vary to fit the topic.
 
-**Section progression:** Context → Concept → NeTEx mapping → Practice → Reference
+**Recommended progression** (adapt as needed, not a strict template):
 
-Required sections:
 1. Introduction — topic + "what you'll learn" list
 2. Core Concepts — the *why*
 3. How It Works in NeTEx — objects, frames, references
 4. Practical Examples — validated XML
 5. Best Practices (recommended)
-6. Related Resources (required)
+6. Related Resources (recommended)
+
+**Hard rules that always apply:**
+- Start with an introduction that sets context
+- Include at least one validated XML example
+- Use flexible-alerts syntax (not emoji callouts)
+- Use Mermaid/SVG for diagrams (follow the palette)
+- Cross-reference related Object/Frame Table files with relative links
+- Keep paragraphs short (3–5 sentences)
 
 **Length target:** 400–1200 words (excluding XML). May be longer for complex topics.
 
