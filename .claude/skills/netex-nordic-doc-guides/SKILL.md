@@ -105,6 +105,7 @@ Links to related guides, frame/object documentation, and external references:
 - Cross-reference related Object/Frame Table files with relative links
 - Keep paragraphs short (3–5 sentences)
 - All XML must be validated against XSD
+- When a guide covers objects **not yet documented** in the Nordic Profile, flag them explicitly with a `> [!WARNING]` callout noting their status (e.g. "undocumented", "proposed", or "diverges from published profile")
 
 ---
 
