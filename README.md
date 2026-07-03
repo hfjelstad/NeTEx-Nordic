@@ -11,12 +11,12 @@ Timetables · Stops · Vehicles · Fares · Operations
 </p>
 
 <p>
-<span class="badge train">Train</span>
-<span class="badge bus">Bus</span>
-<span class="badge metro">Metro</span>
-<span class="badge tram">Tram</span>
-<span class="badge ferry">Ferry</span>
-<span class="badge plane">Air</span>
+<img src="https://img.shields.io/badge/Train-%23181C56" alt="Train">
+<img src="https://img.shields.io/badge/Bus-%236A1B9A" alt="Bus">
+<img src="https://img.shields.io/badge/Metro-%23E65100" alt="Metro">
+<img src="https://img.shields.io/badge/Tram-%232E7D32" alt="Tram">
+<img src="https://img.shields.io/badge/Ferry-%230277BD" alt="Ferry">
+<img src="https://img.shields.io/badge/Air-%238B1A1A" alt="Air">
 </p>
 
 [![Status](https://img.shields.io/badge/status-proof%20of%20concept-orange)]()
@@ -68,9 +68,9 @@ Beyond the core reading path, these guides cover specific domains:
 
 | Domain | Guide |
 |--------|-------|
-| <span class="badge train">Train</span> Rolling stock & composition | [Rolling Stock](Guides/RollingStock/RollingStock_Guide.md) |
-| <span class="badge bus">Bus</span> Vehicle assignment & blocks | [Vehicle Scheduling](Guides/VehicleScheduling/VehicleScheduling_Guide.md) |
-| <span class="badge ferry">Ferry</span> Interchanges & connections | [Interchange](Guides/Interchange/Interchange_Guide.md) |
+| 🚆 Rolling stock & composition | [Rolling Stock](Guides/RollingStock/RollingStock_Guide.md) |
+| 🚌 Vehicle assignment & blocks | [Vehicle Scheduling](Guides/VehicleScheduling/VehicleScheduling_Guide.md) |
+| ⛴️ Interchanges & connections | [Interchange](Guides/Interchange/Interchange_Guide.md) |
 | 🏢 Organisations & contracts | [Organisational Governance](Guides/OrganisationalGovernance/OrganisationalGovernance_Guide.md) |
 | 📢 Passenger information & booking | [Passenger Information](Guides/PassengerInformation/PassengerInformation_Guide.md) |
 | 💰 Fares, zones & products | [Fare Modelling](Guides/FareModelling/FareModelling_Guide.md) |
