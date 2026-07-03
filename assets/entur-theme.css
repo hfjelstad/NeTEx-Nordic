@@ -1,0 +1,286 @@
+/* ============================================================
+   Entur-branded Docsify Theme for Nordic NeTEx Profile
+   Based on Entur / Linje Design System
+   ============================================================ */
+
+/* --- Fonts ---
+   If you have Nationale woff2 files, place them in assets/fonts/
+   and uncomment the @font-face blocks below.
+   Until then, Inter (Google Fonts) serves as a close fallback.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/*
+@font-face { font-family: 'Nationale'; src: url('fonts/Nationale-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'Nationale'; src: url('fonts/Nationale-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'Nationale'; src: url('fonts/Nationale-DemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; }
+*/
+
+/* --- Design tokens --- */
+:root {
+  /* Entur core palette */
+  --e-navy: #181C56;
+  --e-coral: #FF5959;
+  --e-blue-light: #E8F0FE;
+  --e-grey-50: #F7F7FA;
+  --e-grey-100: #EDEDF2;
+  --e-grey-200: #D6D6E0;
+  --e-grey-600: #5C5C70;
+  --e-grey-800: #2B2B3D;
+  --e-white: #FFFFFF;
+
+  /* Transport mode colors */
+  --e-t-train: #181C56;
+  --e-t-bus: #6A1B9A;
+  --e-t-metro: #E65100;
+  --e-t-tram: #2E7D32;
+  --e-t-ferry: #0277BD;
+  --e-t-plane: #8B1A1A;
+
+  /* Docsify overrides */
+  --base-font-family: 'Nationale', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --base-font-size: 15px;
+  --base-line-height: 1.6;
+  --base-color: var(--e-navy);
+  --base-background-color: var(--e-white);
+
+  --theme-color: var(--e-navy);
+  --content-max-width: 960px;
+
+  --heading-color: var(--e-navy);
+  --heading-font-weight: 500;
+
+  --sidebar-background: var(--e-grey-50);
+  --sidebar-border-color: var(--e-grey-100);
+  --sidebar-nav-link-color: var(--e-grey-800);
+  --sidebar-nav-link-color--active: var(--e-navy);
+  --sidebar-nav-link-font-weight--active: 500;
+  --sidebar-nav-link-border-color--active: var(--e-coral);
+  --sidebar-name-color: var(--e-navy);
+  --sidebar-name-font-weight: 500;
+
+  --link-color: var(--e-navy);
+  --link-text-decoration: underline;
+  --link-text-decoration-color: var(--e-grey-200);
+
+  --blockquote-border-color: var(--e-grey-200);
+
+  --code-font-size: 0.85em;
+  --code-inline-background: var(--e-grey-50);
+  --code-inline-color: var(--e-navy);
+  --code-block-border-radius: 8px;
+
+  --notice-tip-border-color: var(--e-navy);
+  --notice-important-border-color: var(--e-coral);
+}
+
+/* --- Dark mode --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --base-background-color: #0F1035;
+    --base-color: #E0E0EC;
+    --heading-color: #FFFFFF;
+    --sidebar-background: #0A0C2A;
+    --sidebar-nav-link-color: #C0C0D4;
+    --sidebar-nav-link-color--active: #FFFFFF;
+    --link-color: #8B9CF7;
+    --link-text-decoration-color: rgba(139, 156, 247, 0.3);
+    --code-inline-background: rgba(255, 255, 255, 0.06);
+    --code-inline-color: #C0C0D4;
+    --blockquote-border-color: rgba(255, 255, 255, 0.1);
+    --e-grey-50: #1A1C4A;
+    --e-grey-100: #252760;
+  }
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500 !important;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; margin-top: 2.5rem; }
+h3 { font-size: 1.2rem; }
+
+/* --- Sidebar branding --- */
+.sidebar .app-name {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--e-navy);
+  padding: 1.2rem 1.5rem 0.8rem;
+}
+
+.sidebar-nav li.active > a {
+  border-right: 3px solid var(--e-coral);
+  font-weight: 500;
+}
+
+/* --- Links --- */
+.markdown-section a {
+  color: var(--e-navy);
+  text-decoration: underline;
+  text-decoration-color: var(--e-grey-200);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.15s;
+}
+
+.markdown-section a:hover {
+  text-decoration-color: var(--e-coral);
+}
+
+/* --- Code blocks --- */
+.markdown-section pre {
+  border-radius: 8px;
+  border: 1px solid var(--e-grey-100);
+  background: var(--e-grey-50);
+}
+
+.markdown-section code {
+  border-radius: 4px;
+}
+
+/* --- Cards (for callout-style sections) --- */
+.markdown-section blockquote {
+  border-left: 4px solid var(--e-navy);
+  border-radius: 0 8px 8px 0;
+  background: var(--e-grey-50);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+/* --- Flexible alerts plugin styling --- */
+.alert {
+  border-radius: 8px !important;
+  border: 1px solid var(--e-grey-100) !important;
+}
+
+.alert.callout.tip {
+  border-left: 4px solid var(--e-navy) !important;
+}
+
+.alert.callout.warning {
+  border-left: 4px solid #F59E0B !important;
+}
+
+.alert.callout.important,
+.alert.callout.attention {
+  border-left: 4px solid var(--e-coral) !important;
+}
+
+.alert.callout.note {
+  border-left: 4px solid var(--e-t-ferry) !important;
+}
+
+/* --- Tables --- */
+.markdown-section table {
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--e-grey-100);
+  width: 100%;
+}
+
+.markdown-section table thead {
+  background: var(--e-grey-50);
+}
+
+.markdown-section table th {
+  font-weight: 500;
+  color: var(--e-navy);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--e-grey-200);
+}
+
+.markdown-section table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--e-grey-100);
+}
+
+.markdown-section table tbody tr:hover {
+  background: var(--e-grey-50);
+}
+
+/* --- Search --- */
+.search input {
+  border-radius: 4px !important;
+  border: 1px solid var(--e-grey-200) !important;
+  font-family: var(--base-font-family);
+}
+
+.search input:focus {
+  box-shadow: 0 0 0 3px rgba(24, 28, 86, 0.15) !important;
+  border-color: var(--e-navy) !important;
+}
+
+/* --- Mermaid diagrams --- */
+.mermaid {
+  background: var(--e-white);
+  border-radius: 8px;
+  border: 1px solid var(--e-grey-100);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+/* --- Transport mode badges (use in markdown as inline HTML) ---
+   <span class="badge train">Train</span>
+   <span class="badge bus">Bus</span>
+*/
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.badge.train   { background: var(--e-t-train); }
+.badge.bus     { background: var(--e-t-bus); }
+.badge.metro   { background: var(--e-t-metro); }
+.badge.tram    { background: var(--e-t-tram); }
+.badge.ferry   { background: var(--e-t-ferry); }
+.badge.plane   { background: var(--e-t-plane); }
+
+/* --- Status badges ---
+   <span class="badge status-required">Required</span>
+   <span class="badge status-optional">Optional</span>
+*/
+.badge.status-required  { background: var(--e-navy); }
+.badge.status-optional  { background: var(--e-grey-600); }
+.badge.status-new       { background: var(--e-coral); }
+.badge.status-changed   { background: #F59E0B; color: var(--e-navy); }
+
+/* --- Profile level markers ---
+   <span class="profile-level min">MIN</span>
+   <span class="profile-level np">NP</span>
+*/
+.profile-level {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  vertical-align: middle;
+}
+
+.profile-level.min { background: var(--e-navy); color: white; }
+.profile-level.np  { background: var(--e-grey-200); color: var(--e-navy); }
+
+/* --- Scroll to top --- */
+.docsify-scroll-to-top {
+  background: var(--e-navy) !important;
+  border-radius: 4px !important;
+}
+
+/* --- Print --- */
+@media print {
+  .sidebar, .docsify-scroll-to-top { display: none; }
+  .content { margin: 0; max-width: 100%; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+}
